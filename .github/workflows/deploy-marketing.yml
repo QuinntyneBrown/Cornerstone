@@ -9,25 +9,36 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: deploy-marketing-production
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MARKETING }}
+    environment:
+      name: marketing-production
+      url: https://lemon-plant-044de2c0f.7.azurestaticapps.net
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
+          package-manager-cache: false
       # The brochure site is hand-written HTML and CSS. There are no dependencies
       # to install: the build copies the directory and verifies it ships no scripts.
       - run: npm run build:marketing
       - name: Publish to Azure Static Web Apps
-        if: env.DEPLOYMENT_TOKEN != ''
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ env.DEPLOYMENT_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MARKETING }}
           action: upload
           app_location: dist/marketing/browser
           output_location: ''
           skip_app_build: true
+      - name: Verify production endpoint
+        run: >-
+          curl --fail --silent --show-error --location
+          --retry 12 --retry-all-errors --retry-delay 5
+          https://lemon-plant-044de2c0f.7.azurestaticapps.net/
+          --output /dev/null

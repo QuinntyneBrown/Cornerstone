@@ -4,6 +4,9 @@ FaithTech's `@cornerstone/ui` Angular CDK component library: accessible behavior
 language, and a practical migration bridge for [Liturgy](https://github.com/QuinntyneBrown/Liturgy)
 and [Word Up](https://github.com/QuinntyneBrown/word-up).
 
+Explore the library at the
+[Cornerstone marketing site](https://lemon-plant-044de2c0f.7.azurestaticapps.net).
+
 ## Workspace
 
 ```text
