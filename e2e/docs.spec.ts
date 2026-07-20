@@ -18,5 +18,5 @@ test('preserves the documented landing-page visual', async ({ page, browserName 
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'API reference (491)' })).toBeVisible();
   await expect(page.locator('.api-grid li')).toHaveCount(491);
-  await expect(page).toHaveScreenshot('docs-home-light.png', { fullPage: true });
+  await expect(page).toHaveScreenshot('docs-home-light.png');
 });
