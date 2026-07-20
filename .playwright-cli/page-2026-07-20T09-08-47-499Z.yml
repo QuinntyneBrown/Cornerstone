@@ -1,0 +1,14 @@
+- generic [ref=e3]:
+    - generic [ref=e4]: '[plugin:vite:import-analysis] Failed to resolve import "./foundations" from "projects/cornerstone/src/lib/communication/cs-code-editor.component.ts". Does the file exist?'
+    - generic [ref=e5]: cs-code-editor.component.ts:22:7
+    - generic [ref=e6]: '1 | import { __decorate } from "tslib"; 2 | import { ChangeDetectionStrategy, Component, input, model, output, } from ''@angular/core''; 3 | import { CsButtonDirective, } from ''./foundations''; | ^ 4 | import { CsTextareaDirective, } from ''./forms''; 5 | let CsCodeEditorComponent = class CsCodeEditorComponent {'
+    - generic [ref=e7]: at TransformPluginContext._formatLog (file:///C:/projects/Cornerstone/node_modules/vite/dist/node/chunks/config.js:29079:43) at TransformPluginContext.error (file:///C:/projects/Cornerstone/node_modules/vite/dist/node/chunks/config.js:29076:14) at normalizeUrl (file:///C:/projects/Cornerstone/node_modules/vite/dist/node/chunks/config.js:27199:18) at async file:///C:/projects/Cornerstone/node_modules/vite/dist/node/chunks/config.js:27257:32 at async Promise.all (index 2) at async TransformPluginContext.transform (file:///C:/projects/Cornerstone/node_modules/vite/dist/node/chunks/config.js:27225:4) at async EnvironmentPluginContainer.transform (file:///C:/projects/Cornerstone/node_modules/vite/dist/node/chunks/config.js:28877:14) at async loadAndTransform (file:///C:/projects/Cornerstone/node_modules/vite/dist/node/chunks/config.js:22746:26) at async viteTransformMiddleware (file:///C:/projects/Cornerstone/node_modules/vite/dist/node/chunks/config.js:24622:20)
+    - generic [ref=e8]:
+        - text: Click outside, press Esc key, or fix the code to dismiss.
+        - text: You can also disable this overlay by setting
+        - code [ref=e9]: server.hmr.overlay
+        - text: to
+        - code [ref=e10]: 'false'
+        - text: in
+        - code [ref=e11]: vite.config.ts
+        - text: .

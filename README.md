@@ -1,54 +1,67 @@
 # Cornerstone
 
-FaithTech's Angular CDK component library: accessible behavior, a disciplined FaithTech visual
+FaithTech's `@cornerstone/ui` Angular CDK component library: accessible behavior, a disciplined FaithTech visual
 language, and a practical migration bridge for [Liturgy](https://github.com/QuinntyneBrown/Liturgy)
 and [Word Up](https://github.com/QuinntyneBrown/word-up).
 
 ## Workspace
 
 ```text
-projects/cornerstone/ @faithtech/cornerstone library
-design-system/        component documentation application
-marketing/            static product and brochure site
+projects/cornerstone/ @cornerstone/ui library
+design-system/        component documentation application (Angular)
+marketing/            brochure site (hand-written static HTML and CSS)
 docs/specs/           architecture, API inventory, and migration specifications
 ```
 
-Both sites are static Angular builds and include Azure Static Web Apps route configuration.
-GitHub Actions builds every project on pull requests and deploys the two sites from `main` when
-their respective Azure deployment token is configured.
+The documentation application is a static Angular build. The brochure site is plain HTML and CSS
+with no framework and no runtime JavaScript; `npm run build:marketing` copies it to
+`dist/marketing/browser` and fails if a script tag ever appears in it. Both ship Azure Static Web
+Apps route configuration, and GitHub Actions deploys each from `main` when its Azure deployment
+token is configured. See [`docs/marketing-site.md`](docs/marketing-site.md) for the brochure site's
+design and content rationale.
 
 ## Start locally
 
 ```bash
 npm install
-npm start                 # component documentation on :4200
-npm run start:marketing   # brochure site on :4200
+npm start                 # component documentation on :5173
+npm run start:marketing   # brochure site on :5174
 ```
 
 ## Build and test
 
 ```bash
 npm test
+npm run test:coverage
+npm run lint
+npm run e2e
 npm run build
+npm run pack:check
 npm run format:check
 ```
+
+## Frontend file organization
+
+Frontend code follows a strict file-per-type convention. Each TypeScript file contains at most one
+top-level declaration, and every Angular component uses colocated external `.html` and `.scss`
+resources. See [`CLAUDE.md`](CLAUDE.md) and run `npm run architecture:check` to verify the invariant.
 
 ## Install in an Angular application
 
 ```bash
-npm install @faithtech/cornerstone @angular/cdk
+npm install @cornerstone/ui @angular/cdk
 ```
 
 Add the base theme to the application's `angular.json` styles array:
 
 ```json
-"styles": ["@faithtech/cornerstone/styles/theme.scss", "src/styles.scss"]
+"styles": ["@cornerstone/ui/styles/theme.scss", "src/styles.scss"]
 ```
 
 Then import only the standalone pieces a screen uses:
 
 ```ts
-import { CsButtonDirective, CsCardComponent } from '@faithtech/cornerstone';
+import { CsButtonDirective, CsCardComponent } from '@cornerstone/ui';
 
 @Component({
   imports: [CsButtonDirective, CsCardComponent],
@@ -62,8 +75,8 @@ the theme:
 
 ```json
 "styles": [
-  "@faithtech/cornerstone/styles/theme.scss",
-  "@faithtech/cornerstone/styles/compat.scss",
+  "@cornerstone/ui/styles/theme.scss",
+  "@cornerstone/ui/styles/compat.scss",
   "src/styles.scss"
 ]
 ```

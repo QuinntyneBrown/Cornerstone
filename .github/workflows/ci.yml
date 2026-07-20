@@ -18,6 +18,15 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm test
-      - run: npm run build
+      - run: npm run api:check
+      - run: npm run trace:check
+      - run: npm run schematics:test
+      - run: npm run architecture:check
+      - run: npm run lint
       - run: npm run format:check
+      - run: npm run test:coverage
+      - run: npm run build
+      - run: npm run pack:check
+      - run: npm run size:check
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run e2e

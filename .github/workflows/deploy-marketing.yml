@@ -3,8 +3,7 @@ name: Deploy marketing
 on:
   push:
     branches: [main]
-    paths:
-      ['marketing/**', 'projects/cornerstone/**', 'package*.json', 'angular.json', 'tsconfig.json']
+    paths: ['marketing/**', 'scripts/build-marketing.mjs', '.github/workflows/deploy-marketing.yml']
   workflow_dispatch:
 
 permissions:
@@ -20,8 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-      - run: npm ci
+      # The brochure site is hand-written HTML and CSS. There are no dependencies
+      # to install: the build copies the directory and verifies it ships no scripts.
       - run: npm run build:marketing
       - name: Publish to Azure Static Web Apps
         if: env.DEPLOYMENT_TOKEN != ''

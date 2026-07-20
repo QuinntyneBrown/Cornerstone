@@ -1,0 +1,19 @@
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  ElementRef,
+  EnvironmentProviders,
+  InjectionToken,
+  Injectable,
+  booleanAttribute,
+  computed,
+  inject,
+  input,
+  makeEnvironmentProviders,
+  output,
+} from '@angular/core';
+import { CsIdService, CsMessageTone } from '../platform';
+
+export type CsSpacingStep = 1 | 2 | 3 | 4 | 5 | 6 | 8;

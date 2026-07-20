@@ -4,7 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@faithtech/cornerstone": ["./projects/cornerstone/src/public-api.ts"]
+      "@cornerstone/ui": ["./projects/cornerstone/src/public-api.ts"]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -34,9 +34,6 @@
     },
     {
       "path": "./design-system/tsconfig.app.json"
-    },
-    {
-      "path": "./marketing/tsconfig.app.json"
     }
   ]
 }
