@@ -1,0 +1,106 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Record consent
+
+enum CsConsentStatus {
+  granted
+  revoked
+  not_recorded
+}
+
+interface CsConsentPanelViewModel {
+  +subjectName: string
+  +contact: CsConsentContactDetail
+  +groups: CsConsentGroup[]
+  +history: CsConsentHistoryEntry[]
+  +readOnly: boolean
+}
+
+interface CsConsentContactDetail {
+  +guardianName: string
+  +relationship: string
+  +lines: CsContactLine[]
+}
+
+interface CsContactLine {
+  +label: string
+  +value: string
+}
+
+interface CsConsentGroup {
+  +groupId: string
+  +label: string
+  +choices: CsConsentChoice[]
+}
+
+interface CsConsentChoice {
+  +scopeId: string
+  +label: string
+  +scopeStatement: string
+  +status: CsConsentStatus
+  +locked: boolean
+}
+
+interface CsConsentHistoryEntry {
+  +scopeLabel: string
+  +status: CsConsentStatus
+  +actorName: string
+  +recordedAt: string
+}
+
+interface CsConsentDecisionIntent {
+  +scopeIds: string[]
+  +status: CsConsentStatus
+}
+
+interface CsConsentRevokeIntent {
+  +scopeIds: string[]
+  +confirmed: true
+}
+
+interface CsConsentContactUpdateIntent {
+  +subjectId: string
+}
+
+class CsConsentPanelComponent {
+  +consent: InputSignal<CsConsentPanelViewModel>
+  +busy: InputSignal<boolean>
+  +decisionRequested: OutputEmitterRef<CsConsentDecisionIntent>
+  +revokeRequested: OutputEmitterRef<CsConsentRevokeIntent>
+  +contactUpdateRequested: OutputEmitterRef<CsConsentContactUpdateIntent>
+  +requestDecision(scopeId: string, status: CsConsentStatus): void
+  +requestRevoke(scopeIds: string[]): void
+  -announceDecision(scopeLabel: string, status: CsConsentStatus): void
+  -formatTimestamp(value: string): string
+}
+
+class CsConfirmDialogComponent {
+  +title: InputSignal<string>
+  +destructive: InputSignal<boolean>
+  +decided: OutputEmitterRef<'confirm' | 'cancel'>
+}
+
+CsConsentPanelComponent --> "1" CsConsentPanelViewModel : reads
+CsConsentPanelViewModel *-- "1" CsConsentContactDetail : frames
+CsConsentContactDetail o-- "0..*" CsContactLine : lists
+CsConsentPanelViewModel o-- "1..*" CsConsentGroup : groups
+CsConsentGroup o-- "1..*" CsConsentChoice : contains
+CsConsentPanelViewModel o-- "0..*" CsConsentHistoryEntry : records
+CsConsentChoice --> "1" CsConsentStatus : holds
+CsConsentHistoryEntry --> "1" CsConsentStatus : states
+CsConsentPanelComponent ..> CsConsentDecisionIntent : emits
+CsConsentPanelComponent ..> CsConsentRevokeIntent : emits
+CsConsentPanelComponent ..> CsConsentContactUpdateIntent : emits
+CsConsentPanelComponent ..> CsConfirmDialogComponent : opens before revoking
+@enduml

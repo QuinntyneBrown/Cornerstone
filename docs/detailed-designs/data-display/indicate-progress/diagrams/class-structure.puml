@@ -1,0 +1,113 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Indicate progress
+
+enum CsProgressMode {
+  determinate
+  indeterminate
+}
+
+enum CsSkeletonPreset {
+  text
+  title
+  circle
+  block
+  button
+  tableRow
+}
+
+enum CsSpinnerMode {
+  inline
+  region
+}
+
+enum CsIndicatorSize {
+  xs
+  sm
+  md
+  lg
+  xl
+}
+
+enum CsProgressTone {
+  default
+  ink
+}
+
+interface CsProgressValue {
+  +label: InputSignal<string>
+  +value: InputSignal<number>
+  +min: InputSignal<number>
+  +max: InputSignal<number>
+  +mode: InputSignal<CsProgressMode>
+}
+
+class CsValueHelpers <<functions>> {
+  +csClampProgress(value: number, min: number, max: number): number
+  +csWarnOutOfRange(component: string, value: number): void
+  +csThrottleAnnouncement(text: string, intervalMs: number): void
+}
+
+class CsSpinnerComponent {
+  +label: InputSignal<string>
+  +size: InputSignal<CsIndicatorSize>
+  +mode: InputSignal<CsSpinnerMode>
+  +decorative: InputSignal<boolean>
+  #role: Signal<'status' | null>
+  #reducedMotion: Signal<boolean>
+}
+
+class CsSkeletonComponent {
+  +preset: InputSignal<CsSkeletonPreset>
+  +lines: InputSignal<number>
+  +width: InputSignal<string>
+  +height: InputSignal<string>
+}
+
+class CsSkeletonGroupComponent {
+  +loading: InputSignal<boolean>
+  +label: InputSignal<string>
+  #busy: Signal<boolean>
+}
+
+class CsProgressBarComponent {
+  +height: InputSignal<'thin' | 'standard'>
+  +tone: InputSignal<CsProgressTone>
+  +showValue: InputSignal<boolean>
+  #clamped: Signal<number>
+  #percentage: Signal<number>
+}
+
+class CsProgressRingComponent {
+  +size: InputSignal<CsIndicatorSize>
+  +tone: InputSignal<CsProgressTone>
+  #clamped: Signal<number>
+  #strokeWidth: Signal<number>
+  #dashOffset: Signal<number>
+}
+
+CsProgressBarComponent ..|> CsProgressValue
+CsProgressRingComponent ..|> CsProgressValue
+CsProgressValue --> CsProgressMode : has
+CsProgressBarComponent ..> CsValueHelpers : clamps and throttles through
+CsProgressRingComponent ..> CsValueHelpers : clamps and throttles through
+CsProgressBarComponent --> CsProgressTone : has
+CsProgressRingComponent --> CsProgressTone : has
+CsProgressRingComponent --> CsIndicatorSize : has
+CsSpinnerComponent --> CsIndicatorSize : has
+CsSpinnerComponent --> CsSpinnerMode : has
+CsSkeletonGroupComponent o-- "0..*" CsSkeletonComponent : projects
+CsSkeletonGroupComponent ..> CsSpinnerComponent : may render decoratively
+CsSkeletonComponent --> CsSkeletonPreset : has
+@enduml

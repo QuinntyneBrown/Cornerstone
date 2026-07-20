@@ -1,0 +1,103 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Follow a learning journey
+
+class CsLearningJourneyComponent {
+  +journey: InputSignal<CsLearningJourneyView>
+  +layout: InputSignal<CsJourneyLayout>
+  +busy: InputSignal<boolean>
+  +stepSelected: OutputEmitterRef<CsLessonStepSelect>
+  +moduleToggled: OutputEmitterRef<CsModuleToggle>
+  -isEmpty: Signal<boolean>
+  -resolvedLayout: Signal<CsJourneyLayout>
+}
+
+class CsLessonStepListComponent {
+  +steps: InputSignal<readonly CsLessonStepView[]>
+  +activeStepId: InputSignal<string | null>
+  +dense: InputSignal<boolean>
+  +stepSelected: OutputEmitterRef<CsLessonStepSelect>
+  -onActivate(step: CsLessonStepView): void
+}
+
+class CsLearningJourneyView {
+  +journeyId: string
+  +title: string
+  +modules: readonly CsJourneyModuleView[]
+  +summary: CsJourneyProgress
+}
+
+class CsJourneyModuleView {
+  +moduleId: string
+  +title: string
+  +steps: readonly CsLessonStepView[]
+  +expanded: boolean
+  +summary: CsJourneyProgress
+}
+
+class CsLessonStepView {
+  +stepId: string
+  +title: string
+  +state: CsLessonStepState
+  +prerequisiteIds: readonly string[]
+  +prerequisiteLabel: string | null
+  +estimatedMinutes: number | null
+  +badgeIds: readonly string[]
+}
+
+class CsJourneyProgress {
+  +completedCount: number
+  +totalCount: number
+  +percent: number
+  +label: string
+}
+
+enum CsLessonStepState {
+  completed
+  current
+  available
+  locked
+}
+
+enum CsJourneyLayout {
+  auto
+  timeline
+  list
+}
+
+class CsLessonStepSelect {
+  +journeyId: string
+  +moduleId: string
+  +stepId: string
+  +state: CsLessonStepState
+}
+
+class CsModuleToggle {
+  +moduleId: string
+  +expanded: boolean
+}
+
+CsLearningJourneyComponent *-- "1..*" CsLessonStepListComponent : renders one per module
+CsLearningJourneyComponent --> "1" CsLearningJourneyView : reads
+CsLearningJourneyComponent ..> CsModuleToggle : emits
+CsLearningJourneyComponent --> CsJourneyLayout : has
+CsLearningJourneyView *-- "1..*" CsJourneyModuleView : contains
+CsLearningJourneyView o-- "1" CsJourneyProgress : summarised by
+CsJourneyModuleView *-- "0..*" CsLessonStepView : contains
+CsJourneyModuleView o-- "1" CsJourneyProgress : summarised by
+CsLessonStepView --> CsLessonStepState : has
+CsLessonStepListComponent --> "0..*" CsLessonStepView : reads
+CsLessonStepListComponent ..> CsLessonStepSelect : emits
+CsLessonStepSelect --> CsLessonStepState : carries
+@enduml

@@ -1,0 +1,185 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Summarize a metric
+
+class CsMetricDelta {
+  +value: number
+  +direction: CsDeltaDirection
+  +sentiment: CsDeltaSentiment
+  +label?: string
+}
+
+enum CsDeltaDirection {
+  up
+  down
+  flat
+}
+
+enum CsDeltaSentiment {
+  positive
+  negative
+  neutral
+}
+
+enum CsMetricTone {
+  neutral
+  success
+  warning
+  error
+  info
+  lime
+}
+
+enum CsStatInteraction {
+  static
+  selectable
+  link
+}
+
+class CsStatCardComponent {
+  +label: InputSignal<string>
+  +value: InputSignal<string | number>
+  +unit: InputSignal<string | null>
+  +delta: InputSignal<CsMetricDelta | null>
+  +supporting: InputSignal<string | null>
+  +tone: InputSignal<CsMetricTone>
+  +interaction: InputSignal<CsStatInteraction>
+  +state: InputSignal<CsDataState<void>>
+  +activated: OutputEmitterRef<void>
+  +selectedChange: OutputEmitterRef<boolean>
+}
+
+class CsKpiComponent {
+  +label: InputSignal<string>
+  +value: InputSignal<string | number>
+  +unit: InputSignal<string | null>
+  +delta: InputSignal<CsMetricDelta | null>
+  +tone: InputSignal<CsMetricTone>
+  +size: InputSignal<CsKpiSize>
+}
+
+class CsProgressMatrixComponent {
+  +rows: InputSignal<CsMatrixRow[]>
+  +columns: InputSignal<CsMatrixColumn[]>
+  +stickyHeaders: InputSignal<boolean>
+  +state: InputSignal<CsDataState<void>>
+  +cellActivated: OutputEmitterRef<CsMatrixCellRef>
+  -summarize(): CsMatrixSummary
+}
+
+class CsMatrixRow {
+  +key: string
+  +label: string
+  +cells: CsMatrixCell[]
+}
+
+class CsMatrixColumn {
+  +key: string
+  +label: string
+  +abbreviation?: string
+}
+
+class CsMatrixCell {
+  +columnKey: string
+  +state: CsMatrixCellState
+  +note?: string
+}
+
+enum CsMatrixCellState {
+  done
+  inProgress
+  none
+  notApplicable
+}
+
+class CsMatrixSummary {
+  +done: number
+  +inProgress: number
+  +none: number
+  +notApplicable: number
+}
+
+class CsMetricSeries {
+  +key: string
+  +label: string
+  +tone?: CsMetricTone
+  +points: CsMetricPoint[]
+}
+
+class CsMetricPoint {
+  +key: string
+  +label: string
+  +value: number
+  +formatted?: string
+}
+
+class CsMetricBarsComponent {
+  +series: InputSignal<CsMetricSeries[]>
+  +max: InputSignal<number | null>
+  +mode: InputSignal<CsMetricBarsMode>
+  +showLegend: InputSignal<boolean>
+  +showValueTable: InputSignal<boolean>
+  +state: InputSignal<CsDataState<void>>
+  +pointActivated: OutputEmitterRef<CsMetricPointRef>
+}
+
+enum CsMetricBarsMode {
+  bars
+  distribution
+}
+
+class CsComparisonChartComponent {
+  +series: InputSignal<CsMetricSeries[]>
+  +baselineKey: InputSignal<string>
+  +showDelta: InputSignal<boolean>
+  +state: InputSignal<CsDataState<void>>
+  -deltaFor(series: CsMetricSeries): CsMetricDelta
+}
+
+class CsMetricValueTableComponent {
+  +series: InputSignal<CsMetricSeries[]>
+  +visible: InputSignal<boolean>
+}
+
+class CsMetricLegendComponent {
+  +series: InputSignal<CsMetricSeries[]>
+}
+
+interface CsDataState<T> {
+  +kind: CsDataStateKind
+}
+
+CsStatCardComponent o-- CsMetricDelta : presents
+CsStatCardComponent --> CsMetricTone : has
+CsStatCardComponent --> CsStatInteraction : has
+CsStatCardComponent ..> CsDataState : renders states of
+CsKpiComponent o-- CsMetricDelta : presents
+CsKpiComponent --> CsMetricTone : has
+CsMetricDelta --> CsDeltaDirection : has
+CsMetricDelta --> CsDeltaSentiment : has
+CsProgressMatrixComponent *-- "1..*" CsMatrixRow : contains
+CsProgressMatrixComponent *-- "1..*" CsMatrixColumn : contains
+CsMatrixRow *-- "1..*" CsMatrixCell : contains
+CsMatrixCell --> CsMatrixCellState : has
+CsProgressMatrixComponent ..> CsMatrixSummary : derives
+CsMetricSeries *-- "1..*" CsMetricPoint : contains
+CsMetricBarsComponent --> "1..*" CsMetricSeries : renders
+CsMetricBarsComponent --> CsMetricBarsMode : has
+CsComparisonChartComponent --> "2..*" CsMetricSeries : renders
+CsComparisonChartComponent ..> CsMetricDelta : derives
+CsMetricBarsComponent *-- CsMetricValueTableComponent : renders
+CsComparisonChartComponent *-- CsMetricValueTableComponent : renders
+CsMetricBarsComponent *-- CsMetricLegendComponent : renders
+CsComparisonChartComponent *-- CsMetricLegendComponent : renders
+@enduml

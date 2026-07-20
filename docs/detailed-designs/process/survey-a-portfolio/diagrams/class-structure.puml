@@ -1,0 +1,138 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Survey a portfolio and the adapter contract
+
+enum CsPortfolioLayout {
+  card
+  grid
+  board
+}
+
+interface CsProcessAdapter {
+  +labels: CsProcessLabels
+  +palette: CsProcessPalette
+  +order: readonly string[]
+  +enforcement: ReadonlyMap<string, CsGateSummary>
+}
+
+class CsProcessLabels {
+  +doneLabel?: string
+  +currentLabel?: string
+  +lockedLabel?: string
+  +gateOpenLabel?: string
+  +gateBlockedLabel?: string
+  +phaseCountLabel?: (name: string, count: number) => string
+  +emptyLabel?: string
+}
+
+class CsProcessPalette {
+  +tokenByKey: ReadonlyMap<string, string>
+  +defaultToken: string
+}
+
+class CsGateSummary {
+  +id: string
+  +label: string
+  +open: boolean
+  +outstandingCount: number
+  +blockedReason?: string
+}
+
+class CsProcessDefaults {
+  +{static} labels: Required<CsProcessLabels>
+  +{static} resolve(labels?: CsProcessLabels): Required<CsProcessLabels>
+}
+
+class ProvideCsProcessAdapter <<function>> {
+  +provideCsProcessAdapter(adapter: CsProcessAdapter): EnvironmentProviders
+}
+
+class CsPhase {
+  +id: string
+  +name: string
+  +paletteKey?: string
+  +description?: string
+}
+
+class CsProject {
+  +id: string
+  +name: string
+  +state: string
+  +meta: readonly CsProjectMeta[]
+  +gate?: CsGateSummary
+  +phaseId?: string
+}
+
+class CsProjectMeta {
+  +label: string
+  +value: string
+}
+
+class CsGratitudeNote {
+  +id: string
+  +quote: string
+  +attribution: string
+  +context?: string
+}
+
+class CsPhaseLaneComponent {
+  +phase: InputSignal<CsPhase>
+  +projects: InputSignal<readonly CsProject[]>
+  +layout: InputSignal<CsPortfolioLayout>
+  +adapter: InputSignal<CsProcessAdapter>
+  -accessibleName: Signal<string>
+  -laneToken: Signal<string>
+}
+
+class CsProjectCardComponent {
+  +project: InputSignal<CsProject>
+  +adapter: InputSignal<CsProcessAdapter>
+  +opened: OutputEmitterRef<CsProjectOpenIntent>
+  -gateText: Signal<string>
+}
+
+class CsGratitudeWallComponent {
+  +notes: InputSignal<readonly CsGratitudeNote[]>
+  +loading: InputSignal<boolean>
+  +emptyText: InputSignal<string>
+  +adapter: InputSignal<CsProcessAdapter>
+  -isEmpty: Signal<boolean>
+}
+
+class CsGratitudeNoteComponent {
+  +note: InputSignal<CsGratitudeNote>
+}
+
+class CsProjectOpenIntent {
+  +projectId: string
+}
+
+CsProcessAdapter *-- CsProcessLabels
+CsProcessAdapter *-- CsProcessPalette
+CsProcessAdapter --> CsGateSummary : supplies enforcement results as
+CsProcessLabels ..> CsProcessDefaults : falls back to
+ProvideCsProcessAdapter ..> CsProcessAdapter : registers
+CsPhaseLaneComponent --> CsProcessAdapter : reads labels, palette, and order from
+CsProjectCardComponent --> CsProcessAdapter : reads labels from
+CsGratitudeWallComponent --> CsProcessAdapter : reads labels from
+CsPhaseLaneComponent "1" o-- "0..*" CsProject : renders
+CsPhaseLaneComponent "1" *-- "0..*" CsProjectCardComponent : contains
+CsPhaseLaneComponent --> CsPhase : groups
+CsPhaseLaneComponent --> CsPortfolioLayout : has
+CsProject "1" o-- "0..*" CsProjectMeta
+CsProject "1" o-- "0..1" CsGateSummary : is gated by
+CsGratitudeWallComponent "1" *-- "0..*" CsGratitudeNoteComponent : contains
+CsGratitudeNoteComponent --> CsGratitudeNote : renders
+CsProjectCardComponent ..> CsProjectOpenIntent : emits
+@enduml

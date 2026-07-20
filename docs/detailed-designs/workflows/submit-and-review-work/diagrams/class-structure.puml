@@ -1,0 +1,214 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Submit and review work
+
+interface ControlValueAccessor {
+  +writeValue(value: unknown): void
+  +registerOnChange(fn: (value: unknown) => void): void
+  +registerOnTouched(fn: () => void): void
+  +setDisabledState(isDisabled: boolean): void
+}
+
+class CsAssignmentCardComponent {
+  +assignment: InputSignal<CsAssignmentView>
+  +expanded: ModelSignal<boolean>
+  +busy: InputSignal<boolean>
+  +actionSelected: OutputEmitterRef<CsAssignmentAction>
+}
+
+class CsSubmissionStatusComponent {
+  +submission: InputSignal<CsSubmissionView>
+  +history: InputSignal<readonly CsSubmissionVersion[]>
+  +showHistory: ModelSignal<boolean>
+  +versionSelected: OutputEmitterRef<CsSubmissionVersionSelect>
+  +actionSelected: OutputEmitterRef<CsSubmissionAction>
+}
+
+class CsRubricComponent {
+  +rubric: InputSignal<CsRubricView>
+  +selection: ModelSignal<CsRubricSelection>
+  +readOnly: InputSignal<boolean>
+  +levelSelected: OutputEmitterRef<CsRubricLevelSelect>
+}
+
+class CsAssessmentEditorComponent {
+  +assessment: InputSignal<CsAssessmentView>
+  +readOnly: InputSignal<boolean>
+  +saving: InputSignal<boolean>
+  +assessmentChanged: OutputEmitterRef<CsAssessmentChange>
+  +decisionSubmitted: OutputEmitterRef<CsAssessmentDecision>
+  -dirty: Signal<boolean>
+  +writeValue(value: string): void
+}
+
+class CsAchievementCardComponent {
+  +achievement: InputSignal<CsAchievementView>
+  +size: InputSignal<CsAchievementSize>
+  +achievementSelected: OutputEmitterRef<CsAchievementSelect>
+}
+
+class CsBadgeCollectionComponent {
+  +achievements: InputSignal<readonly CsAchievementView[]>
+  +layout: InputSignal<CsCollectionLayout>
+  +emptyLabel: InputSignal<string>
+  +achievementSelected: OutputEmitterRef<CsAchievementSelect>
+}
+
+class CsAssignmentView {
+  +assignmentId: string
+  +title: string
+  +dueLabel: string
+  +dueState: CsAssignmentDueState
+  +status: CsSubmissionStatus
+  +instructions: string
+  +metadata: readonly CsMetadataItem[]
+  +actions: readonly CsAssignmentAction[]
+}
+
+enum CsAssignmentDueState {
+  upcoming
+  dueSoon
+  overdue
+  closed
+}
+
+class CsSubmissionView {
+  +submissionId: string
+  +assignmentId: string
+  +status: CsSubmissionStatus
+  +submittedAtLabel: string | null
+  +evidence: readonly CsEvidenceItem[]
+  +feedback: CsReviewFeedback | null
+  +versionCount: number
+}
+
+enum CsSubmissionStatus {
+  draft
+  submitted
+  inReview
+  changesRequested
+  approved
+}
+
+class CsSubmissionVersion {
+  +versionId: string
+  +ordinal: number
+  +submittedAtLabel: string
+  +status: CsSubmissionStatus
+  +isCurrent: boolean
+}
+
+class CsEvidenceItem {
+  +evidenceId: string
+  +kind: string
+  +label: string
+  +sizeLabel: string | null
+  +previewUrl: string | null
+}
+
+class CsReviewFeedback {
+  +authorLabel: string
+  +postedAtLabel: string
+  +body: string
+  +decision: string
+}
+
+class CsRubricView {
+  +rubricId: string
+  +title: string
+  +criteria: readonly CsRubricCriterion[]
+  +totalLabel: string
+}
+
+class CsRubricCriterion {
+  +criterionId: string
+  +label: string
+  +description: string
+  +weight: number
+  +levels: readonly CsRubricLevel[]
+}
+
+class CsRubricLevel {
+  +levelId: string
+  +label: string
+  +descriptor: string
+  +score: number
+}
+
+class CsAssessmentView {
+  +assessmentId: string
+  +submissionId: string
+  +rubric: CsRubricView
+  +selection: CsRubricSelection
+  +comment: string
+  +decision: string | null
+}
+
+class CsAssessmentDecision {
+  +assessmentId: string
+  +outcome: string
+  +selection: CsRubricSelection
+  +comment: string
+}
+
+class CsAchievementView {
+  +achievementId: string
+  +name: string
+  +artUrl: string | null
+  +iconName: string | null
+  +criteriaLabel: string
+  +earned: boolean
+  +awardedAtLabel: string | null
+  +progress: CsAchievementProgress | null
+}
+
+class CsAchievementProgress {
+  +current: number
+  +target: number
+  +percent: number
+  +label: string
+}
+
+class CsAchievementSelect {
+  +achievementId: string
+  +earned: boolean
+}
+
+enum CsCollectionLayout {
+  grid
+  list
+}
+
+CsAssessmentEditorComponent ..|> ControlValueAccessor
+CsAssessmentEditorComponent *-- "1" CsRubricComponent : composes
+CsBadgeCollectionComponent *-- "0..*" CsAchievementCardComponent : renders one per achievement
+CsAssignmentCardComponent --> "1" CsAssignmentView : reads
+CsAssignmentView --> CsAssignmentDueState : has
+CsAssignmentView --> CsSubmissionStatus : reports
+CsSubmissionStatusComponent --> "1" CsSubmissionView : reads
+CsSubmissionStatusComponent --> "0..*" CsSubmissionVersion : lists
+CsSubmissionView *-- "0..*" CsEvidenceItem : carries
+CsSubmissionView o-- "0..1" CsReviewFeedback : carries
+CsSubmissionView --> CsSubmissionStatus : has
+CsRubricComponent --> "1" CsRubricView : reads
+CsRubricView *-- "1..*" CsRubricCriterion : contains
+CsRubricCriterion *-- "1..*" CsRubricLevel : offers
+CsAssessmentEditorComponent --> "1" CsAssessmentView : reads
+CsAssessmentView o-- "1" CsRubricView : assesses against
+CsAssessmentEditorComponent ..> CsAssessmentDecision : emits
+CsAchievementCardComponent --> "1" CsAchievementView : reads
+CsAchievementView o-- "0..1" CsAchievementProgress : reports
+CsAchievementCardComponent ..> CsAchievementSelect : emits
+CsBadgeCollectionComponent --> CsCollectionLayout : has
+@enduml

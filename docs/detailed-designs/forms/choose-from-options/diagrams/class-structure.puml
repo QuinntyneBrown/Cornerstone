@@ -1,0 +1,145 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Choose from options
+
+interface ControlValueAccessor {
+  +writeValue(value: unknown): void
+  +registerOnChange(fn: (value: unknown) => void): void
+  +registerOnTouched(fn: () => void): void
+  +setDisabledState(isDisabled: boolean): void
+}
+
+enum CsSelectState {
+  default
+  loading
+  empty
+  error
+}
+
+enum CsCheckboxState {
+  checked
+  unchecked
+  indeterminate
+}
+
+enum CsChoiceMode {
+  single
+  multiple
+}
+
+class CsSelectDirective {
+  +state: InputSignal<CsSelectState>
+  +density: InputSignal<'comfortable' | 'compact' | 'in-table'>
+  +emptyText: InputSignal<string>
+  +writeValue(value: string | null): void
+  +registerOnChange(fn: (value: string) => void): void
+  +registerOnTouched(fn: () => void): void
+  +setDisabledState(isDisabled: boolean): void
+}
+
+class CsCheckboxComponent {
+  +label: InputSignal<string>
+  +description: InputSignal<string | null>
+  +indeterminate: ModelSignal<boolean>
+  +presentation: InputSignal<'inline' | 'checklist-row'>
+  +disabled: InputSignal<boolean>
+  +changed: OutputEmitterRef<CsCheckboxState>
+  +state: Signal<CsCheckboxState>
+  +writeValue(value: boolean | null): void
+  +registerOnChange(fn: (value: boolean) => void): void
+  +registerOnTouched(fn: () => void): void
+  +setDisabledState(isDisabled: boolean): void
+  #toggle(): void
+}
+
+class CsRadioGroupComponent {
+  +label: InputSignal<string>
+  +presentation: InputSignal<'inline' | 'card' | 'segmented'>
+  +value: ModelSignal<unknown>
+  +members: Signal<readonly CsRadioComponent[]>
+  +writeValue(value: unknown): void
+  +registerOnChange(fn: (value: unknown) => void): void
+  +registerOnTouched(fn: () => void): void
+  +setDisabledState(isDisabled: boolean): void
+  #onArrowKey(event: KeyboardEvent): void
+}
+
+class CsRadioComponent {
+  +value: InputSignal<unknown>
+  +label: InputSignal<string>
+  +description: InputSignal<string | null>
+  +disabled: InputSignal<boolean>
+  +selected: Signal<boolean>
+  #tabIndex: Signal<0 | -1>
+}
+
+class CsSwitchComponent {
+  +label: InputSignal<string>
+  +description: InputSignal<string | null>
+  +disabled: InputSignal<boolean>
+  +checked: ModelSignal<boolean>
+  +changed: OutputEmitterRef<boolean>
+  +writeValue(value: boolean | null): void
+  +registerOnChange(fn: (value: boolean) => void): void
+  +registerOnTouched(fn: () => void): void
+  +setDisabledState(isDisabled: boolean): void
+}
+
+class CsChoiceGroupComponent {
+  +label: InputSignal<string>
+  +mode: InputSignal<CsChoiceMode>
+  +value: ModelSignal<CsChoiceValue>
+  +choices: Signal<readonly CsChoiceCardComponent[]>
+  +writeValue(value: CsChoiceValue): void
+  +registerOnChange(fn: (value: CsChoiceValue) => void): void
+  +registerOnTouched(fn: () => void): void
+  +setDisabledState(isDisabled: boolean): void
+}
+
+class CsChoiceCardComponent {
+  +value: InputSignal<unknown>
+  +title: InputSignal<string>
+  +description: InputSignal<string | null>
+  +media: InputSignal<string | null>
+  +disabled: InputSignal<boolean>
+  +selected: Signal<boolean>
+}
+
+class CsChoiceValue {
+  +single: unknown
+  +multiple: readonly unknown[]
+}
+
+class CsRovingFocusManager {
+  +setActiveItem(index: number): void
+  +onKeydown(event: KeyboardEvent): void
+  -skipDisabled: boolean
+}
+
+CsSelectDirective ..|> ControlValueAccessor
+CsCheckboxComponent ..|> ControlValueAccessor
+CsRadioGroupComponent ..|> ControlValueAccessor
+CsSwitchComponent ..|> ControlValueAccessor
+CsChoiceGroupComponent ..|> ControlValueAccessor
+CsSelectDirective --> CsSelectState : has
+CsCheckboxComponent --> CsCheckboxState : reports
+CsRadioGroupComponent *-- "1..*" CsRadioComponent : owns the value of
+CsRadioGroupComponent ..> CsRovingFocusManager : delegates navigation to
+CsChoiceGroupComponent *-- "1..*" CsChoiceCardComponent : owns the value of
+CsChoiceGroupComponent ..> CsRovingFocusManager : delegates navigation to
+CsChoiceGroupComponent --> CsChoiceMode : has
+CsChoiceGroupComponent --> CsChoiceValue : emits
+CsChoiceCardComponent ..> CsRadioComponent : renders in single mode
+CsChoiceCardComponent ..> CsCheckboxComponent : renders in multiple mode
+@enduml

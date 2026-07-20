@@ -1,0 +1,183 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Manage people
+
+class CsPeopleDirectoryComponent {
+  +people: InputSignal<readonly CsPersonRowView[]>
+  +query: ModelSignal<CsPeopleQuery>
+  +facets: InputSignal<readonly CsPeopleFacet[]>
+  +selection: ModelSignal<ReadonlySet<string>>
+  +layout: InputSignal<CsDirectoryLayout>
+  +loading: InputSignal<boolean>
+  +queryChanged: OutputEmitterRef<CsPeopleQuery>
+  +selectionChanged: OutputEmitterRef<CsPeopleSelectionChange>
+  +rowAction: OutputEmitterRef<CsPersonRowAction>
+  -resolvedVariant: Signal<CsPersonRowVariant>
+  -allSelectedState: Signal<boolean | 'indeterminate'>
+}
+
+class CsPersonRowComponent {
+  +person: InputSignal<CsPersonRowView>
+  +selected: ModelSignal<boolean>
+  +selectable: InputSignal<boolean>
+  +variant: InputSignal<CsPersonRowVariant>
+  +actionSelected: OutputEmitterRef<CsPersonRowAction>
+  +opened: OutputEmitterRef<CsPersonOpen>
+  -avatarFailed: WritableSignal<boolean>
+}
+
+class CsPersonSummaryComponent {
+  +person: InputSignal<CsPersonSummaryView>
+  +actions: InputSignal<readonly CsPersonAction[]>
+  +actionSelected: OutputEmitterRef<CsPersonAction>
+}
+
+class CsRecordTabsComponent {
+  +sections: InputSignal<readonly CsRecordSection[]>
+  +activeSectionId: ModelSignal<string>
+  +orientation: InputSignal<CsRecordTabsOrientation>
+  +sectionChanged: OutputEmitterRef<CsRecordSectionChange>
+}
+
+class CsPersonRowView {
+  +personId: string
+  +displayName: string
+  +avatarUrl: string | null
+  +initials: string
+  +roleLabel: string
+  +cohortLabel: string | null
+  +status: CsPersonStatus
+  +statusLabel: string
+  +actions: readonly CsPersonRowAction[]
+}
+
+class CsPersonSummaryView {
+  +personId: string
+  +displayName: string
+  +pronouns: string | null
+  +avatarUrl: string | null
+  +initials: string
+  +roleLabel: string
+  +cohortLabel: string | null
+  +status: CsPersonStatus
+  +statusLabel: string
+  +contacts: readonly CsContactEntry[]
+}
+
+class CsContactEntry {
+  +kind: string
+  +label: string
+  +value: string
+  +href: string | null
+}
+
+enum CsPersonStatus {
+  active
+  inactive
+  pending
+  archived
+}
+
+class CsPeopleQuery {
+  +text: string
+  +filters: Record<string, readonly string[]>
+  +sortKey: string
+  +sortDirection: string
+}
+
+class CsPeopleFacet {
+  +facetId: string
+  +label: string
+  +options: readonly CsFacetOption[]
+  +multiple: boolean
+}
+
+class CsFacetOption {
+  +optionId: string
+  +label: string
+  +count: number | null
+}
+
+enum CsDirectoryLayout {
+  auto
+  table
+  list
+}
+
+enum CsPersonRowVariant {
+  table
+  list
+}
+
+class CsPeopleSelectionChange {
+  +selectedIds: readonly string[]
+  +lastChangedId: string
+}
+
+class CsPersonRowAction {
+  +personId: string
+  +actionId: string
+  +kind: string
+}
+
+class CsPersonOpen {
+  +personId: string
+}
+
+class CsPersonAction {
+  +personId: string
+  +actionId: string
+  +label: string
+  +kind: string
+}
+
+class CsRecordSection {
+  +sectionId: string
+  +label: string
+  +badgeCount: number | null
+  +disabled: boolean
+  +loading: boolean
+}
+
+class CsRecordSectionChange {
+  +personId: string
+  +fromSectionId: string
+  +toSectionId: string
+}
+
+enum CsRecordTabsOrientation {
+  horizontal
+  vertical
+}
+
+CsPeopleDirectoryComponent *-- "0..*" CsPersonRowComponent : renders one per person
+CsPeopleDirectoryComponent --> "0..*" CsPersonRowView : reads
+CsPeopleDirectoryComponent o-- "1" CsPeopleQuery : holds
+CsPeopleDirectoryComponent --> "0..*" CsPeopleFacet : offers
+CsPeopleDirectoryComponent --> CsDirectoryLayout : has
+CsPeopleDirectoryComponent ..> CsPeopleSelectionChange : emits
+CsPeopleFacet *-- "1..*" CsFacetOption : offers
+CsPersonRowComponent --> "1" CsPersonRowView : reads
+CsPersonRowComponent --> CsPersonRowVariant : has
+CsPersonRowComponent ..> CsPersonRowAction : emits
+CsPersonRowComponent ..> CsPersonOpen : emits
+CsPersonRowView --> CsPersonStatus : has
+CsPersonSummaryComponent --> "1" CsPersonSummaryView : reads
+CsPersonSummaryComponent ..> CsPersonAction : emits
+CsPersonSummaryView *-- "0..*" CsContactEntry : carries
+CsPersonSummaryView --> CsPersonStatus : has
+CsRecordTabsComponent --> "1..*" CsRecordSection : reads
+CsRecordTabsComponent --> CsRecordTabsOrientation : has
+CsRecordTabsComponent ..> CsRecordSectionChange : emits
+@enduml

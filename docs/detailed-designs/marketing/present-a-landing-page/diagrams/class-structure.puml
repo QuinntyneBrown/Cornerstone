@@ -1,0 +1,155 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Present a landing page
+
+enum CsSectionTone {
+  light
+  dark
+  brand
+}
+
+enum CsCtaTone {
+  light
+  dark
+  lime
+}
+
+enum CsContentSectionVariant {
+  prose
+  proseMedia
+  cardGrid
+  stats
+  callout
+  scripture
+}
+
+enum CsHeroMediaPosition {
+  start
+  end
+  below
+  background
+}
+
+enum CsActionEmphasis {
+  primary
+  secondary
+}
+
+interface CsSectionBase {
+  +tone: InputSignal<CsSectionTone>
+  +eyebrow: InputSignal<string>
+  +title: InputSignal<string>
+  +lede: InputSignal<string>
+}
+
+class CsHeroComponent {
+  +tone: InputSignal<CsSectionTone>
+  +eyebrow: InputSignal<string>
+  +title: InputSignal<string>
+  +lede: InputSignal<string>
+  +align: InputSignal<CsHeroAlign>
+  +mediaPosition: InputSignal<CsHeroMediaPosition>
+  +actionSelected: OutputEmitterRef<CsHeroAction>
+}
+
+enum CsHeroAlign {
+  start
+  center
+}
+
+class CsContentSectionComponent {
+  +tone: InputSignal<CsSectionTone>
+  +eyebrow: InputSignal<string>
+  +title: InputSignal<string>
+  +lede: InputSignal<string>
+  +variant: InputSignal<CsContentSectionVariant>
+  +reverse: InputSignal<boolean>
+  +anchorId: InputSignal<string>
+  +cards: InputSignal<readonly CsSectionCard[]>
+  +stats: InputSignal<readonly CsSectionStat[]>
+  +cardSelected: OutputEmitterRef<CsSectionCard>
+}
+
+class CsCtaSectionComponent {
+  +tone: InputSignal<CsCtaTone>
+  +width: InputSignal<CsCtaWidth>
+  +title: InputSignal<string>
+  +lede: InputSignal<string>
+  +primaryAction: InputSignal<CsCtaAction>
+  +secondaryAction: InputSignal<CsCtaAction | null>
+  +actionSelected: OutputEmitterRef<CsCtaAction>
+}
+
+enum CsCtaWidth {
+  compact
+  full
+}
+
+class CsHeroAction {
+  +id: string
+  +label: string
+  +emphasis: CsActionEmphasis
+}
+
+class CsCtaAction {
+  +id: string
+  +label: string
+  +emphasis: CsActionEmphasis
+}
+
+class CsSectionCard {
+  +id: string
+  +title: string
+  +body: string
+  +icon: string
+  +href: string
+  +media: CsSectionMedia
+}
+
+class CsSectionStat {
+  +id: string
+  +value: string
+  +label: string
+  +caption: string
+}
+
+class CsSectionMedia {
+  +src: string
+  +alt: string
+  +aspectRatio: string
+}
+
+class CsSectionAnchorDirective {
+  +anchorId: InputSignal<string>
+  +headerOffset: InputSignal<number>
+  +scrollIntoView(): void
+}
+
+CsHeroComponent ..|> CsSectionBase
+CsContentSectionComponent ..|> CsSectionBase
+CsHeroComponent --> CsHeroMediaPosition : has
+CsHeroComponent --> CsHeroAlign : has
+CsHeroComponent ..> CsHeroAction : emits
+CsHeroAction --> CsActionEmphasis : has
+CsContentSectionComponent --> CsContentSectionVariant : has
+CsContentSectionComponent o-- "0..*" CsSectionCard : renders
+CsContentSectionComponent o-- "0..*" CsSectionStat : renders
+CsContentSectionComponent *-- "0..1" CsSectionAnchorDirective : registers
+CsCtaSectionComponent --> CsCtaTone : has
+CsCtaSectionComponent --> CsCtaWidth : has
+CsCtaSectionComponent ..> CsCtaAction : emits
+CsCtaAction --> CsActionEmphasis : has
+CsSectionCard --> "0..1" CsSectionMedia : has
+CsSectionBase --> CsSectionTone : has
+@enduml

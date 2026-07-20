@@ -1,0 +1,84 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Navigate the public site
+
+class CsMarketingHeaderComponent {
+  +brand: InputSignal<CsBrand>
+  +links: InputSignal<readonly CsMarketingLink[]>
+  +cta: InputSignal<CsMarketingCta | null>
+  +secondaryCta: InputSignal<CsMarketingCta | null>
+  +menuOpen: ModelSignal<boolean>
+  +narrow: Signal<boolean>
+  +ctaSelected: OutputEmitterRef<CsMarketingCta>
+  +toggleMenu(): void
+  -restoreFocusToToggle(): void
+}
+
+class CsMarketingFooterComponent {
+  +brand: InputSignal<CsBrand>
+  +groups: InputSignal<readonly CsMarketingLinkGroup[]>
+  +social: InputSignal<readonly CsSocialLink[]>
+  +legal: InputSignal<readonly CsMarketingLink[]>
+  +copyright: InputSignal<string>
+  +narrow: Signal<boolean>
+}
+
+class CsMarketingLink {
+  +label: string
+  +routerLink?: unknown
+  +href?: string
+  +external?: boolean
+}
+
+class CsMarketingLinkGroup {
+  +heading: string
+  +links: readonly CsMarketingLink[]
+}
+
+class CsMarketingCta {
+  +label: string
+  +variant: CsButtonVariant
+  +routerLink?: unknown
+  +href?: string
+}
+
+class CsSocialLink {
+  +platform: string
+  +ariaLabel: string
+  +href: string
+}
+
+class CsBrand {
+  +label: string
+  +logoSrc?: string
+  +homeLink?: unknown
+}
+
+enum CsButtonVariant {
+  primary
+  secondary
+  ghost
+}
+
+CsMarketingHeaderComponent --> "1" CsBrand : displays
+CsMarketingHeaderComponent --> "0..*" CsMarketingLink : renders
+CsMarketingHeaderComponent --> "0..2" CsMarketingCta : offers
+CsMarketingHeaderComponent ..> CsMarketingCta : emits
+CsMarketingFooterComponent --> "1" CsBrand : displays
+CsMarketingFooterComponent o-- "0..*" CsMarketingLinkGroup : renders
+CsMarketingFooterComponent --> "0..*" CsSocialLink : renders
+CsMarketingFooterComponent --> "0..*" CsMarketingLink : renders as legal links
+CsMarketingLinkGroup *-- "1..*" CsMarketingLink : contains
+CsMarketingCta --> CsButtonVariant : has
+@enduml

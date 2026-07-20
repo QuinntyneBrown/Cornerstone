@@ -1,0 +1,71 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Place an icon
+
+enum CsIconSize {
+  sm
+  md
+  lg
+  xl
+}
+
+enum CsIconFill {
+  none
+  solid
+}
+
+class CsIconDefinition {
+  +name: string
+  +viewBox: string
+  +paths: readonly string[]
+  +fills: readonly CsIconFill[]
+}
+
+class CsIconSet {
+  +id: string
+  +icons: Record<string, CsIconDefinition>
+}
+
+class CsIconRegistry {
+  -definitions: Map<string, CsIconDefinition>
+  +names: Signal<readonly string[]>
+  +registerIconSet(set: CsIconSet): void
+  +registerIcon(name: string, definition: CsIconDefinition): void
+  +resolve(name: string): CsIconDefinition | undefined
+}
+
+class CsIconComponent {
+  +name: InputSignal<string>
+  +size: InputSignal<CsIconSize>
+  +fill: InputSignal<CsIconFill>
+  +label: InputSignal<string | undefined>
+  +definition: Signal<CsIconDefinition | undefined>
+  +decorative: Signal<boolean>
+  -reportMissing(name: string): void
+}
+
+class ProvideCsIcons <<function>> {
+  +provideCsIcons(...sets: CsIconSet[]): EnvironmentProviders
+}
+
+ProvideCsIcons ..> CsIconRegistry : registers
+ProvideCsIcons ..> CsIconSet : seeds from
+CsIconSet "1" *-- "1..*" CsIconDefinition : contains
+CsIconRegistry o-- "0..*" CsIconDefinition : indexes
+CsIconComponent --> CsIconRegistry : resolves through
+CsIconComponent ..> CsIconDefinition : renders
+CsIconComponent --> CsIconSize : has
+CsIconComponent --> CsIconFill : has
+CsIconDefinition --> CsIconFill : provides
+@enduml

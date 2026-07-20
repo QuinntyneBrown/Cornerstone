@@ -1,0 +1,125 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Frame the application shell
+
+enum CsShellSidenavMode {
+  side
+  over
+  auto
+}
+
+class CsShellComponent {
+  +sidenavMode: InputSignal<CsShellSidenavMode>
+  +sidenavOpen: ModelSignal<boolean>
+  +compact: InputSignal<boolean>
+  +bottomNavVisible: InputSignal<boolean>
+  +resolvedMode: Signal<CsShellSidenavMode>
+  -restoreTarget: HTMLElement | null
+  +openSidenav(): void
+  +closeSidenav(): void
+  -resolveMode(): CsShellSidenavMode
+  -trapFocus(): void
+  -restoreFocus(): void
+}
+
+class CsTopbarComponent {
+  +brand: InputSignal<CsBrand>
+  +heading: InputSignal<string>
+  +pills: InputSignal<readonly CsTopbarPill[]>
+  +notificationCount: InputSignal<number>
+  +menuTriggerVisible: InputSignal<boolean>
+  +menuToggled: OutputEmitterRef<void>
+  +notificationsOpened: OutputEmitterRef<void>
+}
+
+class CsSidenavComponent {
+  +groups: InputSignal<readonly CsNavGroup[]>
+  +roles: InputSignal<readonly string[]>
+  +compact: InputSignal<boolean>
+  +mode: InputSignal<CsShellSidenavMode>
+  +visibleGroups: Signal<readonly CsNavGroup[]>
+  +itemActivated: OutputEmitterRef<CsNavItemActivation>
+}
+
+class CsNavGroupComponent {
+  +heading: InputSignal<string>
+  +collapsible: InputSignal<boolean>
+  +expanded: ModelSignal<boolean>
+}
+
+class CsNavItemDirective {
+  +icon: InputSignal<string>
+  +badge: InputSignal<string | number | null>
+  +active: InputSignal<boolean>
+  +disabled: InputSignal<boolean>
+  +ariaCurrent: Signal<'page' | null>
+}
+
+class CsBottomNavComponent {
+  +items: InputSignal<readonly CsBottomNavItem[]>
+  +activeId: ModelSignal<string>
+  +itemActivated: OutputEmitterRef<CsNavItemActivation>
+}
+
+class CsNavGroup {
+  +heading: string
+  +items: readonly CsNavItem[]
+  +roles?: readonly string[]
+}
+
+class CsNavItem {
+  +id: string
+  +label: string
+  +icon: string
+  +badge?: string | number
+  +roles?: readonly string[]
+  +disabled?: boolean
+}
+
+class CsBottomNavItem {
+  +id: string
+  +label: string
+  +icon: string
+  +badge?: string | number
+}
+
+class CsNavItemActivation {
+  +itemId: string
+  +source: 'pointer' | 'keyboard'
+}
+
+class CsTopbarPill {
+  +label: string
+  +tone: CsTone
+}
+
+class CsBrand {
+  +label: string
+  +logoSrc?: string
+}
+
+CsShellComponent --> CsShellSidenavMode : resolves
+CsShellComponent *-- "1" CsTopbarComponent : projects
+CsShellComponent *-- "0..1" CsSidenavComponent : projects
+CsShellComponent *-- "0..1" CsBottomNavComponent : projects
+CsSidenavComponent o-- "0..*" CsNavGroupComponent : renders
+CsNavGroupComponent o-- "1..*" CsNavItemDirective : marks
+CsSidenavComponent ..> CsNavGroup : reads
+CsNavGroup *-- "1..*" CsNavItem : contains
+CsBottomNavComponent ..> CsBottomNavItem : reads
+CsSidenavComponent ..> CsNavItemActivation : emits
+CsBottomNavComponent ..> CsNavItemActivation : emits
+CsTopbarComponent ..> CsTopbarPill : renders
+CsTopbarComponent ..> CsBrand : renders
+@enduml

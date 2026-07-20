@@ -1,0 +1,94 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Identify a person
+
+enum CsAvatarSize {
+  xs
+  sm
+  md
+  lg
+  xl
+}
+
+enum CsAvatarState {
+  loading
+  image
+  initials
+}
+
+class CsPersonSummary {
+  +id: string
+  +name: string
+  +imageUrl?: string
+  +secondaryText?: string
+  +status?: CsBadgeTone
+}
+
+class CsPersonActivated {
+  +id: string
+}
+
+class CsAvatarComponent {
+  +name: InputSignal<string>
+  +src: InputSignal<string>
+  +personId: InputSignal<string>
+  +size: InputSignal<CsAvatarSize>
+  +palette: InputSignal<boolean>
+  +decorative: InputSignal<boolean>
+  #state: Signal<CsAvatarState>
+  #initials: Signal<string>
+  #paletteEntry: Signal<string>
+  #onImageError(): void
+}
+
+class CsAvatarPalette <<function>> {
+  +csAvatarPalette(key: string): string
+  -hash(key: string): number
+}
+
+class CsAvatarStackComponent {
+  +people: InputSignal<readonly CsPersonSummary[]>
+  +max: InputSignal<number>
+  +size: InputSignal<CsAvatarSize>
+  +interactive: InputSignal<boolean>
+  +opened: OutputEmitterRef<void>
+  #drawn: Signal<readonly CsPersonSummary[]>
+  #hiddenCount: Signal<number>
+  #groupLabel: Signal<string>
+}
+
+class CsPersonComponent {
+  +person: InputSignal<CsPersonSummary>
+  +size: InputSignal<CsAvatarSize>
+  +clickable: InputSignal<boolean>
+  +dense: InputSignal<boolean>
+  +activated: OutputEmitterRef<CsPersonActivated>
+  #isNarrow: Signal<boolean>
+  #onActionClick(event: Event): void
+}
+
+class BreakpointObserver <<CDK>> {
+  +observe(query: string): Observable<BreakpointState>
+}
+
+CsPersonComponent *-- "1" CsAvatarComponent : composes
+CsAvatarStackComponent *-- "0..max" CsAvatarComponent : composes
+CsPersonComponent --> "1" CsPersonSummary : renders
+CsAvatarStackComponent --> "0..*" CsPersonSummary : renders
+CsAvatarComponent ..> CsAvatarPalette : calls
+CsAvatarComponent --> CsAvatarSize : has
+CsAvatarComponent --> CsAvatarState : holds
+CsPersonComponent ..> CsPersonActivated : emits
+CsPersonComponent ..> BreakpointObserver : reads
+@enduml

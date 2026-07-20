@@ -1,0 +1,109 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Show movement progress
+
+enum CsMovementState {
+  done
+  current
+  locked
+}
+
+enum CsDialVariant {
+  paper
+  dark
+}
+
+enum CsMovementListVariant {
+  rail
+  page
+}
+
+class CsMovement {
+  +id: string
+  +label: string
+  +shortLabel?: string
+  +state: CsMovementState
+  +lockReason?: string
+}
+
+interface CsProcessAdapter {
+  +labels: CsProcessLabels
+  +palette: CsProcessPalette
+}
+
+class CsProcessPalette {
+  +stateToken: ReadonlyMap<CsMovementState, string>
+  +defaultToken: string
+}
+
+class CsProcessLabels {
+  +doneLabel: string
+  +currentLabel: string
+  +lockedLabel: string
+  +positionSummary: (current: number, total: number) => string
+}
+
+class CsMovementDialComponent {
+  +segments: InputSignal<number>
+  +completed: InputSignal<number>
+  +label: InputSignal<string>
+  +valueText: InputSignal<string | null>
+  +variant: InputSignal<CsDialVariant>
+  +adapter: InputSignal<CsProcessAdapter>
+  -segmentPaths: Signal<readonly string[]>
+}
+
+class CsMovementListComponent {
+  +movements: InputSignal<readonly CsMovement[]>
+  +variant: InputSignal<CsMovementListVariant>
+  +adapter: InputSignal<CsProcessAdapter>
+  +movementActivated: OutputEmitterRef<CsMovementActivation>
+  -accessibleName(item: CsMovement): string
+  -isActivatable(item: CsMovement): boolean
+}
+
+class CsPipStripComponent {
+  +count: InputSignal<number>
+  +current: InputSignal<number>
+  +labels: InputSignal<readonly string[] | null>
+  +adapter: InputSignal<CsProcessAdapter>
+  -summaryText: Signal<string>
+}
+
+class CsProgressRingComponent {
+  +value: InputSignal<number>
+  +size: InputSignal<CsRingSize>
+  +tone: InputSignal<CsRingTone>
+  +label: InputSignal<string>
+  +indeterminate: InputSignal<boolean>
+}
+
+class CsMovementActivation {
+  +movementId: string
+  +index: number
+}
+
+CsMovementDialComponent *-- CsProgressRingComponent : renders through
+CsMovementDialComponent --> CsDialVariant : has
+CsMovementListComponent "1" o-- "0..*" CsMovement : renders
+CsMovementListComponent --> CsMovementListVariant : has
+CsMovementListComponent ..> CsPipStripComponent : renders per-movement pips through
+CsMovement --> CsMovementState : has
+CsMovementDialComponent --> CsProcessAdapter : reads labels from
+CsMovementListComponent --> CsProcessAdapter : reads labels from
+CsPipStripComponent --> CsProcessAdapter : reads labels from
+CsProcessAdapter *-- CsProcessLabels
+CsProcessAdapter *-- CsProcessPalette
+CsMovementListComponent ..> CsMovementActivation : emits
+@enduml

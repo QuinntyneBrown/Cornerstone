@@ -1,0 +1,95 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Apply the brand
+
+enum CsBrandName {
+  faithtech
+  liturgy
+  wordup
+}
+
+enum CsBrandLockupVariant {
+  compact
+  full
+}
+
+enum CsBrandTreatment {
+  light
+  dark
+  mono
+}
+
+enum CsBrandSize {
+  small
+  medium
+  large
+}
+
+enum CsBrandOrientation {
+  horizontal
+  stacked
+}
+
+class CsLogoMarkComponent {
+  +brand: InputSignal<CsBrandName>
+  +size: InputSignal<CsBrandSize>
+  +treatment: InputSignal<CsBrandTreatment | null>
+  +label: InputSignal<string>
+  -resolvedTreatment: Signal<CsBrandTreatment>
+  -artwork: Signal<CsBrandArtwork>
+}
+
+class CsBrandLockupComponent {
+  +brand: InputSignal<CsBrandName>
+  +variant: InputSignal<CsBrandLockupVariant>
+  +treatment: InputSignal<CsBrandTreatment | null>
+  +size: InputSignal<CsBrandSize>
+  +orientation: InputSignal<CsBrandOrientation>
+  +href: InputSignal<string | null>
+  +label: InputSignal<string>
+  -resolvedTreatment: Signal<CsBrandTreatment>
+  -clearSpace: Signal<string>
+}
+
+class CsBrandArtwork {
+  +viewBox: string
+  +markPath: string
+  +wordmarkPath: string
+  +descriptor: string
+  +aspectRatio: number
+}
+
+class CsBrandAssets <<InjectionToken>> {
+  +byBrand: Record<CsBrandName, CsBrandArtwork>
+}
+
+class CsThemeService {
+  +resolved: Signal<CsThemeName>
+}
+
+CsBrandLockupComponent *-- "1" CsLogoMarkComponent : composes
+CsBrandLockupComponent --> CsBrandLockupVariant : has
+CsBrandLockupComponent --> CsBrandOrientation : has
+CsBrandLockupComponent --> CsBrandSize : has
+CsBrandLockupComponent --> CsBrandName : has
+CsBrandLockupComponent --> CsBrandTreatment : resolves to
+CsBrandLockupComponent ..> CsBrandAssets : reads
+CsBrandLockupComponent ..> CsThemeService : reads the resolved theme from
+CsLogoMarkComponent --> CsBrandName : has
+CsLogoMarkComponent --> CsBrandSize : has
+CsLogoMarkComponent --> CsBrandTreatment : resolves to
+CsLogoMarkComponent ..> CsBrandAssets : reads
+CsLogoMarkComponent ..> CsThemeService : reads the resolved theme from
+CsBrandAssets o-- "3" CsBrandArtwork : holds
+@enduml

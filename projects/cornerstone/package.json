@@ -1,0 +1,33 @@
+{
+  "name": "@faithtech/cornerstone",
+  "version": "0.1.0",
+  "description": "FaithTech's Angular CDK component library.",
+  "keywords": [
+    "angular",
+    "cdk",
+    "faithtech",
+    "design-system",
+    "components"
+  ],
+  "license": "MIT",
+  "exports": {
+    "./styles/theme.scss": {
+      "sass": "./styles/theme.scss",
+      "default": "./styles/theme.scss"
+    },
+    "./styles/compat.scss": {
+      "sass": "./styles/compat.scss",
+      "default": "./styles/compat.scss"
+    }
+  },
+  "peerDependencies": {
+    "@angular/cdk": "^21.2.0",
+    "@angular/common": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/forms": "^21.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

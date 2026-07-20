@@ -1,0 +1,114 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Present a vacant state
+
+enum CsDataStateKind {
+  idle
+  loading
+  empty
+  error
+  ready
+}
+
+interface CsDataState<T = void> {
+  +kind: CsDataStateKind
+  +value?: T
+  +error?: CsDataStateError
+}
+
+class CsDataStateError {
+  +message: string
+  +code?: string
+  +retryable?: boolean
+}
+
+class CsDataStateOutletComponent {
+  +state: InputSignal<CsDataState<unknown>>
+  +retry: OutputEmitterRef<void>
+  +stateChange: OutputEmitterRef<CsDataStateKind>
+  -kind: Signal<CsDataStateKind>
+  -announceTransition(kind: CsDataStateKind): void
+}
+
+class CsDataStateHostDirective {
+  +csDataState: InputSignal<CsDataState<unknown>>
+  +busy: Signal<boolean>
+  +retry: OutputEmitterRef<void>
+}
+
+class CsEmptyStateComponent {
+  +icon: InputSignal<string | null>
+  +eyebrow: InputSignal<string | null>
+  +title: InputSignal<string>
+  +description: InputSignal<string | null>
+  +variant: InputSignal<CsEmptyStateVariant>
+}
+
+enum CsEmptyStateVariant {
+  compact
+  card
+  fullPage
+}
+
+class CsStatePageComponent {
+  +condition: InputSignal<CsStatePageCondition>
+  +title: InputSignal<string | null>
+  +description: InputSignal<string | null>
+  +showBrand: InputSignal<boolean>
+  +action: OutputEmitterRef<CsStatePageAction>
+  -defaultsFor(condition: CsStatePageCondition): CsStatePageDefaults
+  -focusHeading(): void
+}
+
+enum CsStatePageCondition {
+  notFound
+  forbidden
+  sessionExpired
+  accountState
+  serverError
+  maintenance
+  offline
+  consentRequired
+}
+
+class CsStatePageDefaults {
+  +icon: string
+  +title: string
+  +description: string
+  +actions: CsStatePageAction[]
+}
+
+class CsStatePageAction {
+  +id: string
+  +condition: CsStatePageCondition
+}
+
+class CsStateAnnouncer {
+  +announce(kind: CsDataStateKind, summary: string): void
+  -politeness(kind: CsDataStateKind): CsAriaLive
+}
+
+CsDataState --> CsDataStateKind : discriminated by
+CsDataState o-- CsDataStateError : carries on error
+CsDataStateOutletComponent --> CsDataState : reads
+CsDataStateHostDirective --> CsDataState : reads
+CsDataStateOutletComponent ..> CsStateAnnouncer : reports transitions to
+CsDataStateHostDirective ..> CsStateAnnouncer : reports transitions to
+CsDataStateOutletComponent "1" --> "0..1" CsEmptyStateComponent : projects into the empty slot
+CsEmptyStateComponent --> CsEmptyStateVariant : has
+CsStatePageComponent --> CsStatePageCondition : has
+CsStatePageComponent ..> CsStatePageDefaults : resolves
+CsStatePageComponent --> CsStatePageAction : emits
+CsStatePageComponent *-- CsEmptyStateComponent : composes in full-page form
+@enduml

@@ -1,0 +1,75 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Locate the current page
+
+interface CsRouterAware {
+  +routerLink: unknown
+  +queryParams?: Record<string, unknown>
+  +activated: OutputEmitterRef<CsNavActivation>
+}
+
+note right of CsRouterAware
+  L2-076: implementers render the
+  supplied routerLink and never
+  inject Router to navigate.
+end note
+
+class CsBreadcrumbsComponent {
+  +crumbs: InputSignal<readonly CsCrumb[]>
+  +maxVisible: InputSignal<number>
+  +separator: InputSignal<string>
+  +ariaLabel: InputSignal<string>
+  +overflow: Signal<CsCrumbOverflow>
+  +truncated: Signal<boolean>
+  +overflowToggled: OutputEmitterRef<boolean>
+  -computeOverflow(crumbs: readonly CsCrumb[]): CsCrumbOverflow
+}
+
+class CsCrumb {
+  +label: string
+  +routerLink?: unknown
+  +queryParams?: Record<string, unknown>
+  +icon?: string
+}
+
+class CsCrumbOverflow {
+  +leading: readonly CsCrumb[]
+  +hidden: readonly CsCrumb[]
+  +trailing: readonly CsCrumb[]
+  +current: CsCrumb
+}
+
+class CsNavActivation {
+  +index: number
+  +crumb: CsCrumb
+}
+
+class CsMenuDirective {
+  +panel: InputSignal<TemplateRef<unknown>>
+  +open: ModelSignal<boolean>
+}
+
+class CsNavItemDirective {
+  +active: InputSignal<boolean>
+  +ariaCurrent: Signal<'page' | null>
+}
+
+CsBreadcrumbsComponent ..|> CsRouterAware
+CsNavItemDirective ..|> CsRouterAware
+CsBreadcrumbsComponent --> "1..*" CsCrumb : renders
+CsBreadcrumbsComponent --> "1" CsCrumbOverflow : derives
+CsCrumbOverflow o-- "0..*" CsCrumb : hides
+CsBreadcrumbsComponent ..> CsMenuDirective : opens the hidden segment through
+CsBreadcrumbsComponent ..> CsNavActivation : emits
+@enduml

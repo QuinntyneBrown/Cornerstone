@@ -1,0 +1,109 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Open an anchored surface
+
+enum CsAnchorPosition {
+  below_start
+  below_end
+  above_start
+  above_end
+  right
+  left
+}
+
+enum CsDismissReason {
+  select
+  escape
+  outside_click
+  trigger
+  detach
+}
+
+class CsMenuDirective {
+  +csMenu: InputSignal<TemplateRef<unknown>>
+  +open: ModelSignal<boolean>
+  +position: InputSignal<CsAnchorPosition>
+  +closeOnSelect: InputSignal<boolean>
+  +opened: OutputEmitterRef<void>
+  +closed: OutputEmitterRef<CsDismissReason>
+  -restoreTarget: HTMLElement | null
+  -overlayRef: OverlayRef | null
+  +openMenu(): void
+  +closeMenu(reason: CsDismissReason): void
+  -buildPositions(): ConnectedPosition[]
+}
+
+class CsMenuItemDirective {
+  +disabled: InputSignal<boolean>
+  +danger: InputSignal<boolean>
+  +checkable: InputSignal<boolean>
+  +checked: ModelSignal<boolean>
+  +role: Signal<'menuitem' | 'menuitemcheckbox' | 'menuitemradio'>
+  +triggered: OutputEmitterRef<CsMenuItemTrigger>
+}
+
+class CsPopoverComponent {
+  +open: ModelSignal<boolean>
+  +position: InputSignal<CsAnchorPosition>
+  +trapFocus: InputSignal<boolean>
+  +ariaLabel: InputSignal<string>
+  +closed: OutputEmitterRef<CsDismissReason>
+}
+
+class CsAccountMenuComponent {
+  +account: InputSignal<CsAccount>
+  +actions: InputSignal<readonly CsAccountAction[]>
+  +actionSelected: OutputEmitterRef<CsAccountAction>
+  +signOut: OutputEmitterRef<void>
+}
+
+class CsAccount {
+  +displayName: string
+  +email?: string
+  +avatarSrc?: string
+  +roleLabel?: string
+}
+
+class CsAccountAction {
+  +id: string
+  +label: string
+  +icon?: string
+  +routerLink?: unknown
+  +danger?: boolean
+}
+
+class CsMenuItemTrigger {
+  +itemId: string
+  +source: 'pointer' | 'keyboard'
+}
+
+interface OverlayRef {
+  +attach(portal: Portal<unknown>): void
+  +detach(): void
+  +updatePosition(): void
+}
+
+CsMenuDirective --> CsAnchorPosition : prefers
+CsMenuDirective --> CsDismissReason : reports
+CsPopoverComponent --> CsAnchorPosition : prefers
+CsPopoverComponent --> CsDismissReason : reports
+CsMenuDirective ..> OverlayRef : attaches through
+CsPopoverComponent ..> OverlayRef : attaches through
+CsMenuDirective o-- "0..*" CsMenuItemDirective : manages focus across
+CsMenuItemDirective ..> CsMenuItemTrigger : emits
+CsAccountMenuComponent *-- "1" CsMenuDirective : composes
+CsAccountMenuComponent o-- "1..*" CsMenuItemDirective : renders
+CsAccountMenuComponent --> "1" CsAccount : displays
+CsAccountMenuComponent --> "1..*" CsAccountAction : offers
+@enduml

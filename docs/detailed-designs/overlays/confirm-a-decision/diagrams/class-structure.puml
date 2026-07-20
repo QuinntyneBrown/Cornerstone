@@ -1,0 +1,108 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Confirm a decision
+
+enum CsConfirmTone {
+  danger
+  warning
+  success
+}
+
+enum CsConfirmResult {
+  confirmed
+  cancelled
+}
+
+enum CsUnsavedChangesChoice {
+  save
+  leave
+  stay
+}
+
+class CsConfirmDialogData {
+  +title: string
+  +message: string
+  +tone: CsConfirmTone
+  +confirmLabel: string
+  +cancelLabel: string
+  +destructiveCopy: string
+  +confirmAction: () => Promise<void>
+}
+
+class CsConfirmDialogComponent {
+  +title: InputSignal<string>
+  +message: InputSignal<string>
+  +tone: InputSignal<CsConfirmTone>
+  +confirmLabel: InputSignal<string>
+  +cancelLabel: InputSignal<string>
+  +pending: InputSignal<boolean>
+  +confirmed: OutputEmitterRef<void>
+  +cancelled: OutputEmitterRef<void>
+  -error: WritableSignal<string | null>
+  +runConfirm(): Promise<void>
+}
+
+class CsUnsavedChangesDialogComponent {
+  +title: InputSignal<string>
+  +message: InputSignal<string>
+  +saveLabel: InputSignal<string>
+  +leaveLabel: InputSignal<string>
+  +stayLabel: InputSignal<string>
+  +saving: InputSignal<boolean>
+  +chosen: OutputEmitterRef<CsUnsavedChangesChoice>
+  +focusStayAction(): void
+}
+
+class CsDialogRef<R, C> {
+  +disableClose: boolean
+  +closed: Observable<R | undefined>
+  +close(result?: R): void
+}
+
+class CsDialogShellComponent {
+  +size: InputSignal<CsDialogSize>
+  +captureFocus(): void
+  +restoreFocus(): void
+}
+
+class CsDialogService {
+  +open<R, D, C>(component: ComponentType<C>, config?: CsDialogConfig<D>): CsDialogRef<R, C>
+  +confirm(data: CsConfirmDialogData): Promise<CsConfirmResult>
+}
+
+class CsConfirmLeave <<function>> {
+  +csConfirmLeave(options: CsConfirmLeaveOptions): CanDeactivateFn<unknown>
+}
+
+class CsConfirmLeaveOptions {
+  +isDirty: () => boolean
+  +save: () => Promise<boolean>
+  +message: string
+}
+
+CsConfirmDialogComponent ..> CsConfirmDialogData : reads
+CsConfirmDialogComponent --> CsConfirmTone : has
+CsConfirmDialogComponent ..> CsConfirmResult : resolves to
+CsConfirmDialogComponent --> CsDialogRef : closes through
+CsUnsavedChangesDialogComponent ..> CsUnsavedChangesChoice : resolves to
+CsUnsavedChangesDialogComponent --> CsDialogRef : closes through
+CsDialogShellComponent o-- "1" CsConfirmDialogComponent : projects
+CsDialogShellComponent o-- "1" CsUnsavedChangesDialogComponent : projects
+CsDialogService ..> CsConfirmDialogComponent : opens
+CsDialogService --> CsDialogRef : returns
+CsConfirmLeave ..> CsUnsavedChangesDialogComponent : opens
+CsConfirmLeave ..> CsConfirmLeaveOptions : reads
+CsConfirmLeave ..> CsUnsavedChangesChoice : maps to a navigation answer
+CsConfirmDialogData --> CsConfirmTone : has
+@enduml

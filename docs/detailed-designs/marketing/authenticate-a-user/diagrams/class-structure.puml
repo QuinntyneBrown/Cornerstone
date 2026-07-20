@@ -1,0 +1,86 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Authenticate a user
+
+enum CsAuthLayoutVariant {
+  centered
+  split
+}
+
+enum CsAuthPanelSide {
+  start
+  end
+}
+
+enum CsAuthPanelTone {
+  light
+  dark
+  brand
+}
+
+class CsAuthLayoutComponent {
+  +variant: InputSignal<CsAuthLayoutVariant>
+  +panelSide: InputSignal<CsAuthPanelSide>
+  +tone: InputSignal<CsAuthPanelTone>
+  -collapsed: Signal<boolean>
+}
+
+class CsAuthCardComponent {
+  +title: InputSignal<string>
+  +lede: InputSignal<string>
+  +error: InputSignal<string | null>
+  +pending: InputSignal<boolean>
+  -errorId: Signal<string>
+  +focusError(): void
+}
+
+class CsAuthBrandDirective {
+  +size: InputSignal<CsBrandLockupSize>
+}
+
+class CsAuthPanelDirective {
+  +tone: InputSignal<CsAuthPanelTone>
+}
+
+class CsAuthAlternateDirective {
+  +align: InputSignal<CsAuthAlternateAlign>
+}
+
+enum CsAuthAlternateAlign {
+  start
+  center
+  between
+}
+
+class CsAuthFooterDirective {
+  +compact: InputSignal<boolean>
+}
+
+class CsBrandLockupComponent {
+  +variant: InputSignal<CsBrandLockupVariant>
+  +treatment: InputSignal<CsBrandTreatment>
+}
+
+CsAuthLayoutComponent --> CsAuthLayoutVariant : has
+CsAuthLayoutComponent --> CsAuthPanelSide : has
+CsAuthLayoutComponent --> CsAuthPanelTone : has
+CsAuthLayoutComponent *-- "1" CsAuthCardComponent : positions
+CsAuthLayoutComponent o-- "0..1" CsAuthBrandDirective : projects
+CsAuthLayoutComponent o-- "0..1" CsAuthPanelDirective : projects
+CsAuthLayoutComponent o-- "0..1" CsAuthFooterDirective : projects
+CsAuthCardComponent o-- "0..1" CsAuthAlternateDirective : projects
+CsAuthBrandDirective --> "1" CsBrandLockupComponent : sizes
+CsAuthPanelDirective --> CsAuthPanelTone : has
+CsAuthAlternateDirective --> CsAuthAlternateAlign : has
+@enduml

@@ -1,0 +1,151 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Take a quiz
+
+interface ControlValueAccessor {
+  +writeValue(value: unknown): void
+  +registerOnChange(fn: (value: unknown) => void): void
+  +registerOnTouched(fn: () => void): void
+  +setDisabledState(isDisabled: boolean): void
+}
+
+class CsQuizComponent {
+  +quiz: InputSignal<CsQuizView>
+  +answers: ModelSignal<CsQuizAnswerMap>
+  +mode: InputSignal<CsQuizMode>
+  +submitting: InputSignal<boolean>
+  +answerChanged: OutputEmitterRef<CsQuizAnswerChange>
+  +navigated: OutputEmitterRef<CsQuizNavigate>
+  +submitted: OutputEmitterRef<CsQuizSubmit>
+  -unansweredRequired: Signal<readonly string[]>
+  -confirmOpen: WritableSignal<boolean>
+  -requestSubmit(): void
+}
+
+class CsQuizQuestionComponent {
+  +question: InputSignal<CsQuizQuestionView>
+  +readOnly: InputSignal<boolean>
+  +showFeedback: InputSignal<boolean>
+  +answerChanged: OutputEmitterRef<CsQuizAnswerChange>
+  -value: WritableSignal<CsQuizAnswerValue>
+  +writeValue(value: CsQuizAnswerValue): void
+}
+
+class CsQuizResultComponent {
+  +result: InputSignal<CsQuizResultView>
+  +actions: InputSignal<readonly CsQuizResultAction[]>
+  +actionSelected: OutputEmitterRef<CsQuizResultAction>
+}
+
+class CsQuizView {
+  +quizId: string
+  +title: string
+  +questions: readonly CsQuizQuestionView[]
+  +currentIndex: number
+  +allowBackNavigation: boolean
+  +progressLabel: string
+}
+
+class CsQuizQuestionView {
+  +questionId: string
+  +prompt: string
+  +answerType: CsQuizAnswerType
+  +options: readonly CsQuizOption[]
+  +required: boolean
+  +validationMessage: string | null
+  +helpText: string | null
+}
+
+class CsQuizOption {
+  +optionId: string
+  +label: string
+  +disabled: boolean
+}
+
+enum CsQuizAnswerType {
+  single
+  multiple
+  text
+}
+
+enum CsQuizMode {
+  attempt
+  review
+}
+
+class CsQuizAnswerChange {
+  +quizId: string
+  +questionId: string
+  +value: CsQuizAnswerValue
+}
+
+class CsQuizNavigate {
+  +quizId: string
+  +fromIndex: number
+  +toIndex: number
+}
+
+class CsQuizSubmit {
+  +quizId: string
+  +answers: CsQuizAnswerMap
+}
+
+class CsQuizResultView {
+  +quizId: string
+  +attemptId: string
+  +score: number
+  +total: number
+  +percent: number
+  +outcome: CsQuizOutcome
+  +summaryLabel: string
+  +questions: readonly CsQuizQuestionResult[]
+}
+
+class CsQuizQuestionResult {
+  +questionId: string
+  +prompt: string
+  +givenLabel: string
+  +expectedLabel: string | null
+  +correct: boolean
+  +explanation: string | null
+}
+
+enum CsQuizOutcome {
+  passed
+  failed
+  pending
+}
+
+class CsQuizResultAction {
+  +actionId: string
+  +label: string
+  +kind: string
+}
+
+CsQuizQuestionComponent ..|> ControlValueAccessor
+CsQuizComponent *-- "1..*" CsQuizQuestionComponent : renders one per question
+CsQuizComponent --> "1" CsQuizView : reads
+CsQuizComponent --> CsQuizMode : has
+CsQuizComponent ..> CsQuizNavigate : emits
+CsQuizComponent ..> CsQuizSubmit : emits
+CsQuizView *-- "1..*" CsQuizQuestionView : contains
+CsQuizQuestionView *-- "0..*" CsQuizOption : offers
+CsQuizQuestionView --> CsQuizAnswerType : has
+CsQuizQuestionComponent --> "1" CsQuizQuestionView : reads
+CsQuizQuestionComponent ..> CsQuizAnswerChange : emits
+CsQuizResultComponent --> "1" CsQuizResultView : reads
+CsQuizResultComponent ..> CsQuizResultAction : emits
+CsQuizResultView *-- "1..*" CsQuizQuestionResult : reports
+CsQuizResultView --> CsQuizOutcome : has
+@enduml

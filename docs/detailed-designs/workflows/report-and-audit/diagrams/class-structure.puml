@@ -1,0 +1,163 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Report and audit
+
+enum CsReportView {
+  overview
+  youth
+  cohort
+  staff
+}
+
+enum CsPanelState {
+  loading
+  ready
+  empty
+  error
+}
+
+interface CsReportFilterState {
+  +fromDate: string | null
+  +toDate: string | null
+  +cohortIds: string[]
+  +trackIds: string[]
+  +mentorIds: string[]
+}
+
+interface CsReportFilterOptions {
+  +cohorts: CsFilterOption[]
+  +tracks: CsFilterOption[]
+  +mentors: CsFilterOption[]
+}
+
+interface CsFilterOption {
+  +id: string
+  +label: string
+}
+
+interface CsKpiPanel {
+  +label: string
+  +value: string
+  +periodLabel: string
+}
+
+interface CsRingPanel {
+  +label: string
+  +completed: number
+  +total: number
+  +dataAlternative: string
+}
+
+interface CsBarPanel {
+  +label: string
+  +series: CsBarDatum[]
+  +dataAlternative: string
+}
+
+interface CsBarDatum {
+  +label: string
+  +value: number
+}
+
+interface CsReportViewModel {
+  +kpis: CsKpiPanel[]
+  +rings: CsRingPanel[]
+  +bars: CsBarPanel[]
+  +filterSummary: string
+  +recordCount: number
+}
+
+interface CsReportExportIntent {
+  +filters: CsReportFilterState
+  +view: CsReportView
+}
+
+interface CsAuditFilterState {
+  +fromDate: string | null
+  +toDate: string | null
+  +actorIds: string[]
+  +actionTypes: string[]
+}
+
+interface CsAuditDetailField {
+  +label: string
+  +value: string
+}
+
+interface CsAuditEvent {
+  +eventId: string
+  +action: string
+  +actorName: string
+  +sourceLabel: string
+  +targetLabel: string
+  +occurredAt: string
+  +timezone: string
+  +isPrivate: boolean
+  +detail: CsAuditDetailField[]
+}
+
+interface CsPageState {
+  +pageIndex: number
+  +pageSize: number
+  +totalCount: number
+}
+
+class CsReportFiltersComponent {
+  +options: InputSignal<CsReportFilterOptions>
+  +filters: ModelSignal<CsReportFilterState>
+  +filtersChanged: OutputEmitterRef<CsReportFilterState>
+  +filtersCleared: OutputEmitterRef<void>
+  -emitDebounced(state: CsReportFilterState): void
+}
+
+class CsReportDashboardComponent {
+  +report: InputSignal<CsReportViewModel>
+  +view: ModelSignal<CsReportView>
+  +state: InputSignal<CsPanelState>
+  +exportRequested: OutputEmitterRef<CsReportExportIntent>
+  +viewChanged: OutputEmitterRef<CsReportView>
+  -announceApplied(summary: string, count: number): void
+}
+
+class CsAuditLogComponent {
+  +events: InputSignal<CsAuditEvent[]>
+  +filters: ModelSignal<CsAuditFilterState>
+  +page: ModelSignal<CsPageState>
+  +state: InputSignal<CsPanelState>
+  +pageChanged: OutputEmitterRef<CsPageState>
+  +filtersChanged: OutputEmitterRef<CsAuditFilterState>
+  +filtersCleared: OutputEmitterRef<void>
+  +detailToggled: OutputEmitterRef<string>
+  -formatTimestamp(value: string, timezone: string): string
+}
+
+CsReportFiltersComponent --> "1" CsReportFilterOptions : reads
+CsReportFilterOptions o-- "0..*" CsFilterOption : lists
+CsReportFiltersComponent --> "1" CsReportFilterState : holds
+CsReportFiltersComponent ..> CsReportDashboardComponent : supplies the filter state to
+CsReportFiltersComponent ..> CsAuditLogComponent : supplies the filter state to
+CsReportDashboardComponent --> "1" CsReportViewModel : reads
+CsReportViewModel o-- "0..*" CsKpiPanel : composes
+CsReportViewModel o-- "0..*" CsRingPanel : composes
+CsReportViewModel o-- "0..*" CsBarPanel : composes
+CsBarPanel o-- "1..*" CsBarDatum : plots
+CsReportDashboardComponent --> "1" CsReportView : presents
+CsReportDashboardComponent --> "1" CsPanelState : reports
+CsReportDashboardComponent ..> CsReportExportIntent : emits
+CsAuditLogComponent --> "0..*" CsAuditEvent : renders
+CsAuditEvent o-- "0..*" CsAuditDetailField : renders only the supplied fields
+CsAuditLogComponent --> "1" CsAuditFilterState : holds
+CsAuditLogComponent --> "1" CsPageState : pages
+CsAuditLogComponent --> "1" CsPanelState : reports
+@enduml

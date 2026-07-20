@@ -1,0 +1,100 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Open a dialog
+
+enum CsDialogSize {
+  small
+  default
+  large
+}
+
+class CsDialogConfig<D> {
+  +data: D
+  +size: CsDialogSize
+  +fullScreenOnMobile: boolean
+  +disableClose: boolean
+  +restoreFocus: boolean
+  +autoFocus: string
+  +ariaLabelledBy: string
+  +ariaDescribedBy: string
+}
+
+class CsDialogService {
+  -dialog: Dialog
+  -scrollStrategy: BlockScrollStrategy
+  -openCount: number
+  +open<R, D, C>(component: ComponentType<C>, config?: CsDialogConfig<D>): CsDialogRef<R, C>
+  +openTemplate<R>(template: TemplateRef<unknown>, config?: CsDialogConfig<unknown>): CsDialogRef<R, unknown>
+  +closeAll(): void
+  -blockPageScroll(): void
+  -releasePageScroll(): void
+}
+
+class CsDialogRef<R, C> {
+  +componentInstance: C
+  +disableClose: boolean
+  +closed: Observable<R | undefined>
+  +backdropClick: Observable<MouseEvent>
+  +keydownEvents: Observable<KeyboardEvent>
+  +close(result?: R): void
+}
+
+class CsDialogShellComponent {
+  +size: InputSignal<CsDialogSize>
+  +fullScreenOnMobile: InputSignal<boolean>
+  +dismissible: InputSignal<boolean>
+  +dismissed: OutputEmitterRef<void>
+  -labelledBy: Signal<string>
+  -describedBy: Signal<string>
+  -trap: FocusTrap
+  -previouslyFocused: HTMLElement
+  +captureFocus(): void
+  +restoreFocus(): void
+}
+
+class CsDialogTitleDirective {
+  +id: InputSignal<string>
+}
+
+class CsDialogDescriptionDirective {
+  +id: InputSignal<string>
+}
+
+class CsDialogActionsDirective {
+  +align: InputSignal<CsDialogActionAlign>
+}
+
+enum CsDialogActionAlign {
+  start
+  end
+  between
+}
+
+class FocusTrap <<CDK>> {
+  +focusInitialElement(): boolean
+  +destroy(): void
+}
+
+CsDialogService ..> CsDialogConfig : reads
+CsDialogService --> "0..*" CsDialogRef : returns
+CsDialogService ..> CsDialogShellComponent : attaches
+CsDialogConfig --> CsDialogSize : has
+CsDialogShellComponent --> CsDialogSize : has
+CsDialogShellComponent *-- FocusTrap : owns
+CsDialogShellComponent o-- "0..1" CsDialogTitleDirective : is labelled by
+CsDialogShellComponent o-- "0..1" CsDialogDescriptionDirective : is described by
+CsDialogShellComponent o-- "0..1" CsDialogActionsDirective : projects
+CsDialogActionsDirective --> CsDialogActionAlign : has
+CsDialogRef ..> CsDialogShellComponent : closes
+@enduml

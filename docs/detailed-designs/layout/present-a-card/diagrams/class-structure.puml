@@ -1,0 +1,121 @@
+@startuml
+' --- shared skin header ---
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam class {
+  BorderColor #344054
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+' --------------------------
+title Class structure — Present a card
+
+enum CsCardTone {
+  paper
+  greige
+  ink
+  lime
+}
+
+enum CsCardPresentation {
+  flat
+  raised
+  link
+  selected
+}
+
+enum CsCardPadding {
+  none
+  compact
+  default
+}
+
+enum CsMediaAspect {
+  sixteenByNine
+  fourByThree
+  oneByOne
+}
+
+enum CsDividerOrientation {
+  horizontal
+  vertical
+}
+
+enum CsDividerVariant {
+  full
+  inset
+}
+
+class CsCardComponent {
+  +tone: InputSignal<CsCardTone>
+  +presentation: InputSignal<CsCardPresentation>
+  +disabled: InputSignal<boolean>
+  +padding: InputSignal<CsCardPadding>
+  +activated: OutputEmitterRef<void>
+  +interactive: Signal<boolean>
+  -targetRole: Signal<'link' | 'button' | 'none'>
+}
+
+class CsCardHeaderComponent {
+  +title: InputSignal<string>
+  +overline: InputSignal<string | undefined>
+  +subtitle: InputSignal<string | undefined>
+  +headingLevel: InputSignal<CsHeadingLevel>
+}
+
+class CsCardMediaComponent {
+  +aspect: InputSignal<CsMediaAspect>
+  +alt: InputSignal<string>
+}
+
+class CsCardContentComponent {
+  +measure: InputSignal<'prose' | 'full'>
+}
+
+class CsCardFooterComponent {
+  +divided: InputSignal<boolean>
+}
+
+class CsCardActionsComponent {
+  +align: InputSignal<CsActionAlign>
+}
+
+class CsDividerComponent {
+  +orientation: InputSignal<CsDividerOrientation>
+  +variant: InputSignal<CsDividerVariant>
+  +spacing: InputSignal<CsSpacingStep>
+  +decorative: InputSignal<boolean>
+  -role: Signal<'separator' | null>
+}
+
+class CsClusterDirective {
+  +gap: InputSignal<CsSpacingStep>
+  +align: InputSignal<CsAlign>
+}
+
+class CsTokenSet {
+  +color: ColorTokens
+  +radius: RadiusTokens
+  +shadow: ShadowTokens
+  +spacing: SpacingTokens
+}
+
+CsCardComponent *-- "0..1" CsCardHeaderComponent : projects
+CsCardComponent *-- "0..1" CsCardMediaComponent : projects
+CsCardComponent *-- "0..1" CsCardContentComponent : projects
+CsCardComponent *-- "0..1" CsCardFooterComponent : projects
+CsCardComponent *-- "0..1" CsCardActionsComponent : projects
+CsCardComponent o-- "0..*" CsDividerComponent : separates slots with
+CsCardActionsComponent ..> CsClusterDirective : arranges with
+CsCardComponent --> CsCardTone : has
+CsCardComponent --> CsCardPresentation : has
+CsCardComponent --> CsCardPadding : has
+CsCardMediaComponent --> CsMediaAspect : has
+CsDividerComponent --> CsDividerOrientation : has
+CsDividerComponent --> CsDividerVariant : has
+CsCardComponent ..> CsTokenSet : reads
+CsDividerComponent ..> CsTokenSet : reads
+@enduml
