@@ -108,6 +108,9 @@ vocabulary while templates move incrementally to the `cs-*` Angular API. See
 
 ## Theme customization
 
+See [event component examples](docs/event-components.md) for countdowns, review
+dialogs, team assignment boards, and raffle presentations.
+
 All decisions are CSS custom properties. Override tokens on `:root` or a subtree:
 
 ```scss

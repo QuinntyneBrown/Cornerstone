@@ -12,7 +12,7 @@
       "type": "readonly ScheduleGroup[]",
       "required": true,
       "description": "Groups public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {

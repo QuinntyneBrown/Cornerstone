@@ -24,7 +24,7 @@
       "required": false,
       "defaultValue": "[]",
       "description": "Errors public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     }
   ],

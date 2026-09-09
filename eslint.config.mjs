@@ -51,6 +51,13 @@ export default tseslint.config(
     },
   },
   {
+    files: ['src/cornerstone/core/forms/cs-select.directive.ts'],
+    rules: {
+      // Preserve the inherited writable disabled signal while exposing native [disabled].
+      '@angular-eslint/no-input-rename': ['error', { allowedNames: ['disabled'] }],
+    },
+  },
+  {
     files: ['**/*.html'],
     extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
   },

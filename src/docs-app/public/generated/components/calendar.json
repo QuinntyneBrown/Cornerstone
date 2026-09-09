@@ -22,7 +22,7 @@
       "type": "readonly CalendarDate[]",
       "required": true,
       "description": "Dates public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {
@@ -33,7 +33,7 @@
       "required": false,
       "defaultValue": "[]",
       "description": "Events public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {

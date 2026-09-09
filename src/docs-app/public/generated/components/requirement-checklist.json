@@ -12,7 +12,7 @@
       "type": "readonly CsRequirement[]",
       "required": true,
       "description": "Requirements public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {

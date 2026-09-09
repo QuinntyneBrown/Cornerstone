@@ -1,5 +1,5 @@
 {
-  "symbolCount": 491,
+  "symbolCount": 504,
   "components": [
     {
       "name": "AccordionComponent",
@@ -320,6 +320,14 @@
       "selector": "cs-conversation-list",
       "category": "communication",
       "description": "Conversation List public API."
+    },
+    {
+      "name": "CountdownComponent",
+      "label": "Countdown",
+      "slug": "countdown",
+      "selector": "cs-countdown",
+      "category": "communication",
+      "description": "A countdown driven by the consumer's clock, with no background timer."
     },
     {
       "name": "CsvImportWizardComponent",
@@ -898,6 +906,14 @@
       "description": "Radio Group public API."
     },
     {
+      "name": "RaffleStageComponent",
+      "label": "Raffle Stage",
+      "slug": "raffle-stage",
+      "selector": "cs-raffle-stage",
+      "category": "communication",
+      "description": "Presents a consumer-supplied draw; never generates a winner or stores participant data."
+    },
+    {
       "name": "RecordTabsComponent",
       "label": "Record Tabs",
       "slug": "record-tabs",
@@ -928,6 +944,14 @@
       "selector": "cs-requirement-checklist",
       "category": "process",
       "description": "Requirement Checklist public API."
+    },
+    {
+      "name": "ReviewDialogComponent",
+      "label": "Review Dialog",
+      "slug": "review-dialog",
+      "selector": "cs-review-dialog",
+      "category": "overlays",
+      "description": "A controlled native modal dialog. Consumers set open=false after a dismissal request."
     },
     {
       "name": "RubricComponent",
@@ -1088,6 +1112,14 @@
       "selector": "cs-table-container",
       "category": "data-display",
       "description": "Table Container public API."
+    },
+    {
+      "name": "TeamBoardComponent",
+      "label": "Team Board",
+      "slug": "team-board",
+      "selector": "cs-team-board",
+      "category": "workflows",
+      "description": "Controlled team membership and project assignment; emits intent without persistence."
     },
     {
       "name": "TimelineComponent",

@@ -23,7 +23,7 @@
       "type": "readonly ImportTargetColumn[]",
       "required": true,
       "description": "Columns public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {

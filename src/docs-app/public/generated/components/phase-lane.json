@@ -22,7 +22,7 @@
       "type": "readonly Project[]",
       "required": true,
       "description": "Projects public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {

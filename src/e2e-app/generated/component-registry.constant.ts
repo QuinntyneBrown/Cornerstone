@@ -132,6 +132,8 @@ export const componentRegistry: Readonly<Record<string, () => Promise<Type<unkno
     import('@quinntyne/cornerstone').then(
       (library) => library.ConversationListComponent as Type<unknown>,
     ),
+  countdown: () =>
+    import('@quinntyne/cornerstone').then((library) => library.CountdownComponent as Type<unknown>),
   'csv-import-wizard': () =>
     import('@quinntyne/cornerstone').then(
       (library) => library.CsvImportWizardComponent as Type<unknown>,
@@ -372,6 +374,10 @@ export const componentRegistry: Readonly<Record<string, () => Promise<Type<unkno
     import('@quinntyne/cornerstone').then(
       (library) => library.RadioGroupComponent as Type<unknown>,
     ),
+  'raffle-stage': () =>
+    import('@quinntyne/cornerstone').then(
+      (library) => library.RaffleStageComponent as Type<unknown>,
+    ),
   'record-tabs': () =>
     import('@quinntyne/cornerstone').then(
       (library) => library.RecordTabsComponent as Type<unknown>,
@@ -387,6 +393,10 @@ export const componentRegistry: Readonly<Record<string, () => Promise<Type<unkno
   'requirement-checklist': () =>
     import('@quinntyne/cornerstone').then(
       (library) => library.RequirementChecklistComponent as Type<unknown>,
+    ),
+  'review-dialog': () =>
+    import('@quinntyne/cornerstone').then(
+      (library) => library.ReviewDialogComponent as Type<unknown>,
     ),
   rubric: () =>
     import('@quinntyne/cornerstone').then((library) => library.RubricComponent as Type<unknown>),
@@ -446,6 +456,8 @@ export const componentRegistry: Readonly<Record<string, () => Promise<Type<unkno
     import('@quinntyne/cornerstone').then(
       (library) => library.TableContainerComponent as Type<unknown>,
     ),
+  'team-board': () =>
+    import('@quinntyne/cornerstone').then((library) => library.TeamBoardComponent as Type<unknown>),
   timeline: () =>
     import('@quinntyne/cornerstone').then((library) => library.TimelineComponent as Type<unknown>),
   'toast-outlet': () =>

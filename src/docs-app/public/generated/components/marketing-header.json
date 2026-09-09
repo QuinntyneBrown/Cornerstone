@@ -13,7 +13,7 @@
       "required": false,
       "defaultValue": "[]",
       "description": "Links public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     }
   ],

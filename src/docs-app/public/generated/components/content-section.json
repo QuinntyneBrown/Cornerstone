@@ -45,7 +45,7 @@
       "required": false,
       "defaultValue": "[]",
       "description": "Cards public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {
@@ -56,7 +56,7 @@
       "required": false,
       "defaultValue": "[]",
       "description": "Stats public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     }
   ],

@@ -1,38 +1,43 @@
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import {
-  ChangeDetectionStrategy,
-  Component,
   Directive,
   ElementRef,
-  Provider,
+  afterEveryRender,
   booleanAttribute,
   computed,
-  forwardRef,
   inject,
   input,
-  model,
-  output,
-  signal,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CsButtonDirective } from '../foundations/cs-button.directive';
 import { CsControlBase } from '../platform/cs-control-base.class';
-import { CsIdService } from '../platform/cs-id.service';
-import { CsLocalizationService } from '../platform/cs-localization.service';
 import { valueAccessor } from './value-accessor.function';
 
 @Directive({
   selector: 'select[csSelect]',
+  exportAs: 'csSelect',
   providers: [valueAccessor(() => CsSelectDirective)],
   host: {
     class: 'cs-select',
-    '[attr.disabled]': 'disabled() ? true : null',
+    '[disabled]': 'effectiveDisabled()',
+    '[value]': 'value() ?? ""',
     '(change)': 'onChangeValue($event)',
     '(blur)': 'markTouched()',
   },
 })
 export class CsSelectDirective extends CsControlBase<string> {
+  readonly disabledInput = input(false, { alias: 'disabled', transform: booleanAttribute });
+  protected readonly effectiveDisabled = computed(() => this.disabledInput() || this.disabled());
+  private readonly element = inject<ElementRef<HTMLSelectElement>>(ElementRef).nativeElement;
+
+  constructor() {
+    super();
+    // Options can be rendered after the host value binding, including async lists.
+    afterEveryRender(() => {
+      const value = this.value() ?? '';
+      if (this.element.value !== value) this.element.value = value;
+    });
+  }
+
   protected onChangeValue(event: Event): void {
+    if (this.effectiveDisabled()) return;
     this.updateValue((event.target as HTMLSelectElement).value);
   }
 }

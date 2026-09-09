@@ -22,7 +22,7 @@
       "type": "readonly AccountAction[]",
       "required": true,
       "description": "Actions public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {

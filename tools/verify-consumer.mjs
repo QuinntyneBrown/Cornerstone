@@ -32,7 +32,7 @@ const archives = registryVersion
 assert.equal(archives.length, 2, 'Verify exactly the two release packages');
 writeFileSync(
   resolve(consumer, 'package.json'),
-  '{"name":"cornerstone-packed-consumer","private":true}\n',
+  '{"name":"cornerstone-packed-consumer","private":true,"type":"module"}\n',
 );
 npm([
   'install',
@@ -48,18 +48,30 @@ writeFileSync(
   resolve(consumer, 'consumer.component.ts'),
   `
 import { Component } from '@angular/core';
-import { BadgeComponent, CardComponent, CsButtonDirective, CsCardHeaderComponent, CsProgressComponent } from '@quinntyne/cornerstone';
+import { BadgeComponent, CardComponent, CsButtonDirective, CsCardHeaderComponent, CsProgressComponent, CountdownComponent, ReviewDialogComponent, TeamBoardComponent, RaffleStageComponent } from '@quinntyne/cornerstone';
+import type { BoardGroup, BoardMember, BoardProject, MemberMove, ProjectAssignment, NewTeamRequest, TeamBoardText, RaffleResult, RaffleStageText } from '@quinntyne/cornerstone';
 @Component({
-  imports: [BadgeComponent, CardComponent, CsButtonDirective, CsCardHeaderComponent, CsProgressComponent],
+  selector: 'consumer-app',
+  imports: [BadgeComponent, CardComponent, CsButtonDirective, CsCardHeaderComponent, CsProgressComponent, CountdownComponent, ReviewDialogComponent, TeamBoardComponent, RaffleStageComponent],
   templateUrl: './consumer.component.html',
   styleUrl: './consumer.component.scss',
 })
-export class ConsumerComponent {}
+export class ConsumerComponent {
+  readonly groups: BoardGroup[] = [{id: 'team', name: 'Team', projectId: ''}];
+  readonly members: BoardMember[] = [{id: 'person', name: 'Ada', label: 'Developer', groupId: 'team'}];
+  readonly projects: BoardProject[] = [];
+  readonly result: RaffleResult = {id: 'draw', label: 'Ada', candidates: [], start: 0, reveal: 2000};
+  readonly boardText: Partial<TeamBoardText> = {};
+  readonly raffleText: Partial<RaffleStageText> = {};
+  move(event: MemberMove): void {}
+  assign(event: ProjectAssignment): void {}
+  create(event: NewTeamRequest): void {}
+}
 `,
 );
 writeFileSync(
   resolve(consumer, 'consumer.component.html'),
-  '<cs-card><header csCardHeader>Review</header><cs-badge tone="success">Ready</cs-badge><button csButton>Continue</button></cs-card><cs-progress-bar [value]="50" />',
+  '<cs-card><header csCardHeader>Review</header><cs-badge tone="success">Ready</cs-badge><button csButton>Continue</button></cs-card><cs-progress-bar [value]="50" /><cs-countdown [now]="1000" [target]="2000" /><cs-review-dialog title="Review"><p>Review content</p></cs-review-dialog><cs-team-board [groups]="groups" [members]="members" [projects]="projects" [text]="boardText" (moved)="move($event)" (assigned)="assign($event)" (newTeamRequested)="create($event)" /><cs-raffle-stage [result]="result" [now]="1000" [text]="raffleText" />',
 );
 writeFileSync(resolve(consumer, 'consumer.component.scss'), ':host { display: block; }');
 writeFileSync(
@@ -92,6 +104,26 @@ execFileSync(
   ],
   { stdio: 'inherit' },
 );
+
+writeFileSync(
+  resolve(consumer, 'verify-ssr.mjs'),
+  `import '@angular/compiler';
+import assert from 'node:assert/strict';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideServerRendering, renderApplication } from '@angular/platform-server';
+import { ConsumerComponent } from './compiled/consumer.component.js';
+const html = await renderApplication(
+  (context) => bootstrapApplication(ConsumerComponent, { providers: [provideZonelessChangeDetection(), provideServerRendering()] }, context),
+  { document: '<html><body><consumer-app></consumer-app></body></html>', url: 'http://localhost/', allowedHosts: ['localhost'] },
+);
+for (const selector of ['cs-countdown', 'cs-review-dialog', 'cs-team-board', 'cs-raffle-stage']) assert.ok(html.includes(selector));
+assert.ok(html.includes('Drawing a name'));
+assert.ok(!html.includes('NaN'));
+console.log('Packed components rendered on the server without browser effects.');
+`,
+);
+execFileSync(process.execPath, [resolve(consumer, 'verify-ssr.mjs')], { stdio: 'inherit' });
 
 const importer = new NodePackageImporter(consumer);
 for (const name of ['theme', 'tokens', 'compat']) {

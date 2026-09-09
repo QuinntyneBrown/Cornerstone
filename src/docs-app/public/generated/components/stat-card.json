@@ -44,7 +44,7 @@
       "required": false,
       "defaultValue": "null",
       "description": "Delta public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {

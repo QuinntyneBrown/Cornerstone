@@ -12,7 +12,7 @@ test('renders all public components with deterministic application fixtures', as
   });
   const fixture = new FixturePage(page);
   await fixture.open();
-  expect(components).toHaveLength(144);
+  expect(components).toHaveLength(148);
   for (const component of components) await fixture.showComponent(component.slug, component.label);
   expect(failures).toEqual([]);
 });

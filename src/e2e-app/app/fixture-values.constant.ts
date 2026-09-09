@@ -1,4 +1,31 @@
 export const fixtureValues: Readonly<Record<string, Readonly<Record<string, unknown>>>> = {
+  countdown: { target: 90061000, now: 0 },
+  'review-dialog': { title: 'Review changes', open: false },
+  'team-board': {
+    groups: [
+      { id: '', name: 'Unassigned', projectId: '' },
+      { id: 'a', name: 'Team A', projectId: 'project-1' },
+      { id: 'b', name: 'Team B', projectId: '' },
+    ],
+    members: [
+      { id: 'ada', name: 'Ada', label: 'Developer', groupId: 'a' },
+      { id: 'grace', name: 'Grace', label: 'Designer', groupId: '' },
+    ],
+    projects: [{ id: 'project-1', title: 'Community directory' }],
+    editable: true,
+    currentMember: 'ada',
+  },
+  'raffle-stage': {
+    result: {
+      id: 'example',
+      label: 'Ada · Ticket 01',
+      candidates: ['Ada', 'Grace'],
+      start: 0,
+      reveal: 2000,
+    },
+    now: 1000,
+    forceFallback: true,
+  },
   'account-menu': {
     account: { displayName: 'Ada Mensah', email: 'ada@example.org', role: 'Programme lead' },
     actions: [

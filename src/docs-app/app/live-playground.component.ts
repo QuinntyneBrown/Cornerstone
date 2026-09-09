@@ -180,6 +180,10 @@ export class LivePlaygroundComponent {
       const output = instance[member.name] as
         { subscribe?: (listener: (value: unknown) => void) => unknown } | undefined;
       output?.subscribe?.((value) => {
+        if (this.entry().slug === 'review-dialog' && member.name === 'closed') {
+          const open = this.inputMembers().find((input) => input.name === 'open');
+          if (open) this.update(open, false);
+        }
         const rendered = typeof value === 'string' ? value : JSON.stringify(value);
         this.events.update((events) =>
           [`${member.name}: ${rendered ?? String(value)}`, ...events].slice(0, 12),

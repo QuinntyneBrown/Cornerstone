@@ -37,17 +37,17 @@ export default defineConfig({
     { name: 'webkit', testMatch: 'docs.spec.ts', use: { ...devices['Desktop Safari'] } },
     {
       name: 'components-chromium',
-      testMatch: 'components.spec.ts',
+      testMatch: ['components.spec.ts', 'event-components.spec.ts'],
       use: { ...devices['Desktop Chrome'], baseURL: 'http://127.0.0.1:4176' },
     },
     {
       name: 'components-firefox',
-      testMatch: 'components.spec.ts',
+      testMatch: ['components.spec.ts', 'event-components.spec.ts'],
       use: { ...devices['Desktop Firefox'], baseURL: 'http://127.0.0.1:4176' },
     },
     {
       name: 'components-webkit',
-      testMatch: 'components.spec.ts',
+      testMatch: ['components.spec.ts', 'event-components.spec.ts'],
       use: { ...devices['Desktop Safari'], baseURL: 'http://127.0.0.1:4176' },
     },
   ],

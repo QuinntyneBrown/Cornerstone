@@ -55,7 +55,7 @@
       "type": "readonly FileRejection[]",
       "required": false,
       "description": "Rejected public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     }
   ],

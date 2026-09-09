@@ -23,7 +23,7 @@
       "type": "readonly BottomNavItem[]",
       "required": true,
       "description": "Items public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {

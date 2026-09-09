@@ -171,7 +171,7 @@
           "type": "readonly AccountAction[]",
           "required": true,
           "description": "Actions public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -405,7 +405,7 @@
           "type": "readonly AudienceOption[]",
           "required": true,
           "description": "Audiences public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -728,7 +728,7 @@
           "type": "readonly AttachmentViewModel[]",
           "required": true,
           "description": "Items public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -1178,7 +1178,7 @@
           "type": "readonly AuditEvent[]",
           "required": true,
           "description": "Events public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -1380,7 +1380,7 @@
           "type": "readonly AchievementView[]",
           "required": true,
           "description": "Items public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -1439,6 +1439,96 @@
       "relatedSymbols": ["CsMessageTone"]
     },
     {
+      "kind": "interface",
+      "name": "BoardGroup",
+      "sourcePath": "src/cornerstone/team-board/board-group.interface.ts",
+      "category": "workflows",
+      "description": "Board Group public API.",
+      "members": [
+        {
+          "name": "id",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Id public API."
+        },
+        {
+          "name": "name",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Name public API."
+        },
+        {
+          "name": "projectId",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Project Id public API."
+        }
+      ]
+    },
+    {
+      "kind": "interface",
+      "name": "BoardMember",
+      "sourcePath": "src/cornerstone/team-board/board-member.interface.ts",
+      "category": "workflows",
+      "description": "Board Member public API.",
+      "members": [
+        {
+          "name": "id",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Id public API."
+        },
+        {
+          "name": "name",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Name public API."
+        },
+        {
+          "name": "label",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Label public API."
+        },
+        {
+          "name": "groupId",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Group Id public API."
+        }
+      ]
+    },
+    {
+      "kind": "interface",
+      "name": "BoardProject",
+      "sourcePath": "src/cornerstone/team-board/board-project.interface.ts",
+      "category": "workflows",
+      "description": "Board Project public API.",
+      "members": [
+        {
+          "name": "id",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Id public API."
+        },
+        {
+          "name": "title",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Title public API."
+        }
+      ]
+    },
+    {
       "kind": "class",
       "name": "BottomNavComponent",
       "sourcePath": "src/cornerstone/bottom-nav/bottom-nav.component.ts",
@@ -1463,7 +1553,7 @@
           "type": "readonly BottomNavItem[]",
           "required": true,
           "description": "Items public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -1594,7 +1684,7 @@
           "type": "readonly Crumb[]",
           "required": true,
           "description": "Crumbs public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -1677,7 +1767,7 @@
           "type": "readonly CalendarDate[]",
           "required": true,
           "description": "Dates public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -1688,7 +1778,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Events public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -2335,7 +2425,7 @@
           "type": "readonly CsMetricSeries[]",
           "required": true,
           "description": "Series public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -2893,7 +2983,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Cards public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -2904,7 +2994,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Stats public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -3016,7 +3106,7 @@
           "type": "readonly ConversationItem[]",
           "required": true,
           "description": "Conversations public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -3036,6 +3126,85 @@
       "label": "Conversation List",
       "tokens": [],
       "relatedSymbols": ["ConversationItem"]
+    },
+    {
+      "kind": "class",
+      "name": "CountdownComponent",
+      "sourcePath": "src/cornerstone/countdown/countdown.component.ts",
+      "category": "communication",
+      "description": "A countdown driven by the consumer's clock, with no background timer.",
+      "members": [
+        {
+          "name": "target",
+          "bindingName": "target",
+          "role": "input",
+          "type": "number",
+          "required": true,
+          "description": "Target public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "now",
+          "bindingName": "now",
+          "role": "input",
+          "type": "number",
+          "required": true,
+          "description": "Now public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "ariaLabel",
+          "bindingName": "ariaLabel",
+          "role": "input",
+          "type": "string",
+          "required": false,
+          "defaultValue": "'Time remaining'",
+          "description": "Aria Label public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "pendingCaption",
+          "bindingName": "pendingCaption",
+          "role": "input",
+          "type": "string",
+          "required": false,
+          "defaultValue": "'The event will begin soon.'",
+          "description": "Pending Caption public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "expiredCaption",
+          "bindingName": "expiredCaption",
+          "role": "input",
+          "type": "string",
+          "required": false,
+          "defaultValue": "'The countdown is complete.'",
+          "description": "Expired Caption public API.",
+          "structured": false,
+          "options": []
+        }
+      ],
+      "component": true,
+      "selector": "cs-countdown",
+      "slug": "countdown",
+      "label": "Countdown",
+      "tokens": [
+        "--cs-countdown-size",
+        "--cs-font-display",
+        "--cs-font-weight-bold",
+        "--cs-heading-tracking",
+        "--cs-ink-muted",
+        "--cs-label-tracking",
+        "--cs-space-2",
+        "--cs-space-5",
+        "--cs-space-6",
+        "--cs-text-xs"
+      ],
+      "relatedSymbols": []
     },
     {
       "kind": "interface",
@@ -5215,7 +5384,17 @@
       "sourcePath": "src/cornerstone/core/forms/cs-select.directive.ts",
       "category": "forms",
       "description": "Cs Select public API.",
-      "members": []
+      "members": [
+        {
+          "name": "disabledInput",
+          "bindingName": "disabled",
+          "role": "input",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false",
+          "description": "Disabled Input public API."
+        }
+      ]
     },
     {
       "kind": "type",
@@ -5544,7 +5723,7 @@
           "type": "readonly ImportTargetColumn[]",
           "required": true,
           "description": "Columns public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -5674,7 +5853,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Actions public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -5734,7 +5913,7 @@
           "type": "readonly CsCurriculumNode[]",
           "required": true,
           "description": "Nodes public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -5822,7 +6001,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Filters public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -5943,7 +6122,7 @@
           "type": "readonly DefinitionItem[]",
           "required": true,
           "description": "Items public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -6751,7 +6930,7 @@
           "type": "readonly FileRejection[]",
           "required": false,
           "description": "Rejected public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -6799,7 +6978,7 @@
           "type": "readonly FileEntry[]",
           "required": true,
           "description": "Files public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -6927,7 +7106,7 @@
           "type": "readonly CsRequirement[]",
           "required": true,
           "description": "Requirements public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -7090,7 +7269,7 @@
           "type": "readonly GratitudeNote[]",
           "required": true,
           "description": "Notes public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -7182,7 +7361,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Actions public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -7547,7 +7726,7 @@
           "type": "readonly KanbanColumn[]",
           "required": true,
           "description": "Columns public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -7806,7 +7985,7 @@
           "type": "readonly LessonStepView[]",
           "required": true,
           "description": "Steps public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -8015,7 +8194,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Groups public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -8041,7 +8220,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Links public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -8127,6 +8306,29 @@
       "relatedSymbols": ["CsMediaViewModel", "MediaFrameDirective"]
     },
     {
+      "kind": "interface",
+      "name": "MemberMove",
+      "sourcePath": "src/cornerstone/team-board/member-move.interface.ts",
+      "category": "workflows",
+      "description": "Member Move public API.",
+      "members": [
+        {
+          "name": "memberId",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Member Id public API."
+        },
+        {
+          "name": "groupId",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Group Id public API."
+        }
+      ]
+    },
+    {
       "kind": "class",
       "name": "MessageComposerComponent",
       "sourcePath": "src/cornerstone/message-composer/message-composer.component.ts",
@@ -8198,7 +8400,7 @@
           "type": "readonly MessageViewModel[]",
           "required": true,
           "description": "Messages public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -8314,7 +8516,7 @@
           "type": "readonly CsMetricSeries[]",
           "required": true,
           "description": "Series public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -8369,7 +8571,7 @@
           "type": "readonly CsMetricSeries[]",
           "required": true,
           "description": "Series public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -8394,7 +8596,7 @@
           "type": "readonly CsMetricSeries[]",
           "required": true,
           "description": "Series public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -8503,7 +8705,7 @@
           "type": "readonly Movement[]",
           "required": true,
           "description": "Movements public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -8549,7 +8751,7 @@
           "type": "readonly Movement[]",
           "required": true,
           "description": "Movements public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -8647,6 +8849,22 @@
       "relatedSymbols": ["NavGroup"]
     },
     {
+      "kind": "interface",
+      "name": "NewTeamRequest",
+      "sourcePath": "src/cornerstone/team-board/new-team-request.interface.ts",
+      "category": "workflows",
+      "description": "New Team Request public API.",
+      "members": [
+        {
+          "name": "memberId",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Member Id public API."
+        }
+      ]
+    },
+    {
       "kind": "class",
       "name": "NotificationItemComponent",
       "sourcePath": "src/cornerstone/notification-item/notification-item.component.ts",
@@ -8705,7 +8923,7 @@
           "type": "readonly CsNotificationViewModel[]",
           "required": true,
           "description": "Notifications public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -8969,7 +9187,7 @@
           "type": "readonly PersonRowView[]",
           "required": true,
           "description": "People public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -9488,7 +9706,7 @@
           "type": "readonly Project[]",
           "required": true,
           "description": "Projects public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -9571,7 +9789,7 @@
           "type": "readonly Movement[]",
           "required": true,
           "description": "Items public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -9728,7 +9946,7 @@
           "type": "readonly CsProcessStage[]",
           "required": true,
           "description": "Stages public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -9789,7 +10007,7 @@
           "type": "readonly CsProcessStage[]",
           "required": true,
           "description": "Stages public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -9888,7 +10106,7 @@
           "type": "readonly CsCurriculumNode[]",
           "required": true,
           "description": "Nodes public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -10033,6 +10251,29 @@
           "type": "number",
           "required": false,
           "description": "Progress public API."
+        }
+      ]
+    },
+    {
+      "kind": "interface",
+      "name": "ProjectAssignment",
+      "sourcePath": "src/cornerstone/team-board/project-assignment.interface.ts",
+      "category": "workflows",
+      "description": "Project Assignment public API.",
+      "members": [
+        {
+          "name": "groupId",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Group Id public API."
+        },
+        {
+          "name": "projectId",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Project Id public API."
         }
       ]
     },
@@ -10653,6 +10894,228 @@
       "relatedSymbols": []
     },
     {
+      "kind": "interface",
+      "name": "RaffleResult",
+      "sourcePath": "src/cornerstone/raffle-stage/raffle-result.interface.ts",
+      "category": "communication",
+      "description": "Raffle Result public API.",
+      "members": [
+        {
+          "name": "id",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Id public API."
+        },
+        {
+          "name": "label",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Label public API."
+        },
+        {
+          "name": "winnerName",
+          "role": "property",
+          "type": "string",
+          "required": false,
+          "description": "Winner Name public API."
+        },
+        {
+          "name": "winnerDetail",
+          "role": "property",
+          "type": "string",
+          "required": false,
+          "description": "Winner Detail public API."
+        },
+        {
+          "name": "candidates",
+          "role": "property",
+          "type": "string[]",
+          "required": true,
+          "description": "Candidates public API."
+        },
+        {
+          "name": "start",
+          "role": "property",
+          "type": "number",
+          "required": true,
+          "description": "Start public API."
+        },
+        {
+          "name": "reveal",
+          "role": "property",
+          "type": "number",
+          "required": true,
+          "description": "Reveal public API."
+        }
+      ]
+    },
+    {
+      "kind": "class",
+      "name": "RaffleStageComponent",
+      "sourcePath": "src/cornerstone/raffle-stage/raffle-stage.component.ts",
+      "category": "communication",
+      "description": "Presents a consumer-supplied draw; never generates a winner or stores participant data.",
+      "members": [
+        {
+          "name": "result",
+          "bindingName": "result",
+          "role": "input",
+          "type": "RaffleResult | null",
+          "required": false,
+          "defaultValue": "null",
+          "description": "Result public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "now",
+          "bindingName": "now",
+          "role": "input",
+          "type": "number | null",
+          "required": false,
+          "defaultValue": "null",
+          "description": "Now public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "forceFallback",
+          "bindingName": "forceFallback",
+          "role": "input",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false",
+          "description": "Force Fallback public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "text",
+          "bindingName": "text",
+          "role": "input",
+          "type": "Partial<RaffleStageText>",
+          "required": false,
+          "defaultValue": "{}",
+          "description": "Text public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "stopEffects",
+          "role": "method",
+          "type": "void",
+          "parameters": [],
+          "description": "Stop Effects public API.",
+          "structured": false,
+          "options": []
+        }
+      ],
+      "component": true,
+      "selector": "cs-raffle-stage",
+      "slug": "raffle-stage",
+      "label": "Raffle Stage",
+      "tokens": [
+        "--cs-border",
+        "--cs-border-width",
+        "--cs-confetti-duration",
+        "--cs-confetti-fall-distance",
+        "--cs-confetti-piece-width",
+        "--cs-confetti-spin",
+        "--cs-confetti-start",
+        "--cs-font-mono",
+        "--cs-font-weight-bold",
+        "--cs-heading-leading",
+        "--cs-heading-tracking",
+        "--cs-ink-muted",
+        "--cs-lime",
+        "--cs-radius-lg",
+        "--cs-radius-pill",
+        "--cs-raffle-stage-height",
+        "--cs-raffle-winner-size",
+        "--cs-space-3",
+        "--cs-space-5",
+        "--cs-space-8",
+        "--cs-surface",
+        "--cs-text-lg",
+        "--cs-text-xl"
+      ],
+      "relatedSymbols": ["RaffleResult", "RaffleStageText"]
+    },
+    {
+      "kind": "interface",
+      "name": "RaffleStageText",
+      "sourcePath": "src/cornerstone/raffle-stage/raffle-stage-text.interface.ts",
+      "category": "communication",
+      "description": "Raffle Stage Text public API.",
+      "members": [
+        {
+          "name": "ariaLabel",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Aria Label public API."
+        },
+        {
+          "name": "waitingTitle",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Waiting Title public API."
+        },
+        {
+          "name": "waitingDescription",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Waiting Description public API."
+        },
+        {
+          "name": "drawingBadge",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Drawing Badge public API."
+        },
+        {
+          "name": "drawingName",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Drawing Name public API."
+        },
+        {
+          "name": "drawingAnnouncement",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Drawing Announcement public API."
+        },
+        {
+          "name": "winnerBadge",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Winner Badge public API."
+        },
+        {
+          "name": "winnerDescription",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Winner Description public API."
+        },
+        {
+          "name": "stopEffects",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Stop Effects public API."
+        }
+      ]
+    },
+    {
       "kind": "type",
       "name": "RailOrientation",
       "sourcePath": "src/cornerstone/process-rail/rail-orientation.type.ts",
@@ -10720,7 +11183,7 @@
           "type": "readonly RecordSection[]",
           "required": true,
           "description": "Sections public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -10998,7 +11461,7 @@
           "type": "readonly CsRequirement[]",
           "required": true,
           "description": "Requirements public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -11026,6 +11489,84 @@
       "category": "data-display",
       "description": "Responsive Table public API.",
       "members": []
+    },
+    {
+      "kind": "class",
+      "name": "ReviewDialogComponent",
+      "sourcePath": "src/cornerstone/review-dialog/review-dialog.component.ts",
+      "category": "overlays",
+      "description": "A controlled native modal dialog. Consumers set open=false after a dismissal request.",
+      "members": [
+        {
+          "name": "title",
+          "bindingName": "title",
+          "role": "input",
+          "type": "string",
+          "required": true,
+          "description": "Title public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "open",
+          "bindingName": "open",
+          "role": "input",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false",
+          "description": "Open public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "closeLabel",
+          "bindingName": "closeLabel",
+          "role": "input",
+          "type": "string",
+          "required": false,
+          "defaultValue": "'Close dialog'",
+          "description": "Close Label public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "closed",
+          "bindingName": "closed",
+          "role": "output",
+          "type": "void",
+          "required": false,
+          "description": "Closed public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "restoreFocus",
+          "role": "method",
+          "type": "void",
+          "parameters": [],
+          "description": "Restore Focus public API.",
+          "structured": false,
+          "options": []
+        }
+      ],
+      "component": true,
+      "selector": "cs-review-dialog",
+      "slug": "review-dialog",
+      "label": "Review Dialog",
+      "tokens": [
+        "--cs-border",
+        "--cs-border-width",
+        "--cs-dialog-backdrop",
+        "--cs-ink",
+        "--cs-paper",
+        "--cs-radius-lg",
+        "--cs-review-dialog-width",
+        "--cs-shadow-lg",
+        "--cs-space-4",
+        "--cs-space-6",
+        "--cs-text-lg"
+      ],
+      "relatedSymbols": []
     },
     {
       "kind": "interface",
@@ -11317,7 +11858,7 @@
           "type": "readonly ScheduleGroup[]",
           "required": true,
           "description": "Groups public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -11557,7 +12098,7 @@
           "type": "readonly SegmentOption<T>[]",
           "required": true,
           "description": "Options public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -11906,7 +12447,7 @@
           "required": false,
           "defaultValue": "null",
           "description": "Delta public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -12352,6 +12893,288 @@
     },
     {
       "kind": "class",
+      "name": "TeamBoardComponent",
+      "sourcePath": "src/cornerstone/team-board/team-board.component.ts",
+      "category": "workflows",
+      "description": "Controlled team membership and project assignment; emits intent without persistence.",
+      "members": [
+        {
+          "name": "groups",
+          "bindingName": "groups",
+          "role": "input",
+          "type": "readonly BoardGroup[]",
+          "required": true,
+          "description": "Groups public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "members",
+          "bindingName": "members",
+          "role": "input",
+          "type": "readonly BoardMember[]",
+          "required": true,
+          "description": "Members public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "projects",
+          "bindingName": "projects",
+          "role": "input",
+          "type": "readonly BoardProject[]",
+          "required": false,
+          "defaultValue": "[]",
+          "description": "Projects public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "editable",
+          "bindingName": "editable",
+          "role": "input",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false",
+          "description": "Editable public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "disabled",
+          "bindingName": "disabled",
+          "role": "input",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false",
+          "description": "Disabled public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "currentMember",
+          "bindingName": "currentMember",
+          "role": "input",
+          "type": "string",
+          "required": false,
+          "defaultValue": "''",
+          "description": "Current Member public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "text",
+          "bindingName": "text",
+          "role": "input",
+          "type": "Partial<TeamBoardText>",
+          "required": false,
+          "defaultValue": "{}",
+          "description": "Text public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "moved",
+          "bindingName": "moved",
+          "role": "output",
+          "type": "MemberMove",
+          "required": false,
+          "description": "Moved public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "assigned",
+          "bindingName": "assigned",
+          "role": "output",
+          "type": "ProjectAssignment",
+          "required": false,
+          "description": "Assigned public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "newTeamRequested",
+          "bindingName": "newTeamRequested",
+          "role": "output",
+          "type": "NewTeamRequest",
+          "required": false,
+          "description": "New Team Requested public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "moveMember",
+          "role": "method",
+          "type": "void",
+          "parameters": [
+            {
+              "name": "memberId",
+              "type": "string",
+              "optional": false
+            },
+            {
+              "name": "groupId",
+              "type": "string",
+              "optional": false
+            }
+          ],
+          "description": "Move Member public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "assignProject",
+          "role": "method",
+          "type": "void",
+          "parameters": [
+            {
+              "name": "groupId",
+              "type": "string",
+              "optional": false
+            },
+            {
+              "name": "projectId",
+              "type": "string",
+              "optional": false
+            }
+          ],
+          "description": "Assign Project public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "requestNewTeam",
+          "role": "method",
+          "type": "void",
+          "parameters": [
+            {
+              "name": "memberId",
+              "type": "string",
+              "optional": false
+            }
+          ],
+          "description": "Request New Team public API.",
+          "structured": false,
+          "options": []
+        }
+      ],
+      "component": true,
+      "selector": "cs-team-board",
+      "slug": "team-board",
+      "label": "Team Board",
+      "tokens": [
+        "--cs-border",
+        "--cs-border-width",
+        "--cs-drag-placeholder-opacity",
+        "--cs-ink-muted",
+        "--cs-lime-strong",
+        "--cs-paper",
+        "--cs-radius-sm",
+        "--cs-shadow-lg",
+        "--cs-space-1",
+        "--cs-space-2",
+        "--cs-space-3",
+        "--cs-space-4",
+        "--cs-space-5",
+        "--cs-space-8",
+        "--cs-surface",
+        "--cs-team-board-column-width",
+        "--cs-text-lg",
+        "--cs-text-sm",
+        "--cs-text-xs"
+      ],
+      "relatedSymbols": [
+        "BoardGroup",
+        "BoardMember",
+        "BoardProject",
+        "MemberMove",
+        "NewTeamRequest",
+        "ProjectAssignment",
+        "TeamBoardText"
+      ]
+    },
+    {
+      "kind": "interface",
+      "name": "TeamBoardText",
+      "sourcePath": "src/cornerstone/team-board/team-board-text.interface.ts",
+      "category": "workflows",
+      "description": "Team Board Text public API.",
+      "members": [
+        {
+          "name": "people",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "People public API."
+        },
+        {
+          "name": "noProject",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "No Project public API."
+        },
+        {
+          "name": "unassigned",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Unassigned public API."
+        },
+        {
+          "name": "currentMember",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Current Member public API."
+        },
+        {
+          "name": "moveTo",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Move To public API."
+        },
+        {
+          "name": "newTeam",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "New Team public API."
+        },
+        {
+          "name": "teamProject",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Team Project public API."
+        },
+        {
+          "name": "emptyEditable",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Empty Editable public API."
+        },
+        {
+          "name": "emptyReadonly",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Empty Readonly public API."
+        },
+        {
+          "name": "dragMember",
+          "role": "property",
+          "type": "string",
+          "required": true,
+          "description": "Drag Member public API."
+        }
+      ]
+    },
+    {
+      "kind": "class",
       "name": "ThreadAnnouncerService",
       "sourcePath": "src/cornerstone/message-thread/thread-announcer.service.ts",
       "category": "communication",
@@ -12380,7 +13203,7 @@
           "type": "readonly TimelineEntry[]",
           "required": true,
           "description": "Entries public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -12658,7 +13481,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Errors public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -12683,7 +13506,7 @@
           "type": "readonly WizardStep[]",
           "required": true,
           "description": "Steps public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -13027,7 +13850,7 @@
           "type": "readonly AccountAction[]",
           "required": true,
           "description": "Actions public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -13177,7 +14000,7 @@
           "type": "readonly AudienceOption[]",
           "required": true,
           "description": "Audiences public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -13312,7 +14135,7 @@
           "type": "readonly AttachmentViewModel[]",
           "required": true,
           "description": "Items public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -13455,7 +14278,7 @@
           "type": "readonly AuditEvent[]",
           "required": true,
           "description": "Events public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -13617,7 +14440,7 @@
           "type": "readonly AchievementView[]",
           "required": true,
           "description": "Items public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -13700,7 +14523,7 @@
           "type": "readonly BottomNavItem[]",
           "required": true,
           "description": "Items public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -13815,7 +14638,7 @@
           "type": "readonly Crumb[]",
           "required": true,
           "description": "Crumbs public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -13898,7 +14721,7 @@
           "type": "readonly CalendarDate[]",
           "required": true,
           "description": "Dates public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -13909,7 +14732,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Events public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -14368,7 +15191,7 @@
           "type": "readonly CsMetricSeries[]",
           "required": true,
           "description": "Series public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -14587,7 +15410,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Cards public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -14598,7 +15421,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Stats public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -14658,7 +15481,7 @@
           "type": "readonly ConversationItem[]",
           "required": true,
           "description": "Conversations public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -14678,6 +15501,85 @@
       "label": "Conversation List",
       "tokens": [],
       "relatedSymbols": ["ConversationItem"]
+    },
+    {
+      "kind": "class",
+      "name": "CountdownComponent",
+      "sourcePath": "src/cornerstone/countdown/countdown.component.ts",
+      "category": "communication",
+      "description": "A countdown driven by the consumer's clock, with no background timer.",
+      "members": [
+        {
+          "name": "target",
+          "bindingName": "target",
+          "role": "input",
+          "type": "number",
+          "required": true,
+          "description": "Target public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "now",
+          "bindingName": "now",
+          "role": "input",
+          "type": "number",
+          "required": true,
+          "description": "Now public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "ariaLabel",
+          "bindingName": "ariaLabel",
+          "role": "input",
+          "type": "string",
+          "required": false,
+          "defaultValue": "'Time remaining'",
+          "description": "Aria Label public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "pendingCaption",
+          "bindingName": "pendingCaption",
+          "role": "input",
+          "type": "string",
+          "required": false,
+          "defaultValue": "'The event will begin soon.'",
+          "description": "Pending Caption public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "expiredCaption",
+          "bindingName": "expiredCaption",
+          "role": "input",
+          "type": "string",
+          "required": false,
+          "defaultValue": "'The countdown is complete.'",
+          "description": "Expired Caption public API.",
+          "structured": false,
+          "options": []
+        }
+      ],
+      "component": true,
+      "selector": "cs-countdown",
+      "slug": "countdown",
+      "label": "Countdown",
+      "tokens": [
+        "--cs-countdown-size",
+        "--cs-font-display",
+        "--cs-font-weight-bold",
+        "--cs-heading-tracking",
+        "--cs-ink-muted",
+        "--cs-label-tracking",
+        "--cs-space-2",
+        "--cs-space-5",
+        "--cs-space-6",
+        "--cs-text-xs"
+      ],
+      "relatedSymbols": []
     },
     {
       "kind": "class",
@@ -14704,7 +15606,7 @@
           "type": "readonly ImportTargetColumn[]",
           "required": true,
           "description": "Columns public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -14782,7 +15684,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Actions public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -14842,7 +15744,7 @@
           "type": "readonly CsCurriculumNode[]",
           "required": true,
           "description": "Nodes public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -14913,7 +15815,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Filters public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -14988,7 +15890,7 @@
           "type": "readonly DefinitionItem[]",
           "required": true,
           "description": "Items public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -15451,7 +16353,7 @@
           "type": "readonly FileRejection[]",
           "required": false,
           "description": "Rejected public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -15476,7 +16378,7 @@
           "type": "readonly FileEntry[]",
           "required": true,
           "description": "Files public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -15557,7 +16459,7 @@
           "type": "readonly CsRequirement[]",
           "required": true,
           "description": "Requirements public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -15645,7 +16547,7 @@
           "type": "readonly GratitudeNote[]",
           "required": true,
           "description": "Notes public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -15692,7 +16594,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Actions public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -15807,7 +16709,7 @@
           "type": "readonly KanbanColumn[]",
           "required": true,
           "description": "Columns public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -15991,7 +16893,7 @@
           "type": "readonly LessonStepView[]",
           "required": true,
           "description": "Steps public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -16124,7 +17026,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Groups public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -16150,7 +17052,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Links public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -16268,7 +17170,7 @@
           "type": "readonly MessageViewModel[]",
           "required": true,
           "description": "Messages public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -16319,7 +17221,7 @@
           "type": "readonly CsMetricSeries[]",
           "required": true,
           "description": "Series public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -16344,7 +17246,7 @@
           "type": "readonly CsMetricSeries[]",
           "required": true,
           "description": "Series public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -16369,7 +17271,7 @@
           "type": "readonly CsMetricSeries[]",
           "required": true,
           "description": "Series public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -16394,7 +17296,7 @@
           "type": "readonly Movement[]",
           "required": true,
           "description": "Movements public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -16440,7 +17342,7 @@
           "type": "readonly Movement[]",
           "required": true,
           "description": "Movements public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -16557,7 +17459,7 @@
           "type": "readonly CsNotificationViewModel[]",
           "required": true,
           "description": "Notifications public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -16782,7 +17684,7 @@
           "type": "readonly PersonRowView[]",
           "required": true,
           "description": "People public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -17029,7 +17931,7 @@
           "type": "readonly Project[]",
           "required": true,
           "description": "Projects public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -17112,7 +18014,7 @@
           "type": "readonly Movement[]",
           "required": true,
           "description": "Items public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -17231,7 +18133,7 @@
           "type": "readonly CsProcessStage[]",
           "required": true,
           "description": "Stages public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -17292,7 +18194,7 @@
           "type": "readonly CsProcessStage[]",
           "required": true,
           "description": "Stages public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -17391,7 +18293,7 @@
           "type": "readonly CsCurriculumNode[]",
           "required": true,
           "description": "Nodes public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -17796,6 +18698,98 @@
     },
     {
       "kind": "class",
+      "name": "RaffleStageComponent",
+      "sourcePath": "src/cornerstone/raffle-stage/raffle-stage.component.ts",
+      "category": "communication",
+      "description": "Presents a consumer-supplied draw; never generates a winner or stores participant data.",
+      "members": [
+        {
+          "name": "result",
+          "bindingName": "result",
+          "role": "input",
+          "type": "RaffleResult | null",
+          "required": false,
+          "defaultValue": "null",
+          "description": "Result public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "now",
+          "bindingName": "now",
+          "role": "input",
+          "type": "number | null",
+          "required": false,
+          "defaultValue": "null",
+          "description": "Now public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "forceFallback",
+          "bindingName": "forceFallback",
+          "role": "input",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false",
+          "description": "Force Fallback public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "text",
+          "bindingName": "text",
+          "role": "input",
+          "type": "Partial<RaffleStageText>",
+          "required": false,
+          "defaultValue": "{}",
+          "description": "Text public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "stopEffects",
+          "role": "method",
+          "type": "void",
+          "parameters": [],
+          "description": "Stop Effects public API.",
+          "structured": false,
+          "options": []
+        }
+      ],
+      "component": true,
+      "selector": "cs-raffle-stage",
+      "slug": "raffle-stage",
+      "label": "Raffle Stage",
+      "tokens": [
+        "--cs-border",
+        "--cs-border-width",
+        "--cs-confetti-duration",
+        "--cs-confetti-fall-distance",
+        "--cs-confetti-piece-width",
+        "--cs-confetti-spin",
+        "--cs-confetti-start",
+        "--cs-font-mono",
+        "--cs-font-weight-bold",
+        "--cs-heading-leading",
+        "--cs-heading-tracking",
+        "--cs-ink-muted",
+        "--cs-lime",
+        "--cs-radius-lg",
+        "--cs-radius-pill",
+        "--cs-raffle-stage-height",
+        "--cs-raffle-winner-size",
+        "--cs-space-3",
+        "--cs-space-5",
+        "--cs-space-8",
+        "--cs-surface",
+        "--cs-text-lg",
+        "--cs-text-xl"
+      ],
+      "relatedSymbols": ["RaffleResult", "RaffleStageText"]
+    },
+    {
+      "kind": "class",
       "name": "RecordTabsComponent",
       "sourcePath": "src/cornerstone/record-tabs/record-tabs.component.ts",
       "category": "workflows",
@@ -17808,7 +18802,7 @@
           "type": "readonly RecordSection[]",
           "required": true,
           "description": "Sections public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -17944,7 +18938,7 @@
           "type": "readonly CsRequirement[]",
           "required": true,
           "description": "Requirements public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -17964,6 +18958,84 @@
       "label": "Requirement Checklist",
       "tokens": [],
       "relatedSymbols": ["CsRequirement", "CsRequirementToggleIntent"]
+    },
+    {
+      "kind": "class",
+      "name": "ReviewDialogComponent",
+      "sourcePath": "src/cornerstone/review-dialog/review-dialog.component.ts",
+      "category": "overlays",
+      "description": "A controlled native modal dialog. Consumers set open=false after a dismissal request.",
+      "members": [
+        {
+          "name": "title",
+          "bindingName": "title",
+          "role": "input",
+          "type": "string",
+          "required": true,
+          "description": "Title public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "open",
+          "bindingName": "open",
+          "role": "input",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false",
+          "description": "Open public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "closeLabel",
+          "bindingName": "closeLabel",
+          "role": "input",
+          "type": "string",
+          "required": false,
+          "defaultValue": "'Close dialog'",
+          "description": "Close Label public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "closed",
+          "bindingName": "closed",
+          "role": "output",
+          "type": "void",
+          "required": false,
+          "description": "Closed public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "restoreFocus",
+          "role": "method",
+          "type": "void",
+          "parameters": [],
+          "description": "Restore Focus public API.",
+          "structured": false,
+          "options": []
+        }
+      ],
+      "component": true,
+      "selector": "cs-review-dialog",
+      "slug": "review-dialog",
+      "label": "Review Dialog",
+      "tokens": [
+        "--cs-border",
+        "--cs-border-width",
+        "--cs-dialog-backdrop",
+        "--cs-ink",
+        "--cs-paper",
+        "--cs-radius-lg",
+        "--cs-review-dialog-width",
+        "--cs-shadow-lg",
+        "--cs-space-4",
+        "--cs-space-6",
+        "--cs-text-lg"
+      ],
+      "relatedSymbols": []
     },
     {
       "kind": "class",
@@ -18020,7 +19092,7 @@
           "type": "readonly ScheduleGroup[]",
           "required": true,
           "description": "Groups public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -18177,7 +19249,7 @@
           "type": "readonly SegmentOption<T>[]",
           "required": true,
           "description": "Options public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -18395,7 +19467,7 @@
           "required": false,
           "defaultValue": "null",
           "description": "Delta public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {
@@ -18656,6 +19728,209 @@
     },
     {
       "kind": "class",
+      "name": "TeamBoardComponent",
+      "sourcePath": "src/cornerstone/team-board/team-board.component.ts",
+      "category": "workflows",
+      "description": "Controlled team membership and project assignment; emits intent without persistence.",
+      "members": [
+        {
+          "name": "groups",
+          "bindingName": "groups",
+          "role": "input",
+          "type": "readonly BoardGroup[]",
+          "required": true,
+          "description": "Groups public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "members",
+          "bindingName": "members",
+          "role": "input",
+          "type": "readonly BoardMember[]",
+          "required": true,
+          "description": "Members public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "projects",
+          "bindingName": "projects",
+          "role": "input",
+          "type": "readonly BoardProject[]",
+          "required": false,
+          "defaultValue": "[]",
+          "description": "Projects public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "editable",
+          "bindingName": "editable",
+          "role": "input",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false",
+          "description": "Editable public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "disabled",
+          "bindingName": "disabled",
+          "role": "input",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false",
+          "description": "Disabled public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "currentMember",
+          "bindingName": "currentMember",
+          "role": "input",
+          "type": "string",
+          "required": false,
+          "defaultValue": "''",
+          "description": "Current Member public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "text",
+          "bindingName": "text",
+          "role": "input",
+          "type": "Partial<TeamBoardText>",
+          "required": false,
+          "defaultValue": "{}",
+          "description": "Text public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "moved",
+          "bindingName": "moved",
+          "role": "output",
+          "type": "MemberMove",
+          "required": false,
+          "description": "Moved public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "assigned",
+          "bindingName": "assigned",
+          "role": "output",
+          "type": "ProjectAssignment",
+          "required": false,
+          "description": "Assigned public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "newTeamRequested",
+          "bindingName": "newTeamRequested",
+          "role": "output",
+          "type": "NewTeamRequest",
+          "required": false,
+          "description": "New Team Requested public API.",
+          "structured": true,
+          "options": []
+        },
+        {
+          "name": "moveMember",
+          "role": "method",
+          "type": "void",
+          "parameters": [
+            {
+              "name": "memberId",
+              "type": "string",
+              "optional": false
+            },
+            {
+              "name": "groupId",
+              "type": "string",
+              "optional": false
+            }
+          ],
+          "description": "Move Member public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "assignProject",
+          "role": "method",
+          "type": "void",
+          "parameters": [
+            {
+              "name": "groupId",
+              "type": "string",
+              "optional": false
+            },
+            {
+              "name": "projectId",
+              "type": "string",
+              "optional": false
+            }
+          ],
+          "description": "Assign Project public API.",
+          "structured": false,
+          "options": []
+        },
+        {
+          "name": "requestNewTeam",
+          "role": "method",
+          "type": "void",
+          "parameters": [
+            {
+              "name": "memberId",
+              "type": "string",
+              "optional": false
+            }
+          ],
+          "description": "Request New Team public API.",
+          "structured": false,
+          "options": []
+        }
+      ],
+      "component": true,
+      "selector": "cs-team-board",
+      "slug": "team-board",
+      "label": "Team Board",
+      "tokens": [
+        "--cs-border",
+        "--cs-border-width",
+        "--cs-drag-placeholder-opacity",
+        "--cs-ink-muted",
+        "--cs-lime-strong",
+        "--cs-paper",
+        "--cs-radius-sm",
+        "--cs-shadow-lg",
+        "--cs-space-1",
+        "--cs-space-2",
+        "--cs-space-3",
+        "--cs-space-4",
+        "--cs-space-5",
+        "--cs-space-8",
+        "--cs-surface",
+        "--cs-team-board-column-width",
+        "--cs-text-lg",
+        "--cs-text-sm",
+        "--cs-text-xs"
+      ],
+      "relatedSymbols": [
+        "BoardGroup",
+        "BoardMember",
+        "BoardProject",
+        "MemberMove",
+        "NewTeamRequest",
+        "ProjectAssignment",
+        "TeamBoardText"
+      ]
+    },
+    {
+      "kind": "class",
       "name": "TimelineComponent",
       "sourcePath": "src/cornerstone/timeline/timeline.component.ts",
       "category": "data-display",
@@ -18668,7 +19943,7 @@
           "type": "readonly TimelineEntry[]",
           "required": true,
           "description": "Entries public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -18783,7 +20058,7 @@
           "required": false,
           "defaultValue": "[]",
           "description": "Errors public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         }
       ],
@@ -18808,7 +20083,7 @@
           "type": "readonly WizardStep[]",
           "required": true,
           "description": "Steps public API.",
-          "structured": false,
+          "structured": true,
           "options": []
         },
         {

@@ -47,6 +47,23 @@
   --cs-breakpoint-md: 768px;
   --cs-breakpoint-lg: 992px;
   --cs-breakpoint-xl: 1200px;
+  --cs-countdown-size: clamp(2.75rem, 8vw, 7rem);
+  --cs-raffle-winner-size: clamp(2rem, 6vw, 5rem);
+  --cs-review-dialog-width: 36rem;
+  --cs-heading-leading: 1.04;
+  --cs-heading-tracking: -0.05em;
+  --cs-label-tracking: 0.12em;
+  --cs-font-weight-bold: 700;
+  --cs-border-width: 1px;
+  --cs-dialog-backdrop: rgb(22 22 12 / 48%);
+  --cs-team-board-column-width: 18rem;
+  --cs-drag-placeholder-opacity: 0.5;
+  --cs-raffle-stage-height: 24rem;
+  --cs-confetti-fall-distance: 30rem;
+  --cs-confetti-piece-width: 0.55rem;
+  --cs-confetti-duration: 5s;
+  --cs-confetti-start: -2rem;
+  --cs-confetti-spin: 540deg;
 }
 
 .cs-theme-dark {

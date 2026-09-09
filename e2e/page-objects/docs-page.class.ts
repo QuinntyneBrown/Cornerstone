@@ -9,8 +9,8 @@ export class DocsPage {
     await expect(this.page).toHaveURL(/\/components\/categories$/);
     await expect(this.page.locator('html')).toHaveClass(/cs-theme-dark/);
     await expect(this.page.getByRole('heading', { name: 'Components', exact: true })).toBeVisible();
-    await expect(this.page.locator('.component-nav nav a')).toHaveCount(144);
-    await expect(this.page.locator('.component-grid > a')).toHaveCount(144);
+    await expect(this.page.locator('.component-nav nav a')).toHaveCount(148);
+    await expect(this.page.locator('.component-grid > a')).toHaveCount(148);
 
     const results = await new AxeBuilder({ page: this.page }).analyze();
     expect(
@@ -65,7 +65,7 @@ export class DocsPage {
     this.page.on('console', (message) => {
       if (message.type() === 'error') failures.push(message.text());
     });
-    expect(catalog.components).toHaveLength(144);
+    expect(catalog.components).toHaveLength(148);
     for (const component of catalog.components) {
       await this.page
         .locator('.component-nav')

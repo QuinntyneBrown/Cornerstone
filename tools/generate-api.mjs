@@ -327,7 +327,9 @@ for (const component of components) {
     .map((entry) => entry.name);
   for (const member of component.members ?? []) {
     const typeEntry = unique.find((entry) => entry.name === member.type);
-    member.structured = typeEntry?.kind === 'interface';
+    member.structured = unique.some(
+      (entry) => entry.kind === 'interface' && new RegExp(`\\b${entry.name}\\b`).test(member.type),
+    );
     member.options = typeEntry?.declaration
       ? [...typeEntry.declaration.matchAll(/['"]([^'"]+)['"]/g)].map((match) => match[1])
       : [];
@@ -395,8 +397,8 @@ for (const [target, rawContent] of targets) {
     writeFileSync(target, content);
   }
 }
-if (components.length !== 144) {
-  console.error(`Expected 144 public components, found ${components.length}.`);
+if (components.length !== 148) {
+  console.error(`Expected 148 public components, found ${components.length}.`);
   changed = true;
 }
 if (changed) process.exitCode = 1;

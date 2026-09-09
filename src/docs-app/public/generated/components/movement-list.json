@@ -12,7 +12,7 @@
       "type": "readonly Movement[]",
       "required": true,
       "description": "Movements public API.",
-      "structured": false,
+      "structured": true,
       "options": []
     },
     {

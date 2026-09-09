@@ -12,7 +12,7 @@ test('exposes Badge controls, source, and its actual API', async ({ page }) => {
   await new DocsPage(page).verifyBadgeControlsAndSource();
 });
 
-test('renders all 144 live component routes without runtime errors', async ({ page }) => {
+test('renders all 148 live component routes without runtime errors', async ({ page }) => {
   test.setTimeout(90_000);
   await new DocsPage(page).verifyEveryComponentRoute();
 });
