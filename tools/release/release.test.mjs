@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { nextVersion, publishPair, predecessors } from './policy.mjs';
+import { nextVersion, publishPair, predecessors, waitForManifest } from './policy.mjs';
 import { run } from './io.mjs';
 
 test('release subprocesses support both captured and inherited output and propagate failure', () => {
@@ -50,6 +50,10 @@ function fixture() {
       });
       tags.set(pkg.name, record.version);
     },
+    submitted: async (pkg) => {
+      pkg.submittedAt = '2026-09-09T09:00:00.000Z';
+    },
+    waitForManifest: async (name) => registry.get(name),
     verifyConsumer: async () => {
       verified = true;
     },
@@ -68,6 +72,47 @@ test('both packages must publish and verify before completion', async () => {
   assert.ok(f.finished());
   await publishPair(f.record, f.ports);
   assert.equal(f.registry.size, 2);
+});
+
+test('accepted uploads waiting for npm scanning are not submitted again on recovery', async () => {
+  const f = fixture();
+  for (const pkg of f.record.packages) pkg.submittedAt = '2026-09-09T09:00:00.000Z';
+  f.ports.publish = async () => {
+    throw new Error('must not resubmit accepted uploads');
+  };
+  f.ports.waitForManifest = async (name) => ({
+    version: f.record.version,
+    gitHead: f.record.commit,
+    dist: { integrity: f.record.packages.find((pkg) => pkg.name === name).integrity },
+  });
+  await publishPair(f.record, f.ports);
+  assert.ok(f.finished());
+});
+
+test('registry visibility polling tolerates scanning delays but remains bounded', async () => {
+  let attempts = 0;
+  const manifest = { version: '0.1.0' };
+  const sleep = async () => {};
+  assert.equal(
+    await waitForManifest(async () => (++attempts < 3 ? undefined : manifest), {
+      attempts: 3,
+      sleep,
+    }),
+    manifest,
+  );
+  await assert.rejects(
+    waitForManifest(async () => undefined, { attempts: 3, sleep }),
+    /not available/,
+  );
+  await assert.rejects(
+    waitForManifest(
+      async () => {
+        throw new Error('401');
+      },
+      { sleep },
+    ),
+    /401/,
+  );
 });
 
 test('partial failure resumes the exact version without re-uploading the first package', async () => {

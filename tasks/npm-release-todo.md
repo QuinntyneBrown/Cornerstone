@@ -7,5 +7,5 @@
 - [x] Share CI verification and configure main-only OIDC workflow.
 - [x] Document setup and recovery.
 - [x] Complete repository validation and publication dry run (18 browser scenarios, 6 unit tests, 2 token tests, release tests, all builds and quality checks).
-- [ ] Publish the first package pair and configure trusted publishing.
+- [x] Publish the first package pair (`0.1.0`) and configure trusted publishing for both packages.
 - [ ] Verify registry consumers and the next automatic GitHub release.

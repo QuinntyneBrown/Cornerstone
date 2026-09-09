@@ -34,6 +34,13 @@ The publisher stamps only built manifests with the version and `gitHead`.
 It creates a draft GitHub release containing a machine-readable record of the
 version, source commit, package names, filenames, and SHA-512 tarball integrities.
 It uploads the exact tarballs to that draft before publishing either package.
+After npm accepts each upload, the draft records its submission time. Retries
+wait for accepted uploads instead of submitting them again while scanning is
+pending. Registry verification polls every 15 seconds for up to 20 minutes per
+package. If npm takes longer, the run fails with the draft intact for a later
+retry. A crash between npm acceptance and recording the submission may require
+waiting for registry visibility before rerunning.
+
 The source manifests keep their development version; CI never commits generated
 version or changelog changes back to `main`.
 
@@ -98,3 +105,4 @@ See [npm scoped public packages](https://docs.npmjs.com/creating-and-publishing-
 [trusted publishers](https://docs.npmjs.com/trusted-publishers/),
 [npm trust](https://docs.npmjs.com/cli/v11/commands/npm-trust/), and
 [GitHub concurrency](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency).
+See also [npm publication scanning and availability delays](https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/).

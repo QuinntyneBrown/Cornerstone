@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { compareVersions, nextVersion, publishPair } from './policy.mjs';
+import { compareVersions, nextVersion, publishPair, waitForManifest } from './policy.mjs';
 import {
   api,
   gh,
@@ -54,6 +54,7 @@ for (const release of releases) {
   for (const pkg of record.packages) {
     assert.match(pkg.filename, /^[a-z0-9.-]+\.tgz$/);
     assert.match(pkg.integrity, /^sha512-[A-Za-z0-9+/]+={0,2}$/);
+    if (pkg.submittedAt) assert.ok(Number.isFinite(Date.parse(pkg.submittedAt)));
   }
 }
 let existing = releases.find((release) => release.record.commit === commit);
@@ -118,7 +119,7 @@ if (record) {
     } else {
       assert.deepEqual(
         pack(packages[index]),
-        pkg,
+        { name: pkg.name, filename: pkg.filename, integrity: pkg.integrity },
         'Missing reserved asset differs from rebuilt artifact; recover the original validated artifact',
       );
     }
@@ -184,6 +185,18 @@ if (dryRun) {
   }
   await publishPair(record, {
     inspect,
+    submitted: async (pkg) => {
+      pkg.submittedAt = new Date().toISOString();
+      const body = existing.body.replace(
+        /```json\n[\s\S]*?\n```/,
+        () => `\`\`\`json\n${JSON.stringify(record, null, 2)}\n\`\`\``,
+      );
+      existing = api(`repos/${repository}/releases/${existing.id}`, { body }, 'PATCH');
+    },
+    waitForManifest: async (name, version) => {
+      console.log(`Waiting for npm to make ${name}@${version} available after scanning`);
+      return waitForManifest(async () => (await inspect(name, version)).manifest);
+    },
     publish: async (pkg) => {
       npm(
         [

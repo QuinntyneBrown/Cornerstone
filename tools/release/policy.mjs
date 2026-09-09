@@ -1,3 +1,16 @@
+import { setTimeout } from 'node:timers/promises';
+
+export async function waitForManifest(read, { attempts = 80, sleep = setTimeout } = {}) {
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    const manifest = await read();
+    if (manifest) return manifest;
+    if (attempt + 1 < attempts) await sleep(15000);
+  }
+  throw new Error(
+    'Accepted package is not available after 20 minutes; leave the draft and retry after npm scanning completes',
+  );
+}
+
 export function compareVersions(left, right) {
   const parse = (value) => {
     if (!/^\d+\.\d+\.\d+$/.test(value)) throw new Error(`Invalid stable version: ${value}`);
@@ -54,8 +67,13 @@ export async function publishPair(record, ports) {
     throw new Error('A newer latest exists; refusing to publish a stale incomplete release');
   }
   for (const [index, pkg] of record.packages.entries()) {
-    if (!states[index].manifest) await ports.publish(pkg);
-    const { manifest } = await ports.inspect(pkg.name, record.version);
+    if (!states[index].manifest && !pkg.submittedAt) {
+      await ports.publish(pkg);
+      await ports.submitted(pkg);
+    }
+  }
+  for (const pkg of record.packages) {
+    const manifest = await ports.waitForManifest(pkg.name, record.version);
     if (
       manifest?.version !== record.version ||
       manifest?.gitHead !== record.commit ||
