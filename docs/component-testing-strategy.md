@@ -8,7 +8,7 @@
 > they do not override the application boundaries documented in `AGENTS.md`.
 
 **Status:** Proposed  
-**Scope:** Every public UI component and directive in `@cornerstone/ui`  
+**Scope:** Every public UI component and directive in `@quinntyne/cornerstone`  
 **Primary tools:** Playwright Test, the `design-system` Angular application, Component Object Models,
 Vitest/TestBed, and axe-core
 
@@ -41,7 +41,7 @@ second catalogue of examples.
 The current workspace already has most of the foundation:
 
 - `design-system/` is a Vite-powered Angular 21 documentation application consuming
-  `@cornerstone/ui` through the public import path.
+  `@quinntyne/cornerstone` through the public import path.
 - `playwright.config.ts` already starts that application and runs Chromium, Firefox, and WebKit.
 - `@axe-core/playwright` is installed and the existing docs smoke test runs an accessibility scan.
 - Playwright screenshots and repository baselines are already configured under `verification/`.
@@ -507,7 +507,7 @@ A public component is component-tested only when all applicable items are true:
   screen-reader record.
 - Light and dark Chromium baselines exist for every visual variant.
 - Specs cite their L2 requirements, and the component coverage gate reports no missing artifact.
-- The example consumes `@cornerstone/ui` through its public API and performs no HTTP, authorization,
+- The example consumes `@quinntyne/cornerstone` through its public API and performs no HTTP, authorization,
   persistence, or product-routing work.
 
 ## Risks and controls

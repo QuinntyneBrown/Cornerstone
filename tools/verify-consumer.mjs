@@ -14,12 +14,22 @@ const npm = (args, cwd = consumer) =>
     encoding: 'utf8',
     shell: process.platform === 'win32',
   });
-const archives = ['cornerstone', 'design-system-tokens'].map((directory) => {
-  const [result] = JSON.parse(
-    npm(['pack', '--json', `./dist/${directory}`, '--pack-destination', consumer], root),
-  );
-  return resolve(consumer, result.filename);
-});
+const registryVersion = process.argv[2] === '--registry-version' ? process.argv[3] : undefined;
+if (registryVersion) assert.match(registryVersion, /^\d+\.\d+\.\d+$/);
+const archives = registryVersion
+  ? [
+      `@quinntyne/cornerstone@${registryVersion}`,
+      `@quinntyne/cornerstone-design-system@${registryVersion}`,
+    ]
+  : process.argv[2] === '--archives'
+    ? process.argv.slice(3)
+    : ['cornerstone', 'design-system-tokens'].map((directory) => {
+        const [result] = JSON.parse(
+          npm(['pack', '--json', `./dist/${directory}`, '--pack-destination', consumer], root),
+        );
+        return resolve(consumer, result.filename);
+      });
+assert.equal(archives.length, 2, 'Verify exactly the two release packages');
 writeFileSync(
   resolve(consumer, 'package.json'),
   '{"name":"cornerstone-packed-consumer","private":true}\n',
@@ -32,12 +42,13 @@ npm([
   '--no-audit',
   '--no-fund',
   '--package-lock=false',
+  '--registry=https://registry.npmjs.org',
 ]);
 writeFileSync(
   resolve(consumer, 'consumer.component.ts'),
   `
 import { Component } from '@angular/core';
-import { BadgeComponent, CardComponent, CsButtonDirective, CsCardHeaderComponent, CsProgressComponent } from '@cornerstone/ui';
+import { BadgeComponent, CardComponent, CsButtonDirective, CsCardHeaderComponent, CsProgressComponent } from '@quinntyne/cornerstone';
 @Component({
   imports: [BadgeComponent, CardComponent, CsButtonDirective, CsCardHeaderComponent, CsProgressComponent],
   templateUrl: './consumer.component.html',
@@ -85,18 +96,18 @@ execFileSync(
 const importer = new NodePackageImporter(consumer);
 for (const name of ['theme', 'tokens', 'compat']) {
   for (const suffix of ['', '.scss']) {
-    const css = compileString(`@use "pkg:@cornerstone/ui/styles/${name}${suffix}";`, {
+    const css = compileString(`@use "pkg:@quinntyne/cornerstone/styles/${name}${suffix}";`, {
       importers: [importer],
     }).css;
     assert.match(css, /--cs-paper:/, `Missing tokens in ${name}${suffix}`);
   }
 }
-const tokens = compileString('@use "pkg:@cornerstone/design-system/tokens.scss";', {
+const tokens = compileString('@use "pkg:@quinntyne/cornerstone-design-system/tokens.scss";', {
   importers: [importer],
 }).css;
 assert.match(tokens, /--cs-paper:/);
 const packedTokenCss = readFileSync(
-  resolve(consumer, 'node_modules/@cornerstone/design-system/tokens.css'),
+  resolve(consumer, 'node_modules/@quinntyne/cornerstone-design-system/tokens.css'),
   'utf8',
 );
 assert.equal(tokens, packedTokenCss);

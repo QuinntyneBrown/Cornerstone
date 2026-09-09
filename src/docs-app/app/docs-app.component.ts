@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { CsThemeService } from '@cornerstone/ui';
+import { CsThemeService } from '@quinntyne/cornerstone';
 import { CatalogData } from './catalog-data.class';
 
 @Component({

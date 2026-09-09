@@ -13,4 +13,4 @@ delete manifest.scripts;
 delete manifest.devDependencies;
 writeFileSync(resolve(output, 'package.json'), `${JSON.stringify(manifest, null, 2)}\n`);
 writeFileSync(resolve(output, 'tokens.css'), compile(resolve(root, 'styles/tokens.scss')).css);
-console.log('Built @cornerstone/design-system in dist/design-system-tokens.');
+console.log('Built @quinntyne/cornerstone-design-system in dist/design-system-tokens.');

@@ -11,7 +11,7 @@ export default defineConfig({
   plugins: [angular({ tsconfig: resolve(projectRoot, 'tsconfig.app.json') })],
   resolve: {
     alias: {
-      '@cornerstone/ui': resolve(projectRoot, '../cornerstone/public-api.ts'),
+      '@quinntyne/cornerstone': resolve(projectRoot, '../cornerstone/public-api.ts'),
     },
   },
   build: {

@@ -1,7 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { provideCsTheme } from '@cornerstone/ui';
+import { provideCsTheme } from '@quinntyne/cornerstone';
 import { CatalogPageComponent } from './app/catalog-page.component';
 import { ComponentPageComponent } from './app/component-page.component';
 import { DocsAppComponent } from './app';

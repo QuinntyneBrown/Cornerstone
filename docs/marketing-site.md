@@ -12,7 +12,7 @@ and motion that is felt rather than watched.
 
 ## Why replace the Angular version
 
-The old site bootstrapped Angular, the CDK, and the whole `@cornerstone/ui` bundle to render six
+The old site bootstrapped Angular, the CDK, and the whole `@quinntyne/cornerstone` bundle to render six
 static sections. It cost a compile step (`ngc` + `vite build`), an `angular.json` project, a
 TypeScript project reference, and an architecture-check source root — all to ship text that never
 changes between deploys. A brochure site is documents. It should ship as documents.
@@ -23,7 +23,7 @@ the needs of Liturgy and Word Up.
 
 ## Design direction
 
-**Subject.** `@cornerstone/ui` — FaithTech's Angular CDK component library. The audience is Angular
+**Subject.** `@quinntyne/cornerstone` — FaithTech's Angular CDK component library. The audience is Angular
 engineers building church and ministry software, most of them volunteers with limited hours. The
 page has one job: convince that engineer adoption is safe and fast, and get them to `npm install`.
 

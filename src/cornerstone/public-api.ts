@@ -1,4 +1,4 @@
-/** Public API for @cornerstone/ui. */
+/** Public API for @quinntyne/cornerstone. */
 export * from './core/platform/cs-breakpoints.constant';
 export * from './core/platform/cs-viewport-class.type';
 export * from './core/platform/cs-theme-name.type';

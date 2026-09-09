@@ -60,7 +60,7 @@ else Version is new
   release -> repo : Open the GitHub release carrying that section per L2-178
   release -> repo : Push chore(release) with skip-ci so no second run starts per L2-178
   release -> smoke : Install the exact published version from the registry
-  smoke -> npm : Resolve @cornerstone/ui at the published version
+  smoke -> npm : Resolve @quinntyne/cornerstone at the published version
   npm --> smoke : Installed package
   smoke -> smoke : Compile a smoke-test component and resolve every exports subpath per L2-180
 

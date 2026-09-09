@@ -78,6 +78,8 @@ export class ComponentPageComponent {
   }
 
   protected async copyImport(component: ApiEntry): Promise<void> {
-    await navigator.clipboard.writeText(`import { ${component.name} } from '@cornerstone/ui';`);
+    await navigator.clipboard.writeText(
+      `import { ${component.name} } from '@quinntyne/cornerstone';`,
+    );
   }
 }

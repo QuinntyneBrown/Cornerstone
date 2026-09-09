@@ -28,7 +28,7 @@ box "Backend — Build and verification" #ECFDF3
   participant "Support matrix" as matrix
 end box
 
-dev -> cli : Run ng add @cornerstone/ui
+dev -> cli : Run ng add @quinntyne/cornerstone
 cli -> npm : Resolve the package and its schematics field
 npm --> cli : Package tarball and collection path
 cli -> ngadd : Execute the ng-add factory per L2-185

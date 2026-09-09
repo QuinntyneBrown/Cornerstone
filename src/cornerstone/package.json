@@ -1,11 +1,12 @@
 {
-  "name": "@cornerstone/ui",
+  "name": "@quinntyne/cornerstone",
   "version": "0.1.0",
   "description": "FaithTech's accessible Angular CDK component library.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QuinntyneBrown/Cornerstone.git"
+    "url": "git+https://github.com/QuinntyneBrown/Cornerstone.git",
+    "directory": "src/cornerstone"
   },
   "homepage": "https://github.com/QuinntyneBrown/Cornerstone#readme",
   "bugs": {
@@ -15,7 +16,7 @@
   "ng-update": {
     "migrations": "./migrations/migration-collection.json",
     "packageGroup": [
-      "@cornerstone/ui",
+      "@quinntyne/cornerstone",
       "@angular/cdk"
     ]
   },
@@ -62,5 +63,9 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
 }

@@ -9,7 +9,7 @@ the library-oriented layout of [`angular/components`](https://github.com/angular
 
 ```text
 src/
-  cornerstone/                 published @cornerstone/ui package
+  cornerstone/                 published @quinntyne/cornerstone package
     card/                      a component feature, including its owned helpers
     calendar/
     .../                       other component features, directly under the package
@@ -25,7 +25,7 @@ src/
   dev-app/                     independent manual component harness
   e2e-app/                     deterministic acceptance-test application
   marketing/                   static brochure site and its optional WebGPU module
-design-system/                 independent @cornerstone/design-system token package
+design-system/                 independent @quinntyne/cornerstone-design-system token package
   styles/                      authoritative token sources
   tests/                       token behavior tests
   tools/                       independent token build
@@ -53,7 +53,7 @@ The root design-system is the intentional exception: it is independent of Angula
   concerns such as `platform`, `foundations`, and `forms`. A declaration consumed by
   only one component belongs beside that component instead.
 - Import internal library declarations directly from their owning files. Consumers
-  import `@cornerstone/ui`; the library must not import its own public barrel.
+  import `@quinntyne/cornerstone`; the library must not import its own public barrel.
 - Apps depend on the library. The library imports no app code, fixture data, routes,
   storage adapters, or documentation metadata. Apps never import one another.
 - Library-owned UI services such as dialogs, themes, and announcements remain in
@@ -73,10 +73,10 @@ The root design-system is the intentional exception: it is independent of Angula
   replaces it in `dist/cornerstone` with the authoritative source. Use
   `npm run build:library` or `npm run watch`, which perform this packaging step;
   a bare `ng build cornerstone` does not produce the final distributable.
-- Keep existing `@cornerstone/ui/styles/theme`, `tokens`, and `compat` imports working,
+- Keep existing `@quinntyne/cornerstone/styles/theme`, `tokens`, and `compat` imports working,
   with and without `.scss`. Consumers of the UI package need no separate token install.
-- The token package also exposes `@cornerstone/design-system/tokens.css` and
-  `@cornerstone/design-system/tokens.scss`. Component theme rules and legacy migration
+- The token package also exposes `@quinntyne/cornerstone-design-system/tokens.css` and
+  `@quinntyne/cornerstone-design-system/tokens.scss`. Component theme rules and legacy migration
   styles remain owned by the UI package.
 - Preserve public TypeScript names, compatibility aliases, and `cs-` selectors during
   structural changes. Do not add another package entry point just to mirror a folder.
@@ -127,6 +127,12 @@ top-level declarations, inline component resources, missing component resources,
 that do not match the declared type.
 
 ## Commands and verification
+
+Release automation lives in `tools/release/`; its policy and recovery procedure are
+in [`docs/npm-releases.md`](docs/npm-releases.md). Both npm packages publish together
+after shared CI validation on every push to `main`, including documentation changes.
+Keep source package versions unchanged during releases. Never remove an unfinished
+release record, overwrite reserved tarballs, or bypass validation to publish.
 
 - `npm start` / `npm run start:docs`: documentation on port 5173.
 - `npm run start:marketing`: marketing on port 5174.

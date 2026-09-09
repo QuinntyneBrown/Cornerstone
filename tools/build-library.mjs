@@ -12,7 +12,7 @@ const packager = ngPackagr()
 
 function packageTokens() {
   copyFileSync(source, target);
-  console.log('Packaged authoritative tokens with @cornerstone/ui.');
+  console.log('Packaged authoritative tokens with @quinntyne/cornerstone.');
 }
 
 if (watching) {

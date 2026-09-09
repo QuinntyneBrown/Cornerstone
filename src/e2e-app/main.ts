@@ -1,7 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { provideCsTheme } from '@cornerstone/ui';
+import { provideCsTheme } from '@quinntyne/cornerstone';
 import { FixtureAppComponent } from './app/fixture-app.component';
 import { ComponentFixtureComponent } from './app/component-fixture.component';
 import './styles.scss';

@@ -37,6 +37,6 @@ export class CatalogData {
 
   static componentDescription(component: ApiEntry): string {
     const label = component.label ?? component.name;
-    return `${label} is the public ${component.selector} component from @cornerstone/ui. Explore its live behavior, change its inputs, inspect emitted events, and copy a complete working example.`;
+    return `${label} is the public ${component.selector} component from @quinntyne/cornerstone. Explore its live behavior, change its inputs, inspect emitted events, and copy a complete working example.`;
   }
 }

@@ -33,7 +33,10 @@
     "build:tokens": "npm --prefix design-system run build",
     "test:tokens": "npm --prefix design-system test",
     "verify:consumer": "node tools/verify-consumer.mjs",
-    "typecheck:e2e": "tsc -p e2e/tsconfig.json"
+    "typecheck:e2e": "tsc -p e2e/tsconfig.json",
+    "test:release": "node --test tools/release/*.test.mjs",
+    "release:dry-run": "node tools/release/run.mjs --dry-run",
+    "release:publish": "node tools/release/run.mjs"
   },
   "private": true,
   "packageManager": "npm@10.9.4",
@@ -58,12 +61,6 @@
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.61.1",
     "@schematics/angular": "^21.2.19",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^13.0.1",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^12.0.9",
-    "@semantic-release/npm": "^13.1.5",
-    "@semantic-release/release-notes-generator": "^14.1.1",
     "@types/node": "^22.20.1",
     "@vitest/coverage-v8": "^4.1.10",
     "angular-eslint": "^21.4.0",
@@ -73,7 +70,6 @@
     "ng-packagr": "^21.2.0",
     "prettier": "^3.8.1",
     "sass": "1.97.3",
-    "semantic-release": "^25.0.8",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.64.0",
     "vitest": "^4.0.8"

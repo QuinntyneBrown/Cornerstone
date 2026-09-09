@@ -2,7 +2,7 @@
 
 ## Overview
 
-Cornerstone is the Angular user-interface library published as `@cornerstone/ui`.
+Cornerstone is the Angular user-interface library published as `@quinntyne/cornerstone`.
 It supplies the components that the Liturgy and Word Up applications compose
 their screens from, and it carries the FaithTech visual language that makes those
 screens look like one product family.
@@ -37,7 +37,7 @@ a small Angular runtime.
 - **`theme.scss`** — the published stylesheet entry point. It declares the token
   set as CSS custom properties on `:root` and `.cs-theme-light`, and the dark
   resolution on `.cs-theme-dark`. An application loads it through the
-  `@cornerstone/ui/styles/theme.scss` export subpath.
+  `@quinntyne/cornerstone/styles/theme.scss` export subpath.
 - **`_tokens.scss`** — the token declarations themselves, under the `--cs-`
   prefix. The set covers the ink scale, `--cs-paper`, the sand and grey scales,
   the FaithTech accent colours (`--cs-lime`, `--cs-sky`, `--cs-teal`,

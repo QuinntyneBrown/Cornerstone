@@ -40,7 +40,7 @@ release -> npm : Publish the minor release carrying the deprecation notice
 maintainer -> collection : Add a rule keyed to the major release that removes the symbol per L2-184
 release -> npm : Publish the major release with the migration collection
 
-dev -> cli : Run ng update @cornerstone/ui
+dev -> cli : Run ng update @quinntyne/cornerstone
 cli -> npm : Resolve the installed and target versions
 npm --> cli : Version pair and ng-update.migrations path
 cli -> collection : Request the rules between the two versions

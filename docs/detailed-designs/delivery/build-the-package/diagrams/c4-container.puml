@@ -6,7 +6,7 @@ title Containers — Build the package
 Person(maintainer, "Library maintainer", "Runs npm run build:library")
 
 System_Boundary(cornerstone, "Cornerstone workspace") {
-  Container(lib, "cornerstone library", "Angular library, @angular/build:ng-packagr", "Source of @cornerstone/ui; entry file src/public-api.ts")
+  Container(lib, "cornerstone library", "Angular library, @angular/build:ng-packagr", "Source of @quinntyne/cornerstone; entry file src/public-api.ts")
   Container(theme, "Theme stylesheet", "Sass assets under src/styles", "Exported through the styles subpaths of the package")
   Container(docs, "design-system docs app", "Angular application", "Consumes the library from the workspace and documents its surface")
   Container(site, "marketing site", "Angular application", "Consumes the library from the workspace")
@@ -27,6 +27,6 @@ Rel(docs, lib, "Imports the public surface of")
 Rel(site, lib, "Imports the public surface of")
 Rel(verify, artifact, "Builds and inspects")
 Rel(verify, npm, "Publishes the packed tarball to")
-Rel(app, npm, "Installs @cornerstone/ui from")
+Rel(app, npm, "Installs @quinntyne/cornerstone from")
 Rel(app, artifact, "Resolves entry points and style subpaths from")
 @enduml

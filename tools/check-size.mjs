@@ -7,7 +7,7 @@ import { gzipSync } from 'node:zlib';
 const root = resolve(import.meta.dirname, '..');
 const budgets = JSON.parse(readFileSync(resolve(root, 'perf/size-budgets.json'), 'utf8'));
 const measure = (path) => gzipSync(readFileSync(resolve(root, path))).byteLength / 1024;
-const fesm = measure('dist/cornerstone/fesm2022/cornerstone-ui.mjs');
+const fesm = measure('dist/cornerstone/fesm2022/quinntyne-cornerstone.mjs');
 const theme = measure('dist/cornerstone/styles/theme.scss');
 
 assert.ok(

@@ -22,7 +22,7 @@ System_Boundary(app, "Consuming application") {
 System_Ext(cdk, "Angular CDK", "BreakpointObserver")
 
 Rel(dev, styles, "Writes breakpoint mixin calls in")
-Rel(styles, bp, "Imports the mixins from", "@cornerstone/ui/styles/breakpoints")
+Rel(styles, bp, "Imports the mixins from", "@quinntyne/cornerstone/styles/breakpoints")
 Rel(page, lib, "Composes responsive components from")
 Rel(lib, adapters, "Reads the active viewport class from")
 Rel(adapters, bp, "Builds its media queries from")

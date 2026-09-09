@@ -2,7 +2,7 @@
 
 ## Overview
 
-Cornerstone is the Angular user-interface library published as `@cornerstone/ui`.
+Cornerstone is the Angular user-interface library published as `@quinntyne/cornerstone`.
 It supplies the components that the Liturgy and Word Up applications compose
 their screens from. Those screens are read on a phone in a church hall, on a
 tablet in a mentoring session, and on a desktop monitor in an administrator's
@@ -48,7 +48,7 @@ service, two behaviour directives, and a test harness.
 - **`CsViewportClass`** — union type of the five class identifiers:
   `'xs' | 'sm' | 'md' | 'lg' | 'xl'`.
 - **`_breakpoints.scss`** — the Sass partial an application imports through the
-  `@cornerstone/ui/styles/breakpoints` export subpath. It publishes the
+  `@quinntyne/cornerstone/styles/breakpoints` export subpath. It publishes the
   `cs-from($class)`, `cs-until($class)`, and `cs-between($from, $to)` mixins,
   each emitting a media query at the same threshold the constant declares, and it
   publishes the thresholds as CSS custom properties under `--cs-bp-`.

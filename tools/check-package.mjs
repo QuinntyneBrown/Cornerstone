@@ -14,7 +14,7 @@ const [pack] = JSON.parse(output);
 const files = new Set(pack.files.map((file) => file.path.replaceAll('\\', '/')));
 const manifest = JSON.parse(readFileSync(resolve(root, 'dist/cornerstone/package.json'), 'utf8'));
 
-assert.equal(manifest.name, '@cornerstone/ui');
+assert.equal(manifest.name, '@quinntyne/cornerstone');
 assert.deepEqual(Object.keys(manifest.dependencies ?? {}), ['tslib']);
 for (const peer of [
   '@angular/cdk',
@@ -28,7 +28,7 @@ for (const style of ['theme.scss', 'tokens.scss', 'compat.scss']) {
   assert.ok(files.has(`styles/${style}`), `Missing packaged stylesheet styles/${style}`);
   assert.ok(manifest.exports?.[`./styles/${style}`], `Missing export for styles/${style}`);
 }
-assert.ok(files.has('fesm2022/cornerstone-ui.mjs'));
-assert.ok(files.has('types/cornerstone-ui.d.ts'));
+assert.ok(files.has('fesm2022/quinntyne-cornerstone.mjs'));
+assert.ok(files.has('types/quinntyne-cornerstone.d.ts'));
 assert.ok(![...files].some((file) => file.endsWith('.spec.ts')));
 console.log(`Package contract verified: ${pack.entryCount} files, ${pack.size} bytes packed.`);

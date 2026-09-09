@@ -2,7 +2,7 @@
 
 ## Overview
 
-Cornerstone is the Angular user-interface library published as `@cornerstone/ui`.
+Cornerstone is the Angular user-interface library published as `@quinntyne/cornerstone`.
 It supplies the components that the Liturgy and Word Up applications compose
 their screens from. Those applications import from one package root and expect
 every symbol behind it to behave the same way, whether it is a button directive
@@ -88,7 +88,7 @@ directives, and a build-time surface report. It renders nothing on its own.
   presentation component.
 
 The library ships no `NgModule` for public consumption. Every component and
-directive is standalone and importable from `@cornerstone/ui` directly.
+directive is standalone and importable from `@quinntyne/cornerstone` directly.
 
 The exact character budget at which `FieldComponent` switches its character
 count from polite to assertive announcement is `<TO SUPPLY>`.

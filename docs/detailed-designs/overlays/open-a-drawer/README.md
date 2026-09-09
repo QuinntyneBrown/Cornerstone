@@ -2,7 +2,7 @@
 
 ## Overview
 
-Cornerstone is the Angular user-interface library published as `@cornerstone/ui`.
+Cornerstone is the Angular user-interface library published as `@quinntyne/cornerstone`.
 It supplies the components that the Liturgy and Word Up applications compose their
 screens from. This feature covers the drawer: the panel that slides in from an edge
 of the viewport to hold navigation, filters, or a secondary editor beside the work

@@ -20,7 +20,7 @@ box "Developer workstation" #E0F2FE
   participant "angular.json styles array" as anglejson
 end box
 box "Backend — npm registry" #FFF4E5
-  participant "@cornerstone/ui tarball" as tarball
+  participant "@quinntyne/cornerstone tarball" as tarball
 end box
 box "Backend — Build and verification" #ECFDF3
   participant "Node module resolver" as resolver
@@ -28,10 +28,10 @@ box "Backend — Build and verification" #ECFDF3
   participant "Application bundle" as bundle
 end box
 
-dev -> app : Run npm install @cornerstone/ui
+dev -> app : Run npm install @quinntyne/cornerstone
 app -> tarball : Request the published version
 tarball --> app : Package contents and built manifest
-dev -> anglejson : Add @cornerstone/ui/styles/theme.scss to the styles array
+dev -> anglejson : Add @quinntyne/cornerstone/styles/theme.scss to the styles array
 anglejson -> resolver : Request the subpath
 
 alt Subpath is declared in the exports map

@@ -18,8 +18,8 @@ function ngAdd(options = {}) {
 
     const styles = Array.isArray(build.options.styles) ? build.options.styles : [];
     for (const style of [
-      '@cornerstone/ui/styles/theme.scss',
-      ...(options.compatibilityStyles ? ['@cornerstone/ui/styles/compat.scss'] : []),
+      '@quinntyne/cornerstone/styles/theme.scss',
+      ...(options.compatibilityStyles ? ['@quinntyne/cornerstone/styles/compat.scss'] : []),
     ]) {
       if (!styles.some((entry) => (typeof entry === 'string' ? entry : entry.input) === style))
         styles.push(style);

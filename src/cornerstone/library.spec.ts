@@ -8,7 +8,7 @@ import { TabsHostComponent } from './testing/tabs-host/tabs-host.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuizView } from './quiz/quiz-view.interface';
 
-describe('@cornerstone/ui contract', () => {
+describe('@quinntyne/cornerstone contract', () => {
   it('applies typed button appearances', async () => {
     await TestBed.configureTestingModule({ imports: [ButtonHostComponent] }).compileComponents();
     const fixture = TestBed.createComponent(ButtonHostComponent);

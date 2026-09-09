@@ -1,8 +1,10 @@
+> Historical design: the current implementation and recovery contract are documented in [npm releases](../../../npm-releases.md). It publishes both packages on every passing main push, including documentation, and uses durable draft records instead of generated main commits or next releases.
+
 # Publish to npm
 
 ## Overview
 
-Cornerstone is the Angular user-interface library published as `@cornerstone/ui`.
+Cornerstone is the Angular user-interface library published as `@quinntyne/cornerstone`.
 Liturgy and Word Up install it from the public npm registry, so a change reaches
 those applications only after a release. This feature defines the release: what
 triggers it, how the version is derived, what is published, and what evidence the
@@ -110,7 +112,7 @@ refines a level-1 (L1) requirement, cited by identifier.
 |-------|--------------|-------------|
 | `L2-174` | `L1-022` | Every pull request title and every commit subject reaching `main` shall follow the Conventional Commits specification, each accepted type shall be documented beside the bump it produces, and a `!` marker or `BREAKING CHANGE:` footer shall derive a major bump. |
 | `L2-175` | `L1-022` | The released version shall be derived from the conventional commits since the previous release tag, shall be identical across two runs over the same range, and shall produce no release when only non-releasable types are present. |
-| `L2-176` | `L1-022` | A GitHub Actions workflow shall publish `@cornerstone/ui` to the public npm registry on every push to `main` after the full verification suite passes, shall publish the artifact built in that run from that commit, and shall report a dry-run version on a pull request without publishing. |
+| `L2-176` | `L1-022` | A GitHub Actions workflow shall publish `@quinntyne/cornerstone` to the public npm registry on every push to `main` after the full verification suite passes, shall publish the artifact built in that run from that commit, and shall report a dry-run version on a pull request without publishing. |
 | `L2-177` | `L1-022` | The release shall skip publishing and exit successfully when the derived version already exists, shall serialize concurrent runs through a concurrency group that cancels no run mid-publish, and shall create no tag or release for a version that failed to publish. |
 | `L2-178` | `L1-022` | Every published version shall produce an annotated `v<version>` tag, a `CHANGELOG.md` section grouping the included commits by type with links, and a GitHub release carrying that section, and the changelog write-back shall not retrigger the workflow. |
 | `L2-179` | `L1-022` | The workflow shall publish stable releases to the `latest` distribution tag and prereleases to the `next` tag, leaving `latest` unchanged so that a plain install resolves the most recent stable version. |

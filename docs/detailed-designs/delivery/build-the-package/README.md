@@ -2,7 +2,7 @@
 
 ## Overview
 
-Cornerstone is the Angular user-interface library published as `@cornerstone/ui`.
+Cornerstone is the Angular user-interface library published as `@quinntyne/cornerstone`.
 It supplies the components that the Liturgy and Word Up applications compose
 their screens from. Before an application can consume a component, the workspace
 turns library source into an artifact that the npm registry distributes and that
@@ -30,7 +30,7 @@ library is published. The two applications consume it from the workspace during
 development and reinstall it from the registry after release.
 
 The library project declares the package name `@faithtech/cornerstone` today.
-L2-001 requires `@cornerstone/ui`, so the rename of the manifest, the
+L2-001 requires `@quinntyne/cornerstone`, so the rename of the manifest, the
 `public-api.ts` banner, and every workspace reference falls inside this feature.
 
 ## Description
@@ -41,7 +41,7 @@ the declaration and source-map output of the Angular compiler.
 
 - **`src/cornerstone/package.json`** — the source manifest ng-packagr reads
   and rewrites into the built manifest. It shall declare `name` as
-  `@cornerstone/ui`, a `license`, a `repository`, a `homepage`, a `bugs` URL,
+  `@quinntyne/cornerstone`, a `license`, a `repository`, a `homepage`, a `bugs` URL,
   `keywords`, and `sideEffects: false` (L2-001). The current file declares
   `name`, `license`, `keywords`, and `sideEffects`; `repository`, `homepage`, and
   `bugs` are added by this design.
@@ -70,7 +70,7 @@ the declaration and source-map output of the Angular compiler.
   `./styles/compat.scss`, and `./styles/tokens.scss` (L2-003). Each stylesheet
   subpath declares a `sass` condition and a `default` condition so that the Sass
   compiler and a plain CSS pipeline both resolve it. Each also declares an
-  extensionless alias so that `@use '@cornerstone/ui/styles/theme' as *;`
+  extensionless alias so that `@use '@quinntyne/cornerstone/styles/theme' as *;`
   resolves. The current file exports two stylesheet subpaths and no
   extensionless alias; `./styles/tokens.scss` and the aliases are added by this
   design. `src/styles/_tokens.scss` is a Sass partial today, so the design adds
@@ -99,7 +99,7 @@ refines a level-1 (L1) requirement, cited by identifier.
 
 | L2 ID | Refines (L1) | Requirement |
 |-------|--------------|-------------|
-| `L2-001` | `L1-001` | The library shall build to a publishable Angular Package Format artifact named `@cornerstone/ui`, and its manifest shall declare `license`, `repository`, `homepage`, `bugs`, `keywords`, and `sideEffects: false`. |
+| `L2-001` | `L1-001` | The library shall build to a publishable Angular Package Format artifact named `@quinntyne/cornerstone`, and its manifest shall declare `license`, `repository`, `homepage`, `bugs`, `keywords`, and `sideEffects: false`. |
 | `L2-002` | `L1-001` | The package shall declare `@angular/core`, `@angular/common`, `@angular/cdk`, `@angular/forms`, and `@angular/router` as peer dependencies with permissive ranges, shall declare `tslib` as its only runtime dependency, and shall not bundle any Angular package. |
 | `L2-003` | `L1-001` | The package shall export its theme, compatibility, and token stylesheets through declared `exports` subpaths resolvable by both the Sass compiler and a plain CSS pipeline, and those subpaths shall resolve from a published tarball. |
 | `L2-004` | `L1-001` | The published package shall ship complete, strict-mode-clean TypeScript declarations and source maps for every public symbol. |
@@ -151,7 +151,7 @@ that `npm pack --dry-run` reports.
 ### Behaviour — resolve a stylesheet subpath from the tarball
 
 A consuming application installs the published package and adds
-`@cornerstone/ui/styles/theme.scss` to its build. Node resolves the subpath
+`@quinntyne/cornerstone/styles/theme.scss` to its build. Node resolves the subpath
 through the `exports` map, and an undeclared subpath fails with
 `ERR_PACKAGE_PATH_NOT_EXPORTED` rather than resolving to a private file.
 

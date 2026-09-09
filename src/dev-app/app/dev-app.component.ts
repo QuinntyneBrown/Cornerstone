@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { BadgeComponent, CardComponent, CsButtonDirective } from '@cornerstone/ui';
+import { BadgeComponent, CardComponent, CsButtonDirective } from '@quinntyne/cornerstone';
 
 @Component({
   selector: 'cs-dev-app',

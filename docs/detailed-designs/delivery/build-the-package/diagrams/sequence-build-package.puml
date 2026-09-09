@@ -39,7 +39,7 @@ ngpkg -> tsc : Compile under tsconfig.lib.prod.json
 tsc -> dist : Emit FESM2022 bundles with Angular imports external per L2-002
 tsc -> dist : Emit .d.ts declarations and .js.map source maps per L2-004
 ngpkg -> dist : Copy src/styles assets to styles/
-ngpkg -> dist : Rewrite the manifest as @cornerstone/ui per L2-001
+ngpkg -> dist : Rewrite the manifest as @quinntyne/cornerstone per L2-001
 ngpkg -> dist : Carry the exports subpaths into the built manifest per L2-003
 dist --> ngpkg : Artifact file list
 ngpkg --> script : Build result

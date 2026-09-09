@@ -1,6 +1,6 @@
 # Cornerstone
 
-FaithTech's `@cornerstone/ui` Angular CDK component library: accessible behavior, a disciplined FaithTech visual
+FaithTech's `@quinntyne/cornerstone` Angular CDK component library: accessible behavior, a disciplined FaithTech visual
 language, and a practical migration bridge for [Liturgy](https://github.com/QuinntyneBrown/Liturgy)
 and [Word Up](https://github.com/QuinntyneBrown/word-up).
 
@@ -10,12 +10,12 @@ Explore the library at the
 ## Workspace
 
 ```text
-src/cornerstone/      @cornerstone/ui library, with direct component feature folders
+src/cornerstone/      @quinntyne/cornerstone library, with direct component feature folders
 src/docs-app/         published interactive documentation (Angular)
 src/dev-app/          independent manual component harness
 src/e2e-app/          deterministic acceptance-test application
 src/marketing/        static HTML/CSS brochure and optional WebGPU enhancement
-design-system/        independent @cornerstone/design-system token package
+design-system/        independent @quinntyne/cornerstone-design-system token package
 e2e/                  browser page objects and specifications
 tools/                repository builds, generation, and verification
 docs/                 requirements, API inventory, and detailed designs
@@ -63,20 +63,23 @@ final packaging step. The token package builds independently with `npm run build
 
 ## Install in an Angular application
 
+Both packages publish together on every passing push to `main`. See
+[`docs/npm-releases.md`](docs/npm-releases.md) for versioning, setup, and recovery.
+
 ```bash
-npm install @cornerstone/ui @angular/cdk
+npm install @quinntyne/cornerstone @angular/cdk
 ```
 
 Add the base theme to the application's `angular.json` styles array:
 
 ```json
-"styles": ["@cornerstone/ui/styles/theme.scss", "src/styles.scss"]
+"styles": ["@quinntyne/cornerstone/styles/theme.scss", "src/styles.scss"]
 ```
 
 Then import only the standalone pieces a screen uses:
 
 ```ts
-import { CsButtonDirective, CardComponent } from '@cornerstone/ui';
+import { CsButtonDirective, CardComponent } from '@quinntyne/cornerstone';
 
 @Component({
   imports: [CsButtonDirective, CardComponent],
@@ -90,8 +93,8 @@ the theme:
 
 ```json
 "styles": [
-  "@cornerstone/ui/styles/theme.scss",
-  "@cornerstone/ui/styles/compat.scss",
+  "@quinntyne/cornerstone/styles/theme.scss",
+  "@quinntyne/cornerstone/styles/compat.scss",
   "src/styles.scss"
 ]
 ```

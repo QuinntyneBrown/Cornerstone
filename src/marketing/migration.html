@@ -6,7 +6,7 @@
     <title>Migration guide — Cornerstone</title>
     <meta
       name="description"
-      content="How an existing Liturgy or Word Up screen moves onto @cornerstone/ui, using a compatibility stylesheet that keeps the old class vocabulary rendering meanwhile."
+      content="How an existing Liturgy or Word Up screen moves onto @quinntyne/cornerstone, using a compatibility stylesheet that keeps the old class vocabulary rendering meanwhile."
     />
     <meta name="theme-color" content="#0d0d07" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -95,7 +95,7 @@
                   The schematic writes the theme entry for you. Adding it by hand works too.
                 </p>
               </div>
-              <pre tabindex="0"><code><s>$</s> ng add <b>@cornerstone/ui</b></code></pre>
+              <pre tabindex="0"><code><s>$</s> ng add <b>@quinntyne/cornerstone</b></code></pre>
             </li>
             <li class="step reveal">
               <p class="step__ord">02</p>
@@ -107,8 +107,8 @@
                 </p>
               </div>
               <pre tabindex="0"><code>"styles": [
-  "@cornerstone/ui/styles/theme.scss",
-  <i>"@cornerstone/ui/styles/compat.scss"</i>,
+  "@quinntyne/cornerstone/styles/theme.scss",
+  <i>"@quinntyne/cornerstone/styles/compat.scss"</i>,
   "src/styles.scss"
 ]</code></pre>
             </li>

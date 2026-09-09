@@ -45,13 +45,13 @@ npm --> release : Published prerelease and attestation identifier
 release -> release : Record the version and the distribution tag in the job summary per L2-181
 release --> maintainer : Report the prerelease
 
-dev -> app : Run npm install @cornerstone/ui
+dev -> app : Run npm install @quinntyne/cornerstone
 app -> tags : Resolve the latest distribution tag
 tags --> app : Most recent stable version per L2-179
 app --> dev : Stable version installed with no prerelease selected
 
 opt Developer opts into the prerelease
-  dev -> app : Run npm install @cornerstone/ui@next
+  dev -> app : Run npm install @quinntyne/cornerstone@next
   app -> tags : Resolve the next distribution tag
   tags --> app : Prerelease version
   app --> dev : Prerelease installed without changing latest

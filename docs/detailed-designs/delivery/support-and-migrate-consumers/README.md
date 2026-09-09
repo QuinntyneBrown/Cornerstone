@@ -2,7 +2,7 @@
 
 ## Overview
 
-Cornerstone is the Angular user-interface library published as `@cornerstone/ui`.
+Cornerstone is the Angular user-interface library published as `@quinntyne/cornerstone`.
 Liturgy and Word Up install it, upgrade it, and eventually meet a release that
 removes something they depend on. This feature covers the promises the library
 makes about which versions it works with, the notice it gives before removing a
@@ -74,7 +74,7 @@ collections, a policy document, and the checks that keep the three consistent.
   location they cannot rewrite rather than leaving it silently unchanged.
 - **`ng add` schematic** — `schematics/ng-add/`, referenced from the package
   manifest's `schematics` field. It installs `@angular/cdk` at the matrix
-  version, appends `@cornerstone/ui/styles/theme.scss` to the target project's
+  version, appends `@quinntyne/cornerstone/styles/theme.scss` to the target project's
   `styles` array in `angular.json` ahead of the application stylesheet, adds
   `provideCsTheme()` to the application config, and offers the optional
   compatibility stylesheet that `bridge-legacy-markup` defines (L2-185, L2-186).
@@ -143,7 +143,7 @@ carries the prompts the setup schematic accepts.
 
 ### Behaviour — configure an application with `ng add`
 
-A developer runs `ng add @cornerstone/ui`. The schematic checks the workspace
+A developer runs `ng add @quinntyne/cornerstone`. The schematic checks the workspace
 against the support matrix, then edits the styles array, the application config,
 and the dependency set.
 

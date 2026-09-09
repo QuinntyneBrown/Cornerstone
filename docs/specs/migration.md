@@ -1,19 +1,19 @@
 # Cornerstone migration guide
 
 The compatibility stylesheet preserves the audited Liturgy and Word Up class vocabularies while a
-consumer moves one screen at a time to `@cornerstone/ui`. It reproduces presentation only; use the
+consumer moves one screen at a time to `@quinntyne/cornerstone`. It reproduces presentation only; use the
 Angular APIs to gain keyboard behavior, ARIA relationships, typed intent outputs, and forms support.
 
 ## Setup
 
-Run `ng add @cornerstone/ui` or add the theme manually. Existing applications can opt into the
+Run `ng add @quinntyne/cornerstone` or add the theme manually. Existing applications can opt into the
 bridge after the theme:
 
 ```json
 {
   "styles": [
-    "@cornerstone/ui/styles/theme.scss",
-    "@cornerstone/ui/styles/compat.scss",
+    "@quinntyne/cornerstone/styles/theme.scss",
+    "@quinntyne/cornerstone/styles/compat.scss",
     "src/styles.scss"
   ]
 }

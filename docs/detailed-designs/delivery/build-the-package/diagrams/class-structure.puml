@@ -14,7 +14,7 @@ skinparam class {
 title Class structure — Build the package
 
 class CsPackageManifest {
-  +name: '@cornerstone/ui'
+  +name: '@quinntyne/cornerstone'
   +version: string
   +description: string
   +license: string

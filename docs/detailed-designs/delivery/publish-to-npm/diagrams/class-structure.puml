@@ -74,7 +74,7 @@ class CsReleasePlan {
 }
 
 class CsIdempotencyProbe {
-  +packageName: '@cornerstone/ui'
+  +packageName: '@quinntyne/cornerstone'
   +version: string
   +existsOnRegistry(): boolean
   +reason: string

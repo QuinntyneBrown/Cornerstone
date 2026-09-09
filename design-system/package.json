@@ -1,5 +1,5 @@
 {
-  "name": "@cornerstone/design-system",
+  "name": "@quinntyne/cornerstone-design-system",
   "version": "0.1.0",
   "description": "Cornerstone design tokens, independent of Angular and the component library.",
   "license": "MIT",
@@ -23,5 +23,14 @@
   },
   "devDependencies": {
     "sass": "1.97.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuinntyneBrown/Cornerstone.git",
+    "directory": "design-system"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

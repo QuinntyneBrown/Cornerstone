@@ -8,7 +8,7 @@ const { HostTree } = require('@angular-devkit/schematics');
 const { SchematicTestRunner } = require('@angular-devkit/schematics/testing');
 
 const collection = resolve(import.meta.dirname, '../src/cornerstone/schematics/collection.json');
-const runner = new SchematicTestRunner('@cornerstone/ui', collection);
+const runner = new SchematicTestRunner('@quinntyne/cornerstone', collection);
 const tree = new HostTree();
 tree.create(
   '/angular.json',
@@ -27,8 +27,8 @@ const result = await runner.runSchematic(
 const workspace = JSON.parse(result.readContent('/angular.json'));
 const manifest = JSON.parse(result.readContent('/package.json'));
 assert.deepEqual(workspace.projects.demo.architect.build.options.styles, [
-  '@cornerstone/ui/styles/theme.scss',
-  '@cornerstone/ui/styles/compat.scss',
+  '@quinntyne/cornerstone/styles/theme.scss',
+  '@quinntyne/cornerstone/styles/compat.scss',
 ]);
 assert.equal(manifest.dependencies['@angular/cdk'], '^21.0.0');
 
