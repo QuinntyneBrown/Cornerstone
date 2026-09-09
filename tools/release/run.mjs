@@ -191,7 +191,12 @@ if (dryRun) {
         /```json\n[\s\S]*?\n```/,
         () => `\`\`\`json\n${JSON.stringify(record, null, 2)}\n\`\`\``,
       );
-      existing = api(`repos/${repository}/releases/${existing.id}`, { body }, 'PATCH');
+      existing = api(
+        `repos/${repository}/releases/${existing.id}`,
+        { body, tag_name: `v${version}`, target_commitish: commit },
+        'PATCH',
+      );
+      assert.equal(existing.tag_name, `v${version}`, 'GitHub changed the reserved release tag');
     },
     waitForManifest: async (name, version) => {
       console.log(`Waiting for npm to make ${name}@${version} available after scanning`);
@@ -239,15 +244,19 @@ if (dryRun) {
         });
         api(`repos/${repository}/git/refs`, { ref: `refs/tags/v${version}`, sha: tag.sha });
       }
-      api(
+      const finalized = api(
         `repos/${repository}/releases/${existing.id}`,
         {
           draft: false,
+          tag_name: `v${version}`,
+          target_commitish: commit,
           make_latest:
             !previous || compareVersions(version, previous.version) >= 0 ? 'true' : 'false',
         },
         'PATCH',
       );
+      assert.equal(finalized.tag_name, `v${version}`, 'GitHub finalized an unexpected release tag');
+      assert.equal(finalized.draft, false);
     },
   });
   console.log(
