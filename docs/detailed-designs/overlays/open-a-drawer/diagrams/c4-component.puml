@@ -6,12 +6,12 @@ title Components — Open a drawer
 Person(user, "Application user", "Opens and dismisses the panel")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(drawer, "CsDrawerComponent", "Standalone component", "Renders the anchored panel and holds the opened, position, and mode state")
-  Component(container, "CsDrawerContainerComponent", "Standalone component", "Reflows the page content beside a non-modal drawer")
-  Component(service, "CsDrawerService", "Injectable service", "Opens a drawer programmatically and returns a typed handle")
-  Component(ref, "CsDrawerRef<R, C>", "Handle object", "Carries close(result) and the closed observable")
-  Component(headerd, "CsDrawerHeaderDirective", "Attribute directive", "Lays out the title and close control and supplies aria-labelledby")
-  Component(footerd, "CsDrawerFooterDirective", "Attribute directive", "Pins the action region to the bottom edge of the panel")
+  Component(drawer, "DrawerComponent", "Standalone component", "Renders the anchored panel and holds the opened, position, and mode state")
+  Component(container, "DrawerContainerComponent", "Standalone component", "Reflows the page content beside a non-modal drawer")
+  Component(service, "DrawerService", "Injectable service", "Opens a drawer programmatically and returns a typed handle")
+  Component(ref, "DrawerRef<R, C>", "Handle object", "Carries close(result) and the closed observable")
+  Component(headerd, "DrawerHeaderDirective", "Attribute directive", "Lays out the title and close control and supplies aria-labelledby")
+  Component(footerd, "DrawerFooterDirective", "Attribute directive", "Pins the action region to the bottom edge of the panel")
 }
 
 Container_Boundary(themec, "Theme stylesheet") {

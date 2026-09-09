@@ -49,7 +49,7 @@ The feature is a vertical slice from a page's view-model input down to the
 keyboard focus of a single control. It spans four components, their item types,
 and the change types they emit.
 
-- **`CsTabGroupComponent`** (`cs-tab-group`) — the tab set. It reads
+- **`TabGroupComponent`** (`cs-tab-group`) — the tab set. It reads
   `tabs: InputSignal<readonly CsTab[]>`,
   `selectedId: ModelSignal<string>`, `lazy: InputSignal<boolean>`, and
   `overflow: InputSignal<CsTabOverflow>` (`'scroll' | 'menu'`). It emits
@@ -58,45 +58,45 @@ and the change types they emit.
   `End` keys, and skips disabled tabs. When `lazy` is set, a panel's content
   renders on first selection and stays rendered afterwards. Its states are
   `selected`, `unselected`, `disabled`, and `overflowing`.
-- **`CsTabComponent`** (`cs-tab`) — the declarative form of a single tab, for
+- **`TabComponent`** (`cs-tab`) — the declarative form of a single tab, for
   applications that supply panel content as template rather than as data. It
   reads `label: InputSignal<string>`, `badge: InputSignal<string | number | null>`,
   and `disabled: InputSignal<boolean>`, and projects its panel content.
-- **`CsSegmentedControlComponent`** (`cs-segmented-control`) — the compact
-  switcher. It reads `options: InputSignal<readonly CsSegmentOption[]>`,
+- **`SegmentedControlComponent`** (`cs-segmented-control`) — the compact
+  switcher. It reads `options: InputSignal<readonly SegmentOption[]>`,
   `value: ModelSignal<string>`, `size: InputSignal<CsSize>`, and
   `ariaLabel: InputSignal<string>`. It emits
   `valueChange` through the model. It renders a `radiogroup` with roving focus:
   one option holds `tabindex="0"`, the rest hold `tabindex="-1"`, and the arrow
   keys move both focus and selection. It implements `ControlValueAccessor` so a
   reactive form may own the value.
-- **`CsAccordionComponent`** (`cs-accordion`) — the stack. It reads
+- **`AccordionComponent`** (`cs-accordion`) — the stack. It reads
   `mode: InputSignal<CsAccordionMode>` (`'single' | 'multiple'`),
   `expandedIds: ModelSignal<readonly string[]>`, and
   `lazy: InputSignal<boolean>`. It emits
   `expandedChange` through the model. In `single` mode expanding one item
   collapses the rest.
-- **`CsAccordionItemComponent`** (`cs-accordion-item`) — one section. It reads
+- **`AccordionItemComponent`** (`cs-accordion-item`) — one section. It reads
   `itemId: InputSignal<string>`, `heading: InputSignal<string>`, and
   `disabled: InputSignal<boolean>`, and projects its body. The heading renders a
   `<button>` carrying `aria-expanded` and `aria-controls`; the arrow, `Home`, and
   `End` keys move focus between headings.
-- **`CsPaginatorComponent`** (`cs-paginator`) — the page selector. It reads
+- **`PaginatorComponent`** (`cs-paginator`) — the page selector. It reads
   `totalItems: InputSignal<number>`, `pageIndex: ModelSignal<number>`,
   `pageSize: ModelSignal<number>`,
   `pageSizeOptions: InputSignal<readonly number[]>`, and
   `compact: InputSignal<boolean>`. It emits
-  `pageChange: OutputEmitterRef<CsPageChange>`. It renders previous and next
+  `pageChange: OutputEmitterRef<PageChange>`. It renders previous and next
   controls, the page count, a page-size select, and a result summary in a live
   region so a screen reader hears the new range after each change. In `compact`
   mode it renders the previous and next controls and the position summary only.
 - **`CsTab`** — configuration type holding an identifier, a label, an optional
   badge, an optional disabled flag, and an optional `routerLink` value.
-- **`CsSegmentOption`** — configuration type holding a value, a label, an
+- **`SegmentOption`** — configuration type holding a value, a label, an
   optional icon name, and an optional disabled flag.
 - **`CsSelectionChange`** — output type holding the previous identifier, the new
   identifier, and whether the change came from a pointer or the keyboard.
-- **`CsPageChange`** — output type holding the page index, the page size, and the
+- **`PageChange`** — output type holding the page index, the page size, and the
   total item count.
 
 Overflow in the tab group has two resolutions. Under `scroll` the tab list scrolls

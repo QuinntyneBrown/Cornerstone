@@ -19,8 +19,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone icon runtime" #D1FADF
-  participant "CsIconRegistry" as registry
-  participant "CsIconComponent" as icon
+  participant "IconRegistry" as registry
+  participant "IconComponent" as icon
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Icon styles" as styles

@@ -6,13 +6,13 @@ title Components — Authenticate a user
 Person(user, "Application user", "Reads the screen and submits credentials")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(layout, "CsAuthLayoutComponent", "Standalone component", "Owns the centered and split page arrangement and the panel tone")
-  Component(card, "CsAuthCardComponent", "Standalone component", "Renders the h1 title, lede, error alert, form region, and alternate action")
-  Component(brandd, "CsAuthBrandDirective", "Attribute directive", "Sizes and positions the projected brand lockup per variant")
-  Component(paneld, "CsAuthPanelDirective", "Attribute directive", "Applies the panel tone and constrained measure")
-  Component(altd, "CsAuthAlternateDirective", "Attribute directive", "Lays out the links beneath the form")
-  Component(footerd, "CsAuthFooterDirective", "Attribute directive", "Renders the legal and support links at the page foot")
-  Component(lockup, "CsBrandLockupComponent", "Standalone component", "Supplies the mark and wordmark per L2-148")
+  Component(layout, "AuthLayoutComponent", "Standalone component", "Owns the centered and split page arrangement and the panel tone")
+  Component(card, "AuthCardComponent", "Standalone component", "Renders the h1 title, lede, error alert, form region, and alternate action")
+  Component(brandd, "AuthBrandDirective", "Attribute directive", "Sizes and positions the projected brand lockup per variant")
+  Component(paneld, "AuthPanelDirective", "Attribute directive", "Applies the panel tone and constrained measure")
+  Component(altd, "AuthAlternateDirective", "Attribute directive", "Lays out the links beneath the form")
+  Component(footerd, "AuthFooterDirective", "Attribute directive", "Renders the legal and support links at the page foot")
+  Component(lockup, "BrandLockupComponent", "Standalone component", "Supplies the mark and wordmark per L2-148")
 }
 
 Container_Boundary(themec, "Theme stylesheet") {

@@ -13,7 +13,7 @@ skinparam class {
 ' --------------------------
 title Class structure — Browse tabular data
 
-enum CsTableDensity {
+enum TableDensity {
   compact
   comfortable
 }
@@ -30,31 +30,31 @@ enum CsSortDirection {
   none
 }
 
-class CsSortChange {
+class SortChange {
   +column: string
   +direction: CsSortDirection
 }
 
-class CsTableDirective {
-  +density: InputSignal<CsTableDensity>
+class TableDirective {
+  +density: InputSignal<TableDensity>
   +stickyHeader: InputSignal<boolean>
   +selectionMode: InputSignal<CsTableSelectionMode>
   +selection: ModelSignal<ReadonlySet<string>>
-  +sortChange: OutputEmitterRef<CsSortChange>
+  +sortChange: OutputEmitterRef<SortChange>
   +selectionChange: OutputEmitterRef<ReadonlySet<string>>
   +toggleRow(key: string): void
   +toggleAll(): void
-  -activeSort: Signal<CsSortChange | null>
+  -activeSort: Signal<SortChange | null>
 }
 
-class CsTableSortHeaderDirective {
+class TableSortHeaderDirective {
   +csSortHeader: InputSignal<string>
   +disabled: InputSignal<boolean>
   -ariaSort: Signal<CsSortDirection>
   -activate(): void
 }
 
-class CsTableRowDirective {
+class TableRowDirective {
   +csRow: InputSignal<string>
   +disabled: InputSignal<boolean>
   -selected: Signal<boolean>
@@ -65,7 +65,7 @@ class CsTableSelectAllDirective {
   -indeterminate: Signal<boolean>
 }
 
-class CsTableContainerComponent {
+class TableContainerComponent {
   +caption: InputSignal<string>
   +captionVisible: InputSignal<boolean>
   +maxHeight: InputSignal<string | null>
@@ -73,7 +73,7 @@ class CsTableContainerComponent {
   +retry: OutputEmitterRef<void>
 }
 
-class CsResponsiveTableDirective {
+class ResponsiveTableDirective {
   +breakpoint: InputSignal<string>
   +primaryColumn: InputSignal<string | null>
   -reflowed: Signal<boolean>
@@ -82,30 +82,30 @@ class CsResponsiveTableDirective {
   -applyCellLabels(headers: string[]): void
 }
 
-class CsDataToolbarComponent {
+class DataToolbarComponent {
   +searchTerm: ModelSignal<string>
   +searchPlaceholder: InputSignal<string>
-  +filters: InputSignal<CsFilterChip[]>
+  +filters: InputSignal<FilterChip[]>
   +resultCount: InputSignal<number | null>
   +resultLabel: InputSignal<string>
   +collapsible: InputSignal<boolean>
   +state: InputSignal<CsDataState<void>>
-  +filterRemoved: OutputEmitterRef<CsFilterChip>
+  +filterRemoved: OutputEmitterRef<FilterChip>
   +filtersCleared: OutputEmitterRef<void>
   +viewChange: OutputEmitterRef<string>
-  +exportRequested: OutputEmitterRef<CsExportRequest>
+  +exportRequested: OutputEmitterRef<ExportRequest>
   +primaryAction: OutputEmitterRef<void>
   -announceCount(count: number): void
 }
 
-class CsFilterChip {
+class FilterChip {
   +id: string
   +label: string
   +value: string
   +removable?: boolean
 }
 
-class CsExportRequest {
+class ExportRequest {
   +format: CsExportFormat
   +scope: CsExportScope
 }
@@ -120,18 +120,18 @@ interface CsDataState<T> {
   +kind: CsDataStateKind
 }
 
-CsTableContainerComponent *-- "1" CsTableDirective : frames
-CsTableContainerComponent ..> CsDataState : renders states of
-CsTableDirective --> CsTableDensity : has
-CsTableDirective --> CsTableSelectionMode : has
-CsTableDirective o-- "0..*" CsTableSortHeaderDirective : coordinates
-CsTableDirective o-- "0..*" CsTableRowDirective : collects keys from
-CsTableDirective o-- "0..1" CsTableSelectAllDirective : publishes condition to
-CsTableDirective --> CsSortChange : emits
-CsSortChange --> CsSortDirection : has
-CsResponsiveTableDirective ..> CsTableDirective : reads column headers of
-CsDataToolbarComponent --> "0..*" CsFilterChip : presents
-CsDataToolbarComponent --> CsExportRequest : emits
-CsExportRequest --> CsExportScope : has
-CsDataToolbarComponent ..> CsDataState : renders states of
+TableContainerComponent *-- "1" TableDirective : frames
+TableContainerComponent ..> CsDataState : renders states of
+TableDirective --> TableDensity : has
+TableDirective --> CsTableSelectionMode : has
+TableDirective o-- "0..*" TableSortHeaderDirective : coordinates
+TableDirective o-- "0..*" TableRowDirective : collects keys from
+TableDirective o-- "0..1" CsTableSelectAllDirective : publishes condition to
+TableDirective --> SortChange : emits
+SortChange --> CsSortDirection : has
+ResponsiveTableDirective ..> TableDirective : reads column headers of
+DataToolbarComponent --> "0..*" FilterChip : presents
+DataToolbarComponent --> ExportRequest : emits
+ExportRequest --> CsExportScope : has
+DataToolbarComponent ..> CsDataState : renders states of
 @enduml

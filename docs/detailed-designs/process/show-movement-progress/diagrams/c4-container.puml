@@ -12,7 +12,7 @@ System_Boundary(app, "Consuming application") {
 }
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "CsMovementDialComponent, CsMovementListComponent, CsPipStripComponent, and CsProgressRingComponent")
+  Container(lib, "Component library", "Angular standalone components", "MovementDialComponent, MovementListComponent, PipStripComponent, and ProgressRingComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Resolves the paper and dark surfaces and the state colours")
   Container(docs, "Documentation site", "Angular application", "Publishes dial, list, and strip examples with a neutral adapter")
 }
@@ -23,7 +23,7 @@ Rel(user, shell, "Reads progress in")
 Rel(shell, page, "Renders")
 Rel(services, page, "Supply movement states and counts to")
 Rel(page, lib, "Binds counts, movements, and the adapter to", "signal inputs")
-Rel(lib, page, "Emits CsMovementActivation to", "output()")
+Rel(lib, page, "Emits MovementActivation to", "output()")
 Rel(lib, theme, "Resolves track, arc, and pip colour from")
 Rel(lib, browser, "Renders progressbar and ordered list semantics to")
 Rel(theme, browser, "Is resolved by", "CSS cascade")

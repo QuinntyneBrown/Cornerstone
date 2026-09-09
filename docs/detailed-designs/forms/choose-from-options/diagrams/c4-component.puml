@@ -7,12 +7,12 @@ Person(dev, "Application developer", "Binds the group value and the option set")
 
 Container_Boundary(lib, "Cornerstone component library") {
   Component(select, "CsSelectDirective", "Angular attribute directive", "Styles a native select, preserves option groups, and carries the loading, empty, and error states")
-  Component(checkbox, "CsCheckboxComponent", "Angular standalone component", "Checked, unchecked, and indeterminate states with description and checklist-row presentation")
-  Component(radiogroup, "CsRadioGroupComponent", "Angular standalone component", "Owns the group value, the radiogroup role, and the group-level error")
-  Component(radio, "CsRadioComponent", "Angular standalone component", "Renders one option with a label and description")
-  Component(switchc, "CsSwitchComponent", "Angular standalone component", "role=switch control toggled by Space and Enter")
-  Component(choicegroup, "CsChoiceGroupComponent", "Angular standalone component", "Single or multiple selection over large choice presentations")
-  Component(choicecard, "CsChoiceCardComponent", "Angular standalone component", "Large card target with a non-colour selection mark")
+  Component(checkbox, "CheckboxComponent", "Angular standalone component", "Checked, unchecked, and indeterminate states with description and checklist-row presentation")
+  Component(radiogroup, "RadioGroupComponent", "Angular standalone component", "Owns the group value, the radiogroup role, and the group-level error")
+  Component(radio, "RadioComponent", "Angular standalone component", "Renders one option with a label and description")
+  Component(switchc, "SwitchComponent", "Angular standalone component", "role=switch control toggled by Space and Enter")
+  Component(choicegroup, "ChoiceGroupComponent", "Angular standalone component", "Single or multiple selection over large choice presentations")
+  Component(choicecard, "ChoiceCardComponent", "Angular standalone component", "Large card target with a non-colour selection mark")
   Component(keymgr, "Roving focus manager", "CDK FocusKeyManager wrapper", "Moves focus and selection with arrow keys and skips disabled members")
 }
 

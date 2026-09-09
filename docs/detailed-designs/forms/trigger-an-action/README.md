@@ -66,7 +66,7 @@ emits no output of its own; activation reaches the application through the nativ
 - **`CsIconButtonDirective` target size** — the rendered box is square at the
   size token, and at viewport XS the interactive target including padding is at
   least 44 x 44 CSS pixels.
-- **`CsButtonGroupComponent`** — element component with the `cs-button-group`
+- **`ButtonGroupComponent`** — element component with the `cs-button-group`
   selector. It exposes `role="group"` with an accessible name from its required
   `label` input, projects the member actions, collapses interior radii, and wraps
   members onto a second row at narrow viewports without clipping any focus ring.
@@ -122,7 +122,7 @@ receive the resulting command; no styling crosses that boundary.
 ### Components
 
 `CsButtonDirective` and `CsIconButtonDirective` decorate native activation
-elements. `CsButtonGroupComponent` projects them and owns the grouping
+elements. `ButtonGroupComponent` projects them and owns the grouping
 semantics. Both directives read tokens and delegate focus behaviour to Angular
 CDK.
 
@@ -132,7 +132,7 @@ CDK.
 
 `CsButtonDirective` holds the appearance, size, and state inputs.
 `CsIconButtonDirective` extends the same base with a required label and a badge.
-`CsButtonGroupComponent` aggregates the members it projects.
+`ButtonGroupComponent` aggregates the members it projects.
 
 ![Class diagram for triggering an action](diagrams/class-structure.png)
 

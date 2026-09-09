@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "MessagingViewModelService" as vm
 end box
 box "Frontend — Cornerstone messaging" #D1FADF
-  participant "CsConversationListComponent" as list
-  participant "CsMessageComposerComponent" as composer
-  participant "CsMessageThreadComponent" as thread
+  participant "ConversationListComponent" as list
+  participant "MessageComposerComponent" as composer
+  participant "MessageThreadComponent" as thread
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "cdkTextareaAutosize" as cdk

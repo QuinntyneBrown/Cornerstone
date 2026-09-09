@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone process components" #D1FADF
-  participant "CsProcessRailComponent" as rail
-  participant "CsProcessJourneyComponent" as journey
-  participant "CsGateComponent" as gate
+  participant "ProcessRailComponent" as rail
+  participant "ProcessJourneyComponent" as journey
+  participant "GateComponent" as gate
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Component styles" as styles

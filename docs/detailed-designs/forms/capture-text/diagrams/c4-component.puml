@@ -6,11 +6,11 @@ title Components — Capture text
 Person(dev, "Application developer", "Binds label, hint, and error text")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(field, "CsFieldComponent", "Angular standalone component", "Generates the control ID, renders label, hint, error, success, and count, and assembles aria-describedby")
+  Component(field, "FieldComponent", "Angular standalone component", "Generates the control ID, renders label, hint, error, success, and count, and assembles aria-describedby")
   Component(input, "CsInputDirective", "Angular attribute directive", "Styles and wires the ten native input types and implements ControlValueAccessor")
   Component(textarea, "CsTextareaDirective", "Angular attribute directive", "Resizable, fixed-height, and autosize textareas with an optional character count")
-  Component(group, "CsInputGroupComponent", "Angular standalone component", "Renders an input and its addons as one bounded control with a single focus ring")
-  Component(addon, "CsInputAddonDirective", "Angular attribute directive", "Prefix or suffix text, icon, or action segment with documented description semantics")
+  Component(group, "InputGroupComponent", "Angular standalone component", "Renders an input and its addons as one bounded control with a single focus ring")
+  Component(addon, "InputAddonDirective", "Angular attribute directive", "Prefix or suffix text, icon, or action segment with documented description semantics")
   Component(idgen, "Control ID generator", "Injectable counter", "Issues stable unique identifiers for label and description association")
   Component(count, "Character count", "Live region", "Announces politely at the warning threshold and at the limit")
 }

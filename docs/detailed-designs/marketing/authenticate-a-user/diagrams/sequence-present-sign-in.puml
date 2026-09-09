@@ -21,9 +21,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as appsvc
 end box
 box "Frontend — Cornerstone marketing components" #D1FADF
-  participant "CsAuthLayoutComponent" as layout
-  participant "CsAuthCardComponent" as card
-  participant "CsBrandLockupComponent" as lockup
+  participant "AuthLayoutComponent" as layout
+  participant "AuthCardComponent" as card
+  participant "BrandLockupComponent" as lockup
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Auth layout styles" as styles

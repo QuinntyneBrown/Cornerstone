@@ -6,7 +6,7 @@ title Containers — Open a drawer
 Person(user, "Application user", "Opens a filter panel or the navigation drawer")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components and services", "Supplies CsDrawerComponent, CsDrawerContainerComponent, and CsDrawerService")
+  Container(lib, "Component library", "Angular standalone components and services", "Supplies DrawerComponent, DrawerContainerComponent, and DrawerService")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the panel surface, elevation, extent, and motion duration")
   Container(docs, "Documentation site", "Angular application", "Publishes the drawer variants and mode guidance")
 }

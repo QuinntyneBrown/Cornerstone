@@ -6,10 +6,10 @@ title Components — Present a vacant state
 Person(dev, "Application developer", "Supplies a typed data state and the copy")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(outlet, "CsDataStateOutletComponent", "Angular component", "Narrows CsDataState and projects the idle, loading, empty, error, or ready slot")
-  Component(host, "CsDataStateHostDirective", "Angular directive", "Applies the same contract to a component that renders its own content")
-  Component(empty, "CsEmptyStateComponent", "Angular component", "Renders icon, eyebrow, title, description, and actions in compact, card, or full-page form")
-  Component(statepage, "CsStatePageComponent", "Angular component", "Renders one of eight full-page conditions and emits the activated action")
+  Component(outlet, "DataStateOutletComponent", "Angular component", "Narrows CsDataState and projects the idle, loading, empty, error, or ready slot")
+  Component(host, "DataStateHostDirective", "Angular directive", "Applies the same contract to a component that renders its own content")
+  Component(empty, "EmptyStateComponent", "Angular component", "Renders icon, eyebrow, title, description, and actions in compact, card, or full-page form")
+  Component(statepage, "StatePageComponent", "Angular component", "Renders one of eight full-page conditions and emits the activated action")
   Component(types, "CsDataState and CsDataStateError", "TypeScript types", "Discriminated union carrying idle, loading, empty, error, and ready")
   Component(announce, "State announcer", "Injectable service", "Applies the polite and assertive announcement policy for state transitions")
 }

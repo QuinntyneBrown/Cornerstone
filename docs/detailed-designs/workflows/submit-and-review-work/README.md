@@ -56,115 +56,115 @@ The feature is a vertical slice from a Word Up assignment page and review page
 down to the rendered assignment, rubric, and badge surfaces. It introduces six
 components, their view model types, and their intent types.
 
-- **`CsAssignmentCardComponent`** — selector `cs-assignment-card`. It renders one
+- **`AssignmentCardComponent`** — selector `cs-assignment-card`. It renders one
   assignment: title, due date, status, metadata, instructions, and the actions
   open to the current viewer. Inputs: `assignment:
-  InputSignal<CsAssignmentView>`, `expanded: ModelSignal<boolean>`, and `busy:
+  InputSignal<AssignmentView>`, `expanded: ModelSignal<boolean>`, and `busy:
   InputSignal<boolean>`. Output: `actionSelected:
-  OutputEmitterRef<CsAssignmentAction>`. States: collapsed, expanded, and busy.
-- **`CsSubmissionStatusComponent`** — selector `cs-submission-status`. It renders
+  OutputEmitterRef<AssignmentAction>`. States: collapsed, expanded, and busy.
+- **`SubmissionStatusComponent`** — selector `cs-submission-status`. It renders
   the state of a submission, its evidence, the review feedback attached to it,
   and its version history. Inputs: `submission:
-  InputSignal<CsSubmissionView>`, `history:
-  InputSignal<readonly CsSubmissionVersion[]>`, and `showHistory:
+  InputSignal<SubmissionView>`, `history:
+  InputSignal<readonly SubmissionVersion[]>`, and `showHistory:
   ModelSignal<boolean>`. Outputs: `versionSelected:
-  OutputEmitterRef<CsSubmissionVersionSelect>` and `actionSelected:
+  OutputEmitterRef<SubmissionVersionSelect>` and `actionSelected:
   OutputEmitterRef<CsSubmissionAction>`. States: draft, submitted, under review,
   changes requested, and approved.
-- **`CsRubricComponent`** — selector `cs-rubric`. It renders a criterion by level
+- **`RubricComponent`** — selector `cs-rubric`. It renders a criterion by level
   grid with the selected level and score for each criterion. Inputs: `rubric:
-  InputSignal<CsRubricView>`, `selection: ModelSignal<CsRubricSelection>`, and
+  InputSignal<RubricView>`, `selection: ModelSignal<RubricSelection>`, and
   `readOnly: InputSignal<boolean>`. Output: `levelSelected:
-  OutputEmitterRef<CsRubricLevelSelect>`. States: read-only and editing. At the
+  OutputEmitterRef<RubricLevelSelect>`. States: read-only and editing. At the
   narrow breakpoint the grid reflows to one stacked criterion block per row; the
   breakpoint value is `<TO SUPPLY>`.
-- **`CsAssessmentEditorComponent`** — selector `cs-assessment-editor`. It
-  composes `CsRubricComponent` with a comment field and the two decision actions.
-  Inputs: `assessment: InputSignal<CsAssessmentView>`, `readOnly:
+- **`AssessmentEditorComponent`** — selector `cs-assessment-editor`. It
+  composes `RubricComponent` with a comment field and the two decision actions.
+  Inputs: `assessment: InputSignal<AssessmentView>`, `readOnly:
   InputSignal<boolean>`, and `saving: InputSignal<boolean>`. Outputs:
-  `assessmentChanged: OutputEmitterRef<CsAssessmentChange>` and
-  `decisionSubmitted: OutputEmitterRef<CsAssessmentDecision>`. States:
+  `assessmentChanged: OutputEmitterRef<AssessmentChange>` and
+  `decisionSubmitted: OutputEmitterRef<AssessmentDecision>`. States:
   read-only, editing, dirty, and saving.
-- **`CsAchievementCardComponent`** — selector `cs-achievement-card`. It renders
+- **`AchievementCardComponent`** — selector `cs-achievement-card`. It renders
   one badge with its art or icon, its criteria, its award date when earned, and
   its progress when unearned. Inputs: `achievement:
-  InputSignal<CsAchievementView>` and `size: InputSignal<CsAchievementSize>`.
-  Output: `achievementSelected: OutputEmitterRef<CsAchievementSelect>`. States:
+  InputSignal<AchievementView>` and `size: InputSignal<CsAchievementSize>`.
+  Output: `achievementSelected: OutputEmitterRef<AchievementSelect>`. States:
   earned and locked.
-- **`CsBadgeCollectionComponent`** — selector `cs-badge-collection`. It renders a
+- **`BadgeCollectionComponent`** — selector `cs-badge-collection`. It renders a
   set of achievements in a grid or a list. Inputs: `achievements:
-  InputSignal<readonly CsAchievementView[]>`, `layout:
-  InputSignal<CsCollectionLayout>` defaulting to `'grid'`, and `emptyLabel:
+  InputSignal<readonly AchievementView[]>`, `layout:
+  InputSignal<CollectionLayout>` defaulting to `'grid'`, and `emptyLabel:
   InputSignal<string>`. Output: `achievementSelected:
-  OutputEmitterRef<CsAchievementSelect>`. States: populated and empty.
-- **`CsAssignmentView`** — view model of an assignment. Fields: `assignmentId`,
+  OutputEmitterRef<AchievementSelect>`. States: populated and empty.
+- **`AssignmentView`** — view model of an assignment. Fields: `assignmentId`,
   `title`, `dueLabel`, `dueState`, `status`, `instructions`, `metadata`, and
   `actions`.
-- **`CsAssignmentDueState`** — union type of the due states supplied by the
+- **`AssignmentDueState`** — union type of the due states supplied by the
   application: `'upcoming' | 'due-soon' | 'overdue' | 'closed'`.
 - **`CsMetadataItem`** — labelled value rendered in the assignment metadata row.
   Fields: `label` and `value`.
-- **`CsSubmissionView`** — view model of the current submission. Fields:
+- **`SubmissionView`** — view model of the current submission. Fields:
   `submissionId`, `assignmentId`, `status`, `submittedAtLabel`, `evidence`,
   `feedback`, and `versionCount`.
-- **`CsSubmissionStatus`** — union type of the submission states: `'draft' |
+- **`SubmissionStatus`** — union type of the submission states: `'draft' |
   'submitted' | 'in-review' | 'changes-requested' | 'approved'`.
-- **`CsSubmissionVersion`** — view model of an earlier submission. Fields:
+- **`SubmissionVersion`** — view model of an earlier submission. Fields:
   `versionId`, `ordinal`, `submittedAtLabel`, `status`, and `isCurrent`.
-- **`CsEvidenceItem`** — view model of one piece of evidence. Fields:
+- **`EvidenceItem`** — view model of one piece of evidence. Fields:
   `evidenceId`, `kind`, `label`, `sizeLabel`, and `previewUrl`.
-- **`CsReviewFeedback`** — view model of the feedback attached to a submission.
+- **`ReviewFeedback`** — view model of the feedback attached to a submission.
   Fields: `authorLabel`, `postedAtLabel`, `body`, and `decision`.
-- **`CsAssignmentAction`** and **`CsSubmissionAction`** — intents naming an action
+- **`AssignmentAction`** and **`CsSubmissionAction`** — intents naming an action
   the user selected. Fields: `actionId`, `kind`, and the owning identifier. The
   `kind` values cover `'submit'`, `'resubmit'`, `'withdraw'`, and `'open'`.
-- **`CsSubmissionVersionSelect`** — intent emitted when a viewer opens an earlier
+- **`SubmissionVersionSelect`** — intent emitted when a viewer opens an earlier
   version. Fields: `submissionId` and `versionId`.
-- **`CsRubricView`** — view model of a rubric. Fields: `rubricId`, `title`,
+- **`RubricView`** — view model of a rubric. Fields: `rubricId`, `title`,
   `criteria`, and `totalLabel`.
-- **`CsRubricCriterion`** — view model of one criterion. Fields: `criterionId`,
+- **`RubricCriterion`** — view model of one criterion. Fields: `criterionId`,
   `label`, `description`, `weight`, and `levels`.
-- **`CsRubricLevel`** — view model of one level. Fields: `levelId`, `label`,
+- **`RubricLevel`** — view model of one level. Fields: `levelId`, `label`,
   `descriptor`, and `score`.
-- **`CsRubricSelection`** — record keyed by `criterionId` holding the selected
+- **`RubricSelection`** — record keyed by `criterionId` holding the selected
   `levelId` for each.
-- **`CsRubricLevelSelect`** — intent emitted on each level selection. Fields:
+- **`RubricLevelSelect`** — intent emitted on each level selection. Fields:
   `rubricId`, `criterionId`, `levelId`, and `score`.
-- **`CsAssessmentView`** — view model of an assessment in progress. Fields:
+- **`AssessmentView`** — view model of an assessment in progress. Fields:
   `assessmentId`, `submissionId`, `rubric`, `selection`, `comment`, and
   `decision`.
-- **`CsAssessmentChange`** — intent emitted on each edit. Fields: `assessmentId`,
+- **`AssessmentChange`** — intent emitted on each edit. Fields: `assessmentId`,
   `selection`, and `comment`.
-- **`CsAssessmentDecision`** — intent emitted when a mentor concludes. Fields:
+- **`AssessmentDecision`** — intent emitted when a mentor concludes. Fields:
   `assessmentId`, `outcome` of `'approve' | 'request-changes'`, `selection`, and
   `comment`.
-- **`CsAchievementView`** — view model of a badge. Fields: `achievementId`,
+- **`AchievementView`** — view model of a badge. Fields: `achievementId`,
   `name`, `artUrl`, `iconName`, `criteriaLabel`, `earned`, `awardedAtLabel`, and
   `progress`.
-- **`CsAchievementProgress`** — view model of progress toward an unearned badge.
+- **`AchievementProgress`** — view model of progress toward an unearned badge.
   Fields: `current`, `target`, `percent`, and `label`.
-- **`CsAchievementSelect`** — intent emitted when a viewer opens a badge. Fields:
+- **`AchievementSelect`** — intent emitted when a viewer opens a badge. Fields:
   `achievementId` and `earned`.
-- **`CsCollectionLayout`** and **`CsAchievementSize`** — union types of the layout
+- **`CollectionLayout`** and **`CsAchievementSize`** — union types of the layout
   and size selections: `'grid' | 'list'` and `'sm' | 'md' | 'lg'`.
 
 All six components are standalone and use `OnPush` change detection.
-`CsAssessmentEditorComponent` composes `CsRubricComponent` rather than
+`AssessmentEditorComponent` composes `RubricComponent` rather than
 reimplementing the grid, and holds the comment field as a value-bearing control
 implementing `ControlValueAccessor`.
 
 The rubric grid renders as a table with a row per criterion and a column per
 level, and each cell is a radio in a group named for its criterion, so arrow keys
 move within a criterion and `Tab` moves between criteria. Selected levels are
-conveyed by text as well as by fill. `CsRubricComponent` renders the supplied
+conveyed by text as well as by fill. `RubricComponent` renders the supplied
 `totalLabel`; it sums no scores.
 
-`CsSubmissionStatusComponent` renders version history as an ordered list, newest
+`SubmissionStatusComponent` renders version history as an ordered list, newest
 first, with the current version marked in text. It performs no upload: evidence
 arrives already described in the view model, and a submit action emits an intent
 for the application to satisfy.
 
-`CsAchievementCardComponent` renders a locked badge with its criteria and its
+`AchievementCardComponent` renders a locked badge with its criteria and its
 progress, and marks the locked state in text as well as in treatment. Under
 `prefers-reduced-motion: reduce` the award treatment appears without animation.
 
@@ -200,8 +200,8 @@ surfaces and reads its visual values from the theme stylesheet.
 ### Components
 
 Word Up's submission, assessment, and achievement services build the view models
-and receive the intents. `CsAssessmentEditorComponent` composes
-`CsRubricComponent`; neither one totals a score or decides an outcome.
+and receive the intents. `AssessmentEditorComponent` composes
+`RubricComponent`; neither one totals a score or decides an outcome.
 
 ![C4 component view for submitting and reviewing work](diagrams/c4-component.png)
 

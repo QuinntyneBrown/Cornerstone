@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone card" #D1FADF
-  participant "CsCardComponent" as card
+  participant "CardComponent" as card
   participant "CsCardHeaderComponent" as header
   participant "CsCardActionsComponent" as actions
 end box

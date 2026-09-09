@@ -12,7 +12,7 @@ System_Boundary(app, "Consuming application") {
 }
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "CsProcessRailComponent and CsProcessJourneyComponent")
+  Container(lib, "Component library", "Angular standalone components", "ProcessRailComponent and ProcessJourneyComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Resolves the stage palette named by the adapter")
   Container(docs, "Documentation site", "Angular application", "Publishes rail and journey examples with a neutral adapter")
 }
@@ -24,7 +24,7 @@ Rel(user, shell, "Reads and activates stages in")
 Rel(shell, page, "Renders")
 Rel(services, page, "Supply stage state and enforcement results to")
 Rel(page, lib, "Binds stages and the adapter to", "signal inputs")
-Rel(lib, page, "Emits CsStageActivation and CsStageActionIntent to", "output()")
+Rel(lib, page, "Emits CsStageActivation and StageActionIntent to", "output()")
 Rel(page, services, "Resolves intents into routing and persistence through")
 Rel(lib, theme, "Resolves stage colour and spacing from")
 Rel(lib, cdk, "Observes viewport breakpoints through")

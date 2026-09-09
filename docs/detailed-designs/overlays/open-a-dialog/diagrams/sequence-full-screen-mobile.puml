@@ -16,8 +16,8 @@ skinparam package {
 }
 actor "Application user" as user
 box "Frontend — Cornerstone dialog runtime" #D1FADF
-  participant "CsDialogShellComponent" as shell
-  participant "CsDialogActionsDirective" as actions
+  participant "DialogShellComponent" as shell
+  participant "DialogActionsDirective" as actions
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Panel styles" as styles

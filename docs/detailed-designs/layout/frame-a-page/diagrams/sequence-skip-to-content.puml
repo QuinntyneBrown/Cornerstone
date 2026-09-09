@@ -22,7 +22,7 @@ end box
 box "Frontend — Cornerstone page frame" #D1FADF
   participant "CsSkipLinkDirective" as skip
   participant "CsVisuallyHiddenDirective" as hidden
-  participant "CsPageComponent" as frame
+  participant "PageComponent" as frame
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "FocusMonitor" as cdk

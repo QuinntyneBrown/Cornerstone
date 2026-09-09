@@ -25,14 +25,14 @@ enum CsFormParticipation {
   angular-only
 }
 
-enum CsWizardStepState {
+enum WizardStepState {
   pending
   current
   complete
   skipped
 }
 
-class CsFormActionsComponent {
+class FormActionsComponent {
   +label: InputSignal<string>
   +submitting: InputSignal<boolean>
   +sticky: InputSignal<boolean>
@@ -42,22 +42,22 @@ class CsFormActionsComponent {
   #isDuplicateActivation: Signal<boolean>
 }
 
-class CsValidationSummaryComponent {
-  +errors: InputSignal<readonly CsValidationEntry[]>
+class ValidationSummaryComponent {
+  +errors: InputSignal<readonly ValidationEntry[]>
   +heading: InputSignal<string>
   +entryActivated: OutputEmitterRef<string>
   #focusHeading(): void
   #announceOnce(): void
 }
 
-class CsValidationEntry {
+class ValidationEntry {
   +controlId: string
   +label: string
   +message: string
 }
 
-class CsWizardComponent {
-  +steps: InputSignal<readonly CsWizardStep[]>
+class WizardComponent {
+  +steps: InputSignal<readonly WizardStep[]>
   +currentStep: ModelSignal<string>
   +resumeState: InputSignal<CsWizardResumeState | null>
   +finishing: InputSignal<boolean>
@@ -73,12 +73,12 @@ class CsWizardComponent {
   #finish(): void
 }
 
-class CsWizardStep {
+class WizardStep {
   +id: string
   +title: string
   +optional: boolean
   +valid: boolean
-  +state: CsWizardStepState
+  +state: WizardStepState
 }
 
 class CsWizardResumeState {
@@ -87,13 +87,13 @@ class CsWizardResumeState {
 }
 
 class CsStepper {
-  +steps: InputSignal<readonly CsWizardStep[]>
+  +steps: InputSignal<readonly WizardStep[]>
   +current: InputSignal<string>
   +compact: InputSignal<boolean>
 }
 
 class CsValidationGate <<function>> {
-  +canAdvance(step: CsWizardStep): boolean
+  +canAdvance(step: WizardStep): boolean
 }
 
 class CsFocusRouter {
@@ -107,16 +107,16 @@ class CsControlParticipation {
   +name: string | null
 }
 
-CsWizardComponent ..|> ControlValueAccessor
-CsWizardComponent o-- "1..*" CsWizardStep : sequences
-CsWizardComponent --> CsWizardResumeState : restores from
-CsWizardComponent *-- CsStepper : renders its header as
-CsWizardComponent *-- CsFormActionsComponent : renders its actions as
-CsWizardComponent ..> CsValidationGate : gates advancement through
-CsWizardComponent o-- CsValidationSummaryComponent : announces step errors through
-CsWizardStep --> CsWizardStepState : has
-CsValidationSummaryComponent o-- "0..*" CsValidationEntry : lists
-CsValidationSummaryComponent ..> CsFocusRouter : moves focus through
+WizardComponent ..|> ControlValueAccessor
+WizardComponent o-- "1..*" WizardStep : sequences
+WizardComponent --> CsWizardResumeState : restores from
+WizardComponent *-- CsStepper : renders its header as
+WizardComponent *-- FormActionsComponent : renders its actions as
+WizardComponent ..> CsValidationGate : gates advancement through
+WizardComponent o-- ValidationSummaryComponent : announces step errors through
+WizardStep --> WizardStepState : has
+ValidationSummaryComponent o-- "0..*" ValidationEntry : lists
+ValidationSummaryComponent ..> CsFocusRouter : moves focus through
 CsControlParticipation --> CsFormParticipation : records
-CsFormActionsComponent ..> CsControlParticipation : submits controls declaring
+FormActionsComponent ..> CsControlParticipation : submits controls declaring
 @enduml

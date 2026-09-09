@@ -42,21 +42,21 @@ The feature is a vertical slice from the toolbar control a reader operates down
 to the rendered row, at both wide and narrow viewports. It spans two directives,
 two components, three supporting directives, and the table types they share.
 
-- **`CsTableDirective`** — selector `table[csTable]`. The attribute directive
+- **`TableDirective`** — selector `table[csTable]`. The attribute directive
   that styles and instruments a native table. The inputs are
-  `density: InputSignal<CsTableDensity>` over `'compact' | 'comfortable'`,
+  `density: InputSignal<TableDensity>` over `'compact' | 'comfortable'`,
   `stickyHeader: InputSignal<boolean>` defaulting to true,
   `selectionMode: InputSignal<CsTableSelectionMode>` over
   `'none' | 'single' | 'multiple'`, and
   `selection: ModelSignal<ReadonlySet<string>>`. It emits
-  `sortChange: OutputEmitterRef<CsSortChange>` and
+  `sortChange: OutputEmitterRef<SortChange>` and
   `selectionChange: OutputEmitterRef<ReadonlySet<string>>` (L2-093).
-- **`CsTableSortHeaderDirective`** — selector `th[csSortHeader]`. The sorting
+- **`TableSortHeaderDirective`** — selector `th[csSortHeader]`. The sorting
   hook. It takes `csSortHeader: InputSignal<string>` naming the column key,
   renders the header as a button, sets `aria-sort` to `ascending`,
   `descending`, or `none` on the active header, and asks its parent
-  `CsTableDirective` to emit `CsSortChange`. It performs no sort of its own.
-- **`CsTableRowDirective`** — selector `tr[csRow]`. It takes
+  `TableDirective` to emit `SortChange`. It performs no sort of its own.
+- **`TableRowDirective`** — selector `tr[csRow]`. It takes
   `csRow: InputSignal<string>` carrying the row key and
   `disabled: InputSignal<boolean>`. It reflects the selected condition as
   `aria-selected` and contributes its key to the parent directive's selection
@@ -64,7 +64,7 @@ two components, three supporting directives, and the table types they share.
 - **`CsTableSelectAllDirective`** — selector `[csSelectAll]`. It reflects the
   three selection conditions of the header control: none selected, all selected,
   and partially selected, the last as `indeterminate` on the native checkbox.
-- **`CsTableContainerComponent`** — selector `cs-table-container`. The frame the
+- **`TableContainerComponent`** — selector `cs-table-container`. The frame the
   table sits in. The inputs are `caption: InputSignal<string>`,
   `captionVisible: InputSignal<boolean>`,
   `maxHeight: InputSignal<string | null>`, and
@@ -74,32 +74,32 @@ two components, three supporting directives, and the table types they share.
   keyboard reader can pan a wide table. It projects the empty, loading, and error
   slots in place of the table body through the shared data-state contract
   (L2-093, L2-101).
-- **`CsTableDensity`** — union type of the two row densities:
+- **`TableDensity`** — union type of the two row densities:
   `'compact' | 'comfortable'`. The density resolves row padding and line height
   from `--cs-` spacing tokens; it changes no font size, so the two densities
   remain legible at the same zoom level.
-- **`CsSortChange`** — the emitted sort intent. It holds `column: string` and
+- **`SortChange`** — the emitted sort intent. It holds `column: string` and
   `direction: 'asc' | 'desc' | 'none'`.
-- **`CsResponsiveTableDirective`** — selector `table[csResponsiveTable]`. The
+- **`ResponsiveTableDirective`** — selector `table[csResponsiveTable]`. The
   reflow (L2-094). The inputs are `breakpoint: InputSignal<string>` and
   `primaryColumn: InputSignal<string | null>`. Below the breakpoint it renders
   each row as a card and each cell with its column header text as a visible
   label.
-- **`CsDataToolbarComponent`** — selector `cs-data-toolbar`. The control strip
+- **`DataToolbarComponent`** — selector `cs-data-toolbar`. The control strip
   (L2-095). The inputs are `searchTerm: ModelSignal<string>`,
   `searchPlaceholder: InputSignal<string>`,
-  `filters: InputSignal<CsFilterChip[]>`,
+  `filters: InputSignal<FilterChip[]>`,
   `resultCount: InputSignal<number | null>`,
   `resultLabel: InputSignal<string>`,
   `collapsible: InputSignal<boolean>` defaulting to true, and
   `state: InputSignal<CsDataState<void>>`. The projection slots are
   `[csToolbarFilters]`, `[csToolbarViewOptions]`, and `[csToolbarActions]`.
-- **`CsFilterChip`** — the removable filter shape. It holds `id: string`,
+- **`FilterChip`** — the removable filter shape. It holds `id: string`,
   `label: string`, `value: string`, and an optional `removable: boolean`.
-  `CsDataToolbarComponent` emits `filterRemoved: OutputEmitterRef<CsFilterChip>`
+  `DataToolbarComponent` emits `filterRemoved: OutputEmitterRef<FilterChip>`
   and `filtersCleared: OutputEmitterRef<void>`; it removes nothing from the query
   itself.
-- **`CsExportRequest`** — the emitted export intent. It holds
+- **`ExportRequest`** — the emitted export intent. It holds
   `format: CsExportFormat` and `scope: 'all' | 'filtered' | 'selected'`. The
   application produces the file; the library holds no serializer.
 
@@ -169,17 +169,17 @@ resolutions.
 
 ### Components
 
-`CsTableContainerComponent` frames a native table instrumented by
-`CsTableDirective`, its sort headers, and its row directives.
-`CsResponsiveTableDirective` restores the table roles at narrow widths, and
-`CsDataToolbarComponent` emits the query intents.
+`TableContainerComponent` frames a native table instrumented by
+`TableDirective`, its sort headers, and its row directives.
+`ResponsiveTableDirective` restores the table roles at narrow widths, and
+`DataToolbarComponent` emits the query intents.
 
 ![C4 component view for browsing tabular data](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsTableDirective` holds the selection model and coordinates the sort headers and
-row directives. `CsDataToolbarComponent` emits search, filter, view, export, and
+`TableDirective` holds the selection model and coordinates the sort headers and
+row directives. `DataToolbarComponent` emits search, filter, view, export, and
 primary-action intents without holding a query.
 
 ![Class diagram for browsing tabular data](diagrams/class-structure.png)

@@ -21,9 +21,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application router" as router
 end box
 box "Frontend — Cornerstone attendance composite" #D1FADF
-  participant "CsAttendanceRosterComponent" as roster
-  participant "CsAttendanceChoiceComponent" as choice
-  participant "CsUnsavedChangesDialogComponent" as unsaved
+  participant "AttendanceRosterComponent" as roster
+  participant "AttendanceChoiceComponent" as choice
+  participant "UnsavedChangesDialogComponent" as unsaved
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer" as announcer
@@ -32,7 +32,7 @@ box "Browser — platform" #FFF4E5
   participant "DOM and input" as browser
 end box
 
-page -> roster : Bind CsAttendanceRosterViewModel
+page -> roster : Bind AttendanceRosterViewModel
 roster -> choice : Render one radio group per row per L2-125
 choice -> browser : Name the group with the person's name per L2-125
 browser --> user : Roster of 40 rows, targets at least 44x44 CSS pixels
@@ -43,7 +43,7 @@ roster -> roster : Select the rows whose state is null
 roster -> choice : Set 'present' on each unset row per L2-125
 roster -> announcer : Announce politely how many rows changed per L2-125
 announcer --> browser : Polite live region update
-roster -> page : Emit one CsAttendanceBulkChange for all changes per L2-125
+roster -> page : Emit one AttendanceBulkChange for all changes per L2-125
 roster -> roster : Recompute the unsaved summary per L2-125
 
 page -> store : Write the bulk change

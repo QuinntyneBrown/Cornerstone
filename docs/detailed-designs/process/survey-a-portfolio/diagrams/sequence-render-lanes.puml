@@ -21,8 +21,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "CsProcessAdapter" as adapter
 end box
 box "Frontend — Cornerstone portfolio components" #D1FADF
-  participant "CsPhaseLaneComponent" as lane
-  participant "CsProjectCardComponent" as card
+  participant "PhaseLaneComponent" as lane
+  participant "ProjectCardComponent" as card
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Theme stylesheet" as theme
@@ -59,7 +59,7 @@ end
 
 user -> dom : Activate a project card
 dom -> card : Click or Enter
-card -> page : Emit CsProjectOpenIntent and perform no navigation per L2-141
+card -> page : Emit ProjectOpenIntent and perform no navigation per L2-141
 page -> services : Resolve the intent into a route change
 services --> page : Project detail route
 page --> user : Project opened by the application

@@ -19,9 +19,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone kanban components" #D1FADF
-  participant "CsKanbanBoardComponent" as board
-  participant "CsKanbanColumnComponent" as column
-  participant "CsKanbanAnnouncer" as announcer
+  participant "KanbanBoardComponent" as board
+  participant "KanbanColumnComponent" as column
+  participant "KanbanAnnouncer" as announcer
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "DragDropModule and LiveAnnouncer" as cdk
@@ -52,7 +52,7 @@ board -> page : Emit no move intent per L2-139
 board -> dom : Return the card to its source position
 
 alt The card is released over the empty accepting column
-  board -> page : Emit one CsWorkItemMoveIntent
+  board -> page : Emit one WorkItemMoveIntent
 else The card is released outside every drop list
   board -> page : Emit no move intent
 end

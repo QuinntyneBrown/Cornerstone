@@ -19,9 +19,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone data display" #D1FADF
-  participant "CsSpinnerComponent" as spinner
-  participant "CsSkeletonGroupComponent" as group
-  participant "CsProgressBarComponent" as bar
+  participant "SpinnerComponent" as spinner
+  participant "SkeletonGroupComponent" as group
+  participant "ProgressBarComponent" as bar
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Indicator styles" as styles

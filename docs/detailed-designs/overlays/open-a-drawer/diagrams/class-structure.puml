@@ -13,27 +13,27 @@ skinparam class {
 ' --------------------------
 title Class structure — Open a drawer
 
-enum CsDrawerPosition {
+enum DrawerPosition {
   start
   end
   bottom
 }
 
-enum CsDrawerMode {
+enum DrawerMode {
   modal
   nonModal
 }
 
-class CsDrawerComponent {
+class DrawerComponent {
   +opened: ModelSignal<boolean>
-  +position: InputSignal<CsDrawerPosition>
-  +mode: InputSignal<CsDrawerMode>
+  +position: InputSignal<DrawerPosition>
+  +mode: InputSignal<DrawerMode>
   +size: InputSignal<string>
   +responsiveFullScreen: InputSignal<boolean>
   +dismissible: InputSignal<boolean>
   +openedChange: OutputEmitterRef<boolean>
   +closed: OutputEmitterRef<void>
-  -effectiveMode: Signal<CsDrawerMode>
+  -effectiveMode: Signal<DrawerMode>
   -previouslyFocused: HTMLElement
   +open(): void
   +close(): void
@@ -41,15 +41,15 @@ class CsDrawerComponent {
   -releaseTrap(): void
 }
 
-class CsDrawerContainerComponent {
-  +drawer: Signal<CsDrawerComponent>
+class DrawerContainerComponent {
+  +drawer: Signal<DrawerComponent>
   +contentInset: Signal<string>
 }
 
-class CsDrawerConfig<D> {
+class DrawerConfig<D> {
   +data: D
-  +position: CsDrawerPosition
-  +mode: CsDrawerMode
+  +position: DrawerPosition
+  +mode: DrawerMode
   +size: string
   +responsiveFullScreen: boolean
   +dismissible: boolean
@@ -57,25 +57,25 @@ class CsDrawerConfig<D> {
   +ariaLabelledBy: string
 }
 
-class CsDrawerService {
+class DrawerService {
   -overlay: Overlay
-  +open<R, D, C>(component: ComponentType<C>, config?: CsDrawerConfig<D>): CsDrawerRef<R, C>
+  +open<R, D, C>(component: ComponentType<C>, config?: DrawerConfig<D>): DrawerRef<R, C>
   +closeAll(): void
 }
 
-class CsDrawerRef<R, C> {
+class DrawerRef<R, C> {
   +componentInstance: C
   +closed: Observable<R | undefined>
   +backdropClick: Observable<MouseEvent>
   +close(result?: R): void
 }
 
-class CsDrawerHeaderDirective {
+class DrawerHeaderDirective {
   +title: InputSignal<string>
   +showClose: InputSignal<boolean>
 }
 
-class CsDrawerFooterDirective {
+class DrawerFooterDirective {
   +align: InputSignal<CsDrawerFooterAlign>
 }
 
@@ -94,18 +94,18 @@ class BreakpointObserver <<CDK>> {
   +observe(query: string): Observable<BreakpointState>
 }
 
-CsDrawerComponent --> CsDrawerPosition : has
-CsDrawerComponent --> CsDrawerMode : has
-CsDrawerComponent *-- "0..1" FocusTrap : owns while modal
-CsDrawerComponent ..> BreakpointObserver : reads
-CsDrawerComponent o-- "0..1" CsDrawerHeaderDirective : projects
-CsDrawerComponent o-- "0..1" CsDrawerFooterDirective : projects
-CsDrawerContainerComponent o-- "1" CsDrawerComponent : reflows around
-CsDrawerService ..> CsDrawerConfig : reads
-CsDrawerService --> "0..*" CsDrawerRef : returns
-CsDrawerService ..> CsDrawerComponent : attaches
-CsDrawerConfig --> CsDrawerPosition : has
-CsDrawerConfig --> CsDrawerMode : has
-CsDrawerFooterDirective --> CsDrawerFooterAlign : has
-CsDrawerRef ..> CsDrawerComponent : closes
+DrawerComponent --> DrawerPosition : has
+DrawerComponent --> DrawerMode : has
+DrawerComponent *-- "0..1" FocusTrap : owns while modal
+DrawerComponent ..> BreakpointObserver : reads
+DrawerComponent o-- "0..1" DrawerHeaderDirective : projects
+DrawerComponent o-- "0..1" DrawerFooterDirective : projects
+DrawerContainerComponent o-- "1" DrawerComponent : reflows around
+DrawerService ..> DrawerConfig : reads
+DrawerService --> "0..*" DrawerRef : returns
+DrawerService ..> DrawerComponent : attaches
+DrawerConfig --> DrawerPosition : has
+DrawerConfig --> DrawerMode : has
+DrawerFooterDirective --> CsDrawerFooterAlign : has
+DrawerRef ..> DrawerComponent : closes
 @enduml

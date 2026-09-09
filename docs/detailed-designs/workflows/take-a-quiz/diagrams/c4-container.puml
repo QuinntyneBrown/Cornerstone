@@ -6,7 +6,7 @@ title Containers — Take a quiz
 Person(youth, "Youth participant", "Takes the quiz")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Renders CsQuizComponent, CsQuizQuestionComponent, and CsQuizResultComponent")
+  Container(lib, "Component library", "Angular standalone components", "Renders QuizComponent, QuizQuestionComponent, and QuizResultComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the tokens the quiz styles resolve")
   Container(docs, "Documentation site", "Angular application", "Publishes the quiz view model and intent contracts")
 }
@@ -22,9 +22,9 @@ System_Ext(browser, "Browser platform", "Rendering and input engine")
 
 Rel(youth, shell, "Opens the quiz screen in")
 Rel(shell, page, "Routes to")
-Rel(services, page, "Computes CsQuizView and CsQuizResultView for")
+Rel(services, page, "Computes QuizView and QuizResultView for")
 Rel(page, lib, "Binds the quiz and result view models to")
-Rel(lib, page, "Emits CsQuizAnswerChange, CsQuizNavigate, and CsQuizSubmit to")
+Rel(lib, page, "Emits QuizAnswerChange, QuizNavigate, and QuizSubmit to")
 Rel(page, services, "Forwards the submit intent to")
 Rel(lib, theme, "Resolves visual values from")
 Rel(lib, cdk, "Opens the confirm dialog with")

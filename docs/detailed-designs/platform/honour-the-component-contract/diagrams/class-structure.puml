@@ -42,7 +42,7 @@ abstract class CsControlBase<T> {
   +onBlur(): void
 }
 
-class CsFieldComponent {
+class FieldComponent {
   +label: InputSignal<string>
   +hint: InputSignal<string | undefined>
   +error: InputSignal<string | undefined>
@@ -63,7 +63,7 @@ class CsInputDirective {
   +placeholder: InputSignal<string>
 }
 
-class CsCheckboxComponent {
+class CheckboxComponent {
   +indeterminate: ModelSignal<boolean>
   +description: InputSignal<string | undefined>
 }
@@ -80,16 +80,16 @@ interface CsSlotHost {
   +hasSlot(name: string): Signal<boolean>
 }
 
-class CsCardHeaderDirective {
+class CardHeaderDirective {
   +{static} slotName: string
 }
 
-class CsPageActionsDirective {
+class PageActionsDirective {
   +{static} slotName: string
 }
 
-class CsCardComponent {
-  +tone: InputSignal<CsCardTone>
+class CardComponent {
+  +tone: InputSignal<CardTone>
   +raised: InputSignal<boolean>
   +hasSlot(name: string): Signal<boolean>
 }
@@ -105,12 +105,12 @@ class CsIntent<TKind, TPayload> {
   +payload: TPayload
 }
 
-class CsAttendanceRosterComponent {
-  +viewModel: InputSignal<CsAttendanceRosterViewModel>
+class AttendanceRosterComponent {
+  +viewModel: InputSignal<AttendanceRosterViewModel>
   +intent: OutputEmitterRef<CsAttendanceIntent>
 }
 
-class CsAttendanceRosterViewModel <<readonly>> {
+class AttendanceRosterViewModel <<readonly>> {
   +sessionId: string
   +entries: readonly CsRosterEntry[]
   +unsavedCount: number
@@ -119,17 +119,17 @@ class CsAttendanceRosterViewModel <<readonly>> {
 CsControlBase ..|> ControlValueAccessor
 CsControlBase ..|> CsFieldControl
 CsInputDirective --|> CsControlBase
-CsCheckboxComponent --|> CsControlBase
+CheckboxComponent --|> CsControlBase
 CsControlBase ..> CsIdService : generates its id from
-CsFieldComponent ..> CsIdService : generates label, hint, and error ids from
-CsFieldComponent o-- "1" CsFieldControl : wires
-CsCardHeaderDirective --|> CsSlotDirective
-CsPageActionsDirective --|> CsSlotDirective
+FieldComponent ..> CsIdService : generates label, hint, and error ids from
+FieldComponent o-- "1" CsFieldControl : wires
+CardHeaderDirective --|> CsSlotDirective
+PageActionsDirective --|> CsSlotDirective
 CsSlotDirective --> CsSlotHost : registers with
-CsCardComponent ..|> CsSlotHost
-CsCardComponent *-- "0..*" CsSlotDirective : projects
+CardComponent ..|> CsSlotHost
+CardComponent *-- "0..*" CsSlotDirective : projects
 CsInputDirective ..> InputTransforms : coerces inputs with
-CsCardComponent ..> InputTransforms : coerces inputs with
-CsAttendanceRosterComponent --> CsAttendanceRosterViewModel : reads
-CsAttendanceRosterComponent --> CsIntent : emits
+CardComponent ..> InputTransforms : coerces inputs with
+AttendanceRosterComponent --> AttendanceRosterViewModel : reads
+AttendanceRosterComponent --> CsIntent : emits
 @enduml

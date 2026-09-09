@@ -6,16 +6,16 @@ title Components — Navigate the public site
 Person_Ext(visitor, "Visitor", "Reaches a public destination or the call to action")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(header, "CsMarketingHeaderComponent", "Standalone component", "Header landmark with brand, link set, call to action, and mobile menu state")
+  Component(header, "MarketingHeaderComponent", "Standalone component", "Header landmark with brand, link set, call to action, and mobile menu state")
   Component(toggle, "Mobile menu toggle", "Component-scoped template", "Expands the link list in flow with aria-expanded")
   Component(cta, "Call-to-action control", "Component-scoped template", "Renders the primary and secondary public actions")
-  Component(footer, "CsMarketingFooterComponent", "Standalone component", "Footer landmark with grouped, social, and legal links")
+  Component(footer, "MarketingFooterComponent", "Standalone component", "Footer landmark with grouped, social, and legal links")
   Component(group, "Footer link group", "Component-scoped template", "Labelled nav landmark that collapses to a disclosure on narrow viewports")
   Component(ext, "External link marker", "Component-scoped template", "Applies rel=noopener noreferrer and names the destination as external")
 }
 
 Container_Boundary(appb, "Consuming application") {
-  Component(config, "Public link configuration", "Plain data", "CsMarketingLink, CsMarketingLinkGroup, CsSocialLink, and CsMarketingCta values")
+  Component(config, "Public link configuration", "Plain data", "CsMarketingLink, MarketingLinkGroup, SocialLink, and MarketingCta values")
   Component(router, "Angular Router", "Application routing", "Resolves routerLink bindings on internal public links")
   Component(handler, "Call-to-action handler", "Angular component", "Acts on the emitted intent")
 }

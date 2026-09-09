@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
 end box
 box "Frontend — Cornerstone reading components" #D1FADF
   participant "CsTooltipDirective" as tooltip
-  participant "CsDefinitionListComponent" as deflist
+  participant "DefinitionListComponent" as deflist
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Overlay" as overlay

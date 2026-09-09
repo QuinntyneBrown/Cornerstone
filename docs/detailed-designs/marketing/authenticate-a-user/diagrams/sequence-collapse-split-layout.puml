@@ -16,9 +16,9 @@ skinparam package {
 }
 actor "Application user" as user
 box "Frontend — Cornerstone marketing components" #D1FADF
-  participant "CsAuthLayoutComponent" as layout
-  participant "CsAuthCardComponent" as card
-  participant "CsAuthBrandDirective" as brand
+  participant "AuthLayoutComponent" as layout
+  participant "AuthCardComponent" as card
+  participant "AuthBrandDirective" as brand
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Auth layout styles" as styles

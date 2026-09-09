@@ -6,14 +6,14 @@ title Components — Import and author curriculum
 Person(admin, "Administrator", "Imports rows and authors the hierarchy")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(wizard, "CsCsvImportWizardComponent", "Standalone component, OnPush", "Upload, mapping, validation, confirmation, progress, and result steps; emits typed intents only")
+  Component(wizard, "CsvImportWizardComponent", "Standalone component, OnPush", "Upload, mapping, validation, confirmation, progress, and result steps; emits typed intents only")
   Component(preview, "Row preview renderer", "Text interpolation only", "Renders a cell beginning with =, +, -, or @ as literal text and evaluates nothing")
-  Component(tree, "CsCurriculumTreeComponent", "Standalone component, ARIA tree", "Track, module, lesson, and question hierarchy with selection and reorder")
-  Component(editor, "CsCurriculumEditorComponent", "Standalone component, nested forms", "Edits the selected node and reports draft, dirty, and published state")
-  Component(builder, "CsProgressionBuilderComponent", "Standalone component", "Ordered stages and terms with editable rows and transition controls")
-  Component(grid, "CsCompetencyGridComponent", "Standalone component (L2-096 matrix)", "Renders competencies against stages")
-  Component(confirm, "CsConfirmDialogComponent", "Standalone component (L2-103)", "Destructive confirmation preceding a delete intent")
-  Component(unsaved, "CsUnsavedChangesDialogComponent", "Standalone component (L2-105)", "Presented when a dirty editor loses its selection")
+  Component(tree, "CurriculumTreeComponent", "Standalone component, ARIA tree", "Track, module, lesson, and question hierarchy with selection and reorder")
+  Component(editor, "CurriculumEditorComponent", "Standalone component, nested forms", "Edits the selected node and reports draft, dirty, and published state")
+  Component(builder, "ProgressionBuilderComponent", "Standalone component", "Ordered stages and terms with editable rows and transition controls")
+  Component(grid, "CompetencyGridComponent", "Standalone component (L2-096 matrix)", "Renders competencies against stages")
+  Component(confirm, "ConfirmDialogComponent", "Standalone component (L2-103)", "Destructive confirmation preceding a delete intent")
+  Component(unsaved, "UnsavedChangesDialogComponent", "Standalone component (L2-105)", "Presented when a dirty editor loses its selection")
   Component(models, "Import, curriculum, and progression types", "TypeScript types", "CsImportValidation, CsCurriculumNode, CsProgressionViewModel and their intents")
 }
 

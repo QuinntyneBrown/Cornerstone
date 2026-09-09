@@ -6,7 +6,7 @@ title Containers — Follow a learning journey
 Person(youth, "Youth participant", "Follows the journey")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Renders CsLearningJourneyComponent and CsLessonStepListComponent from a view model")
+  Container(lib, "Component library", "Angular standalone components", "Renders LearningJourneyComponent and LessonStepListComponent from a view model")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the tokens the journey styles resolve")
   Container(docs, "Documentation site", "Angular application", "Publishes the view model and intent contracts")
 }
@@ -22,9 +22,9 @@ System_Ext(browser, "Browser platform", "Rendering and media query engine")
 
 Rel(youth, shell, "Opens the journey screen in")
 Rel(shell, page, "Routes to")
-Rel(services, page, "Computes CsLearningJourneyView for")
+Rel(services, page, "Computes LearningJourneyView for")
 Rel(page, lib, "Binds the journey view model to")
-Rel(lib, page, "Emits CsLessonStepSelect and CsModuleToggle to")
+Rel(lib, page, "Emits LessonStepSelect and ModuleToggle to")
 Rel(page, services, "Forwards intents to")
 Rel(lib, theme, "Resolves visual values from")
 Rel(lib, cdk, "Manages roving focus with")

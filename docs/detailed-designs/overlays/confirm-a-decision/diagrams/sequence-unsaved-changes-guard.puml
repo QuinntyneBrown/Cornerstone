@@ -21,9 +21,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as appsvc
 end box
 box "Frontend — Cornerstone overlay runtime" #D1FADF
-  participant "csConfirmLeave()" as guard
-  participant "CsDialogService" as service
-  participant "CsUnsavedChangesDialogComponent" as unsaved
+  participant "confirmLeave()" as guard
+  participant "DialogService" as service
+  participant "UnsavedChangesDialogComponent" as unsaved
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Dialog and FocusTrap" as cdk

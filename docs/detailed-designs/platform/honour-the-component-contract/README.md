@@ -44,12 +44,12 @@ directives, and a build-time surface report. It renders nothing on its own.
   holds the `value` model signal, mirrors the form model's disabled state into a
   `disabled` signal, propagates touched state on the first blur after focus, and
   derives `invalid` from the bound `NgControl` status and touched state.
-- **`CsFieldComponent`** — the framing component that owns a label, an optional
+- **`FieldComponent`** — the framing component that owns a label, an optional
   hint, an optional error, an optional success message, and an optional character
   count. It generates the control identifier, sets `for` on the label, and
   composes `aria-describedby` from the hint and error identifiers, appending to a
   developer-supplied value rather than replacing it.
-- **`CsFieldControl`** — the interface a control implements so `CsFieldComponent`
+- **`CsFieldControl`** — the interface a control implements so `FieldComponent`
   can wire it: `id`, `describedBy`, `invalid`, `disabled`, `required`, and
   `focus()`.
 - **`CsIdService`** — the identifier source shared with the CDK adapter layer
@@ -90,7 +90,7 @@ directives, and a build-time surface report. It renders nothing on its own.
 The library ships no `NgModule` for public consumption. Every component and
 directive is standalone and importable from `@cornerstone/ui` directly.
 
-The exact character budget at which `CsFieldComponent` switches its character
+The exact character budget at which `FieldComponent` switches its character
 count from polite to assertive announcement is `<TO SUPPLY>`.
 
 ## Requirements
@@ -130,7 +130,7 @@ container regenerates the checked-in signature list on every build.
 
 ### Components
 
-`CsControlBase` and `CsFieldComponent` implement the forms and wiring clauses,
+`CsControlBase` and `FieldComponent` implement the forms and wiring clauses,
 the coercion helpers implement the input clause, the slot directives implement
 the projection clause, and the intent types implement the composite clause. The
 lint rules and the surface report hold all four in place.
@@ -140,7 +140,7 @@ lint rules and the surface report hold all four in place.
 ### Class structure
 
 `CsControlBase<T>` realizes `ControlValueAccessor` and `CsFieldControl`, and each
-value-bearing control extends it. `CsFieldComponent` aggregates one field control
+value-bearing control extends it. `FieldComponent` aggregates one field control
 and composes its described-by list from the hint and error identifiers. Composites
 take a `CsViewModel` and emit a `CsIntent`.
 
@@ -148,7 +148,7 @@ take a `CsViewModel` and emit a `CsIntent`.
 
 ### Behaviour — bind a control to a reactive form
 
-A field renders a label, a control, a hint, and an error. `CsFieldComponent`
+A field renders a label, a control, a hint, and an error. `FieldComponent`
 generates the identifiers and wires the relationships; `CsControlBase` reports
 value, touched, and disabled state back to the `FormControl`.
 

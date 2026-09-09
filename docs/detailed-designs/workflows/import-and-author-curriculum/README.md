@@ -63,38 +63,38 @@ The feature is a vertical slice from a spreadsheet file selected in the browser
 through to a curriculum hierarchy and a progression matrix, and back out as typed
 intents.
 
-- **`CsCsvImportWizardComponent`** — the import composite, selector
-  `cs-csv-import-wizard`. It takes `targets: InputSignal<CsImportTargetColumn[]>`,
+- **`CsvImportWizardComponent`** — the import composite, selector
+  `cs-csv-import-wizard`. It takes `targets: InputSignal<ImportTargetColumn[]>`,
   `validation: InputSignal<CsImportValidation | null>`, and
   `progress: InputSignal<CsImportProgress | null>`, and it emits `fileSelected`,
   `mappingChanged`, and `importRequested`. Its five steps are upload, mapping,
   validation, confirmation, and result. It uses the wizard behaviour of L2-062,
   including the validation gate between steps.
-- **`CsImportCellText`** — the rendering rule applied to every preview cell. The
+- **`ImportCellText`** — the rendering rule applied to every preview cell. The
   wizard binds cell values through text interpolation only. A value beginning
   with `=`, `+`, `-`, or `@` renders as the same characters the file holds, and
   the wizard performs no evaluation, no expression parsing, and no formula
   detection that would change the rendered characters.
-- **`CsCurriculumTreeComponent`** — the hierarchy composite, selector
+- **`CurriculumTreeComponent`** — the hierarchy composite, selector
   `cs-curriculum-tree`. It takes `nodes: InputSignal<CsCurriculumNode[]>` and
   `selectedId: ModelSignal<string | null>`, and emits `addRequested`,
   `deleteRequested`, `reorderRequested`, and `selectionChanged`. It implements
   the ARIA tree pattern with `role="tree"`, `role="treeitem"`, `aria-expanded`,
   `aria-level`, `aria-setsize`, and `aria-posinset`, and it keeps exactly one
   item in the tab order.
-- **`CsCurriculumEditorComponent`** — the node editor, selector
+- **`CurriculumEditorComponent`** — the node editor, selector
   `cs-curriculum-editor`. It takes `node: InputSignal<CsCurriculumNode | null>`,
   holds `dirty: Signal<boolean>`, and emits `saveRequested` and `cancelRequested`.
   It presents nested forms for a track, a module, a lesson, or a question
   according to the selected node's kind.
-- **`CsProgressionBuilderComponent`** — the progression composite, selector
+- **`ProgressionBuilderComponent`** — the progression composite, selector
   `cs-progression-builder`. It takes
   `progression: InputSignal<CsProgressionViewModel>` and
   `transitions: InputSignal<CsTransitionRule[]>`, and emits `rowChanged`,
   `reorderRequested`, and `transitionRequested`. A transition the supplied rules
   do not permit renders as a disabled control carrying an accessible description
   stating why.
-- **`CsCompetencyGridComponent`** — the matrix composite, selector
+- **`CompetencyGridComponent`** — the matrix composite, selector
   `cs-competency-grid`. It takes `grid: InputSignal<CsCompetencyGridViewModel>`
   and emits `cellActivated`. It satisfies the matrix semantics of L2-096.
 - **`CsCurriculumNode`** — one node: the identifier, the kind, the title, the
@@ -103,7 +103,7 @@ intents.
   `'track' | 'module' | 'lesson' | 'question'`.
 - **`CsCurriculumNodeState`** — union type of the lifecycle states:
   `'draft' | 'dirty' | 'published'`.
-- **`CsImportTargetColumn`**, **`CsColumnMapping`**, **`CsImportValidation`**,
+- **`ImportTargetColumn`**, **`CsColumnMapping`**, **`CsImportValidation`**,
   **`CsImportRowError`**, **`CsImportProgress`**, **`CsImportResult`** — the
   import types, carrying the target field list, the chosen mapping, the valid,
   invalid, and duplicate counts, the per-row errors with row number and reason,

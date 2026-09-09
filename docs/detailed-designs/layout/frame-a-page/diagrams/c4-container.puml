@@ -6,7 +6,7 @@ title Containers — Frame a page
 Person(dev, "Application developer", "Places the frame and its slots in routed templates")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components and directives", "Provides CsPageComponent, CsSectionComponent, CsToolbarComponent, CsActionBarComponent, and the accessibility directives")
+  Container(lib, "Component library", "Angular standalone components and directives", "Provides PageComponent, SectionComponent, ToolbarComponent, ActionBarComponent, and the accessibility directives")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the spacing, typography, and elevation tokens the frame resolves")
   Container(docs, "Documentation site", "Angular application", "Publishes the slot map, heading rules, and overflow strategy")
 }

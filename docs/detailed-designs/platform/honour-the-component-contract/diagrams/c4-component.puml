@@ -5,7 +5,7 @@ title Components — Honour the component contract
 
 Container_Boundary(contract, "Cornerstone contract layer") {
   Component(base, "CsControlBase<T>", "Abstract class", "Implements ControlValueAccessor, disabled mirroring, and touched propagation")
-  Component(field, "CsFieldComponent", "Angular component", "Generates identifiers and composes label, hint, error, and described-by wiring")
+  Component(field, "FieldComponent", "Angular component", "Generates identifiers and composes label, hint, error, and described-by wiring")
   Component(iface, "CsFieldControl", "TypeScript interface", "The surface a field wires: id, describedBy, invalid, disabled, required, focus()")
   Component(ids, "CsIdService", "Injectable service", "Generates document-unique cs- prefixed identifiers")
   Component(coerce, "Input transforms", "csBooleanAttribute, csNumberAttribute, csEnumAttribute", "Coerce attribute forms and diagnose invalid enum values")
@@ -15,9 +15,9 @@ Container_Boundary(contract, "Cornerstone contract layer") {
 }
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(input, "CsInputDirective / CsSelectDirective / CsCheckboxComponent", "Value-bearing controls", "Extend CsControlBase and realize CsFieldControl")
-  Component(card, "CsCardComponent / CsPageComponent", "Multi-slot components", "Render header, footer, and action chrome only when a slot has content")
-  Component(composite, "CsAttendanceRosterComponent", "Composite component", "Takes a typed view model and emits typed intents")
+  Component(input, "CsInputDirective / CsSelectDirective / CheckboxComponent", "Value-bearing controls", "Extend CsControlBase and realize CsFieldControl")
+  Component(card, "CardComponent / PageComponent", "Multi-slot components", "Render header, footer, and action chrome only when a slot has content")
+  Component(composite, "AttendanceRosterComponent", "Composite component", "Takes a typed view model and emits typed intents")
 }
 
 Container_Boundary(gate, "Surface report") {

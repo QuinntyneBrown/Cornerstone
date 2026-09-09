@@ -19,9 +19,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Roster page" as page
 end box
 box "Frontend — Cornerstone table components" #D1FADF
-  participant "CsResponsiveTableDirective" as reflow
-  participant "CsTableDirective" as table
-  participant "CsDataToolbarComponent" as toolbar
+  participant "ResponsiveTableDirective" as reflow
+  participant "TableDirective" as table
+  participant "DataToolbarComponent" as toolbar
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "BreakpointObserver" as bp

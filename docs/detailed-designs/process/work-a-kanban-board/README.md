@@ -39,51 +39,51 @@ progress display.
 The feature is a vertical slice from a column view model down to an announced
 move. It introduces three components, the drag behaviour, and the intents.
 
-- **`CsKanbanBoardComponent`** — the board, selector `cs-kanban-board`. Inputs:
-  `columns: InputSignal<readonly CsKanbanColumn[]>`,
+- **`KanbanBoardComponent`** — the board, selector `cs-kanban-board`. Inputs:
+  `columns: InputSignal<readonly KanbanColumn[]>`,
   `adapter: InputSignal<CsProcessAdapter>`, and
   `dragDisabled: InputSignal<boolean>`. Output:
-  `itemMoved: OutputEmitterRef<CsWorkItemMoveIntent>`. The board lays columns out
+  `itemMoved: OutputEmitterRef<WorkItemMoveIntent>`. The board lays columns out
   horizontally and scrolls horizontally at viewport XS, with keyboard scrolling
   available and each column held at or above the documented minimum readable
   width. It registers every column as a CDK drop list within one connected group.
-- **`CsKanbanColumnComponent`** — the column, selector `cs-kanban-column`.
-  Inputs: `column: InputSignal<CsKanbanColumn>`, `adapter`, and
-  `dropState: InputSignal<CsDropState>` holding `'idle'`, `'allowed'`, or
+- **`KanbanColumnComponent`** — the column, selector `cs-kanban-column`.
+  Inputs: `column: InputSignal<KanbanColumn>`, `adapter`, and
+  `dropState: InputSignal<DropState>` holding `'idle'`, `'allowed'`, or
   `'blocked'`. Each column is a labelled region whose accessible name combines
   the column title and its item count. A locked column refuses every drop and
   states its lock reason. An empty column renders the empty state and stays a
   valid drop target with an accessible drop description.
-- **`CsWorkItemCardComponent`** — the card, selector `cs-work-item-card`.
-  Inputs: `item: InputSignal<CsWorkItem>`, `adapter`, and
+- **`WorkItemCardComponent`** — the card, selector `cs-work-item-card`.
+  Inputs: `item: InputSignal<WorkItem>`, `adapter`, and
   `draggable: InputSignal<boolean>`. Outputs:
-  `opened: OutputEmitterRef<CsWorkItemOpenIntent>` and
-  `actionSelected: OutputEmitterRef<CsWorkItemActionIntent>`. The accessible name
+  `opened: OutputEmitterRef<WorkItemOpenIntent>` and
+  `actionSelected: OutputEmitterRef<WorkItemActionIntent>`. The accessible name
   combines the item code and title. `Enter` on the card emits the open intent and
   starts no drag. The drag handle carries its own accessible name, and the action
   menu trigger's accessible name includes the item code. A blocked item states its
   blocked state and reason in text and exposes the reason as an accessible
   description; an inactive item is de-emphasized while holding AA text contrast.
-  Progress renders through `CsPipStripComponent` (L2-138).
-- **`CsKanbanColumn`** — the column view model: `id`, `title`, `items`,
+  Progress renders through `PipStripComponent` (L2-138).
+- **`KanbanColumn`** — the column view model: `id`, `title`, `items`,
   `accepts` listing the item kinds the column takes, optional `locked`, optional
   `lockReason`, optional `done`, and optional `emptyText`.
-- **`CsWorkItem`** — the item view model: `id`, `code`, `title`, optional
+- **`WorkItem`** — the item view model: `id`, `code`, `title`, optional
   `description`, `tags`, optional `points`, `status`, optional `progress`,
   optional `assignee`, optional `actions`, optional `blockedReason`, and optional
   `inactive`.
-- **`CsDropState`** — union type of the drop feedback states: `'idle' | 'allowed'
+- **`DropState`** — union type of the drop feedback states: `'idle' | 'allowed'
   | 'blocked'`.
-- **`CsWorkItemMoveIntent`** — the move intent: `itemId`, `fromColumnId`,
+- **`WorkItemMoveIntent`** — the move intent: `itemId`, `fromColumnId`,
   `toColumnId`, and `toIndex`. The board emits it exactly once per completed
   move and emits none for a refused drop.
-- **`CsWorkItemOpenIntent`** — the open intent: `itemId`.
-- **`CsWorkItemActionIntent`** — the action-menu intent: `itemId` and `actionId`.
-- **`CsKanbanKeyboardMove`** — the internal controller for the keyboard
+- **`WorkItemOpenIntent`** — the open intent: `itemId`.
+- **`WorkItemActionIntent`** — the action-menu intent: `itemId` and `actionId`.
+- **`KanbanKeyboardMove`** — the internal controller for the keyboard
   alternative. It holds a grab state, moves the grabbed card between columns and
-  positions, emits the same `CsWorkItemMoveIntent` as a pointer drop, and
+  positions, emits the same `WorkItemMoveIntent` as a pointer drop, and
   announces the resulting column and position politely.
-- **`CsKanbanAnnouncer`** — the internal live-region helper. It announces a
+- **`KanbanAnnouncer`** — the internal live-region helper. It announces a
   refused drop once per drag and announces the landing column and position after
   a keyboard move.
 
@@ -130,9 +130,9 @@ components.
 
 ### Class structure
 
-`CsKanbanColumn` declares what it accepts and whether it is locked;
-`CsWorkItem` carries the card's content and state; both the pointer drop and the
-keyboard move produce one `CsWorkItemMoveIntent`.
+`KanbanColumn` declares what it accepts and whether it is locked;
+`WorkItem` carries the card's content and state; both the pointer drop and the
+keyboard move produce one `WorkItemMoveIntent`.
 
 ![Class diagram for working a kanban board](diagrams/class-structure.png)
 

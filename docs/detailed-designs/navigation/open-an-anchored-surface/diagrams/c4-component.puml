@@ -8,8 +8,8 @@ Person(user, "Application user", "Activates a trigger and selects an action")
 Container_Boundary(lib, "Cornerstone component library") {
   Component(menu, "CsMenuDirective", "Attribute directive", "Owns the overlay lifetime, the open model, and the focus restore target")
   Component(item, "CsMenuItemDirective", "Attribute directive", "Applies menuitem, checkbox, or radio semantics and the danger tone")
-  Component(popover, "CsPopoverComponent", "Standalone component", "Anchored panel projecting arbitrary content, optionally focus trapped")
-  Component(account, "CsAccountMenuComponent", "Standalone component", "Avatar and name trigger over a fixed profile, settings, support, and sign-out set")
+  Component(popover, "PopoverComponent", "Standalone component", "Anchored panel projecting arbitrary content, optionally focus trapped")
+  Component(account, "AccountMenuComponent", "Standalone component", "Avatar and name trigger over a fixed profile, settings, support, and sign-out set")
   Component(sep, "Separator element", "Component-scoped template", "Divides the action list with role=separator")
 }
 

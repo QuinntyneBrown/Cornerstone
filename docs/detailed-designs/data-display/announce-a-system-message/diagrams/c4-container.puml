@@ -6,7 +6,7 @@ title Containers — Announce a system message
 Person(user, "Application user", "Hears and reads system messages")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components and services", "Supplies CsAlertComponent, CsOfflineBannerComponent, CsToastService, and CsToastOutletComponent")
+  Container(lib, "Component library", "Angular standalone components and services", "Supplies AlertComponent, OfflineBannerComponent, ToastService, and ToastOutletComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the tone, elevation, and motion tokens the messages resolve")
   Container(docs, "Documentation site", "Angular application", "Publishes the announcement policy table and the timeout defaults")
 }
@@ -29,6 +29,6 @@ Rel(lib, theme, "Resolves tone, elevation, and motion values from")
 Rel(cdk, browser, "Writes announcements to the live regions of")
 Rel(lib, browser, "Writes role status and role alert markup to")
 Rel(browser, user, "Announces the message to")
-Rel(lib, svc, "Returns CsToastResult to")
+Rel(lib, svc, "Returns ToastResult to")
 Rel(docs, lib, "Documents the politeness routing of")
 @enduml

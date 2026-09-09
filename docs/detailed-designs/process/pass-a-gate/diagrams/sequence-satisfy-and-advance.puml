@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone gate components" #D1FADF
-  participant "CsGateComponent" as gate
-  participant "CsRequirementChecklistComponent" as list
-  participant "CsGateAnnouncer" as announcer
+  participant "GateComponent" as gate
+  participant "RequirementChecklistComponent" as list
+  participant "GateAnnouncer" as announcer
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer" as cdk
@@ -55,7 +55,7 @@ announcer -> cdk : Announce politely once
 
 user -> dom : Activate the advance action
 dom -> gate : Click or Enter
-gate -> page : Emit exactly one CsGateAdvanceIntent
+gate -> page : Emit exactly one GateAdvanceIntent
 page -> services : Authorize and perform the stage transition
 services --> page : Next stage state
 page --> user : Advanced process

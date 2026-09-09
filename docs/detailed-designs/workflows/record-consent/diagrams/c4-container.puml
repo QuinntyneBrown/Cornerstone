@@ -23,7 +23,7 @@ System_Ext(browser, "Browser platform", "Rendering and input")
 
 Rel(guardian, browser, "Grants and revokes consent in")
 Rel(browser, lib, "Delivers pointer and keyboard events to")
-Rel(page, lib, "Supplies CsConsentPanelViewModel to")
+Rel(page, lib, "Supplies ConsentPanelViewModel to")
 Rel(lib, page, "Emits decision, revoke, and contact-update intents to")
 Rel(page, services, "Delegates every rule decision and write to")
 Rel(services, record, "Reads and writes")

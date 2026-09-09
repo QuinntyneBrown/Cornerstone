@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "FormControl" as control
 end box
 box "Frontend — Cornerstone choice controls" #D1FADF
-  participant "CsCheckboxComponent" as checkbox
-  participant "CsSwitchComponent" as switchc
+  participant "CheckboxComponent" as checkbox
+  participant "SwitchComponent" as switchc
 end box
 box "Browser — platform" #FFF4E5
   participant "Native checkbox host" as native

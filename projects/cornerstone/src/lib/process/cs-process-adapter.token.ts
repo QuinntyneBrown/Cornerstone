@@ -9,12 +9,12 @@ import {
   output,
 } from '@angular/core';
 import {
-  CsBadgeComponent,
+  BadgeComponent,
   CsButtonDirective,
-  CsCardComponent,
-  CsProgressRingComponent,
+  CardComponent,
+  ProgressRingComponent,
 } from '../foundations';
-import { CsCheckboxComponent } from '../forms';
+import { CheckboxComponent } from '../forms';
 import { CsProcessAdapter } from './cs-process-adapter.interface';
 
 export const CS_PROCESS_ADAPTER = new InjectionToken<CsProcessAdapter>('CS_PROCESS_ADAPTER');

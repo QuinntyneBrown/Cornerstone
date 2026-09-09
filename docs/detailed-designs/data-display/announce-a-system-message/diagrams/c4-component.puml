@@ -7,11 +7,11 @@ Person(user, "Application user", "Receives the announcement and may act on it")
 
 Container_Boundary(lib, "Cornerstone component library") {
   Component(policy, "csAnnouncementPolitenessFor()", "Pure function", "Maps tone and origin to polite, assertive, or off")
-  Component(alert, "CsAlertComponent", "Standalone component", "Renders an inline message with heading, icon, in-region actions, and dismiss")
-  Component(banner, "CsOfflineBannerComponent", "Standalone component", "Renders offline, reconnecting, queued, and restored states and reports its height")
-  Component(service, "CsToastService", "Injectable service", "Holds the queue, enforces the maximum-visible policy, and returns CsToastRef")
-  Component(outlet, "CsToastOutletComponent", "Standalone component", "Renders visible toasts and owns the polite and assertive live regions")
-  Component(types, "Message types", "TypeScript types", "CsMessageTone, CsLivePoliteness, CsConnectivityState, CsToastConfig, CsToastResult")
+  Component(alert, "AlertComponent", "Standalone component", "Renders an inline message with heading, icon, in-region actions, and dismiss")
+  Component(banner, "OfflineBannerComponent", "Standalone component", "Renders offline, reconnecting, queued, and restored states and reports its height")
+  Component(service, "ToastService", "Injectable service", "Holds the queue, enforces the maximum-visible policy, and returns ToastRef")
+  Component(outlet, "ToastOutletComponent", "Standalone component", "Renders visible toasts and owns the polite and assertive live regions")
+  Component(types, "Message types", "TypeScript types", "CsMessageTone, CsLivePoliteness, ConnectivityState, ToastConfig, ToastResult")
   Component(styles, "Message styles", "Component-scoped CSS", "Resolves tone, elevation, and motion from --cs- tokens")
 }
 
@@ -25,7 +25,7 @@ System_Ext(browser, "Browser platform", "Live regions and assistive technology b
 
 Rel(svc, service, "Opens messages through")
 Rel(service, outlet, "Releases visible messages to")
-Rel(service, svc, "Returns CsToastRef and CsToastResult to")
+Rel(service, svc, "Returns ToastRef and ToastResult to")
 Rel(shell, outlet, "Mounts")
 Rel(svc, banner, "Reports connectivity state to")
 Rel(banner, shell, "Emits the banner height to")

@@ -49,37 +49,37 @@ The feature is a vertical slice from an application-supplied consent view model
 down to grouped fieldsets, a history list, and a set of typed intents travelling
 back.
 
-- **`CsConsentPanelComponent`** — the composite, selector `cs-consent-panel`. It
-  takes `consent: InputSignal<CsConsentPanelViewModel>` and
+- **`ConsentPanelComponent`** — the composite, selector `cs-consent-panel`. It
+  takes `consent: InputSignal<ConsentPanelViewModel>` and
   `busy: InputSignal<boolean>`, and emits `decisionRequested`,
   `revokeRequested`, and `contactUpdateRequested`. It renders the current status,
   the contact detail block, one fieldset per consent group, the revoke and update
   actions, and the history list.
-- **`CsConsentPanelViewModel`** — the input type. It carries the subject's
+- **`ConsentPanelViewModel`** — the input type. It carries the subject's
   display name, the contact detail block, the consent groups, the history
   entries, and a read-only flag.
-- **`CsConsentGroup`** — one labelled fieldset: the group identifier, the group
+- **`ConsentGroup`** — one labelled fieldset: the group identifier, the group
   label, and the choices it contains. Each group renders as a `fieldset` with a
   `legend`, so the group label reaches assistive technology as part of each
   choice's accessible name.
-- **`CsConsentChoice`** — one scope: the scope identifier, the scope label, the
+- **`ConsentChoice`** — one scope: the scope identifier, the scope label, the
   scope statement, the current decision, and whether the choice is locked. The
   scope statement is rendered as text beside the control rather than carried by a
   heading alone, so the scope is readable without heading navigation.
-- **`CsConsentStatus`** — union type of the decision states:
+- **`ConsentStatus`** — union type of the decision states:
   `'granted' | 'revoked' | 'not-recorded'`.
-- **`CsConsentHistoryEntry`** — one recorded decision: the scope label, the
+- **`ConsentHistoryEntry`** — one recorded decision: the scope label, the
   decision, the actor's display name, and the timestamp. The panel renders the
   timestamp with locale-aware formatting beside a machine-readable value.
-- **`CsConsentContactDetail`** — the labelled contact block: the guardian name,
+- **`ConsentContactDetail`** — the labelled contact block: the guardian name,
   the relationship, and the contact lines. Every field is rendered as read-only
   text.
-- **`CsConsentDecisionIntent`** — intent carrying the changed scopes and the
+- **`ConsentDecisionIntent`** — intent carrying the changed scopes and the
   decision applied to them. Exactly one intent is emitted per confirmed action,
   whatever set of scopes that action covers.
-- **`CsConsentRevokeIntent`** — intent carrying the scopes a revocation covers,
+- **`ConsentRevokeIntent`** — intent carrying the scopes a revocation covers,
   emitted only after the destructive confirm dialog resolves.
-- **`CsConsentContactUpdateIntent`** — intent asking the application to open its
+- **`ConsentContactUpdateIntent`** — intent asking the application to open its
   own contact-editing flow. The panel edits no contact field itself.
 
 A revocation passes through the confirm dialog (L2-103) in its destructive
@@ -124,7 +124,7 @@ container of its own.
 
 ### Components
 
-`CsConsentPanelComponent` composes a contact block, one fieldset per consent
+`ConsentPanelComponent` composes a contact block, one fieldset per consent
 group, and a history list, and it emits intents across the boundary to the
 application's consent service. The rules, the audit write, and the storage sit on
 the application side of that boundary; no Cornerstone component holds a store.
@@ -133,7 +133,7 @@ the application side of that boundary; no Cornerstone component holds a store.
 
 ### Class structure
 
-The panel reads one `CsConsentPanelViewModel` composed of contact detail, consent
+The panel reads one `ConsentPanelViewModel` composed of contact detail, consent
 groups, and history entries, and emits three intent types. No type in the slice
 carries a persistence or logging method.
 

@@ -38,7 +38,7 @@ enum CsChipSelectionMode {
   multiple
 }
 
-class CsBadgeComponent {
+class BadgeComponent {
   +tone: InputSignal<CsBadgeTone>
   +presentation: InputSignal<CsBadgePresentation>
   +value: InputSignal<number>
@@ -49,36 +49,36 @@ class CsBadgeComponent {
   #decorative: Signal<boolean>
 }
 
-class CsPillComponent {
+class PillComponent {
   +tone: InputSignal<CsBadgeTone>
   +value: InputSignal<string>
   +removable: InputSignal<boolean>
   +selectable: InputSignal<boolean>
   +selected: ModelSignal<boolean>
   +disabled: InputSignal<boolean>
-  +removed: OutputEmitterRef<CsChipRemoveEvent>
+  +removed: OutputEmitterRef<ChipRemoveEvent>
   +selectedChange: OutputEmitterRef<boolean>
   +focus(): void
   #onKeydown(event: KeyboardEvent): void
 }
 
-class CsChipListComponent {
+class ChipListComponent {
   +ariaLabel: InputSignal<string>
   +selectionMode: InputSignal<CsChipSelectionMode>
   +orientation: InputSignal<'horizontal' | 'vertical'>
-  +removed: OutputEmitterRef<CsChipRemoveEvent>
-  +selectionChange: OutputEmitterRef<CsChipSelectionChange>
-  #chips: Signal<readonly CsPillComponent[]>
-  -keyManager: FocusKeyManager<CsPillComponent>
+  +removed: OutputEmitterRef<ChipRemoveEvent>
+  +selectionChange: OutputEmitterRef<ChipSelectionChange>
+  #chips: Signal<readonly PillComponent[]>
+  -keyManager: FocusKeyManager<PillComponent>
   -moveFocusAfterRemoval(index: number): void
 }
 
-class CsChipRemoveEvent {
+class ChipRemoveEvent {
   +value: string
   +index: number
 }
 
-class CsChipSelectionChange {
+class ChipSelectionChange {
   +selected: readonly string[]
   +changed: string
 }
@@ -89,13 +89,13 @@ class FocusKeyManager <<CDK>> {
   +setActiveItem(index: number): void
 }
 
-CsChipListComponent o-- "0..*" CsPillComponent : manages
-CsChipListComponent *-- "1" FocusKeyManager : owns
-CsChipListComponent ..> CsChipRemoveEvent : emits
-CsChipListComponent ..> CsChipSelectionChange : emits
-CsChipListComponent --> CsChipSelectionMode : has
-CsPillComponent ..> CsChipRemoveEvent : emits
-CsPillComponent --> CsBadgeTone : has
-CsBadgeComponent --> CsBadgeTone : has
-CsBadgeComponent --> CsBadgePresentation : has
+ChipListComponent o-- "0..*" PillComponent : manages
+ChipListComponent *-- "1" FocusKeyManager : owns
+ChipListComponent ..> ChipRemoveEvent : emits
+ChipListComponent ..> ChipSelectionChange : emits
+ChipListComponent --> CsChipSelectionMode : has
+PillComponent ..> ChipRemoveEvent : emits
+PillComponent --> CsBadgeTone : has
+BadgeComponent --> CsBadgeTone : has
+BadgeComponent --> CsBadgePresentation : has
 @enduml

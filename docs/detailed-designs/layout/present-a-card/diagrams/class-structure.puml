@@ -13,14 +13,14 @@ skinparam class {
 ' --------------------------
 title Class structure — Present a card
 
-enum CsCardTone {
+enum CardTone {
   paper
   greige
   ink
   lime
 }
 
-enum CsCardPresentation {
+enum CardPresentation {
   flat
   raised
   link
@@ -39,7 +39,7 @@ enum CsMediaAspect {
   oneByOne
 }
 
-enum CsDividerOrientation {
+enum DividerOrientation {
   horizontal
   vertical
 }
@@ -49,9 +49,9 @@ enum CsDividerVariant {
   inset
 }
 
-class CsCardComponent {
-  +tone: InputSignal<CsCardTone>
-  +presentation: InputSignal<CsCardPresentation>
+class CardComponent {
+  +tone: InputSignal<CardTone>
+  +presentation: InputSignal<CardPresentation>
   +disabled: InputSignal<boolean>
   +padding: InputSignal<CsCardPadding>
   +activated: OutputEmitterRef<void>
@@ -83,8 +83,8 @@ class CsCardActionsComponent {
   +align: InputSignal<CsActionAlign>
 }
 
-class CsDividerComponent {
-  +orientation: InputSignal<CsDividerOrientation>
+class DividerComponent {
+  +orientation: InputSignal<DividerOrientation>
   +variant: InputSignal<CsDividerVariant>
   +spacing: InputSignal<CsSpacingStep>
   +decorative: InputSignal<boolean>
@@ -103,19 +103,19 @@ class CsTokenSet {
   +spacing: SpacingTokens
 }
 
-CsCardComponent *-- "0..1" CsCardHeaderComponent : projects
-CsCardComponent *-- "0..1" CsCardMediaComponent : projects
-CsCardComponent *-- "0..1" CsCardContentComponent : projects
-CsCardComponent *-- "0..1" CsCardFooterComponent : projects
-CsCardComponent *-- "0..1" CsCardActionsComponent : projects
-CsCardComponent o-- "0..*" CsDividerComponent : separates slots with
+CardComponent *-- "0..1" CsCardHeaderComponent : projects
+CardComponent *-- "0..1" CsCardMediaComponent : projects
+CardComponent *-- "0..1" CsCardContentComponent : projects
+CardComponent *-- "0..1" CsCardFooterComponent : projects
+CardComponent *-- "0..1" CsCardActionsComponent : projects
+CardComponent o-- "0..*" DividerComponent : separates slots with
 CsCardActionsComponent ..> CsClusterDirective : arranges with
-CsCardComponent --> CsCardTone : has
-CsCardComponent --> CsCardPresentation : has
-CsCardComponent --> CsCardPadding : has
+CardComponent --> CardTone : has
+CardComponent --> CardPresentation : has
+CardComponent --> CsCardPadding : has
 CsCardMediaComponent --> CsMediaAspect : has
-CsDividerComponent --> CsDividerOrientation : has
-CsDividerComponent --> CsDividerVariant : has
-CsCardComponent ..> CsTokenSet : reads
-CsDividerComponent ..> CsTokenSet : reads
+DividerComponent --> DividerOrientation : has
+DividerComponent --> CsDividerVariant : has
+CardComponent ..> CsTokenSet : reads
+DividerComponent ..> CsTokenSet : reads
 @enduml

@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "FormControl" as control
 end box
 box "Frontend — Cornerstone selection components" #D1FADF
-  participant "CsDateTimeFieldComponent" as field
+  participant "DateTimeFieldComponent" as field
   participant "Bound validator" as bounds
 end box
 box "Browser — platform" #FFF4E5

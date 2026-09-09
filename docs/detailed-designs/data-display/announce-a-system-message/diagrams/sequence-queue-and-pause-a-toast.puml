@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application shell" as shell
 end box
 box "Frontend — Cornerstone message runtime" #D1FADF
-  participant "CsToastService" as toasts
-  participant "CsToastRef" as ref
-  participant "CsToastOutletComponent" as outlet
+  participant "ToastService" as toasts
+  participant "ToastRef" as ref
+  participant "ToastOutletComponent" as outlet
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Overlay and LiveAnnouncer" as cdk
@@ -41,7 +41,7 @@ else Outlet is mounted
 end
 
 toasts -> ref : Create one handle per message
-ref --> svc : CsToastRef with afterDismissed
+ref --> svc : ToastRef with afterDismissed
 toasts -> outlet : Release the visible messages in order
 outlet -> cdk : Position the outlet above the page
 outlet -> dom : Announce each message in order without dropping one per L2-083
@@ -60,7 +60,7 @@ user -> dom : Activate the message action
 dom -> outlet : Click event
 outlet -> toasts : Report the action outcome
 toasts -> ref : Resolve afterDismissed with 'action' per L2-083
-ref --> svc : CsToastResult 'action'
+ref --> svc : ToastResult 'action'
 outlet -> dom : Remove the message and move no focus per L2-083
 toasts -> outlet : Release the queued message into the freed slot
 dom --> user : Next message presented in order

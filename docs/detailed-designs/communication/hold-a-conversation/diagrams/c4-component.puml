@@ -6,17 +6,17 @@ title Components — Hold a conversation
 Person(mentor, "Mentor", "Reads a thread and replies")
 
 Container_Boundary(appsvc, "Consuming application services") {
-  Component(msgvm, "MessagingViewModelService", "Angular injectable", "Builds CsMessageViewModel and CsConversationViewModel from application data")
+  Component(msgvm, "MessagingViewModelService", "Angular injectable", "Builds MessageViewModel and CsConversationViewModel from application data")
   Component(delivery, "MessageDeliveryHandler", "Angular injectable", "Receives send, retry, and history intents and owns delivery and the offline queue")
 }
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(list, "CsConversationListComponent", "Standalone component", "Selectable list with responsive master-detail behaviour")
-  Component(item, "CsConversationItemComponent", "Standalone component", "Avatar, preview, timestamp, unread badge, and selected state")
-  Component(thread, "CsMessageThreadComponent", "Standalone component", "Accessible log with sent, received, and system presentations")
-  Component(anchor, "CsThreadScrollAnchor", "Directive", "Holds the scroll anchoring policy for append and prepend")
-  Component(announcer, "CsThreadAnnouncerService", "Injectable service", "Holds the new-message announcement policy")
-  Component(composer, "CsMessageComposerComponent", "Standalone component", "Auto-growing input with send, queued, and error states")
+  Component(list, "ConversationListComponent", "Standalone component", "Selectable list with responsive master-detail behaviour")
+  Component(item, "ConversationItemComponent", "Standalone component", "Avatar, preview, timestamp, unread badge, and selected state")
+  Component(thread, "MessageThreadComponent", "Standalone component", "Accessible log with sent, received, and system presentations")
+  Component(anchor, "ThreadScrollAnchor", "Directive", "Holds the scroll anchoring policy for append and prepend")
+  Component(announcer, "ThreadAnnouncerService", "Injectable service", "Holds the new-message announcement policy")
+  Component(composer, "MessageComposerComponent", "Standalone component", "Auto-growing input with send, queued, and error states")
 }
 
 System_Ext(cdk, "Angular CDK", "Autosize, scrolling, focus, and breakpoint observation")

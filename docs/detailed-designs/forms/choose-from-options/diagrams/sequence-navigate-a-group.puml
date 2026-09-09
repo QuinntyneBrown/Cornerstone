@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "FormControl" as control
 end box
 box "Frontend — Cornerstone choice controls" #D1FADF
-  participant "CsChoiceGroupComponent" as group
-  participant "CsChoiceCardComponent" as card
-  participant "CsRadioGroupComponent" as radiogroup
+  participant "ChoiceGroupComponent" as group
+  participant "ChoiceCardComponent" as card
+  participant "RadioGroupComponent" as radiogroup
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "FocusKeyManager" as keymgr

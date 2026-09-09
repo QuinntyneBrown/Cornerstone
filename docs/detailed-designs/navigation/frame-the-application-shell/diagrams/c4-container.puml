@@ -6,7 +6,7 @@ title Containers — Frame the application shell
 Person(dev, "Application developer", "Places the shell at the root of the authenticated route tree")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsShellComponent, CsTopbarComponent, CsSidenavComponent, and CsBottomNavComponent")
+  Container(lib, "Component library", "Angular standalone components", "Supplies ShellComponent, TopbarComponent, SidenavComponent, and BottomNavComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the spacing, colour, elevation, and motion tokens the shell reads")
   Container(docs, "Documentation site", "Angular application", "Publishes the shell content-region and configuration guide")
 }

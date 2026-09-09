@@ -43,20 +43,20 @@ surface (L2-005), and needs no network request.
 The feature spans two components and the types that name the brands, the variants,
 and the treatments.
 
-- **`CsLogoMarkComponent`** — the `cs-logo-mark` element that renders the graphic
+- **`LogoMarkComponent`** — the `cs-logo-mark` element that renders the graphic
   symbol alone. It carries a `brand` input of `'faithtech' | 'liturgy' | 'wordup'`,
   a `size` input of `'small' | 'medium' | 'large'`, a `treatment` input of
   `'light' | 'dark' | 'mono'`, and a `label` input supplying the accessible name.
   It renders inline SVG with `role="img"` when `label` is set and
   `aria-hidden="true"` when it is empty, so a mark beside a wordmark is not
   announced twice.
-- **`CsBrandLockupComponent`** — the `cs-brand-lockup` element that renders the mark
+- **`BrandLockupComponent`** — the `cs-brand-lockup` element that renders the mark
   and the wordmark together. It carries a `brand` input, a `variant` input of
   `'compact' | 'full'`, a `treatment` input, a `size` input, an `orientation` input
   of `'horizontal' | 'stacked'`, and an optional `href` input. It renders as a link
   when `href` is set and as a plain element otherwise.
 - **`CsBrandName`** — union type of the brands: `'faithtech' | 'liturgy' | 'wordup'`.
-- **`CsBrandLockupVariant`** — union type of the lockup variants:
+- **`BrandLockupVariant`** — union type of the lockup variants:
   `'compact' | 'full'`. The compact variant renders the mark alone at small sizes
   and the mark with an abbreviated wordmark above them. The full variant renders
   the mark, the wordmark, and the descriptor line.
@@ -118,7 +118,7 @@ colours, and the theme service reports which treatment to resolve.
 
 ### Components
 
-`CsBrandLockupComponent` composes `CsLogoMarkComponent` with the wordmark and the
+`BrandLockupComponent` composes `LogoMarkComponent` with the wordmark and the
 descriptor. Both read their artwork from the `CsBrandAssets` token and their
 treatment from `CsThemeService` when none is set explicitly.
 
@@ -126,8 +126,8 @@ treatment from `CsThemeService` when none is set explicitly.
 
 ### Class structure
 
-`CsBrandLockupComponent` holds the brand, variant, treatment, size, and orientation
-and composes one `CsLogoMarkComponent`. `CsBrandAssets` supplies the artwork for
+`BrandLockupComponent` holds the brand, variant, treatment, size, and orientation
+and composes one `LogoMarkComponent`. `CsBrandAssets` supplies the artwork for
 each `CsBrandName`.
 
 ![Class diagram for applying the brand](diagrams/class-structure.png)

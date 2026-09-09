@@ -28,7 +28,7 @@ cancels the navigation
 **pending state** — state a dialog holds while the confirmed action runs, in which
 the confirm control is busy and the dialog resists dismissal
 
-Both dialogs open through `CsDialogService` (L2-102) and inherit its focus trap,
+Both dialogs open through `DialogService` (L2-102) and inherit its focus trap,
 focus restoration, scroll blocking, and typed result channel. This feature adds the
 decision semantics on top: the tone of the icon, the shape of the choice, the
 handling of an asynchronous outcome, and the three-way answer a route guard needs.
@@ -43,21 +43,21 @@ triggered the navigation rather than to whichever element the router left focuse
 The feature spans two dialog components, their result types, and one convenience
 opener on the dialog service.
 
-- **`CsConfirmDialogComponent`** — the `cs-confirm-dialog` element rendered inside
-  `CsDialogShellComponent`. It carries a `title` input, a `message` input, a
+- **`ConfirmDialogComponent`** — the `cs-confirm-dialog` element rendered inside
+  `DialogShellComponent`. It carries a `title` input, a `message` input, a
   `tone` input of `'danger' | 'warning' | 'success'`, a `confirmLabel` input, a
   `cancelLabel` input, and a `pending` input. It renders the tone icon, the
   message, an optional projected destructive-action slot, and the two actions. It
   emits `confirmed` and `cancelled`, and resolves the dialog to a
-  `CsConfirmResult`.
-- **`CsConfirmDialogData`** — the typed payload passed through
-  `CsDialogConfig.data`. It carries `title`, `message`, `tone`, `confirmLabel`,
+  `ConfirmResult`.
+- **`ConfirmDialogData`** — the typed payload passed through
+  `DialogConfig.data`. It carries `title`, `message`, `tone`, `confirmLabel`,
   `cancelLabel`, `destructiveCopy`, and an optional `confirmAction` returning a
   promise or observable.
-- **`CsConfirmResult`** — union type of the answer:
+- **`ConfirmResult`** — union type of the answer:
   `'confirmed' | 'cancelled'`. The dialog resolves to `undefined` when the user
   dismisses it, which the calling code treats as `'cancelled'`.
-- **`CsConfirmTone`** — union type of the icon tones:
+- **`ConfirmTone`** — union type of the icon tones:
   `'danger' | 'warning' | 'success'`. The tone selects the icon glyph, the icon
   colour token, and the confirm button variant; `danger` renders the destructive
   button variant.
@@ -65,21 +65,21 @@ opener on the dialog service.
   the confirm dialog renders beneath the message. An application places the name of
   the record, the count of affected rows, or a typed-confirmation control in it.
   The library supplies no copy of its own for this region.
-- **`CsUnsavedChangesDialogComponent`** — the `cs-unsaved-changes-dialog` element.
+- **`UnsavedChangesDialogComponent`** — the `cs-unsaved-changes-dialog` element.
   It renders three actions rather than two and resolves to a
-  `CsUnsavedChangesChoice`. It carries a `title` input, a `message` input, a
+  `UnsavedChangesChoice`. It carries a `title` input, a `message` input, a
   `saveLabel` input, a `leaveLabel` input, a `stayLabel` input, and a `saving`
   input.
-- **`CsUnsavedChangesChoice`** — union type of the three answers:
+- **`UnsavedChangesChoice`** — union type of the three answers:
   `'save' | 'leave' | 'stay'`. Dismissal resolves to `'stay'`, so an interrupted
   dialog never discards work.
-- **`csConfirmLeave()`** — the guard helper an application registers as a
+- **`confirmLeave()`** — the guard helper an application registers as a
   `CanDeactivateFn`. It opens the unsaved-changes dialog, awaits the choice,
   returns `true` for `'leave'`, returns `false` for `'stay'`, and awaits the
   supplied save callback before returning `true` for `'save'`.
-- **`CsDialogService.confirm(data)`** — the convenience opener that returns a
-  `Promise<CsConfirmResult>` for call sites that want the answer without holding a
-  `CsDialogRef`.
+- **`DialogService.confirm(data)`** — the convenience opener that returns a
+  `Promise<ConfirmResult>` for call sites that want the answer without holding a
+  `DialogRef`.
 
 The confirm dialog owns the pending and error states when the caller supplies
 `confirmAction`. On confirmation it sets `disableClose`, marks the confirm control
@@ -124,17 +124,17 @@ resolve back into application services that perform the action or the save.
 
 ### Components
 
-Both dialog components render inside `CsDialogShellComponent` and therefore inherit
-its focus trap and restoration. `csConfirmLeave()` sits between the router and the
+Both dialog components render inside `DialogShellComponent` and therefore inherit
+its focus trap and restoration. `confirmLeave()` sits between the router and the
 unsaved-changes dialog and converts the choice into a navigation answer.
 
 ![C4 component view for confirming a decision](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsConfirmDialogComponent` reads a `CsConfirmDialogData` and resolves to a
-`CsConfirmResult`; `CsUnsavedChangesDialogComponent` resolves to a
-`CsUnsavedChangesChoice`. Both depend on `CsDialogRef` for the typed close.
+`ConfirmDialogComponent` reads a `ConfirmDialogData` and resolves to a
+`ConfirmResult`; `UnsavedChangesDialogComponent` resolves to a
+`UnsavedChangesChoice`. Both depend on `DialogRef` for the typed close.
 
 ![Class diagram for confirming a decision](diagrams/class-structure.png)
 

@@ -1,19 +1,3 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import {
-  CsAlertComponent,
-  CsBadgeComponent,
-  CsButtonDirective,
-  CsCardComponent,
-  CsContainerComponent,
-  CsFieldComponent,
-  CsInputDirective,
-  CsPageComponent,
-  CsSectionComponent,
-  CsSectionHeaderComponent,
-  CsThemeService,
-} from '@cornerstone/ui';
-import api from '../generated/api.json';
-
 export const guides = [
   ['Getting started', 'Install the package, provide the theme, and import standalone APIs.'],
   ['Theming and tokens', 'Customize CSS properties while retaining contrast and motion defaults.'],

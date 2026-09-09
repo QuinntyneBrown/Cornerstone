@@ -13,12 +13,12 @@ import {
   signal,
 } from '@angular/core';
 import {
-  CsAvatarComponent,
-  CsBadgeComponent,
+  AvatarComponent,
+  BadgeComponent,
   CsButtonDirective,
-  CsProgressBarComponent,
-  CsProgressRingComponent,
-  CsSkeletonComponent,
+  ProgressBarComponent,
+  ProgressRingComponent,
+  SkeletonComponent,
 } from '../foundations';
 import { CsDataState, CsDataStateError, CsFormatService, CsMessageTone } from '../platform';
 import { Subject } from 'rxjs';

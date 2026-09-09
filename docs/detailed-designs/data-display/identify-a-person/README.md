@@ -42,7 +42,7 @@ The feature is a vertical slice from a page that holds person data down to the
 rendered identity mark and its entry in the accessibility tree. It introduces three
 components, one palette function, and four public types.
 
-- **`CsAvatarComponent`** — the identity mark, selector `cs-avatar`. It carries a
+- **`AvatarComponent`** — the identity mark, selector `cs-avatar`. It carries a
   `name` required input supplying the initials source, a `src` input for the
   photograph, a `personId` input keying the deterministic palette, a `size` input
   over `xs`, `sm`, `md`, `lg`, and `xl`, a `palette` input enabling or disabling the
@@ -58,16 +58,16 @@ components, one palette function, and four public types.
   hashes the `personId`, or the trimmed and case-folded `name` when no identifier is
   supplied, and indexes the token palette set by the remainder. The function is pure,
   so two renders of the same person on two screens select the same entry.
-- **`CsAvatarStackComponent`** — the overlapping group, selector `cs-avatar-stack`.
-  It carries a `people` input of `CsPersonSummary` values, a `max` input bounding the
+- **`AvatarStackComponent`** — the overlapping group, selector `cs-avatar-stack`.
+  It carries a `people` input of `PersonSummary` values, a `max` input bounding the
   drawn avatars, a `size` input shared with the avatar, and an `interactive` input.
   It renders the first `max` avatars with a negative inline offset and an overflow
   indicator stating the hidden count. The stack exposes one accessible name listing
   every participant, including those the overflow indicator stands for. Individual
   avatars inside the stack take no tab stop unless `interactive` is set, in which
   case the stack renders one activation target and emits `opened`.
-- **`CsPersonComponent`** — the person row, selector `cs-person`. It carries a
-  `person` required input of `CsPersonSummary`, a `size` input, a `clickable` input,
+- **`PersonComponent`** — the person row, selector `cs-person`. It carries a
+  `person` required input of `PersonSummary`, a `size` input, a `clickable` input,
   and a `dense` input. It projects meta content through a `cs-person-meta` slot and
   actions through a `cs-person-actions` slot, and it emits `activated` when the row
   is clickable and the row target is used. A clickable row renders exactly one
@@ -75,7 +75,7 @@ components, one palette function, and four public types.
   action never triggers the row intent. At viewport XS the row reflows to a stacked
   layout with the action area beneath the name block, so every action stays reachable
   without horizontal scrolling.
-- **`CsPersonSummary`** — the view model the stack and the row accept: `id`, `name`,
+- **`PersonSummary`** — the view model the stack and the row accept: `id`, `name`,
   optional `imageUrl`, optional `secondaryText`, and optional `status`.
 - **`CsAvatarSize`** — union type of the five sizes: `'xs' | 'sm' | 'md' | 'lg' |
   'xl'`.
@@ -127,16 +127,16 @@ the size scale; the browser loads the photographs.
 
 ### Components
 
-`CsPersonComponent` composes `CsAvatarComponent` with a name block and two content
-slots. `CsAvatarStackComponent` composes the same avatar with an overflow indicator.
+`PersonComponent` composes `AvatarComponent` with a name block and two content
+slots. `AvatarStackComponent` composes the same avatar with an overflow indicator.
 `csAvatarPalette()` supplies the deterministic colour to both.
 
 ![C4 component view for identifying a person](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsPersonSummary` is the single view model that the stack and the row accept.
-`CsAvatarComponent` derives its initials and its palette entry from that summary and
+`PersonSummary` is the single view model that the stack and the row accept.
+`AvatarComponent` derives its initials and its palette entry from that summary and
 holds the presentation state that the image load result selects.
 
 ![Class diagram for identifying a person](diagrams/class-structure.png)

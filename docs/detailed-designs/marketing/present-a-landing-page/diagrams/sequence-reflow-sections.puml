@@ -16,9 +16,9 @@ skinparam package {
 }
 actor "Application user" as visitor
 box "Frontend — Cornerstone marketing components" #D1FADF
-  participant "CsHeroComponent" as hero
-  participant "CsContentSectionComponent" as section
-  participant "CsCtaSectionComponent" as cta
+  participant "HeroComponent" as hero
+  participant "ContentSectionComponent" as section
+  participant "CtaSectionComponent" as cta
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Section rhythm styles" as styles

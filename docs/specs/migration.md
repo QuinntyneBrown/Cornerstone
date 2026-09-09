@@ -29,17 +29,17 @@ pattern. These are the high-volume legacy families and their first-class replace
 
 | Application | Legacy family | Cornerstone replacement | Status |
 | --- | --- | --- | --- |
-| Word Up | `wu-btn*` | `CsButtonDirective`, `CsIconButtonDirective`, `CsButtonGroupComponent` | Available |
-| Word Up | `wu-card*` | `CsCardComponent` and card slot directives | Available |
-| Word Up | `wu-field*`, `wu-input*`, `wu-select*` | `CsFieldComponent` and Cornerstone form controls | Available |
-| Word Up | `wu-table*` | `CsTableDirective`, `CsTableContainerComponent`, responsive table APIs | Available |
-| Word Up | `wu-modal*`, `wu-drawer*` | `CsDialogService`, `CsDialogShellComponent`, `CsDrawerService` | Available |
-| Word Up | `wu-toast*`, `wu-alert*` | `CsToastService`, `CsToastOutletComponent`, `CsAlertComponent` | Available |
-| Word Up | `wu-sidenav*`, `wu-tabs*` | shell/navigation components and `CsTabGroupComponent` | Available |
+| Word Up | `wu-btn*` | `CsButtonDirective`, `CsIconButtonDirective`, `ButtonGroupComponent` | Available |
+| Word Up | `wu-card*` | `CardComponent` and card slot directives | Available |
+| Word Up | `wu-field*`, `wu-input*`, `wu-select*` | `FieldComponent` and Cornerstone form controls | Available |
+| Word Up | `wu-table*` | `TableDirective`, `TableContainerComponent`, responsive table APIs | Available |
+| Word Up | `wu-modal*`, `wu-drawer*` | `DialogService`, `DialogShellComponent`, `DrawerService` | Available |
+| Word Up | `wu-toast*`, `wu-alert*` | `ToastService`, `ToastOutletComponent`, `AlertComponent` | Available |
+| Word Up | `wu-sidenav*`, `wu-tabs*` | shell/navigation components and `TabGroupComponent` | Available |
 | Liturgy | `btn*`, `button*` | Cornerstone button directives | Available |
-| Liturgy | `card*`, `surface*` | `CsCardComponent`, `CsPageComponent`, `CsSectionComponent` | Available |
+| Liturgy | `card*`, `surface*` | `CardComponent`, `PageComponent`, `SectionComponent` | Available |
 | Liturgy | `rail*`, `station*`, `movement*` | process rail, journey, stage, movement dial, and pip components | Available |
-| Liturgy | `gate*`, `requirement*` | `CsGateComponent`, `CsRequirementChecklistComponent` | Available |
+| Liturgy | `gate*`, `requirement*` | `GateComponent`, `RequirementChecklistComponent` | Available |
 | Liturgy | `kanban*`, `phase*`, `project*` | kanban, phase lane, project card, and portfolio components | Available |
 | Both | page-specific compositions | typed workflow components or application-owned composition | Explicit catalog mapping |
 

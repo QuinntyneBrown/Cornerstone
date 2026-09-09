@@ -21,8 +21,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application router" as router
 end box
 box "Frontend — Cornerstone notifications" #D1FADF
-  participant "CsNotificationListComponent" as list
-  participant "CsNotificationItemComponent" as item
+  participant "NotificationListComponent" as list
+  participant "NotificationItemComponent" as item
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Overlay and FocusTrap" as cdk

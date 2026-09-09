@@ -4,9 +4,9 @@ LAYOUT_WITH_LEGEND()
 title Components — Adopt CDK behaviour
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(menu, "CsMenuDirective / CsPopoverComponent", "Angular directives and component", "Anchored surfaces opened from a trigger")
-  Component(dialog, "CsDialogService / CsDrawerComponent", "Angular service and component", "Modal surfaces that trap and restore focus")
-  Component(board, "CsKanbanBoardComponent", "Angular component", "Column board with pointer and keyboard moves")
+  Component(menu, "CsMenuDirective / PopoverComponent", "Angular directives and component", "Anchored surfaces opened from a trigger")
+  Component(dialog, "DialogService / DrawerComponent", "Angular service and component", "Modal surfaces that trap and restore focus")
+  Component(board, "KanbanBoardComponent", "Angular component", "Column board with pointer and keyboard moves")
   Component(field, "CsTextareaDirective", "Angular directive", "Textarea that grows with its content")
 }
 

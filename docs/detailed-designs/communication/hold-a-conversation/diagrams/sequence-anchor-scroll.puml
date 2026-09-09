@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "MessageDeliveryHandler" as delivery
 end box
 box "Frontend — Cornerstone messaging" #D1FADF
-  participant "CsMessageThreadComponent" as thread
-  participant "CsThreadScrollAnchor" as anchor
+  participant "MessageThreadComponent" as thread
+  participant "ThreadScrollAnchor" as anchor
 end box
 box "Browser — platform" #FFF4E5
   participant "Scroll container" as browser

@@ -14,18 +14,18 @@ import {
   signal,
 } from '@angular/core';
 import {
-  CsAvatarComponent,
-  CsBadgeComponent,
+  AvatarComponent,
+  BadgeComponent,
   CsButtonDirective,
-  CsCardComponent,
-  CsProgressBarComponent,
+  CardComponent,
+  ProgressBarComponent,
 } from '../foundations';
 import {
-  CsChoiceGroupComponent,
-  CsDateTimeFieldComponent,
-  CsFieldComponent,
+  ChoiceGroupComponent,
+  DateTimeFieldComponent,
+  FieldComponent,
   CsInputDirective,
-  CsSearchFieldComponent,
+  SearchFieldComponent,
   CsTextareaDirective,
 } from '../forms';
 import { CsDataState, csSafeUrl } from '../platform';

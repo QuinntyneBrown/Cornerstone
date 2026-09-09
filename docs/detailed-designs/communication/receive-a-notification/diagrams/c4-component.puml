@@ -9,16 +9,16 @@ Person(admin, "Administrator", "Targets and schedules an announcement")
 Container_Boundary(appsvc, "Consuming application services") {
   Component(notifvm, "NotificationViewModelService", "Angular injectable", "Builds CsNotificationViewModel and the unread count from application data")
   Component(readsvc, "NotificationIntentHandler", "Angular injectable", "Receives mark-read and navigate intents and performs persistence and routing")
-  Component(annvm, "AnnouncementViewModelService", "Angular injectable", "Builds CsAudienceOption sets and reports the submit state")
+  Component(annvm, "AnnouncementViewModelService", "Angular injectable", "Builds AudienceOption sets and reports the submit state")
   Component(sendsvc, "AnnouncementDeliveryHandler", "Angular injectable", "Receives preview and submit intents and delivers announcements")
 }
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(list, "CsNotificationListComponent", "Standalone component", "Scrolling list with mark-all-read, empty, and loading states")
-  Component(item, "CsNotificationItemComponent", "Standalone component", "Category icon, timestamp, read state, and deep link")
-  Component(composer, "CsAnnouncementComposerComponent", "Standalone component", "Targeting, scheduling, content, preview, and submit state")
+  Component(list, "NotificationListComponent", "Standalone component", "Scrolling list with mark-all-read, empty, and loading states")
+  Component(item, "NotificationItemComponent", "Standalone component", "Category icon, timestamp, read state, and deep link")
+  Component(composer, "AnnouncementComposerComponent", "Standalone component", "Targeting, scheduling, content, preview, and submit state")
   Component(fields, "Cornerstone field components", "Standalone components", "Select, date-time, and text fields with the shared validation contract")
-  Component(summary, "CsValidationSummaryComponent", "Standalone component", "States blocking errors and moves focus to the first invalid control")
+  Component(summary, "ValidationSummaryComponent", "Standalone component", "States blocking errors and moves focus to the first invalid control")
 }
 
 System_Ext(cdk, "Angular CDK", "Overlay, focus trapping, and breakpoint observation")

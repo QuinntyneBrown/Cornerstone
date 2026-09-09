@@ -33,7 +33,7 @@ class CsDataStateError {
   +retryable?: boolean
 }
 
-class CsDataStateOutletComponent {
+class DataStateOutletComponent {
   +state: InputSignal<CsDataState<unknown>>
   +retry: OutputEmitterRef<void>
   +stateChange: OutputEmitterRef<CsDataStateKind>
@@ -41,37 +41,37 @@ class CsDataStateOutletComponent {
   -announceTransition(kind: CsDataStateKind): void
 }
 
-class CsDataStateHostDirective {
+class DataStateHostDirective {
   +csDataState: InputSignal<CsDataState<unknown>>
   +busy: Signal<boolean>
   +retry: OutputEmitterRef<void>
 }
 
-class CsEmptyStateComponent {
+class EmptyStateComponent {
   +icon: InputSignal<string | null>
   +eyebrow: InputSignal<string | null>
   +title: InputSignal<string>
   +description: InputSignal<string | null>
-  +variant: InputSignal<CsEmptyStateVariant>
+  +variant: InputSignal<EmptyStateVariant>
 }
 
-enum CsEmptyStateVariant {
+enum EmptyStateVariant {
   compact
   card
   fullPage
 }
 
-class CsStatePageComponent {
-  +condition: InputSignal<CsStatePageCondition>
+class StatePageComponent {
+  +condition: InputSignal<StatePageCondition>
   +title: InputSignal<string | null>
   +description: InputSignal<string | null>
   +showBrand: InputSignal<boolean>
   +action: OutputEmitterRef<CsStatePageAction>
-  -defaultsFor(condition: CsStatePageCondition): CsStatePageDefaults
+  -defaultsFor(condition: StatePageCondition): CsStatePageDefaults
   -focusHeading(): void
 }
 
-enum CsStatePageCondition {
+enum StatePageCondition {
   notFound
   forbidden
   sessionExpired
@@ -91,7 +91,7 @@ class CsStatePageDefaults {
 
 class CsStatePageAction {
   +id: string
-  +condition: CsStatePageCondition
+  +condition: StatePageCondition
 }
 
 class CsStateAnnouncer {
@@ -101,14 +101,14 @@ class CsStateAnnouncer {
 
 CsDataState --> CsDataStateKind : discriminated by
 CsDataState o-- CsDataStateError : carries on error
-CsDataStateOutletComponent --> CsDataState : reads
-CsDataStateHostDirective --> CsDataState : reads
-CsDataStateOutletComponent ..> CsStateAnnouncer : reports transitions to
-CsDataStateHostDirective ..> CsStateAnnouncer : reports transitions to
-CsDataStateOutletComponent "1" --> "0..1" CsEmptyStateComponent : projects into the empty slot
-CsEmptyStateComponent --> CsEmptyStateVariant : has
-CsStatePageComponent --> CsStatePageCondition : has
-CsStatePageComponent ..> CsStatePageDefaults : resolves
-CsStatePageComponent --> CsStatePageAction : emits
-CsStatePageComponent *-- CsEmptyStateComponent : composes in full-page form
+DataStateOutletComponent --> CsDataState : reads
+DataStateHostDirective --> CsDataState : reads
+DataStateOutletComponent ..> CsStateAnnouncer : reports transitions to
+DataStateHostDirective ..> CsStateAnnouncer : reports transitions to
+DataStateOutletComponent "1" --> "0..1" EmptyStateComponent : projects into the empty slot
+EmptyStateComponent --> EmptyStateVariant : has
+StatePageComponent --> StatePageCondition : has
+StatePageComponent ..> CsStatePageDefaults : resolves
+StatePageComponent --> CsStatePageAction : emits
+StatePageComponent *-- EmptyStateComponent : composes in full-page form
 @enduml

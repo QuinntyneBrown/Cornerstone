@@ -21,8 +21,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Call-to-action handler" as handler
 end box
 box "Frontend — Cornerstone public chrome" #D1FADF
-  participant "CsMarketingHeaderComponent" as header
-  participant "CsMarketingFooterComponent" as footer
+  participant "MarketingHeaderComponent" as header
+  participant "MarketingFooterComponent" as footer
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Theme stylesheet" as theme

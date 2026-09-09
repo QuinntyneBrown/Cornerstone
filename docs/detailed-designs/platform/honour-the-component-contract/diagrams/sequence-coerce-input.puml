@@ -19,7 +19,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page template" as tpl
 end box
 box "Frontend — Cornerstone component library" #D1FADF
-  participant "CsBadgeComponent" as badge
+  participant "BadgeComponent" as badge
 end box
 box "Frontend — Cornerstone contract layer" #ECFDF3
   participant "Input transforms" as coerce

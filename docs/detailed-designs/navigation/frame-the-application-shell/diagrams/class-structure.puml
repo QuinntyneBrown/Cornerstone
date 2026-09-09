@@ -13,27 +13,27 @@ skinparam class {
 ' --------------------------
 title Class structure — Frame the application shell
 
-enum CsShellSidenavMode {
+enum ShellSidenavMode {
   side
   over
   auto
 }
 
-class CsShellComponent {
-  +sidenavMode: InputSignal<CsShellSidenavMode>
+class ShellComponent {
+  +sidenavMode: InputSignal<ShellSidenavMode>
   +sidenavOpen: ModelSignal<boolean>
   +compact: InputSignal<boolean>
   +bottomNavVisible: InputSignal<boolean>
-  +resolvedMode: Signal<CsShellSidenavMode>
+  +resolvedMode: Signal<ShellSidenavMode>
   -restoreTarget: HTMLElement | null
   +openSidenav(): void
   +closeSidenav(): void
-  -resolveMode(): CsShellSidenavMode
+  -resolveMode(): ShellSidenavMode
   -trapFocus(): void
   -restoreFocus(): void
 }
 
-class CsTopbarComponent {
+class TopbarComponent {
   +brand: InputSignal<CsBrand>
   +heading: InputSignal<string>
   +pills: InputSignal<readonly CsTopbarPill[]>
@@ -43,16 +43,16 @@ class CsTopbarComponent {
   +notificationsOpened: OutputEmitterRef<void>
 }
 
-class CsSidenavComponent {
-  +groups: InputSignal<readonly CsNavGroup[]>
+class SidenavComponent {
+  +groups: InputSignal<readonly NavGroup[]>
   +roles: InputSignal<readonly string[]>
   +compact: InputSignal<boolean>
-  +mode: InputSignal<CsShellSidenavMode>
-  +visibleGroups: Signal<readonly CsNavGroup[]>
+  +mode: InputSignal<ShellSidenavMode>
+  +visibleGroups: Signal<readonly NavGroup[]>
   +itemActivated: OutputEmitterRef<CsNavItemActivation>
 }
 
-class CsNavGroupComponent {
+class NavGroupComponent {
   +heading: InputSignal<string>
   +collapsible: InputSignal<boolean>
   +expanded: ModelSignal<boolean>
@@ -66,13 +66,13 @@ class CsNavItemDirective {
   +ariaCurrent: Signal<'page' | null>
 }
 
-class CsBottomNavComponent {
-  +items: InputSignal<readonly CsBottomNavItem[]>
+class BottomNavComponent {
+  +items: InputSignal<readonly BottomNavItem[]>
   +activeId: ModelSignal<string>
   +itemActivated: OutputEmitterRef<CsNavItemActivation>
 }
 
-class CsNavGroup {
+class NavGroup {
   +heading: string
   +items: readonly CsNavItem[]
   +roles?: readonly string[]
@@ -87,7 +87,7 @@ class CsNavItem {
   +disabled?: boolean
 }
 
-class CsBottomNavItem {
+class BottomNavItem {
   +id: string
   +label: string
   +icon: string
@@ -109,17 +109,17 @@ class CsBrand {
   +logoSrc?: string
 }
 
-CsShellComponent --> CsShellSidenavMode : resolves
-CsShellComponent *-- "1" CsTopbarComponent : projects
-CsShellComponent *-- "0..1" CsSidenavComponent : projects
-CsShellComponent *-- "0..1" CsBottomNavComponent : projects
-CsSidenavComponent o-- "0..*" CsNavGroupComponent : renders
-CsNavGroupComponent o-- "1..*" CsNavItemDirective : marks
-CsSidenavComponent ..> CsNavGroup : reads
-CsNavGroup *-- "1..*" CsNavItem : contains
-CsBottomNavComponent ..> CsBottomNavItem : reads
-CsSidenavComponent ..> CsNavItemActivation : emits
-CsBottomNavComponent ..> CsNavItemActivation : emits
-CsTopbarComponent ..> CsTopbarPill : renders
-CsTopbarComponent ..> CsBrand : renders
+ShellComponent --> ShellSidenavMode : resolves
+ShellComponent *-- "1" TopbarComponent : projects
+ShellComponent *-- "0..1" SidenavComponent : projects
+ShellComponent *-- "0..1" BottomNavComponent : projects
+SidenavComponent o-- "0..*" NavGroupComponent : renders
+NavGroupComponent o-- "1..*" CsNavItemDirective : marks
+SidenavComponent ..> NavGroup : reads
+NavGroup *-- "1..*" CsNavItem : contains
+BottomNavComponent ..> BottomNavItem : reads
+SidenavComponent ..> CsNavItemActivation : emits
+BottomNavComponent ..> CsNavItemActivation : emits
+TopbarComponent ..> CsTopbarPill : renders
+TopbarComponent ..> CsBrand : renders
 @enduml

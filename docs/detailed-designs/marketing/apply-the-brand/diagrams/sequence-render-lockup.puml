@@ -19,8 +19,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application shell" as shell
 end box
 box "Frontend — Cornerstone brand components" #D1FADF
-  participant "CsBrandLockupComponent" as lockup
-  participant "CsLogoMarkComponent" as mark
+  participant "BrandLockupComponent" as lockup
+  participant "LogoMarkComponent" as mark
   participant "CsThemeService" as themesvc
 end box
 box "Frontend — Cornerstone styles" #ECFDF3

@@ -33,7 +33,7 @@ enum CsCheckboxState {
   indeterminate
 }
 
-enum CsChoiceMode {
+enum ChoiceMode {
   single
   multiple
 }
@@ -48,7 +48,7 @@ class CsSelectDirective {
   +setDisabledState(isDisabled: boolean): void
 }
 
-class CsCheckboxComponent {
+class CheckboxComponent {
   +label: InputSignal<string>
   +description: InputSignal<string | null>
   +indeterminate: ModelSignal<boolean>
@@ -63,11 +63,11 @@ class CsCheckboxComponent {
   #toggle(): void
 }
 
-class CsRadioGroupComponent {
+class RadioGroupComponent {
   +label: InputSignal<string>
   +presentation: InputSignal<'inline' | 'card' | 'segmented'>
   +value: ModelSignal<unknown>
-  +members: Signal<readonly CsRadioComponent[]>
+  +members: Signal<readonly RadioComponent[]>
   +writeValue(value: unknown): void
   +registerOnChange(fn: (value: unknown) => void): void
   +registerOnTouched(fn: () => void): void
@@ -75,7 +75,7 @@ class CsRadioGroupComponent {
   #onArrowKey(event: KeyboardEvent): void
 }
 
-class CsRadioComponent {
+class RadioComponent {
   +value: InputSignal<unknown>
   +label: InputSignal<string>
   +description: InputSignal<string | null>
@@ -84,7 +84,7 @@ class CsRadioComponent {
   #tabIndex: Signal<0 | -1>
 }
 
-class CsSwitchComponent {
+class SwitchComponent {
   +label: InputSignal<string>
   +description: InputSignal<string | null>
   +disabled: InputSignal<boolean>
@@ -96,18 +96,18 @@ class CsSwitchComponent {
   +setDisabledState(isDisabled: boolean): void
 }
 
-class CsChoiceGroupComponent {
+class ChoiceGroupComponent {
   +label: InputSignal<string>
-  +mode: InputSignal<CsChoiceMode>
+  +mode: InputSignal<ChoiceMode>
   +value: ModelSignal<CsChoiceValue>
-  +choices: Signal<readonly CsChoiceCardComponent[]>
+  +choices: Signal<readonly ChoiceCardComponent[]>
   +writeValue(value: CsChoiceValue): void
   +registerOnChange(fn: (value: CsChoiceValue) => void): void
   +registerOnTouched(fn: () => void): void
   +setDisabledState(isDisabled: boolean): void
 }
 
-class CsChoiceCardComponent {
+class ChoiceCardComponent {
   +value: InputSignal<unknown>
   +title: InputSignal<string>
   +description: InputSignal<string | null>
@@ -128,18 +128,18 @@ class CsRovingFocusManager {
 }
 
 CsSelectDirective ..|> ControlValueAccessor
-CsCheckboxComponent ..|> ControlValueAccessor
-CsRadioGroupComponent ..|> ControlValueAccessor
-CsSwitchComponent ..|> ControlValueAccessor
-CsChoiceGroupComponent ..|> ControlValueAccessor
+CheckboxComponent ..|> ControlValueAccessor
+RadioGroupComponent ..|> ControlValueAccessor
+SwitchComponent ..|> ControlValueAccessor
+ChoiceGroupComponent ..|> ControlValueAccessor
 CsSelectDirective --> CsSelectState : has
-CsCheckboxComponent --> CsCheckboxState : reports
-CsRadioGroupComponent *-- "1..*" CsRadioComponent : owns the value of
-CsRadioGroupComponent ..> CsRovingFocusManager : delegates navigation to
-CsChoiceGroupComponent *-- "1..*" CsChoiceCardComponent : owns the value of
-CsChoiceGroupComponent ..> CsRovingFocusManager : delegates navigation to
-CsChoiceGroupComponent --> CsChoiceMode : has
-CsChoiceGroupComponent --> CsChoiceValue : emits
-CsChoiceCardComponent ..> CsRadioComponent : renders in single mode
-CsChoiceCardComponent ..> CsCheckboxComponent : renders in multiple mode
+CheckboxComponent --> CsCheckboxState : reports
+RadioGroupComponent *-- "1..*" RadioComponent : owns the value of
+RadioGroupComponent ..> CsRovingFocusManager : delegates navigation to
+ChoiceGroupComponent *-- "1..*" ChoiceCardComponent : owns the value of
+ChoiceGroupComponent ..> CsRovingFocusManager : delegates navigation to
+ChoiceGroupComponent --> ChoiceMode : has
+ChoiceGroupComponent --> CsChoiceValue : emits
+ChoiceCardComponent ..> RadioComponent : renders in single mode
+ChoiceCardComponent ..> CheckboxComponent : renders in multiple mode
 @enduml

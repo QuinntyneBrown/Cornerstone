@@ -9,32 +9,32 @@ import {
   signal,
 } from '@angular/core';
 import {
-  CsAvatarComponent,
-  CsBadgeComponent,
+  AvatarComponent,
+  BadgeComponent,
   CsButtonDirective,
-  CsCardComponent,
-  CsProgressBarComponent,
-  CsProgressRingComponent,
+  CardComponent,
+  ProgressBarComponent,
+  ProgressRingComponent,
 } from '../foundations';
 import {
-  CsCheckboxComponent,
-  CsChoiceCardComponent,
-  CsChoiceGroupComponent,
-  CsFieldComponent,
+  CheckboxComponent,
+  ChoiceCardComponent,
+  ChoiceGroupComponent,
+  FieldComponent,
   CsInputDirective,
-  CsSearchFieldComponent,
+  SearchFieldComponent,
   CsTextareaDirective,
 } from '../forms';
 import { CsDataState, CsIntent, CsViewModel } from '../platform';
 import {
-  CsPersonComponent,
-  CsPersonSummary,
-  CsProgressMatrixComponent,
-  CsStatCardComponent,
-  CsTableContainerComponent,
-  CsTableDirective,
-  CsTimelineComponent,
-  CsTimelineEntry,
+  PersonComponent,
+  PersonSummary,
+  ProgressMatrixComponent,
+  StatCardComponent,
+  TableContainerComponent,
+  TableDirective,
+  TimelineComponent,
+  TimelineEntry,
 } from '../data-display';
 
 export interface CsPersonOpen {

@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone gate components" #D1FADF
-  participant "CsRequirementChecklistComponent" as list
-  participant "CsGateComponent" as gate
-  participant "CsGateAnnouncer" as announcer
+  participant "RequirementChecklistComponent" as list
+  participant "GateComponent" as gate
+  participant "GateAnnouncer" as announcer
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer" as cdk

@@ -19,9 +19,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Report page" as page
 end box
 box "Frontend — Cornerstone metric components" #D1FADF
-  participant "CsMetricBarsComponent" as bars
-  participant "CsMetricValueTableComponent" as table
-  participant "CsMetricLegendComponent" as legend
+  participant "MetricBarsComponent" as bars
+  participant "MetricValueTableComponent" as table
+  participant "MetricLegendComponent" as legend
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Print resolution" as printcss

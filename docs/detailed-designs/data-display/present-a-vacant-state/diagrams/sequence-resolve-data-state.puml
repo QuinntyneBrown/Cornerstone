@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone data-state runtime" #D1FADF
-  participant "CsDataStateOutletComponent" as outlet
+  participant "DataStateOutletComponent" as outlet
   participant "CsStateAnnouncer" as announcer
-  participant "CsEmptyStateComponent" as empty
+  participant "EmptyStateComponent" as empty
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer" as live

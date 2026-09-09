@@ -6,11 +6,11 @@ title Components — Identify a person
 Person(mentor, "Mentor", "Activates a person row in a directory")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(avatar, "CsAvatarComponent", "Standalone component", "Renders image, initials, or loading state across five sizes")
+  Component(avatar, "AvatarComponent", "Standalone component", "Renders image, initials, or loading state across five sizes")
   Component(palette, "csAvatarPalette()", "Pure function", "Maps a person identifier to one token palette entry")
-  Component(stack, "CsAvatarStackComponent", "Standalone component", "Overlaps avatars and states the hidden participant count")
-  Component(person, "CsPersonComponent", "Standalone component", "Pairs an avatar with a name block, meta slot, and action slot")
-  Component(types, "Identity types", "TypeScript types", "CsPersonSummary, CsAvatarSize, CsAvatarState, CsPersonActivated")
+  Component(stack, "AvatarStackComponent", "Standalone component", "Overlaps avatars and states the hidden participant count")
+  Component(person, "PersonComponent", "Standalone component", "Pairs an avatar with a name block, meta slot, and action slot")
+  Component(types, "Identity types", "TypeScript types", "PersonSummary, CsAvatarSize, CsAvatarState, CsPersonActivated")
   Component(styles, "Avatar and person styles", "Component-scoped CSS", "Resolves palette, size, overlap, and reflow from --cs- tokens")
 }
 

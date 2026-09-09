@@ -6,7 +6,7 @@ title Containers — Label with a badge
 Person(user, "Application user", "Filters a directory and reads status labels")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsBadgeComponent, CsPillComponent, and CsChipListComponent")
+  Container(lib, "Component library", "Angular standalone components", "Supplies BadgeComponent, PillComponent, and ChipListComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the tone, radius, and spacing tokens the labels resolve")
   Container(docs, "Documentation site", "Angular application", "Publishes the tone table and the chip keyboard contract")
 }
@@ -23,7 +23,7 @@ Rel(user, page, "Toggles filter pills in")
 Rel(page, lib, "Renders badges and chip lists from")
 Rel(lib, cdk, "Delegates arrow, Home, and End handling to")
 Rel(lib, theme, "Resolves tone and spacing values from")
-Rel(lib, page, "Emits CsChipSelectionChange and CsChipRemoveEvent to")
+Rel(lib, page, "Emits ChipSelectionChange and ChipRemoveEvent to")
 Rel(page, svc, "Applies the reported filter set through")
 Rel(svc, page, "Returns the filtered record set to")
 Rel(lib, browser, "Writes roles, ARIA state, and tab index to")

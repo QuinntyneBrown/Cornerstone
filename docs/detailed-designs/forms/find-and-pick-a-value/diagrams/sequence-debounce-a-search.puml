@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone selection components" #D1FADF
-  participant "CsSearchFieldComponent" as search
+  participant "SearchFieldComponent" as search
   participant "Live status region" as live
 end box
 box "Browser — platform" #FFF4E5

@@ -6,7 +6,7 @@ title Containers — Locate the current page
 Person(dev, "Application developer", "Binds the crumb list in the top bar region")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsBreadcrumbsComponent and the anchored overflow menu")
+  Container(lib, "Component library", "Angular standalone components", "Supplies BreadcrumbsComponent and the anchored overflow menu")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the type, spacing, and colour tokens the trail reads")
   Container(docs, "Documentation site", "Angular application", "Publishes the crumb model and the router integration contract")
 }

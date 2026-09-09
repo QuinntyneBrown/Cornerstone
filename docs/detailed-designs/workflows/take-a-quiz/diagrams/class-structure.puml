@@ -20,47 +20,47 @@ interface ControlValueAccessor {
   +setDisabledState(isDisabled: boolean): void
 }
 
-class CsQuizComponent {
-  +quiz: InputSignal<CsQuizView>
-  +answers: ModelSignal<CsQuizAnswerMap>
-  +mode: InputSignal<CsQuizMode>
+class QuizComponent {
+  +quiz: InputSignal<QuizView>
+  +answers: ModelSignal<QuizAnswerMap>
+  +mode: InputSignal<QuizMode>
   +submitting: InputSignal<boolean>
-  +answerChanged: OutputEmitterRef<CsQuizAnswerChange>
-  +navigated: OutputEmitterRef<CsQuizNavigate>
-  +submitted: OutputEmitterRef<CsQuizSubmit>
+  +answerChanged: OutputEmitterRef<QuizAnswerChange>
+  +navigated: OutputEmitterRef<QuizNavigate>
+  +submitted: OutputEmitterRef<QuizSubmit>
   -unansweredRequired: Signal<readonly string[]>
   -confirmOpen: WritableSignal<boolean>
   -requestSubmit(): void
 }
 
-class CsQuizQuestionComponent {
-  +question: InputSignal<CsQuizQuestionView>
+class QuizQuestionComponent {
+  +question: InputSignal<QuizQuestionView>
   +readOnly: InputSignal<boolean>
   +showFeedback: InputSignal<boolean>
-  +answerChanged: OutputEmitterRef<CsQuizAnswerChange>
-  -value: WritableSignal<CsQuizAnswerValue>
-  +writeValue(value: CsQuizAnswerValue): void
+  +answerChanged: OutputEmitterRef<QuizAnswerChange>
+  -value: WritableSignal<QuizAnswerValue>
+  +writeValue(value: QuizAnswerValue): void
 }
 
-class CsQuizResultComponent {
-  +result: InputSignal<CsQuizResultView>
-  +actions: InputSignal<readonly CsQuizResultAction[]>
-  +actionSelected: OutputEmitterRef<CsQuizResultAction>
+class QuizResultComponent {
+  +result: InputSignal<QuizResultView>
+  +actions: InputSignal<readonly QuizResultAction[]>
+  +actionSelected: OutputEmitterRef<QuizResultAction>
 }
 
-class CsQuizView {
+class QuizView {
   +quizId: string
   +title: string
-  +questions: readonly CsQuizQuestionView[]
+  +questions: readonly QuizQuestionView[]
   +currentIndex: number
   +allowBackNavigation: boolean
   +progressLabel: string
 }
 
-class CsQuizQuestionView {
+class QuizQuestionView {
   +questionId: string
   +prompt: string
-  +answerType: CsQuizAnswerType
+  +answerType: QuizAnswerType
   +options: readonly CsQuizOption[]
   +required: boolean
   +validationMessage: string | null
@@ -73,46 +73,46 @@ class CsQuizOption {
   +disabled: boolean
 }
 
-enum CsQuizAnswerType {
+enum QuizAnswerType {
   single
   multiple
   text
 }
 
-enum CsQuizMode {
+enum QuizMode {
   attempt
   review
 }
 
-class CsQuizAnswerChange {
+class QuizAnswerChange {
   +quizId: string
   +questionId: string
-  +value: CsQuizAnswerValue
+  +value: QuizAnswerValue
 }
 
-class CsQuizNavigate {
+class QuizNavigate {
   +quizId: string
   +fromIndex: number
   +toIndex: number
 }
 
-class CsQuizSubmit {
+class QuizSubmit {
   +quizId: string
-  +answers: CsQuizAnswerMap
+  +answers: QuizAnswerMap
 }
 
-class CsQuizResultView {
+class QuizResultView {
   +quizId: string
   +attemptId: string
   +score: number
   +total: number
   +percent: number
-  +outcome: CsQuizOutcome
+  +outcome: QuizOutcome
   +summaryLabel: string
-  +questions: readonly CsQuizQuestionResult[]
+  +questions: readonly QuizQuestionResult[]
 }
 
-class CsQuizQuestionResult {
+class QuizQuestionResult {
   +questionId: string
   +prompt: string
   +givenLabel: string
@@ -121,31 +121,31 @@ class CsQuizQuestionResult {
   +explanation: string | null
 }
 
-enum CsQuizOutcome {
+enum QuizOutcome {
   passed
   failed
   pending
 }
 
-class CsQuizResultAction {
+class QuizResultAction {
   +actionId: string
   +label: string
   +kind: string
 }
 
-CsQuizQuestionComponent ..|> ControlValueAccessor
-CsQuizComponent *-- "1..*" CsQuizQuestionComponent : renders one per question
-CsQuizComponent --> "1" CsQuizView : reads
-CsQuizComponent --> CsQuizMode : has
-CsQuizComponent ..> CsQuizNavigate : emits
-CsQuizComponent ..> CsQuizSubmit : emits
-CsQuizView *-- "1..*" CsQuizQuestionView : contains
-CsQuizQuestionView *-- "0..*" CsQuizOption : offers
-CsQuizQuestionView --> CsQuizAnswerType : has
-CsQuizQuestionComponent --> "1" CsQuizQuestionView : reads
-CsQuizQuestionComponent ..> CsQuizAnswerChange : emits
-CsQuizResultComponent --> "1" CsQuizResultView : reads
-CsQuizResultComponent ..> CsQuizResultAction : emits
-CsQuizResultView *-- "1..*" CsQuizQuestionResult : reports
-CsQuizResultView --> CsQuizOutcome : has
+QuizQuestionComponent ..|> ControlValueAccessor
+QuizComponent *-- "1..*" QuizQuestionComponent : renders one per question
+QuizComponent --> "1" QuizView : reads
+QuizComponent --> QuizMode : has
+QuizComponent ..> QuizNavigate : emits
+QuizComponent ..> QuizSubmit : emits
+QuizView *-- "1..*" QuizQuestionView : contains
+QuizQuestionView *-- "0..*" CsQuizOption : offers
+QuizQuestionView --> QuizAnswerType : has
+QuizQuestionComponent --> "1" QuizQuestionView : reads
+QuizQuestionComponent ..> QuizAnswerChange : emits
+QuizResultComponent --> "1" QuizResultView : reads
+QuizResultComponent ..> QuizResultAction : emits
+QuizResultView *-- "1..*" QuizQuestionResult : reports
+QuizResultView --> QuizOutcome : has
 @enduml

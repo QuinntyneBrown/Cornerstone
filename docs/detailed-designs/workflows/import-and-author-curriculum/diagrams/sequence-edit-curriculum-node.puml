@@ -21,10 +21,10 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Curriculum store" as store
 end box
 box "Frontend — Cornerstone curriculum composite" #D1FADF
-  participant "CsCurriculumTreeComponent" as tree
-  participant "CsCurriculumEditorComponent" as editor
-  participant "CsUnsavedChangesDialogComponent" as unsaved
-  participant "CsConfirmDialogComponent" as confirm
+  participant "CurriculumTreeComponent" as tree
+  participant "CurriculumEditorComponent" as editor
+  participant "UnsavedChangesDialogComponent" as unsaved
+  participant "ConfirmDialogComponent" as confirm
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Drag-drop and LiveAnnouncer" as cdk

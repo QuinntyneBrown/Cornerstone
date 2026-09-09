@@ -21,9 +21,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone shell" #D1FADF
-  participant "CsShellComponent" as shell
-  participant "CsTopbarComponent" as topbar
-  participant "CsSidenavComponent" as sidenav
+  participant "ShellComponent" as shell
+  participant "TopbarComponent" as topbar
+  participant "SidenavComponent" as sidenav
   participant "CsNavItemDirective" as navitem
 end box
 box "Frontend — Angular CDK" #ECFDF3

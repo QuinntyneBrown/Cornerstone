@@ -32,7 +32,7 @@ storage entirely in the application.
 **value accessor** — object implementing Angular's `ControlValueAccessor`, which
 transports a value between a form control and the rendered control
 
-`CsFilePickerComponent` holds the selected file list as its value and implements
+`FilePickerComponent` holds the selected file list as its value and implements
 that interface. Its inner `<input type="file">` participates in native form
 submission (L2-063) when the application submits the form natively.
 
@@ -42,13 +42,13 @@ The feature is two components over one validation and preview core. The dropzone
 is the drop surface; the picker is the complete control that owns the selection,
 the queue, and the states.
 
-- **`CsFilePickerComponent`** — element component with the `cs-file-picker`
+- **`FilePickerComponent`** — element component with the `cs-file-picker`
   selector wrapping a native `<input type="file">`. It carries the `accept`
   input, the `maxSizeBytes` input, the `multiple` input, the `files` model
   holding the selected entries, and the `uploads` input carrying the per-file
   progress and failure the application reports. It emits the `uploadRequested`
   output and the `retryRequested` output, each naming one file.
-- **`CsDropzoneComponent`** — element component with the `cs-dropzone` selector.
+- **`DropzoneComponent`** — element component with the `cs-dropzone` selector.
   It renders a bounded drop region with the browse action inside it. A drag over
   the region applies a visible drop-target state and announces the drop target
   politely. The region is focusable, and `Enter` or `Space` opens the native file
@@ -58,7 +58,7 @@ the queue, and the states.
   rejected before any intent is emitted. The rejection announces assertively and
   names both the file and the reason. No `uploadRequested` output is emitted for
   a rejected file.
-- **`CsFileSummaryComponent`** — element component with the `cs-file-summary`
+- **`FileSummaryComponent`** — element component with the `cs-file-summary`
   selector presenting one selected entry: its name, its size, its state, its
   remove action, and its retry action when the state is `failed`. Activating
   retry emits `retryRequested` for that entry alone.
@@ -73,11 +73,11 @@ the queue, and the states.
 - **Destruction** — destroying the component mid-upload revokes every object URL
   it created and detaches every listener it attached, so no drag listener and no
   object URL outlive the component.
-- **`CsFileEntry`** — type describing one selection: the `File`, a stable `id`,
+- **`FileEntry`** — type describing one selection: the `File`, a stable `id`,
   the `state`, the `progress` percentage, and the `error` when present.
 - **`CsFileState`** — union type of the entry states: `'selected' | 'uploading' |
   'uploaded' | 'failed' | 'rejected'`.
-- **`CsFileRejection`** — type naming the rejected file and the reason
+- **`FileRejection`** — type naming the rejected file and the reason
   (`size` or `type`).
 - **`CsUploadIntent`** — type carried by the `uploadRequested` and
   `retryRequested` outputs, holding the entry `id` and its `File`.
@@ -114,16 +114,16 @@ HTTP client.
 
 ### Components
 
-`CsDropzoneComponent` owns the drop surface and the keyboard path to the file
-browser. `CsFilePickerComponent` owns the selection, the validator, the object
+`DropzoneComponent` owns the drop surface and the keyboard path to the file
+browser. `FilePickerComponent` owns the selection, the validator, the object
 URL registry, and the per-entry summary.
 
 ![C4 component view for attaching a file](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsFilePickerComponent` realizes `ControlValueAccessor` over a list of
-`CsFileEntry`. The object URL registry is composed into the picker so its
+`FilePickerComponent` realizes `ControlValueAccessor` over a list of
+`FileEntry`. The object URL registry is composed into the picker so its
 lifetime ends with the component.
 
 ![Class diagram for attaching a file](diagrams/class-structure.png)

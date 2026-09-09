@@ -41,14 +41,14 @@ down to the rendered detail surface and its overlays. It spans six public
 components and directives, two supporting components, and the record types they
 share.
 
-- **`CsListComponent`** — selector `cs-list`. The container for a sequence of
+- **`ListComponent`** — selector `cs-list`. The container for a sequence of
   related items (L2-091). The inputs are `dividers: InputSignal<boolean>`,
   `density: InputSignal<CsListDensity>` over `'compact' | 'comfortable'`,
   `selectionMode: InputSignal<CsListSelectionMode>` over
   `'none' | 'single' | 'multiple'`, and
   `state: InputSignal<CsDataState<void>>`. It emits
   `selectionChange: OutputEmitterRef<ReadonlySet<string>>`.
-- **`CsListItemComponent`** — selector `cs-list-item`. One row of a list. The
+- **`ListItemComponent`** — selector `cs-list-item`. One row of a list. The
   inputs are `key: InputSignal<string>`, `title: InputSignal<string>`,
   `meta: InputSignal<string | null>`,
   `interaction: InputSignal<CsListItemInteraction>` over
@@ -57,32 +57,32 @@ share.
   projection slots are `[csListItemLeading]`, `[csListItemBody]`,
   `[csListItemTrailing]`, and `[csListItemActions]`. It emits
   `activated: OutputEmitterRef<void>`.
-- **`CsDefinitionListComponent`** — selector `cs-definition-list`. The key-and-
+- **`DefinitionListComponent`** — selector `cs-definition-list`. The key-and-
   value presentation (L2-092). The inputs are
-  `items: InputSignal<CsDefinitionItem[]>`,
+  `items: InputSignal<DefinitionItem[]>`,
   `layout: InputSignal<CsDefinitionLayout>` over
   `'inline' | 'stacked' | 'compact'`, and
   `state: InputSignal<CsDataState<void>>`. It renders a native `dl` with one
   `div` per pair, so the term and the value stay associated at every layout.
-- **`CsDefinitionItem`** — the pair shape. It holds `term: string`,
+- **`DefinitionItem`** — the pair shape. It holds `term: string`,
   `value: string | null`, and an optional `emptyText: string`. A null value
   renders an em dash paired with visually hidden text naming the absence, so a
   screen reader distinguishes an unfilled field from a field the page omitted.
-- **`CsTimelineComponent`** — selector `cs-timeline`. The dated event sequence
-  (L2-098). The inputs are `entries: InputSignal<CsTimelineEntry[]>`,
+- **`TimelineComponent`** — selector `cs-timeline`. The dated event sequence
+  (L2-098). The inputs are `entries: InputSignal<TimelineEntry[]>`,
   `variant: InputSignal<CsTimelineVariant>` over `'vertical' | 'compact'`, and
   `state: InputSignal<CsDataState<void>>`. It emits
   `entryActivated: OutputEmitterRef<CsTimelineEntryRef>`. It renders an ordered
   list; the connecting rail is drawn from the item styling and carries
   `aria-hidden="true"`, because the rail conveys no information the markers and
   dates do not already carry.
-- **`CsTimelineEntry`** — the event shape. It holds `key: string`,
+- **`TimelineEntry`** — the event shape. It holds `key: string`,
   `title: string`, `date: string`, `position: CsTimelinePosition` over
   `'past' | 'current' | 'future'`, and optional `meta: string` and
   `description: string`. The entry whose position is `current` carries
   `aria-current="step"`, and each position resolves a distinct marker glyph as
   well as a distinct tone.
-- **`CsScriptureQuoteComponent`** — selector `cs-scripture-quote`. The accent
+- **`ScriptureQuoteComponent`** — selector `cs-scripture-quote`. The accent
   quotation (L2-099). The inputs are `citation: InputSignal<string | null>`,
   `reference: InputSignal<string | null>`,
   `surface: InputSignal<CsQuoteSurface>` over `'light' | 'dark'`, and
@@ -103,7 +103,7 @@ share.
   an ordered fallback list, so a tooltip near a viewport edge flips rather than
   clipping (L2-100).
 
-`CsListComponent` selects its semantics from `selectionMode`. A list whose mode
+`ListComponent` selects its semantics from `selectionMode`. A list whose mode
 is `none` renders a `ul` of `li` elements, and an item whose interaction is
 `link` holds one anchor covering the row, so a keyboard reader reaches one target
 per item. A list whose mode is `single` or `multiple` renders a listbox with
@@ -115,7 +115,7 @@ naming the condition, so the state does not rest on font weight or colour alone
 (L2-091). The trailing status and action slots render persistent controls rather
 than controls revealed on hover.
 
-`CsDefinitionListComponent` collapses its inline layout to the stacked layout
+`DefinitionListComponent` collapses its inline layout to the stacked layout
 below the responsive breakpoint, so a long value wraps beneath its term rather
 than into a two-character column (L2-092). The compact layout keeps the inline
 arrangement and reduces the row gap for use inside a card or a side panel.
@@ -172,16 +172,16 @@ reading presentations resolve.
 
 ### Components
 
-`CsListComponent` and `CsListItemComponent` share a selection model.
-`CsDefinitionListComponent`, `CsTimelineComponent`, and
-`CsScriptureQuoteComponent` render native structural elements, and
+`ListComponent` and `ListItemComponent` share a selection model.
+`DefinitionListComponent`, `TimelineComponent`, and
+`ScriptureQuoteComponent` render native structural elements, and
 `CsTooltipDirective` attaches through the CDK overlay.
 
 ![C4 component view for reading a record](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsDefinitionItem` and `CsTimelineEntry` are the two view-model shapes the
+`DefinitionItem` and `TimelineEntry` are the two view-model shapes the
 feature accepts. The list, definition list, and timeline all render the shared
 `CsDataState` contract.
 

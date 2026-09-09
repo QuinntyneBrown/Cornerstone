@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone component library" #D1FADF
-  participant "CsAttendanceRosterComponent" as roster
-  participant "CsCardComponent" as card
+  participant "AttendanceRosterComponent" as roster
+  participant "CardComponent" as card
 end box
 box "Frontend — Cornerstone contract layer" #ECFDF3
   participant "CsSlotDirective registry" as slots
@@ -30,7 +30,7 @@ box "Browser — platform" #FFF4E5
   participant "DOM" as dom
 end box
 
-page -> roster : Bind a frozen CsAttendanceRosterViewModel per L2-022
+page -> roster : Bind a frozen AttendanceRosterViewModel per L2-022
 roster -> card : Render one card per roster entry
 card -> slots : Query registered slots
 alt Actions slot has content

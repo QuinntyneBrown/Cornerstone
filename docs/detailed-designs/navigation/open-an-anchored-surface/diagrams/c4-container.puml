@@ -6,7 +6,7 @@ title Containers — Open an anchored surface
 Person(dev, "Application developer", "Places the account menu in the top bar actions region")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components and directives", "Supplies CsMenuDirective, CsMenuItemDirective, CsPopoverComponent, and CsAccountMenuComponent")
+  Container(lib, "Component library", "Angular standalone components and directives", "Supplies CsMenuDirective, CsMenuItemDirective, PopoverComponent, and AccountMenuComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the elevation, radius, tone, and motion tokens the surfaces read")
   Container(docs, "Documentation site", "Angular application", "Publishes the positioning, dismissal, and focus contracts")
 }

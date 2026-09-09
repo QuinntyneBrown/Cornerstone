@@ -19,10 +19,10 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Angular Router" as router
 end box
 box "Frontend — Cornerstone shell" #D1FADF
-  participant "CsTopbarComponent" as topbar
-  participant "CsShellComponent" as shell
-  participant "CsSidenavComponent" as sidenav
-  participant "CsBottomNavComponent" as bottom
+  participant "TopbarComponent" as topbar
+  participant "ShellComponent" as shell
+  participant "SidenavComponent" as sidenav
+  participant "BottomNavComponent" as bottom
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "BreakpointObserver" as bp

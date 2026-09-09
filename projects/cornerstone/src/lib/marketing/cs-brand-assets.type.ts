@@ -7,7 +7,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { CsButtonDirective, CsCardComponent } from '../foundations';
+import { CsButtonDirective, CardComponent } from '../foundations';
 import { CsBrandAsset } from './cs-brand-asset.interface';
 import { CsBrandName } from './cs-brand-name.type';
 

@@ -19,7 +19,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone layout runtime" #D1FADF
-  participant "CsContainerComponent" as container
+  participant "ContainerComponent" as container
   participant "CsGridDirective" as grid
   participant "CsClusterDirective" as cluster
 end box

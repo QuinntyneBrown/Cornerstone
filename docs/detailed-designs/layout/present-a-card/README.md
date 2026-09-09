@@ -41,7 +41,7 @@ stop in the tab order, whatever the card contains.
 The feature introduces one card component with five projection slots, one divider
 component, and the type surface that names their variants.
 
-- **`CsCardComponent`** — the `cs-card` element that renders a card surface. It
+- **`CardComponent`** — the `cs-card` element that renders a card surface. It
   takes a `tone` signal input over `'paper' | 'greige' | 'ink' | 'lime'`, a
   `presentation` input over `'flat' | 'raised' | 'link' | 'selected'`, a
   `disabled` input over `boolean`, and a `padding` input over
@@ -64,17 +64,17 @@ component, and the type surface that names their variants.
   controls. It takes an `align` input over `'start' | 'end' | 'between'` and
   arranges its children with `CsClusterDirective` so the controls wrap rather
   than overflow.
-- **`CsDividerComponent`** — the `cs-divider` element that draws a rule. It takes
+- **`DividerComponent`** — the `cs-divider` element that draws a rule. It takes
   an `orientation` input over `'horizontal' | 'vertical'`, a `variant` input over
   `'full' | 'inset'`, a `spacing` input over the spacing scale, and a
   `decorative` input over `boolean`. When `decorative` is true the host carries
   `aria-hidden="true"` and no role; when it is false the host carries
   `role="separator"` and, for the vertical orientation,
   `aria-orientation="vertical"`.
-- **`CsCardTone`** — the union type of the tones: `'paper' | 'greige' | 'ink' | 'lime'`.
-- **`CsCardPresentation`** — the union type of the presentations:
+- **`CardTone`** — the union type of the tones: `'paper' | 'greige' | 'ink' | 'lime'`.
+- **`CardPresentation`** — the union type of the presentations:
   `'flat' | 'raised' | 'link' | 'selected'`.
-- **`CsDividerOrientation`** and **`CsDividerVariant`** — the union types of the
+- **`DividerOrientation`** and **`CsDividerVariant`** — the union types of the
   divider's orientation and inset variants.
 
 The `disabled` input is a presentation and a behaviour together. A disabled card
@@ -126,16 +126,16 @@ stylesheet.
 
 ### Components
 
-`CsCardComponent` owns the surface and the activation target; the five slot
-components own the internal structure; `CsDividerComponent` separates the slots
+`CardComponent` owns the surface and the activation target; the five slot
+components own the internal structure; `DividerComponent` separates the slots
 and any content around them.
 
 ![C4 component view for presenting a card](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsCardComponent` composes its five slot components and carries the tone,
-presentation, and disabled state. `CsDividerComponent` stands alone and switches
+`CardComponent` composes its five slot components and carries the tone,
+presentation, and disabled state. `DividerComponent` stands alone and switches
 its semantics on the `decorative` input.
 
 ![Class diagram for presenting a card](diagrams/class-structure.png)

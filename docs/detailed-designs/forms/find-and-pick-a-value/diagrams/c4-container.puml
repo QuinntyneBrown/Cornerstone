@@ -7,7 +7,7 @@ Person(dev, "Application developer", "Implements the query handler")
 Person(user, "Application user", "Narrows a large option set")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsSearchFieldComponent, CsComboboxComponent, CsDateFieldComponent, and CsDateTimeFieldComponent")
+  Container(lib, "Component library", "Angular standalone components", "Supplies SearchFieldComponent, ComboboxComponent, DateFieldComponent, and DateTimeFieldComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares control, listbox, chip, and focus tokens")
   Container(docs, "Documentation site", "Angular application", "Publishes the value contract, the keyboard map, and the announcement formats")
 }

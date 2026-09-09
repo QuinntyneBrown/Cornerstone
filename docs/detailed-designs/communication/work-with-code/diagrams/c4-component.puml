@@ -11,12 +11,12 @@ Container_Boundary(appsvc, "Consuming application services") {
 }
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(block, "CsCodeBlockComponent", "Standalone component", "Read-only pre and code display with language label, wrap or scroll, and copy")
+  Component(block, "CodeBlockComponent", "Standalone component", "Read-only pre and code display with language label, wrap or scroll, and copy")
   Component(copy, "CsCopyToClipboardDirective", "Directive", "Writes to the clipboard and announces completion politely")
-  Component(editor, "CsCodeEditorComponent", "Standalone component", "Labelled textarea with line and column feedback, run, and reset")
-  Component(caret, "CsCaretPositionDirective", "Directive", "Tracks the caret line and column and exposes them on demand")
-  Component(pane, "CsPreviewPaneComponent", "Standalone component", "Text or sandboxed document output with an error state")
-  Component(confirm, "CsConfirmDialogComponent", "Standalone component", "Presents the confirm step before a destructive reset")
+  Component(editor, "CodeEditorComponent", "Standalone component", "Labelled textarea with line and column feedback, run, and reset")
+  Component(caret, "CaretPositionDirective", "Directive", "Tracks the caret line and column and exposes them on demand")
+  Component(pane, "PreviewPaneComponent", "Standalone component", "Text or sandboxed document output with an error state")
+  Component(confirm, "ConfirmDialogComponent", "Standalone component", "Presents the confirm step before a destructive reset")
 }
 
 System_Ext(cdk, "Angular CDK", "Clipboard and focus management")

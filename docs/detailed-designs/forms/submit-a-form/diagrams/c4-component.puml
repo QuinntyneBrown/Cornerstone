@@ -6,9 +6,9 @@ title Components — Submit a form
 Person(dev, "Application developer", "Binds the submitting state and the error list")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(actions, "CsFormActionsComponent", "Angular standalone component", "role=group action bar with primary placement, submitting state, and the sticky treatment")
-  Component(summary, "CsValidationSummaryComponent", "Angular standalone component", "Lists invalid controls in DOM order and links each entry to its control")
-  Component(wizard, "CsWizardComponent", "Angular standalone component", "Step state, back, next, skip, and finish actions with per-step validation gates")
+  Component(actions, "FormActionsComponent", "Angular standalone component", "role=group action bar with primary placement, submitting state, and the sticky treatment")
+  Component(summary, "ValidationSummaryComponent", "Angular standalone component", "Lists invalid controls in DOM order and links each entry to its control")
+  Component(wizard, "WizardComponent", "Angular standalone component", "Step state, back, next, skip, and finish actions with per-step validation gates")
   Component(header, "CsStepper", "Angular standalone component", "Step header primitive retained or deprecated per the migration guide")
   Component(gate, "Validation gate", "Pure predicate", "Blocks advancement while the current step reports invalid")
   Component(guard, "Duplicate submission guard", "Component state", "Suppresses a second activation while a submission is pending")

@@ -21,7 +21,7 @@ System_Ext(browser, "Browser platform", "Rendering, print media, and accessibili
 
 Rel(dev, page, "Binds a metric view model in")
 Rel(services, page, "Publishes computed figures to")
-Rel(page, lib, "Passes CsMetricDelta and CsMetricSeries to")
+Rel(page, lib, "Passes MetricDelta and CsMetricSeries to")
 Rel(lib, page, "Emits activation and selection intents to")
 Rel(lib, theme, "Resolves tone, fill, and pattern values from")
 Rel(lib, cdk, "Observes narrow-viewport breakpoints through", "BreakpointObserver")

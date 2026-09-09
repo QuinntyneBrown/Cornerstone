@@ -21,7 +21,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as appsvc
 end box
 box "Frontend — Cornerstone marketing components" #D1FADF
-  participant "CsAuthCardComponent" as card
+  participant "AuthCardComponent" as card
 end box
 box "Browser — platform" #FFF4E5
   participant "Document and focus" as browser

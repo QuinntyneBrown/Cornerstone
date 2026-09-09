@@ -20,10 +20,10 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone movement components" #D1FADF
-  participant "CsMovementDialComponent" as dial
-  participant "CsMovementListComponent" as list
-  participant "CsPipStripComponent" as strip
-  participant "CsProgressRingComponent" as ring
+  participant "MovementDialComponent" as dial
+  participant "MovementListComponent" as list
+  participant "PipStripComponent" as strip
+  participant "ProgressRingComponent" as ring
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Component styles" as styles

@@ -21,7 +21,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Curriculum store" as store
 end box
 box "Frontend — Cornerstone import composite" #D1FADF
-  participant "CsCsvImportWizardComponent" as wizard
+  participant "CsvImportWizardComponent" as wizard
   participant "Row preview renderer" as preview
 end box
 box "Frontend — Angular CDK" #ECFDF3

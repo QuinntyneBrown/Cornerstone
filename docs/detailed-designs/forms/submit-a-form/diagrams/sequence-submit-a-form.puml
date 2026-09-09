@@ -21,7 +21,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone submission components" #D1FADF
-  participant "CsFormActionsComponent" as actions
+  participant "FormActionsComponent" as actions
   participant "Duplicate submission guard" as guard
 end box
 box "Browser — platform" #FFF4E5

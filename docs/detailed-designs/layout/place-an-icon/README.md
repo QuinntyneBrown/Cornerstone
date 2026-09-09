@@ -47,7 +47,7 @@ The feature is a vertical slice from an application's bootstrap configuration to
 the SVG element in the rendered page. It spans a provider function, a registry
 service, one component, and the type surface that names icons.
 
-- **`CsIconComponent`** — the `cs-icon` element that renders one icon. It takes a
+- **`IconComponent`** — the `cs-icon` element that renders one icon. It takes a
   required `name` signal input holding the registered icon name, an optional
   `size` input over `'sm' | 'md' | 'lg' | 'xl'`, an optional `fill` input over
   `'none' | 'solid'` selecting the outline or filled drawing, and an optional
@@ -55,28 +55,28 @@ service, one component, and the type surface that names icons.
   carries `aria-hidden="true"` and no role; when `label` is present the host
   carries `role="img"` and `aria-label`. The component uses `OnPush` change
   detection and emits no outputs.
-- **`CsIconRegistry`** — the injectable service that holds the resolved index. It
-  exposes `registerIconSet(set: CsIconSet): void` for a whole set,
+- **`IconRegistry`** — the injectable service that holds the resolved index. It
+  exposes `registerIconSet(set: IconSet): void` for a whole set,
   `registerIcon(name: string, svg: string): void` for one icon,
-  `resolve(name: string): CsIconDefinition | undefined` for lookup, and a
+  `resolve(name: string): IconDefinition | undefined` for lookup, and a
   read-only `names` signal listing every registered name. Registration is
   idempotent: registering a name that is already present replaces the previous
   definition.
 - **`provideCsIcons()`** — the provider function an application calls in its
-  application config. It accepts zero or more `CsIconSet` values, registers
-  `CsIconRegistry`, and seeds the registry with those sets before the first
+  application config. It accepts zero or more `IconSet` values, registers
+  `IconRegistry`, and seeds the registry with those sets before the first
   render.
-- **`CsIconSet`** — the shape of a registered set: an `id` naming the set and an
-  `icons` record mapping each icon name to its `CsIconDefinition`.
-- **`CsIconDefinition`** — the shape of a single icon: a `viewBox`, the SVG path
+- **`IconSet`** — the shape of a registered set: an `id` naming the set and an
+  `icons` record mapping each icon name to its `IconDefinition`.
+- **`IconDefinition`** — the shape of a single icon: a `viewBox`, the SVG path
   content, and the `fill` variants the drawing provides.
-- **`CsIconName`** — the union type of the names the shipped sets register. A
+- **`IconName`** — the union type of the names the shipped sets register. A
   consuming application widens the type by declaring its own set.
-- **`CsIconSize`** — the union type of the size steps: `'sm' | 'md' | 'lg' | 'xl'`.
+- **`IconSize`** — the union type of the size steps: `'sm' | 'md' | 'lg' | 'xl'`.
   Each step resolves its edge length from a spacing token, so an icon scales with
   the theme rather than with a literal pixel value.
 
-Registered markup is inlined, never fetched. `CsIconComponent` reads the
+Registered markup is inlined, never fetched. `IconComponent` reads the
 definition from the registry during its own change detection and renders the
 paths into its template. The component issues no HTTP request, holds no
 `HttpClient` dependency, and touches no browser global, so it renders identically
@@ -123,16 +123,16 @@ the icon component both run inside the application's Angular injector.
 
 ### Components
 
-`provideCsIcons()` registers `CsIconRegistry` and seeds it with the sets the
-application imported. `CsIconComponent` resolves a name against the registry and
+`provideCsIcons()` registers `IconRegistry` and seeds it with the sets the
+application imported. `IconComponent` resolves a name against the registry and
 inlines the resulting SVG; the icon styles resolve size and colour from tokens.
 
 ![C4 component view for placing an icon](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsIconRegistry` holds a map of `CsIconDefinition` keyed by name.
-`CsIconComponent` depends on the registry and carries the name, size, fill, and
+`IconRegistry` holds a map of `IconDefinition` keyed by name.
+`IconComponent` depends on the registry and carries the name, size, fill, and
 label inputs that decide what it draws and how it is announced.
 
 ![Class diagram for placing an icon](diagrams/class-structure.png)

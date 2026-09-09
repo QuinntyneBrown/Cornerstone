@@ -79,7 +79,7 @@ class CsStatusService {
   +clear(key: string): void
 }
 
-class CsStatusRegionComponent {
+class StatusRegionComponent {
   +politeness: InputSignal<CsPoliteness>
   +atomic: InputSignal<boolean>
   +message: InputSignal<string>
@@ -117,7 +117,7 @@ CsRovingFocusDirective ..> CsKeyBindings : reads bindings from
 CsRovingFocusDirective --> CsAriaPattern : declares
 CsFocusVisibleDirective --> CsFocusOrigin : reports
 CsStatusService --> CsPoliteness : announces at
-CsStatusRegionComponent --> CsPoliteness : declares
+StatusRegionComponent --> CsPoliteness : declares
 CsBusyDirective ..> CsStatusService : announces through
 CsMenuDirective --> CsAriaPattern : implements
 CsMenuDirective *-- "1" CsRovingFocusDirective : moves the active item with

@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as svc
 end box
 box "Frontend — Cornerstone data display" #D1FADF
-  participant "CsChipListComponent" as list
-  participant "CsPillComponent" as pill
-  participant "CsBadgeComponent" as badge
+  participant "ChipListComponent" as list
+  participant "PillComponent" as pill
+  participant "BadgeComponent" as badge
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "FocusKeyManager" as keys
@@ -47,7 +47,7 @@ dom -> pill : Keydown event
 pill -> pill : Toggle the selected model
 pill -> dom : Write aria-pressed and render a check mark per L2-078
 pill -> list : Report the toggle
-list -> panel : Emit CsChipSelectionChange with the full selected set
+list -> panel : Emit ChipSelectionChange with the full selected set
 
 panel -> svc : Apply the reported filter set
 svc --> panel : Filtered record set with a result count

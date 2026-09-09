@@ -19,9 +19,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone tab group" #D1FADF
-  participant "CsTabGroupComponent" as tabs
+  participant "TabGroupComponent" as tabs
   participant "Deferred panel host" as defer
-  participant "CsSegmentedControlComponent" as segment
+  participant "SegmentedControlComponent" as segment
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "FocusKeyManager" as fkm

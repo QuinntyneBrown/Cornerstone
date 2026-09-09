@@ -6,18 +6,18 @@ title Components — Work a kanban board
 Person(user, "Application user", "Moves a work item by pointer or keyboard")
 
 Container_Boundary(page, "Consuming application feature page") {
-  Component(vm, "Column view model", "CsKanbanColumn[]", "Columns with items, accepted kinds, locked and done flags")
+  Component(vm, "Column view model", "KanbanColumn[]", "Columns with items, accepted kinds, locked and done flags")
   Component(adapter, "Process adapter", "CsProcessAdapter", "Consumer-supplied column titles, lock reasons, and empty-state copy per L2-143")
   Component(handler, "Intent handler", "Component method", "Applies or rejects a move and rebinds the columns")
 }
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(board, "CsKanbanBoardComponent", "Standalone component", "Horizontal responsive board connecting every column as a drop list per L2-139")
-  Component(column, "CsKanbanColumnComponent", "Standalone component", "Labelled region with allowed, blocked, locked, done, and empty states per L2-139")
-  Component(card, "CsWorkItemCardComponent", "Standalone component", "Code, title, tags, points, status, assignee, action menu, and drag handle per L2-140")
-  Component(keyboard, "CsKanbanKeyboardMove", "Injectable controller", "Keyboard alternative emitting the same move intent as a pointer drop")
-  Component(announcer, "CsKanbanAnnouncer", "Injectable helper", "Announces a refused drop and the landing column and position")
-  Component(strip, "CsPipStripComponent", "Standalone component", "Card progress semantics per L2-138")
+  Component(board, "KanbanBoardComponent", "Standalone component", "Horizontal responsive board connecting every column as a drop list per L2-139")
+  Component(column, "KanbanColumnComponent", "Standalone component", "Labelled region with allowed, blocked, locked, done, and empty states per L2-139")
+  Component(card, "WorkItemCardComponent", "Standalone component", "Code, title, tags, points, status, assignee, action menu, and drag handle per L2-140")
+  Component(keyboard, "KanbanKeyboardMove", "Injectable controller", "Keyboard alternative emitting the same move intent as a pointer drop")
+  Component(announcer, "KanbanAnnouncer", "Injectable helper", "Announces a refused drop and the landing column and position")
+  Component(strip, "PipStripComponent", "Standalone component", "Card progress semantics per L2-138")
 }
 
 System_Ext(cdk, "Angular CDK", "DragDropModule, LiveAnnouncer, and BreakpointObserver")
@@ -33,8 +33,8 @@ Rel(card, strip, "Renders progress through")
 Rel(board, cdk, "Registers connected drop lists with", "DragDropModule")
 Rel(board, keyboard, "Delegates the keyboard move sequence to")
 Rel(keyboard, board, "Requests the same move intent as a pointer drop")
-Rel(board, handler, "Emits CsWorkItemMoveIntent to", "output()")
-Rel(card, handler, "Emits CsWorkItemOpenIntent and CsWorkItemActionIntent to", "output()")
+Rel(board, handler, "Emits WorkItemMoveIntent to", "output()")
+Rel(card, handler, "Emits WorkItemOpenIntent and WorkItemActionIntent to", "output()")
 Rel(board, announcer, "Announces refused drops through")
 Rel(keyboard, announcer, "Announces the landing column and position through")
 Rel(announcer, cdk, "Delegates announcement to", "LiveAnnouncer")

@@ -13,7 +13,7 @@ skinparam class {
 ' --------------------------
 title Class structure — Work a kanban board
 
-enum CsDropState {
+enum DropState {
   idle
   allowed
   blocked
@@ -36,10 +36,10 @@ class CsProcessPalette {
   +defaultToken: string
 }
 
-class CsKanbanColumn {
+class KanbanColumn {
   +id: string
   +title: string
-  +items: readonly CsWorkItem[]
+  +items: readonly WorkItem[]
   +accepts: readonly string[]
   +locked?: boolean
   +lockReason?: string
@@ -47,7 +47,7 @@ class CsKanbanColumn {
   +emptyText?: string
 }
 
-class CsWorkItem {
+class WorkItem {
   +id: string
   +code: string
   +title: string
@@ -80,85 +80,85 @@ class CsWorkItemAction {
   +disabled?: boolean
 }
 
-class CsKanbanBoardComponent {
-  +columns: InputSignal<readonly CsKanbanColumn[]>
+class KanbanBoardComponent {
+  +columns: InputSignal<readonly KanbanColumn[]>
   +adapter: InputSignal<CsProcessAdapter>
   +dragDisabled: InputSignal<boolean>
-  +itemMoved: OutputEmitterRef<CsWorkItemMoveIntent>
-  -accepts(column: CsKanbanColumn, item: CsWorkItem): boolean
-  -onDrop(event: CdkDragDrop<CsKanbanColumn>): void
+  +itemMoved: OutputEmitterRef<WorkItemMoveIntent>
+  -accepts(column: KanbanColumn, item: WorkItem): boolean
+  -onDrop(event: CdkDragDrop<KanbanColumn>): void
 }
 
-class CsKanbanColumnComponent {
-  +column: InputSignal<CsKanbanColumn>
+class KanbanColumnComponent {
+  +column: InputSignal<KanbanColumn>
   +adapter: InputSignal<CsProcessAdapter>
-  +dropState: InputSignal<CsDropState>
+  +dropState: InputSignal<DropState>
   -accessibleName: Signal<string>
   -isEmpty: Signal<boolean>
 }
 
-class CsWorkItemCardComponent {
-  +item: InputSignal<CsWorkItem>
+class WorkItemCardComponent {
+  +item: InputSignal<WorkItem>
   +adapter: InputSignal<CsProcessAdapter>
   +draggable: InputSignal<boolean>
-  +opened: OutputEmitterRef<CsWorkItemOpenIntent>
-  +actionSelected: OutputEmitterRef<CsWorkItemActionIntent>
+  +opened: OutputEmitterRef<WorkItemOpenIntent>
+  +actionSelected: OutputEmitterRef<WorkItemActionIntent>
   -accessibleName: Signal<string>
 }
 
-class CsKanbanKeyboardMove {
+class KanbanKeyboardMove {
   +grabbed: Signal<string | null>
   +grab(itemId: string): void
   +moveTo(columnId: string, index: number): void
-  +confirm(): CsWorkItemMoveIntent | null
+  +confirm(): WorkItemMoveIntent | null
   +cancel(): void
 }
 
-class CsKanbanAnnouncer {
+class KanbanAnnouncer {
   +announceRefusal(reason: string): void
   +announceLanding(column: string, index: number, total: number): void
 }
 
-class CsWorkItemMoveIntent {
+class WorkItemMoveIntent {
   +itemId: string
   +fromColumnId: string
   +toColumnId: string
   +toIndex: number
 }
 
-class CsWorkItemOpenIntent {
+class WorkItemOpenIntent {
   +itemId: string
 }
 
-class CsWorkItemActionIntent {
+class WorkItemActionIntent {
   +itemId: string
   +actionId: string
 }
 
-class CsPipStripComponent {
+class PipStripComponent {
   +count: InputSignal<number>
   +current: InputSignal<number>
 }
 
-CsKanbanBoardComponent "1" o-- "0..*" CsKanbanColumn : renders
-CsKanbanBoardComponent "1" *-- "0..*" CsKanbanColumnComponent : contains
-CsKanbanColumnComponent "1" *-- "0..*" CsWorkItemCardComponent : contains
-CsKanbanColumn "1" o-- "0..*" CsWorkItem : holds
-CsWorkItem "1" *-- "0..1" CsPipProgress
-CsWorkItem "1" o-- "0..1" CsAssignee
-CsWorkItem "1" o-- "0..*" CsWorkItemAction
-CsWorkItemCardComponent ..> CsPipStripComponent : renders progress through
-CsKanbanColumnComponent --> CsDropState : renders
-CsKanbanBoardComponent --> CsProcessAdapter : reads labels from
-CsKanbanColumnComponent --> CsProcessAdapter : reads labels from
-CsWorkItemCardComponent --> CsProcessAdapter : reads labels from
+KanbanBoardComponent "1" o-- "0..*" KanbanColumn : renders
+KanbanBoardComponent "1" *-- "0..*" KanbanColumnComponent : contains
+KanbanColumnComponent "1" *-- "0..*" WorkItemCardComponent : contains
+KanbanColumn "1" o-- "0..*" WorkItem : holds
+WorkItem "1" *-- "0..1" CsPipProgress
+WorkItem "1" o-- "0..1" CsAssignee
+WorkItem "1" o-- "0..*" CsWorkItemAction
+WorkItemCardComponent ..> PipStripComponent : renders progress through
+KanbanColumnComponent --> DropState : renders
+KanbanBoardComponent --> CsProcessAdapter : reads labels from
+KanbanColumnComponent --> CsProcessAdapter : reads labels from
+WorkItemCardComponent --> CsProcessAdapter : reads labels from
 CsProcessAdapter *-- CsProcessLabels
 CsProcessAdapter *-- CsProcessPalette
-CsKanbanBoardComponent *-- CsKanbanKeyboardMove : delegates the keyboard sequence to
-CsKanbanBoardComponent ..> CsKanbanAnnouncer : announces through
-CsKanbanKeyboardMove ..> CsKanbanAnnouncer : announces through
-CsKanbanBoardComponent ..> CsWorkItemMoveIntent : emits
-CsKanbanKeyboardMove ..> CsWorkItemMoveIntent : produces
-CsWorkItemCardComponent ..> CsWorkItemOpenIntent : emits
-CsWorkItemCardComponent ..> CsWorkItemActionIntent : emits
+KanbanBoardComponent *-- KanbanKeyboardMove : delegates the keyboard sequence to
+KanbanBoardComponent ..> KanbanAnnouncer : announces through
+KanbanKeyboardMove ..> KanbanAnnouncer : announces through
+KanbanBoardComponent ..> WorkItemMoveIntent : emits
+KanbanKeyboardMove ..> WorkItemMoveIntent : produces
+WorkItemCardComponent ..> WorkItemOpenIntent : emits
+WorkItemCardComponent ..> WorkItemActionIntent : emits
 @enduml

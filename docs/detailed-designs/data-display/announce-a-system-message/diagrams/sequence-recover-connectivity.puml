@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application shell" as shell
 end box
 box "Frontend — Cornerstone message runtime" #D1FADF
-  participant "CsOfflineBannerComponent" as banner
+  participant "OfflineBannerComponent" as banner
   participant "csAnnouncementPolitenessFor()" as policy
 end box
 box "Frontend — Angular CDK" #ECFDF3

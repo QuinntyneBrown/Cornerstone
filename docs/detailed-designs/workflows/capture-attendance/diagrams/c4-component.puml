@@ -6,11 +6,11 @@ title Components — Capture attendance
 Person(volunteer, "Volunteer", "Marks rows and leaves the page")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(roster, "CsAttendanceRosterComponent", "Standalone component, OnPush", "Renders the roster, mark-all, clear, and unsaved summary; emits typed intents only")
-  Component(choice, "CsAttendanceChoiceComponent", "Standalone component, ControlValueAccessor", "Radio group of present, late, absent, and excused named after the person")
+  Component(roster, "AttendanceRosterComponent", "Standalone component, OnPush", "Renders the roster, mark-all, clear, and unsaved summary; emits typed intents only")
+  Component(choice, "AttendanceChoiceComponent", "Standalone component, ControlValueAccessor", "Radio group of present, late, absent, and excused named after the person")
   Component(note, "CsAttendanceNoteField", "Composed Cornerstone field", "Captures the per-row note")
-  Component(unsaved, "CsUnsavedChangesDialogComponent", "Standalone component (L2-105)", "Presented when the user leaves a roster with unsaved rows")
-  Component(models, "Attendance view model and intent types", "TypeScript types", "CsAttendanceRosterViewModel, CsAttendanceChange, CsAttendanceBulkChange")
+  Component(unsaved, "UnsavedChangesDialogComponent", "Standalone component (L2-105)", "Presented when the user leaves a roster with unsaved rows")
+  Component(models, "Attendance view model and intent types", "TypeScript types", "AttendanceRosterViewModel, AttendanceChange, AttendanceBulkChange")
 }
 
 Container_Boundary(app, "Consuming application — session attendance page") {

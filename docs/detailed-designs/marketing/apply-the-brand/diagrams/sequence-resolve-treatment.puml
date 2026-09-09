@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Hero panel" as hero
 end box
 box "Frontend — Cornerstone brand components" #D1FADF
-  participant "CsBrandLockupComponent" as lockup
+  participant "BrandLockupComponent" as lockup
   participant "CsThemeService" as themesvc
 end box
 box "Frontend — Cornerstone styles" #ECFDF3

@@ -13,21 +13,21 @@ skinparam class {
 ' --------------------------
 title Class structure — Report and audit
 
-enum CsReportView {
+enum ReportView {
   overview
   youth
   cohort
   staff
 }
 
-enum CsPanelState {
+enum PanelState {
   loading
   ready
   empty
   error
 }
 
-interface CsReportFilterState {
+interface ReportFilterState {
   +fromDate: string | null
   +toDate: string | null
   +cohortIds: string[]
@@ -70,7 +70,7 @@ interface CsBarDatum {
   +value: number
 }
 
-interface CsReportViewModel {
+interface ReportViewModel {
   +kpis: CsKpiPanel[]
   +rings: CsRingPanel[]
   +bars: CsBarPanel[]
@@ -78,9 +78,9 @@ interface CsReportViewModel {
   +recordCount: number
 }
 
-interface CsReportExportIntent {
-  +filters: CsReportFilterState
-  +view: CsReportView
+interface ReportExportIntent {
+  +filters: ReportFilterState
+  +view: ReportView
 }
 
 interface CsAuditFilterState {
@@ -90,12 +90,12 @@ interface CsAuditFilterState {
   +actionTypes: string[]
 }
 
-interface CsAuditDetailField {
+interface AuditDetailField {
   +label: string
   +value: string
 }
 
-interface CsAuditEvent {
+interface AuditEvent {
   +eventId: string
   +action: string
   +actorName: string
@@ -104,7 +104,7 @@ interface CsAuditEvent {
   +occurredAt: string
   +timezone: string
   +isPrivate: boolean
-  +detail: CsAuditDetailField[]
+  +detail: AuditDetailField[]
 }
 
 interface CsPageState {
@@ -113,28 +113,28 @@ interface CsPageState {
   +totalCount: number
 }
 
-class CsReportFiltersComponent {
+class ReportFiltersComponent {
   +options: InputSignal<CsReportFilterOptions>
-  +filters: ModelSignal<CsReportFilterState>
-  +filtersChanged: OutputEmitterRef<CsReportFilterState>
+  +filters: ModelSignal<ReportFilterState>
+  +filtersChanged: OutputEmitterRef<ReportFilterState>
   +filtersCleared: OutputEmitterRef<void>
-  -emitDebounced(state: CsReportFilterState): void
+  -emitDebounced(state: ReportFilterState): void
 }
 
-class CsReportDashboardComponent {
-  +report: InputSignal<CsReportViewModel>
-  +view: ModelSignal<CsReportView>
-  +state: InputSignal<CsPanelState>
-  +exportRequested: OutputEmitterRef<CsReportExportIntent>
-  +viewChanged: OutputEmitterRef<CsReportView>
+class ReportDashboardComponent {
+  +report: InputSignal<ReportViewModel>
+  +view: ModelSignal<ReportView>
+  +state: InputSignal<PanelState>
+  +exportRequested: OutputEmitterRef<ReportExportIntent>
+  +viewChanged: OutputEmitterRef<ReportView>
   -announceApplied(summary: string, count: number): void
 }
 
-class CsAuditLogComponent {
-  +events: InputSignal<CsAuditEvent[]>
+class AuditLogComponent {
+  +events: InputSignal<AuditEvent[]>
   +filters: ModelSignal<CsAuditFilterState>
   +page: ModelSignal<CsPageState>
-  +state: InputSignal<CsPanelState>
+  +state: InputSignal<PanelState>
   +pageChanged: OutputEmitterRef<CsPageState>
   +filtersChanged: OutputEmitterRef<CsAuditFilterState>
   +filtersCleared: OutputEmitterRef<void>
@@ -142,22 +142,22 @@ class CsAuditLogComponent {
   -formatTimestamp(value: string, timezone: string): string
 }
 
-CsReportFiltersComponent --> "1" CsReportFilterOptions : reads
+ReportFiltersComponent --> "1" CsReportFilterOptions : reads
 CsReportFilterOptions o-- "0..*" CsFilterOption : lists
-CsReportFiltersComponent --> "1" CsReportFilterState : holds
-CsReportFiltersComponent ..> CsReportDashboardComponent : supplies the filter state to
-CsReportFiltersComponent ..> CsAuditLogComponent : supplies the filter state to
-CsReportDashboardComponent --> "1" CsReportViewModel : reads
-CsReportViewModel o-- "0..*" CsKpiPanel : composes
-CsReportViewModel o-- "0..*" CsRingPanel : composes
-CsReportViewModel o-- "0..*" CsBarPanel : composes
+ReportFiltersComponent --> "1" ReportFilterState : holds
+ReportFiltersComponent ..> ReportDashboardComponent : supplies the filter state to
+ReportFiltersComponent ..> AuditLogComponent : supplies the filter state to
+ReportDashboardComponent --> "1" ReportViewModel : reads
+ReportViewModel o-- "0..*" CsKpiPanel : composes
+ReportViewModel o-- "0..*" CsRingPanel : composes
+ReportViewModel o-- "0..*" CsBarPanel : composes
 CsBarPanel o-- "1..*" CsBarDatum : plots
-CsReportDashboardComponent --> "1" CsReportView : presents
-CsReportDashboardComponent --> "1" CsPanelState : reports
-CsReportDashboardComponent ..> CsReportExportIntent : emits
-CsAuditLogComponent --> "0..*" CsAuditEvent : renders
-CsAuditEvent o-- "0..*" CsAuditDetailField : renders only the supplied fields
-CsAuditLogComponent --> "1" CsAuditFilterState : holds
-CsAuditLogComponent --> "1" CsPageState : pages
-CsAuditLogComponent --> "1" CsPanelState : reports
+ReportDashboardComponent --> "1" ReportView : presents
+ReportDashboardComponent --> "1" PanelState : reports
+ReportDashboardComponent ..> ReportExportIntent : emits
+AuditLogComponent --> "0..*" AuditEvent : renders
+AuditEvent o-- "0..*" AuditDetailField : renders only the supplied fields
+AuditLogComponent --> "1" CsAuditFilterState : holds
+AuditLogComponent --> "1" CsPageState : pages
+AuditLogComponent --> "1" PanelState : reports
 @enduml

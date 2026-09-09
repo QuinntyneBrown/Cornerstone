@@ -15,12 +15,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import {
-  CsAvatarComponent,
-  CsBadgeComponent,
-  CsButtonDirective,
-  CsIconComponent,
-} from '../foundations';
+import { AvatarComponent, BadgeComponent, CsButtonDirective, IconComponent } from '../foundations';
 import { CsBreakpointService } from '../platform';
 
 export interface CsMarketingLink {

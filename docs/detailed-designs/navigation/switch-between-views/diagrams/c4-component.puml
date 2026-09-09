@@ -6,12 +6,12 @@ title Components — Switch between views
 Person(user, "Application user", "Selects a tab, segment, section, or page")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(tabs, "CsTabGroupComponent", "Standalone component", "Tablist with roving tabindex, badges, disabled tabs, and overflow")
-  Component(tab, "CsTabComponent", "Standalone component", "Declarative single tab projecting its panel content")
-  Component(segment, "CsSegmentedControlComponent", "Standalone component", "Compact radiogroup with roving focus and forms integration")
-  Component(accordion, "CsAccordionComponent", "Standalone component", "Single or multiple expansion across its sections")
-  Component(accitem, "CsAccordionItemComponent", "Standalone component", "Heading button with aria-expanded and a deferred body")
-  Component(paginator, "CsPaginatorComponent", "Standalone component", "Previous and next controls, page count, page size, and result summary")
+  Component(tabs, "TabGroupComponent", "Standalone component", "Tablist with roving tabindex, badges, disabled tabs, and overflow")
+  Component(tab, "TabComponent", "Standalone component", "Declarative single tab projecting its panel content")
+  Component(segment, "SegmentedControlComponent", "Standalone component", "Compact radiogroup with roving focus and forms integration")
+  Component(accordion, "AccordionComponent", "Standalone component", "Single or multiple expansion across its sections")
+  Component(accitem, "AccordionItemComponent", "Standalone component", "Heading button with aria-expanded and a deferred body")
+  Component(paginator, "PaginatorComponent", "Standalone component", "Previous and next controls, page count, page size, and result summary")
   Component(defer, "Deferred content host", "Component-scoped template", "Renders panel and section content on first reveal")
   Component(live, "Live region", "Component-scoped template", "Announces the result range after each page change")
   Component(menu, "CsMenuDirective", "Attribute directive", "Holds the tabs that do not fit under the menu overflow resolution")

@@ -19,7 +19,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone process components" #D1FADF
-  participant "CsProcessRailComponent" as rail
+  participant "ProcessRailComponent" as rail
   participant "Orientation resolver" as resolver
 end box
 box "Frontend — Angular CDK" #ECFDF3

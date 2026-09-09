@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "ScheduleViewModelService" as vm
 end box
 box "Frontend — Cornerstone schedule" #D1FADF
-  participant "CsScheduleListComponent" as list
-  participant "CsEventCardComponent" as card
+  participant "ScheduleListComponent" as list
+  participant "EventCardComponent" as card
 end box
 box "Browser — platform" #FFF4E5
   participant "Live region" as browser

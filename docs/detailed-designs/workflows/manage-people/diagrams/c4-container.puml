@@ -6,7 +6,7 @@ title Containers — Manage people
 Person(admin, "Administrator", "Manages the roster")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Renders CsPeopleDirectoryComponent, CsPersonRowComponent, CsPersonSummaryComponent, and CsRecordTabsComponent; writes no personal data to storage")
+  Container(lib, "Component library", "Angular standalone components", "Renders PeopleDirectoryComponent, PersonRowComponent, PersonSummaryComponent, and RecordTabsComponent; writes no personal data to storage")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the tokens the directory and record styles resolve")
   Container(docs, "Documentation site", "Angular application", "Publishes the view model and intent contracts")
 }
@@ -22,9 +22,9 @@ System_Ext(browser, "Browser platform", "Rendering and media query engine")
 
 Rel(admin, shell, "Opens the directory screen in")
 Rel(shell, page, "Routes to")
-Rel(services, page, "Computes CsPersonRowView, CsPersonSummaryView, and CsRecordSection for")
+Rel(services, page, "Computes PersonRowView, PersonSummaryView, and RecordSection for")
 Rel(page, lib, "Binds the directory and record view models to")
-Rel(lib, page, "Emits CsPeopleQuery, CsPeopleSelectionChange, CsPersonRowAction, and CsRecordSectionChange to")
+Rel(lib, page, "Emits PeopleQuery, PeopleSelectionChange, PersonRowAction, and RecordSectionChange to")
 Rel(page, services, "Forwards intents to")
 Rel(services, services, "Records the access in the audit log the application owns")
 Rel(lib, theme, "Resolves visual values from")

@@ -6,7 +6,7 @@ title Containers — Browse a schedule
 Person(mentor, "Mentor", "Browses the cohort schedule")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Provides CsCalendarComponent, CsEventCardComponent, and CsScheduleListComponent")
+  Container(lib, "Component library", "Angular standalone components", "Provides CalendarComponent, EventCardComponent, and ScheduleListComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the tokens the schedule surfaces resolve")
   Container(docs, "Documentation site", "Angular application", "Publishes calendar and agenda usage examples")
 }

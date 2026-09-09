@@ -6,7 +6,7 @@ title Containers — Apply the brand
 Person(user, "Application user", "Sees the brand in the header, the authentication screen, and the footer")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsLogoMarkComponent, CsBrandLockupComponent, and the CsBrandAssets token")
+  Container(lib, "Component library", "Angular standalone components", "Supplies LogoMarkComponent, BrandLockupComponent, and the CsBrandAssets token")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the brand colours, size steps, and clear-space scale")
   Container(docs, "Documentation site", "Angular application", "Publishes the brand variants, treatments, and clear-space rules")
 }

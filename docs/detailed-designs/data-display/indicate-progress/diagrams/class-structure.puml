@@ -59,7 +59,7 @@ class CsValueHelpers <<functions>> {
   +csThrottleAnnouncement(text: string, intervalMs: number): void
 }
 
-class CsSpinnerComponent {
+class SpinnerComponent {
   +label: InputSignal<string>
   +size: InputSignal<CsIndicatorSize>
   +mode: InputSignal<CsSpinnerMode>
@@ -68,20 +68,20 @@ class CsSpinnerComponent {
   #reducedMotion: Signal<boolean>
 }
 
-class CsSkeletonComponent {
+class SkeletonComponent {
   +preset: InputSignal<CsSkeletonPreset>
   +lines: InputSignal<number>
   +width: InputSignal<string>
   +height: InputSignal<string>
 }
 
-class CsSkeletonGroupComponent {
+class SkeletonGroupComponent {
   +loading: InputSignal<boolean>
   +label: InputSignal<string>
   #busy: Signal<boolean>
 }
 
-class CsProgressBarComponent {
+class ProgressBarComponent {
   +height: InputSignal<'thin' | 'standard'>
   +tone: InputSignal<CsProgressTone>
   +showValue: InputSignal<boolean>
@@ -89,7 +89,7 @@ class CsProgressBarComponent {
   #percentage: Signal<number>
 }
 
-class CsProgressRingComponent {
+class ProgressRingComponent {
   +size: InputSignal<CsIndicatorSize>
   +tone: InputSignal<CsProgressTone>
   #clamped: Signal<number>
@@ -97,17 +97,17 @@ class CsProgressRingComponent {
   #dashOffset: Signal<number>
 }
 
-CsProgressBarComponent ..|> CsProgressValue
-CsProgressRingComponent ..|> CsProgressValue
+ProgressBarComponent ..|> CsProgressValue
+ProgressRingComponent ..|> CsProgressValue
 CsProgressValue --> CsProgressMode : has
-CsProgressBarComponent ..> CsValueHelpers : clamps and throttles through
-CsProgressRingComponent ..> CsValueHelpers : clamps and throttles through
-CsProgressBarComponent --> CsProgressTone : has
-CsProgressRingComponent --> CsProgressTone : has
-CsProgressRingComponent --> CsIndicatorSize : has
-CsSpinnerComponent --> CsIndicatorSize : has
-CsSpinnerComponent --> CsSpinnerMode : has
-CsSkeletonGroupComponent o-- "0..*" CsSkeletonComponent : projects
-CsSkeletonGroupComponent ..> CsSpinnerComponent : may render decoratively
-CsSkeletonComponent --> CsSkeletonPreset : has
+ProgressBarComponent ..> CsValueHelpers : clamps and throttles through
+ProgressRingComponent ..> CsValueHelpers : clamps and throttles through
+ProgressBarComponent --> CsProgressTone : has
+ProgressRingComponent --> CsProgressTone : has
+ProgressRingComponent --> CsIndicatorSize : has
+SpinnerComponent --> CsIndicatorSize : has
+SpinnerComponent --> CsSpinnerMode : has
+SkeletonGroupComponent o-- "0..*" SkeletonComponent : projects
+SkeletonGroupComponent ..> SpinnerComponent : may render decoratively
+SkeletonComponent --> CsSkeletonPreset : has
 @enduml

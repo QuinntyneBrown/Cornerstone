@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as appsvc
 end box
 box "Frontend — Cornerstone drawer runtime" #D1FADF
-  participant "CsDrawerService" as service
-  participant "CsDrawerComponent" as drawer
-  participant "CsDrawerRef" as ref
+  participant "DrawerService" as service
+  participant "DrawerComponent" as drawer
+  participant "DrawerRef" as ref
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Overlay and BlockScroll" as overlay

@@ -41,18 +41,18 @@ The feature is a vertical slice from an application's enforcement result down to
 the announced state change on the advance action. It introduces two components,
 their intents, and the requirement view model.
 
-- **`CsGateComponent`** — the gate panel, selector `cs-gate`. Inputs:
-  `gate: InputSignal<CsGateSummary>`, `requirements: InputSignal<readonly
+- **`GateComponent`** — the gate panel, selector `cs-gate`. Inputs:
+  `gate: InputSignal<GateSummary>`, `requirements: InputSignal<readonly
   CsRequirement[]>`, `adapter: InputSignal<CsProcessAdapter>`,
-  `mode: InputSignal<CsGateMode>` holding `'interactive'` or `'readonly'`, and
+  `mode: InputSignal<GateMode>` holding `'interactive'` or `'readonly'`, and
   `helperText: InputSignal<string | null>`. Outputs:
-  `advanceRequested: OutputEmitterRef<CsGateAdvanceIntent>` and
+  `advanceRequested: OutputEmitterRef<GateAdvanceIntent>` and
   `requirementToggled: OutputEmitterRef<CsRequirementToggleIntent>`. States:
   open and blocked. When blocked, the advance action is disabled, carries
   `aria-disabled="true"`, and its accessible description states the outstanding
   count. When the gate transitions from blocked to open, the component announces
   the change politely once through a live region.
-- **`CsRequirementChecklistComponent`** — the checklist, selector
+- **`RequirementChecklistComponent`** — the checklist, selector
   `cs-requirement-checklist`. Inputs: `requirements`, `mode`,
   `groupLabel: InputSignal<string>`, and `adapter`. Output:
   `requirementToggled`. In the interactive mode each requirement renders as a
@@ -63,17 +63,17 @@ their intents, and the requirement view model.
   optional `meta`, optional `busy`, and optional `error`. The `busy` flag marks a
   caller-supplied operation as pending; the `error` field carries the message to
   state in text.
-- **`CsGateSummary`** — the enforcement result: `id`, `label`, `open`,
+- **`GateSummary`** — the enforcement result: `id`, `label`, `open`,
   `outstandingCount`, and optional `blockedReason`. The consuming application
   computes every field.
-- **`CsGateMode`** — union type of the interaction modes: `'interactive' |
+- **`GateMode`** — union type of the interaction modes: `'interactive' |
   'readonly'`.
-- **`CsGateAdvanceIntent`** — the intent emitted when the advance action is
+- **`GateAdvanceIntent`** — the intent emitted when the advance action is
   activated, carrying `gateId`. The component emits it exactly once per
   activation and makes no enforcement decision.
 - **`CsRequirementToggleIntent`** — the intent emitted when a requirement is
   toggled, carrying `requirementId`, `gateId`, and the requested `done` value.
-- **`CsGateAnnouncer`** — the internal live-region helper that announces the open
+- **`GateAnnouncer`** — the internal live-region helper that announces the open
   transition politely and a toggle error assertively, each once per occurrence.
 
 A requirement marked busy is not re-activatable while the flag holds, and the
@@ -115,7 +115,7 @@ intents to the feature page.
 
 ### Components
 
-`CsGateComponent` composes `CsRequirementChecklistComponent` and the Cornerstone
+`GateComponent` composes `RequirementChecklistComponent` and the Cornerstone
 checkbox. The adapter and the enforcement result are the only inputs that carry
 application vocabulary or verdicts into either component.
 
@@ -123,7 +123,7 @@ application vocabulary or verdicts into either component.
 
 ### Class structure
 
-`CsGateSummary` carries the enforcement result, `CsRequirement` carries per-item
+`GateSummary` carries the enforcement result, `CsRequirement` carries per-item
 state including busy and error, and each component emits one typed intent per
 interaction.
 

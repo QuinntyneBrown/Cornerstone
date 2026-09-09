@@ -20,10 +20,10 @@ box "Frontend — Consuming application" #E0F2FE
   participant "SourceEvaluationHandler" as runner
 end box
 box "Frontend — Cornerstone code" #D1FADF
-  participant "CsCodeEditorComponent" as editor
-  participant "CsCaretPositionDirective" as caret
-  participant "CsPreviewPaneComponent" as pane
-  participant "CsConfirmDialogComponent" as confirm
+  participant "CodeEditorComponent" as editor
+  participant "CaretPositionDirective" as caret
+  participant "PreviewPaneComponent" as pane
+  participant "ConfirmDialogComponent" as confirm
 end box
 box "Browser — platform" #FFF4E5
   participant "Textarea, iframe sandbox, and focus" as browser

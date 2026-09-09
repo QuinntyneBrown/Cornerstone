@@ -49,62 +49,62 @@ The feature is a vertical slice from a Word Up quiz page down to the rendered
 question and result surfaces. It introduces three components, their view model
 types, and their intent types.
 
-- **`CsQuizComponent`** — the outer composite, selector `cs-quiz`. It holds the
+- **`QuizComponent`** — the outer composite, selector `cs-quiz`. It holds the
   question sequence, the progress indication, and the submit and confirm flow.
-  Inputs: `quiz: InputSignal<CsQuizView>`, `answers:
-  ModelSignal<CsQuizAnswerMap>`, `mode: InputSignal<CsQuizMode>` defaulting to
+  Inputs: `quiz: InputSignal<QuizView>`, `answers:
+  ModelSignal<QuizAnswerMap>`, `mode: InputSignal<QuizMode>` defaulting to
   `'attempt'`, and `submitting: InputSignal<boolean>`. Outputs: `answerChanged:
-  OutputEmitterRef<CsQuizAnswerChange>`, `navigated:
-  OutputEmitterRef<CsQuizNavigate>`, and `submitted:
-  OutputEmitterRef<CsQuizSubmit>`. States: attempt, confirming, submitting, and
+  OutputEmitterRef<QuizAnswerChange>`, `navigated:
+  OutputEmitterRef<QuizNavigate>`, and `submitted:
+  OutputEmitterRef<QuizSubmit>`. States: attempt, confirming, submitting, and
   review.
-- **`CsQuizQuestionComponent`** — the inner composite, selector
+- **`QuizQuestionComponent`** — the inner composite, selector
   `cs-quiz-question`. It renders one question in the shape its answer type calls
   for and carries the answer value. Inputs: `question:
-  InputSignal<CsQuizQuestionView>`, `readOnly: InputSignal<boolean>`, and
+  InputSignal<QuizQuestionView>`, `readOnly: InputSignal<boolean>`, and
   `showFeedback: InputSignal<boolean>`. Output: `answerChanged:
-  OutputEmitterRef<CsQuizAnswerChange>`. The component implements
-  `ControlValueAccessor` over `CsQuizAnswerValue`, so a page may bind it to a
+  OutputEmitterRef<QuizAnswerChange>`. The component implements
+  `ControlValueAccessor` over `QuizAnswerValue`, so a page may bind it to a
   form control instead of the outer composite.
-- **`CsQuizResultComponent`** — the result composite, selector `cs-quiz-result`.
+- **`QuizResultComponent`** — the result composite, selector `cs-quiz-result`.
   It renders the score, the pass state, the per-question outcome with its
   explanation, and the follow-on actions. Inputs: `result:
-  InputSignal<CsQuizResultView>` and `actions:
-  InputSignal<readonly CsQuizResultAction[]>`. Output: `actionSelected:
-  OutputEmitterRef<CsQuizResultAction>`. States: passed, failed, and awaiting
+  InputSignal<QuizResultView>` and `actions:
+  InputSignal<readonly QuizResultAction[]>`. Output: `actionSelected:
+  OutputEmitterRef<QuizResultAction>`. States: passed, failed, and awaiting
   review.
-- **`CsQuizView`** — view model of one attempt. Fields: `quizId`, `title`,
+- **`QuizView`** — view model of one attempt. Fields: `quizId`, `title`,
   `questions`, `currentIndex`, `allowBackNavigation`, and `progressLabel`.
-- **`CsQuizQuestionView`** — view model of one question. Fields: `questionId`,
+- **`QuizQuestionView`** — view model of one question. Fields: `questionId`,
   `prompt`, `answerType`, `options`, `required`, `validationMessage`, and
   `helpText`.
-- **`CsQuizAnswerType`** — union type of the answer types: `'single' | 'multiple'
+- **`QuizAnswerType`** — union type of the answer types: `'single' | 'multiple'
   | 'text'`.
-- **`CsQuizAnswerValue`** — union type of the recorded values: `string | readonly
+- **`QuizAnswerValue`** — union type of the recorded values: `string | readonly
   string[] | null` for choice types and `string | null` for text.
-- **`CsQuizAnswerMap`** — record keyed by `questionId` holding one
-  `CsQuizAnswerValue` each.
-- **`CsQuizAnswerChange`** — intent emitted on each answer edit. Fields:
+- **`QuizAnswerMap`** — record keyed by `questionId` holding one
+  `QuizAnswerValue` each.
+- **`QuizAnswerChange`** — intent emitted on each answer edit. Fields:
   `quizId`, `questionId`, and `value`.
-- **`CsQuizNavigate`** — intent emitted when a participant moves between
+- **`QuizNavigate`** — intent emitted when a participant moves between
   questions. Fields: `quizId`, `fromIndex`, and `toIndex`.
-- **`CsQuizSubmit`** — intent emitted after the participant confirms. Fields:
+- **`QuizSubmit`** — intent emitted after the participant confirms. Fields:
   `quizId` and `answers`.
-- **`CsQuizResultView`** — view model of a marked attempt. Fields: `quizId`,
+- **`QuizResultView`** — view model of a marked attempt. Fields: `quizId`,
   `attemptId`, `score`, `total`, `percent`, `outcome`, `summaryLabel`, and
   `questions`.
-- **`CsQuizQuestionResult`** — view model of one marked question. Fields:
+- **`QuizQuestionResult`** — view model of one marked question. Fields:
   `questionId`, `prompt`, `givenLabel`, `expectedLabel`, `correct`, and
   `explanation`.
-- **`CsQuizOutcome`** — union type of the outcomes: `'passed' | 'failed' |
+- **`QuizOutcome`** — union type of the outcomes: `'passed' | 'failed' |
   'pending'`.
-- **`CsQuizResultAction`** — intent describing a follow-on action. Fields:
+- **`QuizResultAction`** — intent describing a follow-on action. Fields:
   `actionId`, `label`, and `kind` of `'next' | 'retry' | 'review'`.
-- **`CsQuizMode`** — union type of the presentation modes: `'attempt' |
+- **`QuizMode`** — union type of the presentation modes: `'attempt' |
   'review'`.
 
 All three components are standalone and use `OnPush` change detection. Validation
-is presentational: `CsQuizComponent` blocks the submit action while a question
+is presentational: `QuizComponent` blocks the submit action while a question
 marked `required` holds no value and renders the supplied `validationMessage`
 against that question. The message text comes from the view model; the component
 composes no message of its own.
@@ -148,17 +148,17 @@ and the result and builds the confirm dialog on Angular CDK overlays.
 
 ### Components
 
-`CsQuizComponent` receives `CsQuizView` from Word Up's assessment service and
-emits `CsQuizSubmit` back to it. The marking service returns `CsQuizResultView`,
-which `CsQuizResultComponent` renders. No Cornerstone component holds the answer
+`QuizComponent` receives `QuizView` from Word Up's assessment service and
+emits `QuizSubmit` back to it. The marking service returns `QuizResultView`,
+which `QuizResultComponent` renders. No Cornerstone component holds the answer
 key.
 
 ![C4 component view for taking a quiz](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsQuizComponent` composes one `CsQuizQuestionComponent` per question and hands
-the answer map back through a `model()` signal. `CsQuizResultComponent` reads a
+`QuizComponent` composes one `QuizQuestionComponent` per question and hands
+the answer map back through a `model()` signal. `QuizResultComponent` reads a
 separate result view model produced by the application.
 
 ![Class diagram for taking a quiz](diagrams/class-structure.png)

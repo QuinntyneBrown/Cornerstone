@@ -53,7 +53,7 @@ class CsMenuItemDirective {
   +triggered: OutputEmitterRef<CsMenuItemTrigger>
 }
 
-class CsPopoverComponent {
+class PopoverComponent {
   +open: ModelSignal<boolean>
   +position: InputSignal<CsAnchorPosition>
   +trapFocus: InputSignal<boolean>
@@ -61,21 +61,21 @@ class CsPopoverComponent {
   +closed: OutputEmitterRef<CsDismissReason>
 }
 
-class CsAccountMenuComponent {
-  +account: InputSignal<CsAccount>
-  +actions: InputSignal<readonly CsAccountAction[]>
-  +actionSelected: OutputEmitterRef<CsAccountAction>
+class AccountMenuComponent {
+  +account: InputSignal<Account>
+  +actions: InputSignal<readonly AccountAction[]>
+  +actionSelected: OutputEmitterRef<AccountAction>
   +signOut: OutputEmitterRef<void>
 }
 
-class CsAccount {
+class Account {
   +displayName: string
   +email?: string
   +avatarSrc?: string
   +roleLabel?: string
 }
 
-class CsAccountAction {
+class AccountAction {
   +id: string
   +label: string
   +icon?: string
@@ -96,14 +96,14 @@ interface OverlayRef {
 
 CsMenuDirective --> CsAnchorPosition : prefers
 CsMenuDirective --> CsDismissReason : reports
-CsPopoverComponent --> CsAnchorPosition : prefers
-CsPopoverComponent --> CsDismissReason : reports
+PopoverComponent --> CsAnchorPosition : prefers
+PopoverComponent --> CsDismissReason : reports
 CsMenuDirective ..> OverlayRef : attaches through
-CsPopoverComponent ..> OverlayRef : attaches through
+PopoverComponent ..> OverlayRef : attaches through
 CsMenuDirective o-- "0..*" CsMenuItemDirective : manages focus across
 CsMenuItemDirective ..> CsMenuItemTrigger : emits
-CsAccountMenuComponent *-- "1" CsMenuDirective : composes
-CsAccountMenuComponent o-- "1..*" CsMenuItemDirective : renders
-CsAccountMenuComponent --> "1" CsAccount : displays
-CsAccountMenuComponent --> "1..*" CsAccountAction : offers
+AccountMenuComponent *-- "1" CsMenuDirective : composes
+AccountMenuComponent o-- "1..*" CsMenuItemDirective : renders
+AccountMenuComponent --> "1" Account : displays
+AccountMenuComponent --> "1..*" AccountAction : offers
 @enduml

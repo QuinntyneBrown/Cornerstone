@@ -21,8 +21,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Attendance policy service" as rules
 end box
 box "Frontend — Cornerstone attendance composite" #D1FADF
-  participant "CsAttendanceRosterComponent" as roster
-  participant "CsAttendanceChoiceComponent" as choice
+  participant "AttendanceRosterComponent" as roster
+  participant "AttendanceChoiceComponent" as choice
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer" as announcer
@@ -34,7 +34,7 @@ end box
 user -> browser : Select 'late' for one person
 browser -> choice : Radio selection
 choice -> roster : Value change for the row
-roster -> page : Emit CsAttendanceChange per L2-125
+roster -> page : Emit AttendanceChange per L2-125
 
 page -> store : Write the change
 store -> browser : Attempt the request
@@ -56,7 +56,7 @@ roster --> user : Resolve action offered on the row
 
 alt Mentor resolves the conflict
   user -> roster : Activate the resolve action
-  roster -> page : Emit CsAttendanceConflictIntent per L2-125
+  roster -> page : Emit AttendanceConflictIntent per L2-125
   page -> rules : Decide the resolution
   rules --> page : Resolved state
   page -> roster : Bind the row with status 'clean'

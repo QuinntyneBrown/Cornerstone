@@ -7,7 +7,7 @@ Person(dev, "Application developer", "Places the marketing header and footer on 
 Person_Ext(visitor, "Visitor", "Browses public routes without a session")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsMarketingHeaderComponent and CsMarketingFooterComponent")
+  Container(lib, "Component library", "Angular standalone components", "Supplies MarketingHeaderComponent and MarketingFooterComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the type, colour, spacing, and motion tokens the public chrome reads")
   Container(docs, "Documentation site", "Angular application", "Publishes the link model and the public class hooks")
 }

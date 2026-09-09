@@ -41,36 +41,36 @@ scroll and focus handling.
 The feature spans an injectable service, a presentational shell component, and the
 types that carry configuration and results across the boundary.
 
-- **`CsDialogService`** — the injectable an application calls to open a dialog. Its
+- **`DialogService`** — the injectable an application calls to open a dialog. Its
   `open<R, D, C>(component, config)` method takes a component type, an optional
-  typed data payload of type `D`, and returns a `CsDialogRef<R, C>` whose result
+  typed data payload of type `D`, and returns a `DialogRef<R, C>` whose result
   type `R` is the type the dialog resolves to. It applies the `cs-backdrop`
   backdrop class and the FaithTech panel class before delegating to the CDK
   `Dialog` service. It also exposes `openTemplate<R>()` for a template-portal
   dialog and `closeAll()`.
-- **`CsDialogShellComponent`** — the `cs-dialog-shell` element that renders the
+- **`DialogShellComponent`** — the `cs-dialog-shell` element that renders the
   panel. It projects three regions: a header selected by `[csDialogTitle]`, the
   default content, and an action bar selected by `[csDialogActions]`. It carries a
   `size` input of `'small' | 'default' | 'large'`, a `fullScreenOnMobile` input,
   and a `dismissible` input that governs whether the backdrop and the Escape key
   close the dialog. It hosts the CDK focus trap and captures initial focus on
   open.
-- **`CsDialogRef<R, C>`** — the handle returned from `open()`. It carries
+- **`DialogRef<R, C>`** — the handle returned from `open()`. It carries
   `close(result?: R)`, a `closed` observable of `R | undefined`, a `backdropClick`
   observable, a `keydownEvents` observable, and a writable `disableClose` flag that
   a dialog sets while an asynchronous action is in flight.
-- **`CsDialogConfig<D>`** — the configuration object. It carries `data` of type
+- **`DialogConfig<D>`** — the configuration object. It carries `data` of type
   `D`, `size`, `fullScreenOnMobile`, `disableClose`, `ariaLabelledBy`,
   `ariaDescribedBy`, `restoreFocus`, and `autoFocus`.
-- **`CsDialogSize`** — union type of the size identifiers:
+- **`DialogSize`** — union type of the size identifiers:
   `'small' | 'default' | 'large'`.
-- **`CsDialogTitleDirective`** — the `csDialogTitle` attribute directive. It stamps
+- **`DialogTitleDirective`** — the `csDialogTitle` attribute directive. It stamps
   a generated element id and registers that id as the panel's `aria-labelledby`
   target, so the accessible name comes from the rendered heading rather than a
   duplicated string.
-- **`CsDialogDescriptionDirective`** — the `csDialogDescription` attribute
+- **`DialogDescriptionDirective`** — the `csDialogDescription` attribute
   directive. It performs the same registration for `aria-describedby`.
-- **`CsDialogActionsDirective`** — the `csDialogActions` attribute directive. It
+- **`DialogActionsDirective`** — the `csDialogActions` attribute directive. It
   applies the action-bar layout and its responsive stacking.
 
 The shell resolves every visual value from the token surface (L2-005), so a dialog
@@ -117,15 +117,15 @@ application's own DOM.
 
 ### Components
 
-`CsDialogService` wraps the CDK `Dialog`, attaches `CsDialogShellComponent`, and
-returns a `CsDialogRef`. The labelling directives register their element ids with
+`DialogService` wraps the CDK `Dialog`, attaches `DialogShellComponent`, and
+returns a `DialogRef`. The labelling directives register their element ids with
 the shell, and the shell delegates the trap to the CDK focus trap.
 
 ![C4 component view for opening a dialog](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsDialogService` produces a `CsDialogRef<R, C>` from a `CsDialogConfig<D>`. The
+`DialogService` produces a `DialogRef<R, C>` from a `DialogConfig<D>`. The
 shell holds the size and dismissal inputs; the three content directives supply the
 accessible name, the description, and the action layout.
 

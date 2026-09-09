@@ -46,37 +46,37 @@ services beside them.
 The feature is a vertical slice from an application-supplied roster view model
 down to a radio group per person and a set of typed intents travelling back.
 
-- **`CsAttendanceRosterComponent`** — the composite, selector `cs-attendance-roster`.
-  It takes `roster: InputSignal<CsAttendanceRosterViewModel>` and
+- **`AttendanceRosterComponent`** — the composite, selector `cs-attendance-roster`.
+  It takes `roster: InputSignal<AttendanceRosterViewModel>` and
   `busy: InputSignal<boolean>`, derives `unsaved: Signal<CsAttendanceUnsavedSummary>`,
   and emits `stateChanged`, `bulkChanged`, `noteChanged`, and
   `conflictResolveRequested`. It renders one row per person, a mark-all control, a
   clear control, and a summary of unsaved rows. Its states are clean, dirty,
   queued, and conflict; each state is stated in text on the affected row.
-- **`CsAttendanceChoiceComponent`** — the per-person control, selector
+- **`AttendanceChoiceComponent`** — the per-person control, selector
   `cs-attendance-choice`. It implements `ControlValueAccessor` and holds
   `value: ModelSignal<CsAttendanceState | null>`,
   `personName: InputSignal<string>`, `status: InputSignal<CsAttendanceRowStatus>`,
   and `disabled: InputSignal<boolean>`. It renders the four choices as one radio
   group whose accessible name includes the person's name, and each choice target
   measures at least 44 by 44 CSS pixels.
-- **`CsAttendanceRosterViewModel`** — the input type. It carries the session
+- **`AttendanceRosterViewModel`** — the input type. It carries the session
   identifier, the session label, the row list, the conflict count, and a queued
   flag.
-- **`CsAttendanceRowViewModel`** — one row: the person identifier, the person
+- **`AttendanceRowViewModel`** — one row: the person identifier, the person
   name, the current attendance state or `null`, the note or `null`, the row
   status, and the conflict reason or `null`.
 - **`CsAttendanceState`** — union type of the four choices:
   `'present' | 'late' | 'absent' | 'excused'`.
 - **`CsAttendanceRowStatus`** — union type of the row states:
   `'clean' | 'dirty' | 'queued' | 'conflict'`.
-- **`CsAttendanceChange`** — intent carrying one person identifier and the new
+- **`AttendanceChange`** — intent carrying one person identifier and the new
   attendance state.
-- **`CsAttendanceBulkChange`** — intent carrying every row the mark-all or clear
+- **`AttendanceBulkChange`** — intent carrying every row the mark-all or clear
   action changed, emitted once per action rather than once per row.
-- **`CsAttendanceNoteChange`** — intent carrying one person identifier and the
+- **`AttendanceNoteChange`** — intent carrying one person identifier and the
   new note text.
-- **`CsAttendanceConflictIntent`** — intent asking the application to resolve a
+- **`AttendanceConflictIntent`** — intent asking the application to resolve a
   reported conflict on one row.
 - **`CsAttendanceUnsavedSummary`** — derived value holding the changed-row count
   and the changed person identifiers.
@@ -127,7 +127,7 @@ neither container reaches the application's data.
 
 ### Components
 
-`CsAttendanceRosterComponent` renders one `CsAttendanceChoiceComponent` per row
+`AttendanceRosterComponent` renders one `AttendanceChoiceComponent` per row
 and emits typed intents across the boundary to the application's attendance
 service. The domain rules, the persistence, and the authorization sit on the
 application side of that boundary.
@@ -136,8 +136,8 @@ application side of that boundary.
 
 ### Class structure
 
-The roster component reads one `CsAttendanceRosterViewModel`, composes one choice
-component per `CsAttendanceRowViewModel`, and emits four intent types. The choice
+The roster component reads one `AttendanceRosterViewModel`, composes one choice
+component per `AttendanceRowViewModel`, and emits four intent types. The choice
 component realizes `ControlValueAccessor` so an application may bind it to a
 form control.
 

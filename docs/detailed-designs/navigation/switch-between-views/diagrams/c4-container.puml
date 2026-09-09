@@ -6,7 +6,7 @@ title Containers — Switch between views
 Person(dev, "Application developer", "Places view switches inside a feature page")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsTabGroupComponent, CsSegmentedControlComponent, CsAccordionComponent, and CsPaginatorComponent")
+  Container(lib, "Component library", "Angular standalone components", "Supplies TabGroupComponent, SegmentedControlComponent, AccordionComponent, and PaginatorComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the colour, spacing, radius, and motion tokens the switches read")
   Container(docs, "Documentation site", "Angular application", "Publishes the selection contract and the keyboard model")
 }

@@ -19,7 +19,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Competency report page" as page
 end box
 box "Frontend — Cornerstone metric components" #D1FADF
-  participant "CsProgressMatrixComponent" as matrix
+  participant "ProgressMatrixComponent" as matrix
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "BreakpointObserver" as bp

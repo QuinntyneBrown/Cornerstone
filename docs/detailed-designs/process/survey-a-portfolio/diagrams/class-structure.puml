@@ -13,7 +13,7 @@ skinparam class {
 ' --------------------------
 title Class structure — Survey a portfolio and the adapter contract
 
-enum CsPortfolioLayout {
+enum PortfolioLayout {
   card
   grid
   board
@@ -23,7 +23,7 @@ interface CsProcessAdapter {
   +labels: CsProcessLabels
   +palette: CsProcessPalette
   +order: readonly string[]
-  +enforcement: ReadonlyMap<string, CsGateSummary>
+  +enforcement: ReadonlyMap<string, GateSummary>
 }
 
 class CsProcessLabels {
@@ -41,7 +41,7 @@ class CsProcessPalette {
   +defaultToken: string
 }
 
-class CsGateSummary {
+class GateSummary {
   +id: string
   +label: string
   +open: boolean
@@ -58,19 +58,19 @@ class ProvideCsProcessAdapter <<function>> {
   +provideCsProcessAdapter(adapter: CsProcessAdapter): EnvironmentProviders
 }
 
-class CsPhase {
+class Phase {
   +id: string
   +name: string
   +paletteKey?: string
   +description?: string
 }
 
-class CsProject {
+class Project {
   +id: string
   +name: string
   +state: string
   +meta: readonly CsProjectMeta[]
-  +gate?: CsGateSummary
+  +gate?: GateSummary
   +phaseId?: string
 }
 
@@ -79,60 +79,60 @@ class CsProjectMeta {
   +value: string
 }
 
-class CsGratitudeNote {
+class GratitudeNote {
   +id: string
   +quote: string
   +attribution: string
   +context?: string
 }
 
-class CsPhaseLaneComponent {
-  +phase: InputSignal<CsPhase>
-  +projects: InputSignal<readonly CsProject[]>
-  +layout: InputSignal<CsPortfolioLayout>
+class PhaseLaneComponent {
+  +phase: InputSignal<Phase>
+  +projects: InputSignal<readonly Project[]>
+  +layout: InputSignal<PortfolioLayout>
   +adapter: InputSignal<CsProcessAdapter>
   -accessibleName: Signal<string>
   -laneToken: Signal<string>
 }
 
-class CsProjectCardComponent {
-  +project: InputSignal<CsProject>
+class ProjectCardComponent {
+  +project: InputSignal<Project>
   +adapter: InputSignal<CsProcessAdapter>
-  +opened: OutputEmitterRef<CsProjectOpenIntent>
+  +opened: OutputEmitterRef<ProjectOpenIntent>
   -gateText: Signal<string>
 }
 
-class CsGratitudeWallComponent {
-  +notes: InputSignal<readonly CsGratitudeNote[]>
+class GratitudeWallComponent {
+  +notes: InputSignal<readonly GratitudeNote[]>
   +loading: InputSignal<boolean>
   +emptyText: InputSignal<string>
   +adapter: InputSignal<CsProcessAdapter>
   -isEmpty: Signal<boolean>
 }
 
-class CsGratitudeNoteComponent {
-  +note: InputSignal<CsGratitudeNote>
+class GratitudeNoteComponent {
+  +note: InputSignal<GratitudeNote>
 }
 
-class CsProjectOpenIntent {
+class ProjectOpenIntent {
   +projectId: string
 }
 
 CsProcessAdapter *-- CsProcessLabels
 CsProcessAdapter *-- CsProcessPalette
-CsProcessAdapter --> CsGateSummary : supplies enforcement results as
+CsProcessAdapter --> GateSummary : supplies enforcement results as
 CsProcessLabels ..> CsProcessDefaults : falls back to
 ProvideCsProcessAdapter ..> CsProcessAdapter : registers
-CsPhaseLaneComponent --> CsProcessAdapter : reads labels, palette, and order from
-CsProjectCardComponent --> CsProcessAdapter : reads labels from
-CsGratitudeWallComponent --> CsProcessAdapter : reads labels from
-CsPhaseLaneComponent "1" o-- "0..*" CsProject : renders
-CsPhaseLaneComponent "1" *-- "0..*" CsProjectCardComponent : contains
-CsPhaseLaneComponent --> CsPhase : groups
-CsPhaseLaneComponent --> CsPortfolioLayout : has
-CsProject "1" o-- "0..*" CsProjectMeta
-CsProject "1" o-- "0..1" CsGateSummary : is gated by
-CsGratitudeWallComponent "1" *-- "0..*" CsGratitudeNoteComponent : contains
-CsGratitudeNoteComponent --> CsGratitudeNote : renders
-CsProjectCardComponent ..> CsProjectOpenIntent : emits
+PhaseLaneComponent --> CsProcessAdapter : reads labels, palette, and order from
+ProjectCardComponent --> CsProcessAdapter : reads labels from
+GratitudeWallComponent --> CsProcessAdapter : reads labels from
+PhaseLaneComponent "1" o-- "0..*" Project : renders
+PhaseLaneComponent "1" *-- "0..*" ProjectCardComponent : contains
+PhaseLaneComponent --> Phase : groups
+PhaseLaneComponent --> PortfolioLayout : has
+Project "1" o-- "0..*" CsProjectMeta
+Project "1" o-- "0..1" GateSummary : is gated by
+GratitudeWallComponent "1" *-- "0..*" GratitudeNoteComponent : contains
+GratitudeNoteComponent --> GratitudeNote : renders
+ProjectCardComponent ..> ProjectOpenIntent : emits
 @enduml

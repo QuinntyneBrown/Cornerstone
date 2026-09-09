@@ -45,42 +45,42 @@ The feature is a vertical slice from a Word Up feature page down to the rendered
 timeline. It introduces two components, their view model types, and their intent
 types.
 
-- **`CsLearningJourneyComponent`** — the outer composite, selector
+- **`LearningJourneyComponent`** — the outer composite, selector
   `cs-learning-journey`. It renders the modules of a journey and the progress
-  summary above them. Inputs: `journey: InputSignal<CsLearningJourneyView>`,
-  `layout: InputSignal<CsJourneyLayout>` defaulting to `'auto'`, and
+  summary above them. Inputs: `journey: InputSignal<LearningJourneyView>`,
+  `layout: InputSignal<JourneyLayout>` defaulting to `'auto'`, and
   `busy: InputSignal<boolean>`. Outputs: `stepSelected:
-  OutputEmitterRef<CsLessonStepSelect>` and `moduleToggled:
-  OutputEmitterRef<CsModuleToggle>`. States: loading, populated, and empty.
+  OutputEmitterRef<LessonStepSelect>` and `moduleToggled:
+  OutputEmitterRef<ModuleToggle>`. States: loading, populated, and empty.
   Under `layout` of `'auto'` the component renders a vertical timeline at the
   narrow breakpoint and a two-column timeline at and above the wide breakpoint;
   the breakpoint value is `<TO SUPPLY>`.
-- **`CsLessonStepListComponent`** — the inner composite, selector
+- **`LessonStepListComponent`** — the inner composite, selector
   `cs-lesson-step-list`. It renders the steps of one module as a single-select
-  list. Inputs: `steps: InputSignal<readonly CsLessonStepView[]>`,
+  list. Inputs: `steps: InputSignal<readonly LessonStepView[]>`,
   `activeStepId: InputSignal<string | null>`, and `dense:
   InputSignal<boolean>`. Output: `stepSelected:
-  OutputEmitterRef<CsLessonStepSelect>`. Each row carries one of four states:
+  OutputEmitterRef<LessonStepSelect>`. Each row carries one of four states:
   completed, current, available, or locked.
-- **`CsLearningJourneyView`** — view model of the whole path. Fields:
+- **`LearningJourneyView`** — view model of the whole path. Fields:
   `journeyId`, `title`, `modules`, and `summary`.
-- **`CsJourneyModuleView`** — view model of one module. Fields: `moduleId`,
+- **`JourneyModuleView`** — view model of one module. Fields: `moduleId`,
   `title`, `steps`, `expanded`, and `summary`.
-- **`CsLessonStepView`** — view model of one step. Fields: `stepId`, `title`,
+- **`LessonStepView`** — view model of one step. Fields: `stepId`, `title`,
   `state`, `prerequisiteIds`, `prerequisiteLabel`, `estimatedMinutes`, and
   `badgeIds`.
-- **`CsLessonStepState`** — union type of the four step states: `'completed' |
+- **`LessonStepState`** — union type of the four step states: `'completed' |
   'current' | 'available' | 'locked'`.
-- **`CsJourneyProgress`** — view model of the progress summary. Fields:
+- **`JourneyProgress`** — view model of the progress summary. Fields:
   `completedCount`, `totalCount`, `percent`, and `label`. The component renders
   the supplied `percent`; it does not derive one.
-- **`CsLessonStepSelect`** — intent emitted when a user activates a step. Fields:
+- **`LessonStepSelect`** — intent emitted when a user activates a step. Fields:
   `journeyId`, `moduleId`, `stepId`, and `state`. A locked step emits the intent
   with `state` of `'locked'` so the application can explain the block; the
   component itself neither navigates nor suppresses the emission.
-- **`CsModuleToggle`** — intent emitted when a user expands or collapses a
+- **`ModuleToggle`** — intent emitted when a user expands or collapses a
   module. Fields: `moduleId` and `expanded`.
-- **`CsJourneyLayout`** — union type of the layout selections: `'auto' |
+- **`JourneyLayout`** — union type of the layout selections: `'auto' |
   'timeline' | 'list'`.
 
 Both components are standalone and use `OnPush` change detection. Keyboard
@@ -123,8 +123,8 @@ renders the path and reads its visual values from the theme stylesheet.
 
 ### Components
 
-`CsLearningJourneyComponent` receives `CsLearningJourneyView` from Word Up's
-progression service and emits `CsLessonStepSelect` back to it. The boundary is
+`LearningJourneyComponent` receives `LearningJourneyView` from Word Up's
+progression service and emits `LessonStepSelect` back to it. The boundary is
 one-directional in data and one-directional in intent: no Cornerstone component
 calls a service, and no Cornerstone component decides a lock.
 
@@ -132,7 +132,7 @@ calls a service, and no Cornerstone component decides a lock.
 
 ### Class structure
 
-`CsLearningJourneyComponent` composes one `CsLessonStepListComponent` per module.
+`LearningJourneyComponent` composes one `LessonStepListComponent` per module.
 The view model types are read-only records; the intent types carry identifiers
 only.
 
@@ -140,7 +140,7 @@ only.
 
 ### Behaviour — open a lesson step
 
-A participant activates an available step. The list emits `CsLessonStepSelect`,
+A participant activates an available step. The list emits `LessonStepSelect`,
 Word Up's progression service resolves the route and records the visit, and the
 updated view model flows back down.
 

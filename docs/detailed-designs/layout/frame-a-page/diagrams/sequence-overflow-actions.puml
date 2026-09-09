@@ -19,7 +19,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone page frame" #D1FADF
-  participant "CsToolbarComponent" as toolbar
+  participant "ToolbarComponent" as toolbar
   participant "Overflow strategy" as overflow
   participant "CsResponsiveRegionDirective" as region
 end box

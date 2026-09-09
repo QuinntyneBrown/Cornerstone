@@ -6,12 +6,12 @@ title Components — Record consent
 Person(guardian, "Guardian", "Grants or revokes a consent scope")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(panel, "CsConsentPanelComponent", "Standalone component, OnPush", "Renders status, contact detail, grouped choices, actions, and history; emits typed intents only")
+  Component(panel, "ConsentPanelComponent", "Standalone component, OnPush", "Renders status, contact detail, grouped choices, actions, and history; emits typed intents only")
   Component(groups, "Consent group fieldsets", "Rendered fieldset and legend", "Present participation and media scopes with the scope stated in text")
   Component(history, "Consent history list", "Rendered list", "States scope, decision, actor, and locale-formatted timestamp")
   Component(contact, "Contact detail block", "Read-only text", "Renders guardian and minor details with no title attribute and no copy held")
-  Component(confirm, "CsConfirmDialogComponent", "Standalone component (L2-103)", "Destructive confirmation preceding a revocation")
-  Component(models, "Consent view model and intent types", "TypeScript types", "CsConsentPanelViewModel, CsConsentDecisionIntent, CsConsentRevokeIntent")
+  Component(confirm, "ConfirmDialogComponent", "Standalone component (L2-103)", "Destructive confirmation preceding a revocation")
+  Component(models, "Consent view model and intent types", "TypeScript types", "ConsentPanelViewModel, ConsentDecisionIntent, ConsentRevokeIntent")
 }
 
 Container_Boundary(app, "Consuming application — consent page") {

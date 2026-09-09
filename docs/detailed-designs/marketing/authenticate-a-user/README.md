@@ -39,29 +39,29 @@ page (L2-145).
 The feature spans two components and the directives that name their projection
 regions.
 
-- **`CsAuthLayoutComponent`** — the `cs-auth-layout` element that owns the page. It
+- **`AuthLayoutComponent`** — the `cs-auth-layout` element that owns the page. It
   carries a `variant` input of `'centered' | 'split'`, a `panelSide` input of
   `'start' | 'end'` governing which side the artwork panel occupies in the split
   variant, and a `tone` input of `'light' | 'dark' | 'brand'` for the panel. It
   projects a brand region selected by `[csAuthBrand]`, the default card region, a
   panel region selected by `[csAuthPanel]`, and a footer region selected by
   `[csAuthFooter]`.
-- **`CsAuthCardComponent`** — the `cs-auth-card` element that holds the screen
+- **`AuthCardComponent`** — the `cs-auth-card` element that holds the screen
   content. It carries a `title` input, a `lede` input, an `error` input, and a
   `pending` input. It projects the form as its default content and an
   alternate-action region selected by `[csAuthAlternate]`.
-- **`CsAuthLayoutVariant`** — union type of the layout variants:
+- **`AuthLayoutVariant`** — union type of the layout variants:
   `'centered' | 'split'`. The centered variant places the card in the middle of the
   viewport with the brand above it. The split variant places the card in one column
   and an artwork or message panel in the other.
-- **`CsAuthBrandDirective`** — the `csAuthBrand` attribute directive. It sizes and
+- **`AuthBrandDirective`** — the `csAuthBrand` attribute directive. It sizes and
   positions the projected brand lockup (L2-148) for each variant.
-- **`CsAuthPanelDirective`** — the `csAuthPanel` attribute directive. It applies the
+- **`AuthPanelDirective`** — the `csAuthPanel` attribute directive. It applies the
   panel tone, the constrained content measure, and the panel's own typographic
   treatment.
-- **`CsAuthAlternateDirective`** — the `csAuthAlternate` attribute directive. It
+- **`AuthAlternateDirective`** — the `csAuthAlternate` attribute directive. It
   lays out the links beneath the form and separates them from the submit control.
-- **`CsAuthFooterDirective`** — the `csAuthFooter` attribute directive. It renders
+- **`AuthFooterDirective`** — the `csAuthFooter` attribute directive. It renders
   the legal and support links at the foot of the page in both variants.
 
 The card owns the error area. When `error` holds a message, the card renders it in a
@@ -110,15 +110,15 @@ the sign-in request and the redirect.
 
 ### Components
 
-`CsAuthLayoutComponent` positions the brand, the card, the panel, and the footer.
-`CsAuthCardComponent` renders the heading, the lede, the error alert, and the
+`AuthLayoutComponent` positions the brand, the card, the panel, and the footer.
+`AuthCardComponent` renders the heading, the lede, the error alert, and the
 projected form, and the brand lockup arrives from the brand feature (L2-148).
 
 ![C4 component view for authenticating a user](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsAuthLayoutComponent` holds the variant, panel side, and tone; `CsAuthCardComponent`
+`AuthLayoutComponent` holds the variant, panel side, and tone; `AuthCardComponent`
 holds the title, lede, error, and pending state. Four directives name the projection
 regions the two components render into.
 

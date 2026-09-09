@@ -6,12 +6,12 @@ title Components — Find and pick a value
 Person(dev, "Application developer", "Binds the option set and the query handler")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(search, "CsSearchFieldComponent", "Angular standalone component", "Search icon, clear button, debounce and submit modes, and an accessible result status")
-  Component(combobox, "CsComboboxComponent", "Angular standalone component", "ARIA combobox with typeahead, single and multiple selection, and asynchronous loading")
+  Component(search, "SearchFieldComponent", "Angular standalone component", "Search icon, clear button, debounce and submit modes, and an accessible result status")
+  Component(combobox, "ComboboxComponent", "Angular standalone component", "ARIA combobox with typeahead, single and multiple selection, and asynchronous loading")
   Component(listbox, "Overlay listbox", "CDK overlay panel", "Holds the option list, the active descendant, and the empty state")
   Component(chips, "Selection chips", "Angular template", "Renders removable chips with accessible names in multiple mode")
-  Component(datef, "CsDateFieldComponent", "Angular standalone component", "Native-first date control with an ISO-8601 calendar date contract")
-  Component(datetimef, "CsDateTimeFieldComponent", "Angular standalone component", "Native-first date-time control with a timezone-explicit contract")
+  Component(datef, "DateFieldComponent", "Angular standalone component", "Native-first date control with an ISO-8601 calendar date contract")
+  Component(datetimef, "DateTimeFieldComponent", "Angular standalone component", "Native-first date-time control with a timezone-explicit contract")
   Component(bounds, "Bound validator", "Angular validator", "Reports the documented error for a value outside min or max")
   Component(live, "Live status region", "Polite live region", "Announces the result count, the loading state, and the empty state")
 }

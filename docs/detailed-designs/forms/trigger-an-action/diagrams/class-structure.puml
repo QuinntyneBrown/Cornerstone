@@ -61,7 +61,7 @@ class CsIconButtonBadge {
   +max: number
 }
 
-class CsButtonGroupComponent {
+class ButtonGroupComponent {
   +label: InputSignal<string>
   +mode: InputSignal<CsButtonGroupMode>
   +members: Signal<readonly CsButtonDirective[]>
@@ -73,7 +73,7 @@ class CsTooltipDirective {
   +suppressDuplicateName: InputSignal<boolean>
 }
 
-class CsIconComponent {
+class IconComponent {
   +name: InputSignal<string>
   +decorative: InputSignal<boolean>
 }
@@ -92,8 +92,8 @@ CsButtonDirective --> CsButtonSize : has
 CsButtonDirective ..> CsTokenSet : reads
 CsIconButtonDirective --> CsIconButtonBadge : has
 CsIconButtonDirective o-- CsTooltipDirective : is described by
-CsIconButtonDirective *-- CsIconComponent : renders
-CsButtonGroupComponent --> CsButtonGroupMode : has
-CsButtonGroupComponent o-- "1..*" CsButtonDirective : projects
-CsButtonGroupComponent ..> CsTokenSet : reads
+CsIconButtonDirective *-- IconComponent : renders
+ButtonGroupComponent --> CsButtonGroupMode : has
+ButtonGroupComponent o-- "1..*" CsButtonDirective : projects
+ButtonGroupComponent ..> CsTokenSet : reads
 @enduml

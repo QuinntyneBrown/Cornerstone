@@ -13,22 +13,22 @@ skinparam class {
 ' --------------------------
 title Class structure — Navigate the public site
 
-class CsMarketingHeaderComponent {
+class MarketingHeaderComponent {
   +brand: InputSignal<CsBrand>
   +links: InputSignal<readonly CsMarketingLink[]>
-  +cta: InputSignal<CsMarketingCta | null>
-  +secondaryCta: InputSignal<CsMarketingCta | null>
+  +cta: InputSignal<MarketingCta | null>
+  +secondaryCta: InputSignal<MarketingCta | null>
   +menuOpen: ModelSignal<boolean>
   +narrow: Signal<boolean>
-  +ctaSelected: OutputEmitterRef<CsMarketingCta>
+  +ctaSelected: OutputEmitterRef<MarketingCta>
   +toggleMenu(): void
   -restoreFocusToToggle(): void
 }
 
-class CsMarketingFooterComponent {
+class MarketingFooterComponent {
   +brand: InputSignal<CsBrand>
-  +groups: InputSignal<readonly CsMarketingLinkGroup[]>
-  +social: InputSignal<readonly CsSocialLink[]>
+  +groups: InputSignal<readonly MarketingLinkGroup[]>
+  +social: InputSignal<readonly SocialLink[]>
   +legal: InputSignal<readonly CsMarketingLink[]>
   +copyright: InputSignal<string>
   +narrow: Signal<boolean>
@@ -41,19 +41,19 @@ class CsMarketingLink {
   +external?: boolean
 }
 
-class CsMarketingLinkGroup {
+class MarketingLinkGroup {
   +heading: string
   +links: readonly CsMarketingLink[]
 }
 
-class CsMarketingCta {
+class MarketingCta {
   +label: string
   +variant: CsButtonVariant
   +routerLink?: unknown
   +href?: string
 }
 
-class CsSocialLink {
+class SocialLink {
   +platform: string
   +ariaLabel: string
   +href: string
@@ -71,14 +71,14 @@ enum CsButtonVariant {
   ghost
 }
 
-CsMarketingHeaderComponent --> "1" CsBrand : displays
-CsMarketingHeaderComponent --> "0..*" CsMarketingLink : renders
-CsMarketingHeaderComponent --> "0..2" CsMarketingCta : offers
-CsMarketingHeaderComponent ..> CsMarketingCta : emits
-CsMarketingFooterComponent --> "1" CsBrand : displays
-CsMarketingFooterComponent o-- "0..*" CsMarketingLinkGroup : renders
-CsMarketingFooterComponent --> "0..*" CsSocialLink : renders
-CsMarketingFooterComponent --> "0..*" CsMarketingLink : renders as legal links
-CsMarketingLinkGroup *-- "1..*" CsMarketingLink : contains
-CsMarketingCta --> CsButtonVariant : has
+MarketingHeaderComponent --> "1" CsBrand : displays
+MarketingHeaderComponent --> "0..*" CsMarketingLink : renders
+MarketingHeaderComponent --> "0..2" MarketingCta : offers
+MarketingHeaderComponent ..> MarketingCta : emits
+MarketingFooterComponent --> "1" CsBrand : displays
+MarketingFooterComponent o-- "0..*" MarketingLinkGroup : renders
+MarketingFooterComponent --> "0..*" SocialLink : renders
+MarketingFooterComponent --> "0..*" CsMarketingLink : renders as legal links
+MarketingLinkGroup *-- "1..*" CsMarketingLink : contains
+MarketingCta --> CsButtonVariant : has
 @enduml

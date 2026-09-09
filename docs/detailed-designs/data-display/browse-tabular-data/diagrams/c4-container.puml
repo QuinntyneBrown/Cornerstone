@@ -6,7 +6,7 @@ title Containers — Browse tabular data
 Person(dev, "Application developer", "Binds rows and query state to the table and toolbar")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components and directives", "Holds CsTableDirective, CsTableContainer, CsResponsiveTableDirective, and CsDataToolbar")
+  Container(lib, "Component library", "Angular standalone components and directives", "Holds TableDirective, CsTableContainer, ResponsiveTableDirective, and CsDataToolbar")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares density, sticky-header, chip, and reflow resolutions")
   Container(docs, "Documentation site", "Angular application", "Publishes the sorting hooks, the selection model, and the reflow contract")
 }

@@ -13,91 +13,91 @@ skinparam class {
 ' --------------------------
 title Class structure — Follow a learning journey
 
-class CsLearningJourneyComponent {
-  +journey: InputSignal<CsLearningJourneyView>
-  +layout: InputSignal<CsJourneyLayout>
+class LearningJourneyComponent {
+  +journey: InputSignal<LearningJourneyView>
+  +layout: InputSignal<JourneyLayout>
   +busy: InputSignal<boolean>
-  +stepSelected: OutputEmitterRef<CsLessonStepSelect>
-  +moduleToggled: OutputEmitterRef<CsModuleToggle>
+  +stepSelected: OutputEmitterRef<LessonStepSelect>
+  +moduleToggled: OutputEmitterRef<ModuleToggle>
   -isEmpty: Signal<boolean>
-  -resolvedLayout: Signal<CsJourneyLayout>
+  -resolvedLayout: Signal<JourneyLayout>
 }
 
-class CsLessonStepListComponent {
-  +steps: InputSignal<readonly CsLessonStepView[]>
+class LessonStepListComponent {
+  +steps: InputSignal<readonly LessonStepView[]>
   +activeStepId: InputSignal<string | null>
   +dense: InputSignal<boolean>
-  +stepSelected: OutputEmitterRef<CsLessonStepSelect>
-  -onActivate(step: CsLessonStepView): void
+  +stepSelected: OutputEmitterRef<LessonStepSelect>
+  -onActivate(step: LessonStepView): void
 }
 
-class CsLearningJourneyView {
+class LearningJourneyView {
   +journeyId: string
   +title: string
-  +modules: readonly CsJourneyModuleView[]
-  +summary: CsJourneyProgress
+  +modules: readonly JourneyModuleView[]
+  +summary: JourneyProgress
 }
 
-class CsJourneyModuleView {
+class JourneyModuleView {
   +moduleId: string
   +title: string
-  +steps: readonly CsLessonStepView[]
+  +steps: readonly LessonStepView[]
   +expanded: boolean
-  +summary: CsJourneyProgress
+  +summary: JourneyProgress
 }
 
-class CsLessonStepView {
+class LessonStepView {
   +stepId: string
   +title: string
-  +state: CsLessonStepState
+  +state: LessonStepState
   +prerequisiteIds: readonly string[]
   +prerequisiteLabel: string | null
   +estimatedMinutes: number | null
   +badgeIds: readonly string[]
 }
 
-class CsJourneyProgress {
+class JourneyProgress {
   +completedCount: number
   +totalCount: number
   +percent: number
   +label: string
 }
 
-enum CsLessonStepState {
+enum LessonStepState {
   completed
   current
   available
   locked
 }
 
-enum CsJourneyLayout {
+enum JourneyLayout {
   auto
   timeline
   list
 }
 
-class CsLessonStepSelect {
+class LessonStepSelect {
   +journeyId: string
   +moduleId: string
   +stepId: string
-  +state: CsLessonStepState
+  +state: LessonStepState
 }
 
-class CsModuleToggle {
+class ModuleToggle {
   +moduleId: string
   +expanded: boolean
 }
 
-CsLearningJourneyComponent *-- "1..*" CsLessonStepListComponent : renders one per module
-CsLearningJourneyComponent --> "1" CsLearningJourneyView : reads
-CsLearningJourneyComponent ..> CsModuleToggle : emits
-CsLearningJourneyComponent --> CsJourneyLayout : has
-CsLearningJourneyView *-- "1..*" CsJourneyModuleView : contains
-CsLearningJourneyView o-- "1" CsJourneyProgress : summarised by
-CsJourneyModuleView *-- "0..*" CsLessonStepView : contains
-CsJourneyModuleView o-- "1" CsJourneyProgress : summarised by
-CsLessonStepView --> CsLessonStepState : has
-CsLessonStepListComponent --> "0..*" CsLessonStepView : reads
-CsLessonStepListComponent ..> CsLessonStepSelect : emits
-CsLessonStepSelect --> CsLessonStepState : carries
+LearningJourneyComponent *-- "1..*" LessonStepListComponent : renders one per module
+LearningJourneyComponent --> "1" LearningJourneyView : reads
+LearningJourneyComponent ..> ModuleToggle : emits
+LearningJourneyComponent --> JourneyLayout : has
+LearningJourneyView *-- "1..*" JourneyModuleView : contains
+LearningJourneyView o-- "1" JourneyProgress : summarised by
+JourneyModuleView *-- "0..*" LessonStepView : contains
+JourneyModuleView o-- "1" JourneyProgress : summarised by
+LessonStepView --> LessonStepState : has
+LessonStepListComponent --> "0..*" LessonStepView : reads
+LessonStepListComponent ..> LessonStepSelect : emits
+LessonStepSelect --> LessonStepState : carries
 @enduml

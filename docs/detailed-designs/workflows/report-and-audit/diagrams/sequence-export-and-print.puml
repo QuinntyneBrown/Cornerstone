@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Export service" as exporter
 end box
 box "Frontend — Cornerstone reporting composite" #D1FADF
-  participant "CsReportDashboardComponent" as dashboard
-  participant "CsReportFiltersComponent" as filters
+  participant "ReportDashboardComponent" as dashboard
+  participant "ReportFiltersComponent" as filters
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Report print rules" as printcss
@@ -36,8 +36,8 @@ page -> dashboard : Bind the cohort view model
 
 user -> dashboard : Activate the export action
 dashboard -> filters : Read the complete filter state
-filters --> dashboard : CsReportFilterState
-dashboard -> page : Emit CsReportExportIntent carrying the filter state and the view per L2-130
+filters --> dashboard : ReportFilterState
+dashboard -> page : Emit ReportExportIntent carrying the filter state and the view per L2-130
 dashboard -> dashboard : Generate no file per L2-130
 page -> exporter : Produce the export file
 exporter --> page : File offered to the reader

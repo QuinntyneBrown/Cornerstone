@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "FormControl" as control
 end box
 box "Frontend — Cornerstone text controls" #D1FADF
-  participant "CsFieldComponent" as field
-  participant "CsInputGroupComponent" as group
+  participant "FieldComponent" as field
+  participant "InputGroupComponent" as group
   participant "CsInputDirective" as input
 end box
 box "Frontend — Angular CDK" #ECFDF3

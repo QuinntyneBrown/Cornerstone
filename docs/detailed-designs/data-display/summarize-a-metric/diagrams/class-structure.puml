@@ -13,7 +13,7 @@ skinparam class {
 ' --------------------------
 title Class structure — Summarize a metric
 
-class CsMetricDelta {
+class MetricDelta {
   +value: number
   +direction: CsDeltaDirection
   +sentiment: CsDeltaSentiment
@@ -47,11 +47,11 @@ enum CsStatInteraction {
   link
 }
 
-class CsStatCardComponent {
+class StatCardComponent {
   +label: InputSignal<string>
   +value: InputSignal<string | number>
   +unit: InputSignal<string | null>
-  +delta: InputSignal<CsMetricDelta | null>
+  +delta: InputSignal<MetricDelta | null>
   +supporting: InputSignal<string | null>
   +tone: InputSignal<CsMetricTone>
   +interaction: InputSignal<CsStatInteraction>
@@ -60,16 +60,16 @@ class CsStatCardComponent {
   +selectedChange: OutputEmitterRef<boolean>
 }
 
-class CsKpiComponent {
+class KpiComponent {
   +label: InputSignal<string>
   +value: InputSignal<string | number>
   +unit: InputSignal<string | null>
-  +delta: InputSignal<CsMetricDelta | null>
+  +delta: InputSignal<MetricDelta | null>
   +tone: InputSignal<CsMetricTone>
   +size: InputSignal<CsKpiSize>
 }
 
-class CsProgressMatrixComponent {
+class ProgressMatrixComponent {
   +rows: InputSignal<CsMatrixRow[]>
   +columns: InputSignal<CsMatrixColumn[]>
   +stickyHeaders: InputSignal<boolean>
@@ -92,11 +92,11 @@ class CsMatrixColumn {
 
 class CsMatrixCell {
   +columnKey: string
-  +state: CsMatrixCellState
+  +state: MatrixCellState
   +note?: string
 }
 
-enum CsMatrixCellState {
+enum MatrixCellState {
   done
   inProgress
   none
@@ -124,7 +124,7 @@ class CsMetricPoint {
   +formatted?: string
 }
 
-class CsMetricBarsComponent {
+class MetricBarsComponent {
   +series: InputSignal<CsMetricSeries[]>
   +max: InputSignal<number | null>
   +mode: InputSignal<CsMetricBarsMode>
@@ -139,20 +139,20 @@ enum CsMetricBarsMode {
   distribution
 }
 
-class CsComparisonChartComponent {
+class ComparisonChartComponent {
   +series: InputSignal<CsMetricSeries[]>
   +baselineKey: InputSignal<string>
   +showDelta: InputSignal<boolean>
   +state: InputSignal<CsDataState<void>>
-  -deltaFor(series: CsMetricSeries): CsMetricDelta
+  -deltaFor(series: CsMetricSeries): MetricDelta
 }
 
-class CsMetricValueTableComponent {
+class MetricValueTableComponent {
   +series: InputSignal<CsMetricSeries[]>
   +visible: InputSignal<boolean>
 }
 
-class CsMetricLegendComponent {
+class MetricLegendComponent {
   +series: InputSignal<CsMetricSeries[]>
 }
 
@@ -160,26 +160,26 @@ interface CsDataState<T> {
   +kind: CsDataStateKind
 }
 
-CsStatCardComponent o-- CsMetricDelta : presents
-CsStatCardComponent --> CsMetricTone : has
-CsStatCardComponent --> CsStatInteraction : has
-CsStatCardComponent ..> CsDataState : renders states of
-CsKpiComponent o-- CsMetricDelta : presents
-CsKpiComponent --> CsMetricTone : has
-CsMetricDelta --> CsDeltaDirection : has
-CsMetricDelta --> CsDeltaSentiment : has
-CsProgressMatrixComponent *-- "1..*" CsMatrixRow : contains
-CsProgressMatrixComponent *-- "1..*" CsMatrixColumn : contains
+StatCardComponent o-- MetricDelta : presents
+StatCardComponent --> CsMetricTone : has
+StatCardComponent --> CsStatInteraction : has
+StatCardComponent ..> CsDataState : renders states of
+KpiComponent o-- MetricDelta : presents
+KpiComponent --> CsMetricTone : has
+MetricDelta --> CsDeltaDirection : has
+MetricDelta --> CsDeltaSentiment : has
+ProgressMatrixComponent *-- "1..*" CsMatrixRow : contains
+ProgressMatrixComponent *-- "1..*" CsMatrixColumn : contains
 CsMatrixRow *-- "1..*" CsMatrixCell : contains
-CsMatrixCell --> CsMatrixCellState : has
-CsProgressMatrixComponent ..> CsMatrixSummary : derives
+CsMatrixCell --> MatrixCellState : has
+ProgressMatrixComponent ..> CsMatrixSummary : derives
 CsMetricSeries *-- "1..*" CsMetricPoint : contains
-CsMetricBarsComponent --> "1..*" CsMetricSeries : renders
-CsMetricBarsComponent --> CsMetricBarsMode : has
-CsComparisonChartComponent --> "2..*" CsMetricSeries : renders
-CsComparisonChartComponent ..> CsMetricDelta : derives
-CsMetricBarsComponent *-- CsMetricValueTableComponent : renders
-CsComparisonChartComponent *-- CsMetricValueTableComponent : renders
-CsMetricBarsComponent *-- CsMetricLegendComponent : renders
-CsComparisonChartComponent *-- CsMetricLegendComponent : renders
+MetricBarsComponent --> "1..*" CsMetricSeries : renders
+MetricBarsComponent --> CsMetricBarsMode : has
+ComparisonChartComponent --> "2..*" CsMetricSeries : renders
+ComparisonChartComponent ..> MetricDelta : derives
+MetricBarsComponent *-- MetricValueTableComponent : renders
+ComparisonChartComponent *-- MetricValueTableComponent : renders
+MetricBarsComponent *-- MetricLegendComponent : renders
+ComparisonChartComponent *-- MetricLegendComponent : renders
 @enduml

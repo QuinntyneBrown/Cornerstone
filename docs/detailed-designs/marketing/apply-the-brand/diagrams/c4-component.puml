@@ -6,8 +6,8 @@ title Components — Apply the brand
 Person(user, "Application user", "Reads the brand and follows its link to the home route")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(lockup, "CsBrandLockupComponent", "Standalone component", "Composes the mark, wordmark, and descriptor in compact and full variants")
-  Component(mark, "CsLogoMarkComponent", "Standalone component", "Renders the graphic symbol as inline SVG at a fixed size step")
+  Component(lockup, "BrandLockupComponent", "Standalone component", "Composes the mark, wordmark, and descriptor in compact and full variants")
+  Component(mark, "LogoMarkComponent", "Standalone component", "Renders the graphic symbol as inline SVG at a fixed size step")
   Component(assets, "CsBrandAssets", "Injection token", "Holds the SVG path data and viewBox for each brand")
   Component(themesvc, "CsThemeService", "Injectable service", "Reports the resolved theme per L2-033")
 }

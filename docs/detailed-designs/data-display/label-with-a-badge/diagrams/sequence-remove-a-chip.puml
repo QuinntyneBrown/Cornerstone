@@ -19,8 +19,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Tag editor page" as page
 end box
 box "Frontend — Cornerstone data display" #D1FADF
-  participant "CsChipListComponent" as list
-  participant "CsPillComponent" as pill
+  participant "ChipListComponent" as list
+  participant "PillComponent" as pill
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "FocusKeyManager" as keys
@@ -40,7 +40,7 @@ end
 
 pill -> pill : Read the remove control name naming the chip per L2-078
 pill -> list : Emit removed with value and index
-list -> page : Emit CsChipRemoveEvent
+list -> page : Emit ChipRemoveEvent
 page -> page : Drop the tag from the page model
 page -> list : Re-project the remaining chips
 

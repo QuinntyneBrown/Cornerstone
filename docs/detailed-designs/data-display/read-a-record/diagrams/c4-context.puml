@@ -15,7 +15,7 @@ System_Ext(npm, "npm registry", "Distributes the published package")
 
 Rel(dev, cornerstone, "Composes reading presentations from")
 Rel(dev, app, "Owns the record view model in")
-Rel(app, cornerstone, "Passes CsDefinitionItem and CsTimelineEntry values to")
+Rel(app, cornerstone, "Passes DefinitionItem and TimelineEntry values to")
 Rel(cornerstone, app, "Emits activation and selection intents to")
 Rel(cornerstone, cdk, "Positions tooltips and manages roving focus through")
 Rel(cornerstone, browser, "Renders lists, rails, quotations, and overlays to")

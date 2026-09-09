@@ -21,7 +21,7 @@ box "Frontend — Consuming application" #E0F2FE
 end box
 box "Frontend — Cornerstone marketing components" #D1FADF
   participant "CsSectionAnchorDirective" as anchor
-  participant "CsContentSectionComponent" as section
+  participant "ContentSectionComponent" as section
 end box
 box "Browser — platform" #FFF4E5
   participant "Document and scrolling" as browser

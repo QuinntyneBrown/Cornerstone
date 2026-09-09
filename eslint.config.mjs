@@ -10,11 +10,29 @@ export default tseslint.config(
       'out-tsc/**',
       'coverage/**',
       'design-system/src/generated/**',
-      // The brochure site is static HTML and CSS, not Angular templates, so the
-      // Angular template parser below cannot read it. Its accessibility is
-      // verified with axe-core instead; see docs/marketing-site.md.
-      'marketing/**',
+      // The brochure pages are static HTML, not Angular templates, so the
+      // Angular parser below cannot read them. The WebGPU module remains linted.
+      'marketing/**/*.html',
     ],
+  },
+  {
+    ...eslint.configs.recommended,
+    files: ['marketing/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        cancelAnimationFrame: 'readonly',
+        document: 'readonly',
+        GPUBufferUsage: 'readonly',
+        IntersectionObserver: 'readonly',
+        navigator: 'readonly',
+        performance: 'readonly',
+        requestAnimationFrame: 'readonly',
+        ResizeObserver: 'readonly',
+        window: 'readonly',
+      },
+    },
   },
   {
     files: ['**/*.ts'],

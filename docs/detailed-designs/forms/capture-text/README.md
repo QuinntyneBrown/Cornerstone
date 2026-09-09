@@ -42,20 +42,20 @@ The feature is a framing component, two host directives over native elements, an
 a connected-group pair. The field owns the identifiers and the ARIA
 relationships; the directives own presentation and the value contract.
 
-- **`CsFieldComponent`** — element component with the `cs-field` selector. It
+- **`FieldComponent`** — element component with the `cs-field` selector. It
   carries the `label` input, the `hint` input, the `error` input, the `success`
   input, the `requirement` input (`required` or `optional`), the `maxLength`
   input, and the `showCount` input. It projects one control, generates an ID when
   the projected control declares none, points the label's `for` at that ID, and
   assembles `aria-describedby` from the hint, error, and count elements in
   document order.
-- **`CsFieldComponent` state presentation** — the error state sets
+- **`FieldComponent` state presentation** — the error state sets
   `aria-invalid="true"` on the projected control and distinguishes the message by
   icon and text as well as colour. The success state indicates by icon and text
   and sets no `aria-invalid`. The read-only state leaves the control focusable
   and copyable. The requirement marker is never the sole indicator; the control
   also carries `required` or `aria-required="true"`.
-- **`CsFieldComponent` character count** — the count reads the control's current
+- **`FieldComponent` character count** — the count reads the control's current
   length against `maxLength` and announces politely at the documented warning
   threshold and at the limit only, not on every keystroke.
 - **`CsInputDirective`** — attribute directive with the `[csInput]` selector,
@@ -77,19 +77,19 @@ relationships; the directives own presentation and the value contract.
   height in the same change detection cycle in which a value is written
   programmatically. It implements `ControlValueAccessor` on the same contract as
   `CsInputDirective`.
-- **`CsInputGroupComponent`** — element component with the `cs-input-group`
+- **`InputGroupComponent`** — element component with the `cs-input-group`
   selector. It renders one input and its addons as one bounded control, draws a
   single focus ring around the whole group when the inner input takes focus, and
   keeps the input at the documented minimum usable width when addon text is long.
-- **`CsInputAddonDirective`** — attribute directive with the `[csInputAddon]`
+- **`InputAddonDirective`** — attribute directive with the `[csInputAddon]`
   selector. It carries the `position` input (`prefix` or `suffix`) and the
   `meaning` input. A meaningful addon joins the input's `aria-describedby`; a
   decorative addon is hidden from assistive technology. A long addon truncates
   visually while its full text remains available to assistive technology.
-- **`CsFieldState`** — union type of the field states: `'default' | 'error' |
+- **`FieldState`** — union type of the field states: `'default' | 'error' |
   'success' | 'disabled' | 'readonly'`.
 - **`CsInputType`** — union type of the ten supported native input types.
-- **`CsAddonPosition`** — union type of the two addon positions: `'prefix' |
+- **`AddonPosition`** — union type of the two addon positions: `'prefix' |
   'suffix'`.
 
 A trailing action button inside an input group is an ordinary `CsButtonDirective`
@@ -131,17 +131,17 @@ application services never see the rendered element.
 
 ### Components
 
-`CsFieldComponent` generates the identifier and assembles the described-by chain.
+`FieldComponent` generates the identifier and assembles the described-by chain.
 `CsInputDirective` and `CsTextareaDirective` implement the value accessor over
-their native hosts, and `CsInputGroupComponent` binds addons to the same input.
+their native hosts, and `InputGroupComponent` binds addons to the same input.
 
 ![C4 component view for capturing text](diagrams/c4-component.png)
 
 ### Class structure
 
-Both host directives realize `ControlValueAccessor`. `CsFieldComponent` composes
+Both host directives realize `ControlValueAccessor`. `FieldComponent` composes
 one projected control and the description elements that reference it, and
-`CsInputGroupComponent` aggregates the addons attached to that control.
+`InputGroupComponent` aggregates the addons attached to that control.
 
 ![Class diagram for capturing text](diagrams/class-structure.png)
 

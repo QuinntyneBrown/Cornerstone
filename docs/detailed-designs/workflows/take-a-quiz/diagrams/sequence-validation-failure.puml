@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Attempt service" as attempts
 end box
 box "Frontend — Cornerstone quiz composites" #D1FADF
-  participant "CsQuizComponent" as quiz
-  participant "CsQuizQuestionComponent" as question
+  participant "QuizComponent" as quiz
+  participant "QuizQuestionComponent" as question
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Overlay and focus trap" as overlay
@@ -30,7 +30,7 @@ box "Browser — platform" #FFF4E5
   participant "Assistive technology and rendering" as browser
 end box
 
-page -> quiz : Bind CsQuizView with a required question
+page -> quiz : Bind QuizView with a required question
 youth -> browser : Activate submit with that question unanswered
 browser -> quiz : Activation event
 quiz -> quiz : Collect unanswered required question identifiers per L2-118
@@ -42,20 +42,20 @@ alt One or more required questions hold no value
   question -> browser : Set aria-invalid and the error description
   browser --> youth : Announce the unanswered question
   quiz -> question : Move focus to the offending answer control
-  quiz -> page : Emit no CsQuizSubmit
+  quiz -> page : Emit no QuizSubmit
 else Every required question holds a value
   quiz -> overlay : Open the confirm dialog
   overlay --> youth : Confirm prompt
   youth -> overlay : Confirm
   overlay -> quiz : Confirmed
-  quiz -> page : Emit CsQuizSubmit
+  quiz -> page : Emit QuizSubmit
   page -> attempts : Persist the submission
   attempts --> page : Attempt recorded
 end
 
 youth -> browser : Answer the offending question
 browser -> question : Input event
-question -> quiz : Emit CsQuizAnswerChange
+question -> quiz : Emit QuizAnswerChange
 quiz -> quiz : Clear the invalid state and re-enable submit
 quiz --> browser : Submit control available
 @enduml

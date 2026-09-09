@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Directory service" as directorysvc
 end box
 box "Frontend — Cornerstone people composites" #D1FADF
-  participant "CsPeopleDirectoryComponent" as directory
-  participant "CsPersonRowComponent" as row
+  participant "PeopleDirectoryComponent" as directory
+  participant "PersonRowComponent" as row
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Layout observer" as layout

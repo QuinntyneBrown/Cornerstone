@@ -6,7 +6,7 @@ title Containers — Bound and arrange content
 Person(dev, "Application developer", "Applies bounds and arrangement in feature templates")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components and directives", "Provides CsContainerComponent, the layout primitives, and CsResponsiveRegionDirective")
+  Container(lib, "Component library", "Angular standalone components and directives", "Provides ContainerComponent, the layout primitives, and CsResponsiveRegionDirective")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the spacing scale and the container width tokens")
   Container(docs, "Documentation site", "Angular application", "Publishes the layout recipes and the reflow pattern table")
 }

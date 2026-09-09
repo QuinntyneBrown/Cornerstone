@@ -6,17 +6,17 @@ title Components — Frame the application shell
 Person(user, "Application user", "Opens the drawer and activates navigation items")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(shell, "CsShellComponent", "Standalone component", "Resolves the sidenav mode, owns the open state, renders the scrim and the main landmark")
-  Component(topbar, "CsTopbarComponent", "Standalone component", "Sticky bar with brand, heading, pills, notifications, actions, and the menu trigger")
-  Component(sidenav, "CsSidenavComponent", "Standalone component", "Filters groups by role and renders them as a column or a drawer")
-  Component(group, "CsNavGroupComponent", "Standalone component", "Labelled and optionally collapsible section of the sidenav")
+  Component(shell, "ShellComponent", "Standalone component", "Resolves the sidenav mode, owns the open state, renders the scrim and the main landmark")
+  Component(topbar, "TopbarComponent", "Standalone component", "Sticky bar with brand, heading, pills, notifications, actions, and the menu trigger")
+  Component(sidenav, "SidenavComponent", "Standalone component", "Filters groups by role and renders them as a column or a drawer")
+  Component(group, "NavGroupComponent", "Standalone component", "Labelled and optionally collapsible section of the sidenav")
   Component(item, "CsNavItemDirective", "Attribute directive", "Applies icon, badge, active, and disabled semantics to an anchor")
-  Component(bottom, "CsBottomNavComponent", "Standalone component", "Phone primary navigation with safe-area padding")
+  Component(bottom, "BottomNavComponent", "Standalone component", "Phone primary navigation with safe-area padding")
   Component(scrim, "Scrim element", "Component-scoped template", "Dims the page and dismisses the drawer on activation")
 }
 
 Container_Boundary(appb, "Consuming application") {
-  Component(config, "Navigation configuration", "Plain data", "CsNavGroup and CsNavItem values with role lists")
+  Component(config, "Navigation configuration", "Plain data", "NavGroup and CsNavItem values with role lists")
   Component(router, "Angular Router", "Application routing", "Resolves routerLink bindings and sets routerLinkActive")
 }
 

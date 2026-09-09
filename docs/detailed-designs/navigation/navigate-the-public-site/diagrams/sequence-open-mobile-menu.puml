@@ -19,9 +19,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Angular Router" as router
 end box
 box "Frontend — Cornerstone public chrome" #D1FADF
-  participant "CsMarketingHeaderComponent" as header
+  participant "MarketingHeaderComponent" as header
   participant "Mobile menu toggle" as toggle
-  participant "CsMarketingFooterComponent" as footer
+  participant "MarketingFooterComponent" as footer
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Motion tokens" as motion

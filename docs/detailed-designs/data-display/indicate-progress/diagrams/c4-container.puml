@@ -6,7 +6,7 @@ title Containers — Indicate progress
 Person(admin, "Administrator", "Runs a roster import and watches its progress")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsSpinnerComponent, CsSkeletonComponent, CsSkeletonGroupComponent, CsProgressBarComponent, and CsProgressRingComponent")
+  Container(lib, "Component library", "Angular standalone components", "Supplies SpinnerComponent, SkeletonComponent, SkeletonGroupComponent, ProgressBarComponent, and ProgressRingComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the indicator sizes, tones, and motion durations")
   Container(docs, "Documentation site", "Angular application", "Publishes the preset table, size table, and announcement cadence")
 }

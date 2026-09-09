@@ -21,7 +21,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone selection components" #D1FADF
-  participant "CsComboboxComponent" as combobox
+  participant "ComboboxComponent" as combobox
   participant "Overlay listbox" as listbox
   participant "Live status region" as live
 end box

@@ -20,10 +20,10 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone kanban components" #D1FADF
-  participant "CsWorkItemCardComponent" as card
-  participant "CsKanbanBoardComponent" as board
-  participant "CsKanbanKeyboardMove" as keyboard
-  participant "CsKanbanAnnouncer" as announcer
+  participant "WorkItemCardComponent" as card
+  participant "KanbanBoardComponent" as board
+  participant "KanbanKeyboardMove" as keyboard
+  participant "KanbanAnnouncer" as announcer
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer" as cdk
@@ -60,8 +60,8 @@ end
 user -> dom : Press the documented confirm key
 dom -> board : Key event
 board -> keyboard : Confirm the move
-keyboard --> board : CsWorkItemMoveIntent identical to a pointer drop
-board -> page : Emit exactly one CsWorkItemMoveIntent per L2-139
+keyboard --> board : WorkItemMoveIntent identical to a pointer drop
+board -> page : Emit exactly one WorkItemMoveIntent per L2-139
 keyboard -> announcer : Report the landing column and position
 announcer -> cdk : Announce politely
 page -> services : Apply the move and persist it

@@ -1,0 +1,17 @@
+{
+  "kind": "class",
+  "name": "ToolbarComponent",
+  "sourcePath": "projects/cornerstone/src/lib/foundations/toolbar/toolbar.component.ts",
+  "category": "foundations",
+  "description": "Toolbar public API.",
+  "members": [],
+  "component": true,
+  "selector": "cs-toolbar",
+  "slug": "toolbar",
+  "label": "Toolbar",
+  "tokens": [
+    "--cs-space-3"
+  ],
+  "relatedSymbols": [],
+  "relatedEntries": []
+}

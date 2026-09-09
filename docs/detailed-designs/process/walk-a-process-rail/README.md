@@ -33,7 +33,7 @@ every one of those decisions and feeds the result back in through the adapter, s
 that the same rail renders a Liturgy 4D project journey and a Word Up learning
 journey without a source change (L2-143).
 
-The rail sits above the gate feature, which supplies `CsGateComponent` for the
+The rail sits above the gate feature, which supplies `GateComponent` for the
 inter-step gate slot, and above the movement feature, which supplies the progress
 indicators a stage card may embed.
 
@@ -43,9 +43,9 @@ The feature is a vertical slice from an application's stage view model down to
 the rendered list item and its accessible state text. It introduces two
 components and the types they read.
 
-- **`CsProcessRailComponent`** — the compact ordered rail, selector
+- **`ProcessRailComponent`** — the compact ordered rail, selector
   `cs-process-rail`. Inputs: `stages: InputSignal<readonly CsProcessStage[]>`,
-  `orientation: InputSignal<CsRailOrientation>` holding `'vertical'`,
+  `orientation: InputSignal<RailOrientation>` holding `'vertical'`,
   `'horizontal'`, or `'auto'`, `adapter: InputSignal<CsProcessAdapter>`, and
   `activeStageId: InputSignal<string | null>`. Output:
   `stageActivated: OutputEmitterRef<CsStageActivation>`. The rail renders an
@@ -53,11 +53,11 @@ components and the types they read.
   The current stage carries `aria-current="step"`. A locked stage is not
   activatable, carries `aria-disabled="true"`, and exposes its blocking reason
   through `aria-describedby`.
-- **`CsProcessJourneyComponent`** — the full-content timeline, selector
+- **`ProcessJourneyComponent`** — the full-content timeline, selector
   `cs-process-journey`. Inputs: `stages`, `adapter`, and
   `density: InputSignal<CsJourneyDensity>` holding `'comfortable'` or
   `'compact'`. Outputs: `stageActivated` and
-  `stageAction: OutputEmitterRef<CsStageActionIntent>`. Each stage renders as a
+  `stageAction: OutputEmitterRef<StageActionIntent>`. Each stage renders as a
   labelled region with a heading, a state line, and a projected content slot; a
   gate panel renders between a completed stage and the locked stage that follows
   it.
@@ -66,13 +66,13 @@ components and the types they read.
   follows the stage, and optional `badge`.
 - **`CsProcessStageState`** — union type of the stage states: `'done' |
   'current' | 'locked'`.
-- **`CsRailOrientation`** — union type of the layout modes: `'vertical' |
+- **`RailOrientation`** — union type of the layout modes: `'vertical' |
   'horizontal' | 'auto'`. Under `'auto'` the rail observes its container through
   the CDK breakpoint observer and presents horizontally at viewport LG and
   vertically at viewport XS.
 - **`CsStageActivation`** — the intent emitted when a stage label is activated,
   carrying `stageId` and `index`.
-- **`CsStageActionIntent`** — the intent emitted when a stage card action is
+- **`StageActionIntent`** — the intent emitted when a stage card action is
   activated, carrying `stageId`, `actionId`, and the action's `payload`.
 - **`CsProcessAdapter`** — the adapter input defined by the adapter contract
   (L2-143). It carries the label set, the stage palette, and the enforcement
@@ -121,7 +121,7 @@ the adapter names.
 
 ### Components
 
-`CsProcessRailComponent` and `CsProcessJourneyComponent` read the same stage list
+`ProcessRailComponent` and `ProcessJourneyComponent` read the same stage list
 and the same adapter. The adapter boundary is the only path by which application
 vocabulary, colour, and enforcement results enter either component.
 

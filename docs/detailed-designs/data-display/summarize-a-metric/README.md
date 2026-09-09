@@ -43,10 +43,10 @@ computes down to the rendered, printable, screen-reader-readable presentation.
 It spans five public components, two supporting components, and the metric types
 they share.
 
-- **`CsStatCardComponent`** — selector `cs-stat-card`. The framed statistic used
+- **`StatCardComponent`** — selector `cs-stat-card`. The framed statistic used
   on a dashboard. The inputs are `label: InputSignal<string>`,
   `value: InputSignal<string | number>`, `unit: InputSignal<string | null>`,
-  `delta: InputSignal<CsMetricDelta | null>`,
+  `delta: InputSignal<MetricDelta | null>`,
   `supporting: InputSignal<string | null>`,
   `tone: InputSignal<CsMetricTone>`,
   `interaction: InputSignal<CsStatInteraction>`, and
@@ -59,12 +59,12 @@ they share.
   `aria-pressed`. The link mode renders the label as the accessible name of a
   single anchor that covers the card, so a keyboard reader reaches one target
   rather than three.
-- **`CsKpiComponent`** — selector `cs-kpi`. The unframed statistic used inside a
+- **`KpiComponent`** — selector `cs-kpi`. The unframed statistic used inside a
   page header or a summary row, where the surrounding card supplies the frame. It
   carries the same label, value, unit, delta, supporting, and tone inputs as
-  `CsStatCardComponent`, plus `size: InputSignal<CsKpiSize>` over
+  `StatCardComponent`, plus `size: InputSignal<CsKpiSize>` over
   `'sm' | 'md' | 'lg'`.
-- **`CsMetricDelta`** — the comparison shape. It holds `value: number`,
+- **`MetricDelta`** — the comparison shape. It holds `value: number`,
   `direction: 'up' | 'down' | 'flat'`, and
   `sentiment: 'positive' | 'negative' | 'neutral'`, with an optional
   `label: string` naming the comparison period. Direction and sentiment are
@@ -73,7 +73,7 @@ they share.
 - **`CsMetricTone`** — union type of the six tones:
   `'neutral' | 'success' | 'warning' | 'error' | 'info' | 'lime'`. Each tone
   resolves a surface, a border, and a text colour from `--cs-` tokens.
-- **`CsProgressMatrixComponent`** — selector `cs-progress-matrix`. The labelled
+- **`ProgressMatrixComponent`** — selector `cs-progress-matrix`. The labelled
   grid of completion states (L2-096). The inputs are
   `rows: InputSignal<CsMatrixRow[]>`, `columns: InputSignal<CsMatrixColumn[]>`,
   `stickyHeaders: InputSignal<boolean>` defaulting to true, and
@@ -81,18 +81,18 @@ they share.
   `cellActivated: OutputEmitterRef<CsMatrixCellRef>`. It renders a native
   `table` with `th` elements carrying `scope="col"` and `scope="row"`, so each
   cell's accessible name resolves from its two headers.
-- **`CsMatrixCellState`** — union type of the four cell states:
+- **`MatrixCellState`** — union type of the four cell states:
   `'done' | 'in-progress' | 'none' | 'not-applicable'`. Each state resolves a
   glyph, a fill, and a state name; the state name is read into the cell's
   accessible name so the presentation does not depend on the fill.
-- **`CsMetricBarsComponent`** — selector `cs-metric-bars`. Horizontal bars and
+- **`MetricBarsComponent`** — selector `cs-metric-bars`. Horizontal bars and
   100-percent distributions (L2-097). The inputs are
   `series: InputSignal<CsMetricSeries[]>`, `max: InputSignal<number | null>`,
   `mode: InputSignal<'bars' | 'distribution'>`,
   `showLegend: InputSignal<boolean>`, `showValueTable: InputSignal<boolean>`,
   and `state: InputSignal<CsDataState<void>>`. It emits
   `pointActivated: OutputEmitterRef<CsMetricPointRef>`.
-- **`CsComparisonChartComponent`** — selector `cs-comparison-chart`. Paired bars
+- **`ComparisonChartComponent`** — selector `cs-comparison-chart`. Paired bars
   with an explicit delta column (L2-097). It carries the same series input plus
   `baselineKey: InputSignal<string>` naming the series the others are measured
   against, and `showDelta: InputSignal<boolean>`.
@@ -101,11 +101,11 @@ they share.
   `tone: CsMetricTone`, and `points: CsMetricPoint[]`. `CsMetricPoint` holds
   `key: string`, `label: string`, `value: number`, and an optional
   `formatted: string` the application supplies when it owns the number format.
-- **`CsMetricValueTableComponent`** — the shared tabular restatement both charts
+- **`MetricValueTableComponent`** — the shared tabular restatement both charts
   render. It is visually hidden when `showValueTable` is false and exposed to
   assistive technology and to print in every case, so the numbers behind a bar
   are always reachable (L2-097).
-- **`CsMetricLegendComponent`** — the shared legend. Each entry pairs the series
+- **`MetricLegendComponent`** — the shared legend. Each entry pairs the series
   colour with the series label and the fill pattern that series uses, so a
   monochrome print and a colour-blind reader both distinguish the series.
 
@@ -129,7 +129,7 @@ carrying `tabindex="0"` so keyboard readers can pan it.
 The default numeric and percentage formats, which apply when a point supplies no
 `formatted` string, are `<TO SUPPLY>`.
 
-The series count above which `CsMetricLegendComponent` collapses into an overflow
+The series count above which `MetricLegendComponent` collapses into an overflow
 entry is `<TO SUPPLY>`.
 
 ## Requirements
@@ -163,16 +163,16 @@ resolve, including the print resolutions.
 
 ### Components
 
-`CsStatCardComponent` and `CsKpiComponent` share the delta and tone types.
-`CsMetricBarsComponent` and `CsComparisonChartComponent` share the legend and the
-value table. `CsProgressMatrixComponent` renders a native table with scoped
+`StatCardComponent` and `KpiComponent` share the delta and tone types.
+`MetricBarsComponent` and `ComparisonChartComponent` share the legend and the
+value table. `ProgressMatrixComponent` renders a native table with scoped
 headers.
 
 ![C4 component view for summarizing a metric](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsMetricDelta` separates direction from sentiment, and `CsMetricSeries` carries
+`MetricDelta` separates direction from sentiment, and `CsMetricSeries` carries
 the points both charts render. Every presentation accepts the shared
 `CsDataState` contract.
 

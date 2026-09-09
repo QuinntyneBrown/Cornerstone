@@ -9,12 +9,12 @@ import {
   output,
 } from '@angular/core';
 import {
-  CsBadgeComponent,
+  BadgeComponent,
   CsButtonDirective,
-  CsCardComponent,
-  CsProgressRingComponent,
+  CardComponent,
+  ProgressRingComponent,
 } from '../foundations';
-import { CsCheckboxComponent } from '../forms';
+import { CheckboxComponent } from '../forms';
 import { CsProcessLabels } from './cs-process-labels.interface';
 import { CsProcessPalette } from './cs-process-palette.interface';
 

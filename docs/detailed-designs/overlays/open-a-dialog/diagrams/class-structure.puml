@@ -13,15 +13,15 @@ skinparam class {
 ' --------------------------
 title Class structure — Open a dialog
 
-enum CsDialogSize {
+enum DialogSize {
   small
   default
   large
 }
 
-class CsDialogConfig<D> {
+class DialogConfig<D> {
   +data: D
-  +size: CsDialogSize
+  +size: DialogSize
   +fullScreenOnMobile: boolean
   +disableClose: boolean
   +restoreFocus: boolean
@@ -30,18 +30,18 @@ class CsDialogConfig<D> {
   +ariaDescribedBy: string
 }
 
-class CsDialogService {
+class DialogService {
   -dialog: Dialog
   -scrollStrategy: BlockScrollStrategy
   -openCount: number
-  +open<R, D, C>(component: ComponentType<C>, config?: CsDialogConfig<D>): CsDialogRef<R, C>
-  +openTemplate<R>(template: TemplateRef<unknown>, config?: CsDialogConfig<unknown>): CsDialogRef<R, unknown>
+  +open<R, D, C>(component: ComponentType<C>, config?: DialogConfig<D>): DialogRef<R, C>
+  +openTemplate<R>(template: TemplateRef<unknown>, config?: DialogConfig<unknown>): DialogRef<R, unknown>
   +closeAll(): void
   -blockPageScroll(): void
   -releasePageScroll(): void
 }
 
-class CsDialogRef<R, C> {
+class DialogRef<R, C> {
   +componentInstance: C
   +disableClose: boolean
   +closed: Observable<R | undefined>
@@ -50,8 +50,8 @@ class CsDialogRef<R, C> {
   +close(result?: R): void
 }
 
-class CsDialogShellComponent {
-  +size: InputSignal<CsDialogSize>
+class DialogShellComponent {
+  +size: InputSignal<DialogSize>
   +fullScreenOnMobile: InputSignal<boolean>
   +dismissible: InputSignal<boolean>
   +dismissed: OutputEmitterRef<void>
@@ -63,15 +63,15 @@ class CsDialogShellComponent {
   +restoreFocus(): void
 }
 
-class CsDialogTitleDirective {
+class DialogTitleDirective {
   +id: InputSignal<string>
 }
 
-class CsDialogDescriptionDirective {
+class DialogDescriptionDirective {
   +id: InputSignal<string>
 }
 
-class CsDialogActionsDirective {
+class DialogActionsDirective {
   +align: InputSignal<CsDialogActionAlign>
 }
 
@@ -86,15 +86,15 @@ class FocusTrap <<CDK>> {
   +destroy(): void
 }
 
-CsDialogService ..> CsDialogConfig : reads
-CsDialogService --> "0..*" CsDialogRef : returns
-CsDialogService ..> CsDialogShellComponent : attaches
-CsDialogConfig --> CsDialogSize : has
-CsDialogShellComponent --> CsDialogSize : has
-CsDialogShellComponent *-- FocusTrap : owns
-CsDialogShellComponent o-- "0..1" CsDialogTitleDirective : is labelled by
-CsDialogShellComponent o-- "0..1" CsDialogDescriptionDirective : is described by
-CsDialogShellComponent o-- "0..1" CsDialogActionsDirective : projects
-CsDialogActionsDirective --> CsDialogActionAlign : has
-CsDialogRef ..> CsDialogShellComponent : closes
+DialogService ..> DialogConfig : reads
+DialogService --> "0..*" DialogRef : returns
+DialogService ..> DialogShellComponent : attaches
+DialogConfig --> DialogSize : has
+DialogShellComponent --> DialogSize : has
+DialogShellComponent *-- FocusTrap : owns
+DialogShellComponent o-- "0..1" DialogTitleDirective : is labelled by
+DialogShellComponent o-- "0..1" DialogDescriptionDirective : is described by
+DialogShellComponent o-- "0..1" DialogActionsDirective : projects
+DialogActionsDirective --> CsDialogActionAlign : has
+DialogRef ..> DialogShellComponent : closes
 @enduml

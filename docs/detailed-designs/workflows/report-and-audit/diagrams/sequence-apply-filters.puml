@@ -21,9 +21,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Query service" as query
 end box
 box "Frontend — Cornerstone reporting composite" #D1FADF
-  participant "CsReportFiltersComponent" as filters
-  participant "CsReportDashboardComponent" as dashboard
-  participant "CsAuditLogComponent" as audit
+  participant "ReportFiltersComponent" as filters
+  participant "ReportDashboardComponent" as dashboard
+  participant "AuditLogComponent" as audit
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer" as announcer
@@ -35,7 +35,7 @@ end box
 user -> browser : Choose a cohort and a date range
 browser -> filters : Two control changes
 filters -> filters : Debounce by the documented interval per L2-130
-filters -> page : Emit one CsReportFilterState carrying every selection per L2-130
+filters -> page : Emit one ReportFilterState carrying every selection per L2-130
 
 page -> dashboard : Bind the panel state 'loading'
 dashboard -> browser : Render skeletons with aria-busy=true and reserved heights per L2-130
@@ -43,7 +43,7 @@ browser --> user : Layout holds its height while the query runs
 
 page -> query : Aggregate for the applied filters
 query --> page : Figures and the record count
-page -> dashboard : Bind CsReportViewModel and the panel state 'ready'
+page -> dashboard : Bind ReportViewModel and the panel state 'ready'
 dashboard -> browser : Render the KPI, ring, and bar panels
 dashboard -> browser : Attach the data alternative to each chart panel per L2-097
 dashboard -> announcer : Announce the filter summary and record count politely per L2-130

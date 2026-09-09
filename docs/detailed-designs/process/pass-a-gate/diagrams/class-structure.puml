@@ -13,12 +13,12 @@ skinparam class {
 ' --------------------------
 title Class structure — Pass a gate
 
-enum CsGateMode {
+enum GateMode {
   interactive
   readonly
 }
 
-class CsGateSummary {
+class GateSummary {
   +id: string
   +label: string
   +open: boolean
@@ -38,7 +38,7 @@ class CsRequirement {
 interface CsProcessAdapter {
   +labels: CsProcessLabels
   +palette: CsProcessPalette
-  +enforcement: ReadonlyMap<string, CsGateSummary>
+  +enforcement: ReadonlyMap<string, GateSummary>
 }
 
 class CsProcessLabels {
@@ -49,40 +49,40 @@ class CsProcessLabels {
   +allMetLabel: string
 }
 
-class CsGateComponent {
-  +gate: InputSignal<CsGateSummary>
+class GateComponent {
+  +gate: InputSignal<GateSummary>
   +requirements: InputSignal<readonly CsRequirement[]>
   +adapter: InputSignal<CsProcessAdapter>
-  +mode: InputSignal<CsGateMode>
+  +mode: InputSignal<GateMode>
   +helperText: InputSignal<string | null>
-  +advanceRequested: OutputEmitterRef<CsGateAdvanceIntent>
+  +advanceRequested: OutputEmitterRef<GateAdvanceIntent>
   +requirementToggled: OutputEmitterRef<CsRequirementToggleIntent>
   #advanceDisabled: Signal<boolean>
   -statusText(): string
 }
 
-class CsRequirementChecklistComponent {
+class RequirementChecklistComponent {
   +requirements: InputSignal<readonly CsRequirement[]>
-  +mode: InputSignal<CsGateMode>
+  +mode: InputSignal<GateMode>
   +groupLabel: InputSignal<string>
   +adapter: InputSignal<CsProcessAdapter>
   +requirementToggled: OutputEmitterRef<CsRequirementToggleIntent>
   -isActivatable(item: CsRequirement): boolean
 }
 
-class CsCheckboxComponent {
+class CheckboxComponent {
   +checked: ModelSignal<boolean>
   +disabled: InputSignal<boolean>
   +describedBy: InputSignal<string | null>
 }
 
-class CsGateAnnouncer {
+class GateAnnouncer {
   +announceOpen(label: string): void
   +announceAllMet(label: string): void
   +announceError(message: string): void
 }
 
-class CsGateAdvanceIntent {
+class GateAdvanceIntent {
   +gateId: string
 }
 
@@ -92,17 +92,17 @@ class CsRequirementToggleIntent {
   +done: boolean
 }
 
-CsGateComponent --> CsGateSummary : renders the enforcement result
-CsGateComponent "1" *-- "1" CsRequirementChecklistComponent : contains
-CsGateComponent --> CsGateMode : has
-CsRequirementChecklistComponent "1" o-- "0..*" CsRequirement : renders
-CsRequirementChecklistComponent ..> CsCheckboxComponent : renders each interactive item as
-CsGateComponent --> CsProcessAdapter : reads labels from
-CsRequirementChecklistComponent --> CsProcessAdapter : reads labels from
+GateComponent --> GateSummary : renders the enforcement result
+GateComponent "1" *-- "1" RequirementChecklistComponent : contains
+GateComponent --> GateMode : has
+RequirementChecklistComponent "1" o-- "0..*" CsRequirement : renders
+RequirementChecklistComponent ..> CheckboxComponent : renders each interactive item as
+GateComponent --> CsProcessAdapter : reads labels from
+RequirementChecklistComponent --> CsProcessAdapter : reads labels from
 CsProcessAdapter *-- CsProcessLabels
-CsProcessAdapter --> CsGateSummary : supplies
-CsGateComponent ..> CsGateAdvanceIntent : emits
-CsRequirementChecklistComponent ..> CsRequirementToggleIntent : emits
-CsGateComponent ..> CsGateAnnouncer : announces through
-CsRequirementChecklistComponent ..> CsGateAnnouncer : announces through
+CsProcessAdapter --> GateSummary : supplies
+GateComponent ..> GateAdvanceIntent : emits
+RequirementChecklistComponent ..> CsRequirementToggleIntent : emits
+GateComponent ..> GateAnnouncer : announces through
+RequirementChecklistComponent ..> GateAnnouncer : announces through
 @enduml

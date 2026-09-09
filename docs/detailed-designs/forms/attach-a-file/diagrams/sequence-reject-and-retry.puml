@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone file components" #D1FADF
-  participant "CsFilePickerComponent" as picker
+  participant "FilePickerComponent" as picker
   participant "Accept and size validator" as validator
-  participant "CsFileSummaryComponent" as summary
+  participant "FileSummaryComponent" as summary
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer" as announcer

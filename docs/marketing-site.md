@@ -5,9 +5,10 @@ Status: **shipped** · Last updated: 2026-07-20
 ## Goal
 
 Replace the Angular-rendered brochure site in `marketing/` with a hand-written static HTML site —
-no framework, no build-time templating, and no runtime JavaScript. The reference for content depth,
-layout rhythm, and micro-animation is [linear.app/ai](https://linear.app/ai): dark ground, tight
-display typography, hairline structure, and motion that is felt rather than watched.
+no framework and no build-time templating. Runtime code is limited to one dependency-free WebGPU
+progressive enhancement. The reference for content depth, layout rhythm, and micro-animation is
+[linear.app/ai](https://linear.app/ai): dark ground, tight display typography, hairline structure,
+and motion that is felt rather than watched.
 
 ## Why replace the Angular version
 
@@ -54,12 +55,12 @@ weight 640 with `-0.035em` tracking, body at 400 with generous leading, and a mo
 face at `0.18em` tracking for eyebrows, dimension labels, and code. The mono face is what sells the
 construction-document read.
 
-**Signature element.** The hero's derivation chain: three linked cells — a token swatch, a real
-rendered button, a miniature composed screen — with a pulse of light travelling left to right along
-the connectors, and the downstream cells visibly driven by the token. One stone sets every other
-stone, demonstrated in the product's own material rather than asserted in a headline.
+**Signature element.** The hero carries a low-contrast WebGPU foundation field: a faceted setting-out
+grid with lime light travelling through it and a restrained response to pointer movement. It sits
+behind the copy, never carries content, and fades into the existing CSS bloom when WebGPU is not
+available.
 
-**Motion.** All CSS, no scripts.
+**Motion.** CSS owns interface motion; WebGPU owns only the optional hero field.
 
 - A staggered page-load sequence in the hero (the one orchestrated moment).
 - Scroll reveals via `animation-timeline: view()`, wrapped in `@supports` so browsers without it
@@ -67,8 +68,12 @@ stone, demonstrated in the product's own material rather than asserted in a head
 - Datum ticks that brighten as their section enters view.
 - Hover micro-interactions: 1px card lift, border brightening, button sheen sweep, arrow nudge.
 - Ambient drift behind the hero on a 40s loop.
+- A 30 fps WebGPU foundation field, capped at 1.5× device pixel ratio and paused whenever the hero
+  or document is not visible.
 
-Everything above collapses under `prefers-reduced-motion: reduce`.
+Everything above collapses under `prefers-reduced-motion: reduce`. The WebGPU module also declines
+to initialize when data saving or forced-colors mode is enabled, and the unchanged CSS hero is the
+fallback whenever `navigator.gpu`, an adapter, or a WebGPU canvas context is unavailable.
 
 ## Content plan
 
@@ -108,14 +113,16 @@ marketing/
   components.html          all 144 components by domain, plus the support matrix
   migration.html           the compatibility bridge and its removal criteria
   404.html
-  styles/site.css          the whole design system for the site, ~1,000 lines
+  assets/components-docs.png
+  scripts/foundation-field.js  optional WebGPU hero field
+  styles/site.css          the whole design system for the site, ~2,200 lines
   favicon.svg  robots.txt  staticwebapp.config.json
 ```
 
-Eight files, 103 KiB total, zero scripts, zero external requests. `npm run build:marketing` copies
-the directory to `dist/marketing/browser` and refuses to publish if any page grows a `<script>`
-tag, an inline event handler, a missing `<title>`, or a missing `lang`. That guard was tested by
-planting a script tag: it exits 1.
+The site makes zero external requests. `npm run build:marketing` copies the directory to
+`dist/marketing/browser` and permits exactly one module script, at
+`scripts/foundation-field.js`. Any other script tag, runtime module, inline event handler, missing
+`<title>`, or missing `lang` fails the build.
 
 Because the site no longer depends on the library, the deploy workflow dropped `npm ci` entirely
 and now triggers only on `marketing/**` changes.
@@ -127,14 +134,15 @@ and now triggers only on `marketing/**` changes.
 | `npm run lint`                           | Passes                                            |
 | `npm run format:check`                   | Passes                                            |
 | `npm run architecture:check`             | Passes                                            |
-| `npm run build:marketing`                | Passes; fails as designed when a script is added  |
+| `npm run build:marketing`                | Passes; rejects scripts outside the one-file allowlist |
 | axe-core, 4 pages × 2 widths, reduced motion | 0 violations                                  |
 | Horizontal overflow at 360–1600px        | None                                              |
 
 Two configuration files needed narrowing: both Prettier and ESLint apply Angular's template parser
 to every `*.html`, and it cannot read `{` in ordinary prose or code samples. Prettier now uses the
-standard `html` parser under `marketing/`, and ESLint ignores the directory — its Angular template
-rules have nothing to say about static HTML, and axe-core covers the accessibility ground instead.
+standard `html` parser under `marketing/`, and ESLint ignores the static pages while linting the
+WebGPU JavaScript separately. Angular template rules have nothing to say about the brochure HTML,
+so axe-core covers its accessibility ground instead.
 
 ## Progress log
 
@@ -172,3 +180,9 @@ Axe reports contrast violations when motion is allowed, but every flagged node i
 captured mid-animation — `#setup-title`, for instance, is `--chalk` at 18:1 and can only fail while
 partially transparent. Confirmed benign two ways: the reduced-motion pass is clean, and no element
 in the initial viewport sits below 0.9 opacity once the load sequence finishes.
+
+**2026-07-20 — Product visuals and WebGPU.** Tightened the homepage around a real documentation
+screenshot and two composed product screens, then added the optional hero foundation field. The
+shader is written directly in WGSL, adds no dependency or external request, follows pointer input
+without intercepting it, and stops rendering off-screen. The former blanket script prohibition is
+now a strict allowlist for this one module, keeping the runtime exception narrow and reviewable.

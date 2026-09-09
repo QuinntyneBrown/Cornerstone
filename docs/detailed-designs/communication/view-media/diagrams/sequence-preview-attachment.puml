@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "AttachmentTransferHandler" as transfer
 end box
 box "Frontend — Cornerstone media" #D1FADF
-  participant "CsAttachmentListComponent" as attach
-  participant "CsEvidencePreviewComponent" as preview
-  participant "CsMiddleTruncateDirective" as truncate
+  participant "AttachmentListComponent" as attach
+  participant "EvidencePreviewComponent" as preview
+  participant "MiddleTruncateDirective" as truncate
   participant "CsSafeUrlPipe" as safe
 end box
 box "Browser — platform" #FFF4E5

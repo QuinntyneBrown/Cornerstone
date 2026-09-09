@@ -19,7 +19,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Pull request" as pr
 end box
 box "Frontend — Cornerstone component library" #D1FADF
-  participant "CsShellComponent" as shell
+  participant "ShellComponent" as shell
 end box
 box "Frontend — Cornerstone verification harness" #ECFDF3
   participant "CsViewportHarness" as harness

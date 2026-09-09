@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
 end box
 box "Frontend — Cornerstone component library" #D1FADF
   participant "Component gallery" as gallery
-  participant "CsChoiceCardComponent" as comp
+  participant "ChoiceCardComponent" as comp
 end box
 box "Frontend — Cornerstone verification gate" #ECFDF3
   participant "csExpectNoViolations()" as scan

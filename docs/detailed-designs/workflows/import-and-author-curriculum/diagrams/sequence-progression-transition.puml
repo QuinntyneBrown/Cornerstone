@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Curriculum policy service" as rules
 end box
 box "Frontend — Cornerstone progression composite" #D1FADF
-  participant "CsProgressionBuilderComponent" as builder
-  participant "CsCompetencyGridComponent" as grid
+  participant "ProgressionBuilderComponent" as builder
+  participant "CompetencyGridComponent" as grid
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Drag-drop, LiveAnnouncer, BreakpointObserver" as cdk

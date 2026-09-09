@@ -21,15 +21,15 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Assessment service" as grading
 end box
 box "Frontend — Cornerstone work composites" #D1FADF
-  participant "CsBadgeCollectionComponent" as collection
-  participant "CsAchievementCardComponent" as badge
+  participant "BadgeCollectionComponent" as collection
+  participant "AchievementCardComponent" as badge
 end box
 box "Browser — platform" #FFF4E5
   participant "Rendering and media queries" as browser
 end box
 
 awards -> page : Supply the achievement list
-page -> collection : Bind CsAchievementView list and layout 'grid' per L2-122
+page -> collection : Bind AchievementView list and layout 'grid' per L2-122
 collection -> badge : Pass one achievement per card
 badge -> badge : Render locked art, criteria, and progress per L2-122
 badge -> browser : Mark the locked state in text as well as treatment
@@ -53,7 +53,7 @@ end
 
 youth -> browser : Open the badge
 browser -> badge : Activation event
-badge -> collection : Emit CsAchievementSelect
+badge -> collection : Emit AchievementSelect
 collection -> page : Forward the achievement intent
 page -> awards : Load the badge detail
 awards --> page : Badge detail record

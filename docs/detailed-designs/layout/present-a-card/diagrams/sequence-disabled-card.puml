@@ -19,9 +19,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone card" #D1FADF
-  participant "CsCardComponent" as card
+  participant "CardComponent" as card
   participant "CsCardFooterComponent" as footer
-  participant "CsDividerComponent" as divider
+  participant "DividerComponent" as divider
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Card styles" as styles

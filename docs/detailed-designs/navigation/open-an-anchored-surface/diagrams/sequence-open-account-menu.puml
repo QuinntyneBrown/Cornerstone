@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone anchored surfaces" #D1FADF
-  participant "CsAccountMenuComponent" as account
+  participant "AccountMenuComponent" as account
   participant "CsMenuDirective" as menu
   participant "CsMenuItemDirective" as item
 end box

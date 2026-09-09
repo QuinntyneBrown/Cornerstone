@@ -6,17 +6,17 @@ title Components — View media
 Person(youth, "Youth", "Views media and manages attachments")
 
 Container_Boundary(appsvc, "Consuming application services") {
-  Component(mediavm, "MediaViewModelService", "Angular injectable", "Builds CsMediaViewModel and CsAttachmentViewModel and supplies every source URL")
+  Component(mediavm, "MediaViewModelService", "Angular injectable", "Builds CsMediaViewModel and AttachmentViewModel and supplies every source URL")
   Component(transfer, "AttachmentTransferHandler", "Angular injectable", "Receives retry, remove, and download intents and owns upload and storage")
 }
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(viewer, "CsMediaViewerComponent", "Standalone component", "Image, video, iframe, and document presentation with poster, caption, and error state")
-  Component(frame, "CsMediaFrameDirective", "Directive", "Reserves the declared aspect ratio before the source loads")
+  Component(viewer, "MediaViewerComponent", "Standalone component", "Image, video, iframe, and document presentation with poster, caption, and error state")
+  Component(frame, "MediaFrameDirective", "Directive", "Reserves the declared aspect ratio before the source loads")
   Component(safeurl, "CsSafeUrlPipe", "Angular pipe", "Applies the scheme, target, and rel contract in L2-164")
-  Component(attach, "CsAttachmentListComponent", "Standalone component", "File type, size, status, remove, download, and retry")
-  Component(preview, "CsEvidencePreviewComponent", "Standalone component", "Image preview named from the file name")
-  Component(truncate, "CsMiddleTruncateDirective", "Directive", "Truncates a long file name in the middle preserving the extension")
+  Component(attach, "AttachmentListComponent", "Standalone component", "File type, size, status, remove, download, and retry")
+  Component(preview, "EvidencePreviewComponent", "Standalone component", "Image preview named from the file name")
+  Component(truncate, "MiddleTruncateDirective", "Directive", "Truncates a long file name in the middle preserving the extension")
 }
 
 System_Ext(cdk, "Angular CDK", "Breakpoint observation and focus")

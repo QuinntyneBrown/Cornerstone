@@ -19,7 +19,7 @@ enum CsBrandName {
   wordup
 }
 
-enum CsBrandLockupVariant {
+enum BrandLockupVariant {
   compact
   full
 }
@@ -41,7 +41,7 @@ enum CsBrandOrientation {
   stacked
 }
 
-class CsLogoMarkComponent {
+class LogoMarkComponent {
   +brand: InputSignal<CsBrandName>
   +size: InputSignal<CsBrandSize>
   +treatment: InputSignal<CsBrandTreatment | null>
@@ -50,9 +50,9 @@ class CsLogoMarkComponent {
   -artwork: Signal<CsBrandArtwork>
 }
 
-class CsBrandLockupComponent {
+class BrandLockupComponent {
   +brand: InputSignal<CsBrandName>
-  +variant: InputSignal<CsBrandLockupVariant>
+  +variant: InputSignal<BrandLockupVariant>
   +treatment: InputSignal<CsBrandTreatment | null>
   +size: InputSignal<CsBrandSize>
   +orientation: InputSignal<CsBrandOrientation>
@@ -78,18 +78,18 @@ class CsThemeService {
   +resolved: Signal<CsThemeName>
 }
 
-CsBrandLockupComponent *-- "1" CsLogoMarkComponent : composes
-CsBrandLockupComponent --> CsBrandLockupVariant : has
-CsBrandLockupComponent --> CsBrandOrientation : has
-CsBrandLockupComponent --> CsBrandSize : has
-CsBrandLockupComponent --> CsBrandName : has
-CsBrandLockupComponent --> CsBrandTreatment : resolves to
-CsBrandLockupComponent ..> CsBrandAssets : reads
-CsBrandLockupComponent ..> CsThemeService : reads the resolved theme from
-CsLogoMarkComponent --> CsBrandName : has
-CsLogoMarkComponent --> CsBrandSize : has
-CsLogoMarkComponent --> CsBrandTreatment : resolves to
-CsLogoMarkComponent ..> CsBrandAssets : reads
-CsLogoMarkComponent ..> CsThemeService : reads the resolved theme from
+BrandLockupComponent *-- "1" LogoMarkComponent : composes
+BrandLockupComponent --> BrandLockupVariant : has
+BrandLockupComponent --> CsBrandOrientation : has
+BrandLockupComponent --> CsBrandSize : has
+BrandLockupComponent --> CsBrandName : has
+BrandLockupComponent --> CsBrandTreatment : resolves to
+BrandLockupComponent ..> CsBrandAssets : reads
+BrandLockupComponent ..> CsThemeService : reads the resolved theme from
+LogoMarkComponent --> CsBrandName : has
+LogoMarkComponent --> CsBrandSize : has
+LogoMarkComponent --> CsBrandTreatment : resolves to
+LogoMarkComponent ..> CsBrandAssets : reads
+LogoMarkComponent ..> CsThemeService : reads the resolved theme from
 CsBrandAssets o-- "3" CsBrandArtwork : holds
 @enduml

@@ -20,7 +20,7 @@ interface ControlValueAccessor {
   +setDisabledState(isDisabled: boolean): void
 }
 
-enum CsFieldState {
+enum FieldState {
   default
   error
   success
@@ -41,12 +41,12 @@ enum CsInputType {
   datetime-local
 }
 
-enum CsAddonPosition {
+enum AddonPosition {
   prefix
   suffix
 }
 
-class CsFieldComponent {
+class FieldComponent {
   +label: InputSignal<string>
   +hint: InputSignal<string | null>
   +error: InputSignal<string | null>
@@ -54,7 +54,7 @@ class CsFieldComponent {
   +requirement: InputSignal<'required' | 'optional'>
   +maxLength: InputSignal<number | null>
   +showCount: InputSignal<boolean>
-  +state: Signal<CsFieldState>
+  +state: Signal<FieldState>
   +controlId: Signal<string>
   #describedBy(): string
   #announceCount(length: number): void
@@ -84,14 +84,14 @@ class CsTextareaDirective {
   #recalculateHeight(): void
 }
 
-class CsInputGroupComponent {
+class InputGroupComponent {
   +label: InputSignal<string>
   +minInputWidth: InputSignal<string>
   #hasFocusWithin: Signal<boolean>
 }
 
-class CsInputAddonDirective {
-  +position: InputSignal<CsAddonPosition>
+class InputAddonDirective {
+  +position: InputSignal<AddonPosition>
   +meaning: InputSignal<string | null>
   #isDecorative: Signal<boolean>
 }
@@ -108,14 +108,14 @@ class CsControlIdGenerator {
 
 CsInputDirective ..|> ControlValueAccessor
 CsTextareaDirective ..|> ControlValueAccessor
-CsFieldComponent --> CsFieldState : reports
-CsFieldComponent ..> CsControlIdGenerator : requests an identifier from
-CsFieldComponent o-- "1" CsInputDirective : frames and wires
-CsFieldComponent o-- "0..1" CsTextareaDirective : frames and wires
+FieldComponent --> FieldState : reports
+FieldComponent ..> CsControlIdGenerator : requests an identifier from
+FieldComponent o-- "1" CsInputDirective : frames and wires
+FieldComponent o-- "0..1" CsTextareaDirective : frames and wires
 CsInputDirective --> CsInputType : has
 CsTextareaDirective ..> CdkTextareaAutosize : delegates measurement to
-CsInputGroupComponent *-- "1" CsInputDirective : bounds
-CsInputGroupComponent o-- "0..2" CsInputAddonDirective : projects
-CsInputAddonDirective --> CsAddonPosition : has
-CsInputAddonDirective ..> CsInputDirective : describes when meaningful
+InputGroupComponent *-- "1" CsInputDirective : bounds
+InputGroupComponent o-- "0..2" InputAddonDirective : projects
+InputAddonDirective --> AddonPosition : has
+InputAddonDirective ..> CsInputDirective : describes when meaningful
 @enduml

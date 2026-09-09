@@ -63,7 +63,7 @@ announcement service, focus styles, and a verification gate.
   `announceOnce(key, message, politeness)`. The second form suppresses a repeat
   of an identical message under the same key, so a status set twice consecutively
   produces one announcement.
-- **`CsStatusRegionComponent`** — element component `cs-status-region` that hosts
+- **`StatusRegionComponent`** — element component `cs-status-region` that hosts
   a component-owned live region where a shared announcer is unsuitable. It takes
   a `politeness` input of `'polite' | 'assertive'` and an `atomic` input.
 - **`CsBusyDirective`** — attribute directive `csBusy` that sets `aria-busy` on a
@@ -133,7 +133,7 @@ place by the verification gate that runs in the build.
 
 `CsKeyBindings` fixes what each pattern responds to, `CsRovingFocusDirective`
 moves the active item, `CsFocusVisibleDirective` and `_focus.scss` render the
-indicator, and `CsStatusService` with `CsStatusRegionComponent` carries
+indicator, and `CsStatusService` with `StatusRegionComponent` carries
 announcements. `csExpectNoViolations()` asserts the result.
 
 ![C4 component view for operating without a mouse](diagrams/c4-component.png)

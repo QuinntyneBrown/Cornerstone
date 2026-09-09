@@ -43,6 +43,7 @@
     <main id="main">
       <!-- ------------------------------------------------------------ hero -->
       <section class="hero band band--open">
+        <canvas class="hero-gpu" aria-hidden="true"></canvas>
         <div class="band__rail" aria-hidden="true">
           <p class="band__tick">Foundation</p>
         </div>
@@ -52,9 +53,8 @@
             Set every screen from <span class="accent">one stone</span>.
           </h1>
           <p class="lede lift lift-3">
-            Cornerstone is FaithTech's Angular component library. The keyboard behavior, ARIA
-            relationships, and responsive rules are already solved, so a volunteer with two spare
-            hours can ship a screen that works for everyone who opens it.
+            FaithTech's Angular component library. Accessible behavior, responsive rules, and a
+            shared visual language—ready before the first feature ticket.
           </p>
           <div class="hero__actions lift lift-4">
             <a class="btn btn--primary" href="components.html">
@@ -82,46 +82,32 @@
         </div>
       </section>
 
-      <!-- --------------------------------------------- signature: derivation -->
-      <section class="band band--open band--tight" aria-labelledby="derivation-title">
+      <!-- -------------------------------------------- component documentation -->
+      <section class="band band--open band--tight" aria-labelledby="preview-title">
         <div class="band__rail" aria-hidden="true"></div>
         <div class="band__body">
-          <div class="chain lift lift-5">
-            <div class="chain__head">
-              <h2 class="eyebrow" id="derivation-title">Derivation</h2>
-              <p class="chain__note">
-                Change the token and everything downstream of it changes too. No rebuild, no
-                find-and-replace.
-              </p>
+          <figure class="docs-preview lift lift-5">
+            <figcaption class="docs-preview__bar">
+              <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span id="preview-title">Rendered from the public package</span>
+              <span class="docs-preview__status"><i aria-hidden="true"></i> Live docs</span>
+            </figcaption>
+            <div class="docs-preview__viewport">
+              <img
+                src="assets/components-docs.png"
+                width="1440"
+                height="900"
+                alt="Cornerstone documentation showing button, badge, form field, and guide card components in the dark theme"
+                decoding="async"
+              />
+              <div class="docs-preview__callout docs-preview__callout--actions" aria-hidden="true">
+                <span>Buttons</span><code>csButton</code>
+              </div>
+              <div class="docs-preview__callout docs-preview__callout--forms" aria-hidden="true">
+                <span>Field</span><code>cs-field</code>
+              </div>
             </div>
-            <div class="chain__track">
-              <figure class="cell">
-                <p class="cell__label">Token</p>
-                <div class="swatch"></div>
-                <p class="cell__name">--cs-lime</p>
-              </figure>
-              <div class="link" aria-hidden="true"></div>
-              <figure class="cell cell--derived">
-                <p class="cell__label">Primitive</p>
-                <p class="demo-button">Continue</p>
-                <p class="cell__name">csButton</p>
-              </figure>
-              <div class="link" aria-hidden="true"></div>
-              <figure class="cell cell--composed">
-                <p class="cell__label">Composition</p>
-                <div class="mini" aria-hidden="true">
-                  <div class="mini__bar mini__bar--title"></div>
-                  <div class="mini__bar"></div>
-                  <div class="mini__bar mini__bar--short"></div>
-                  <div class="mini__row">
-                    <div class="mini__chip"></div>
-                    <div class="mini__chip mini__chip--muted"></div>
-                  </div>
-                </div>
-                <p class="cell__name">&lt;cs-hero&gt;</p>
-              </figure>
-            </div>
-          </div>
+          </figure>
         </div>
       </section>
 
@@ -132,12 +118,10 @@
         </div>
         <div class="band__body">
           <div class="band__head reveal">
-            <h2 class="headline" id="carries-title">
-              The tedious half of the work, finished and tested.
-            </h2>
+            <h2 class="headline" id="carries-title">The hard parts arrive finished.</h2>
             <p class="lede">
-              Every component is built on the Angular CDK, checked against axe-core in three
-              engines, and shipped as a standalone import you can bring in one piece at a time.
+              CDK behavior, theming, and migration support—without a framework inside your
+              framework.
             </p>
           </div>
 
@@ -154,11 +138,8 @@
                 <rect x="3" y="6" width="18" height="12" rx="2" />
                 <path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10" stroke-linecap="round" />
               </svg>
-              <h3 class="subhead">Behavior, not just paint</h3>
-              <p>
-                Focus traps, overlay positioning, live regions, and typeahead come from the Angular
-                CDK rather than from a stylesheet that only looks the part.
-              </p>
+              <h3 class="subhead">Behavior, not paint</h3>
+              <p>Focus, overlays, live regions, and typeahead are backed by the Angular CDK.</p>
             </article>
 
             <article class="card reveal">
@@ -174,10 +155,7 @@
                 <circle cx="18" cy="12" r="2" />
               </svg>
               <h3 class="subhead">Tokens all the way down</h3>
-              <p>
-                Every decision is a CSS custom property. Override one on <code>:root</code> or on a
-                single subtree and the change lands everywhere, with no build step.
-              </p>
+              <p>Override a CSS custom property globally or on one subtree. No rebuild required.</p>
             </article>
 
             <article class="card reveal">
@@ -192,82 +170,133 @@
                 <path d="M12 3 20 7.5v9L12 21 4 16.5v-9L12 3Z" stroke-linejoin="round" />
                 <path d="M12 12v9M12 12 4 7.5M12 12l8-4.5" stroke-linejoin="round" />
               </svg>
-              <h3 class="subhead">Standalone and zoneless</h3>
+              <h3 class="subhead">Standalone by default</h3>
               <p>
-                Import the three pieces a screen uses instead of a module barrel. Everything runs
-                <code>OnPush</code> and needs no <code>zone.js</code>.
-              </p>
-            </article>
-
-            <article class="card reveal">
-              <svg
-                class="card__icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.4"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="8.5" />
-                <path d="M12 3.5a8.5 8.5 0 0 1 0 17Z" fill="currentColor" stroke="none" />
-              </svg>
-              <h3 class="subhead">Dark and high contrast, handled</h3>
-              <p>
-                Put <code>.cs-theme-dark</code> on any ancestor. Motion collapses under
-                reduced-motion, and borders resolve to system colors when forced colors are on.
-              </p>
-            </article>
-
-            <article class="card reveal">
-              <svg
-                class="card__icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.4"
-                aria-hidden="true"
-              >
-                <path d="M3 16h4M17 16h4" stroke-linecap="round" />
-                <path d="M7 16a5 5 0 0 1 10 0" />
-                <path
-                  d="M12 4v5M9.5 6.5 12 4l2.5 2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              <h3 class="subhead">A bridge, not a rewrite</h3>
-              <p>
-                One optional stylesheet keeps Word Up's <code>wu-*</code> vocabulary and Liturgy's
-                primitives rendering while templates move over a screen at a time.
-              </p>
-            </article>
-
-            <article class="card reveal">
-              <svg
-                class="card__icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.4"
-                aria-hidden="true"
-              >
-                <path d="M4 19h16" stroke-linecap="round" />
-                <rect x="5" y="12" width="3.5" height="7" rx="1" />
-                <rect x="10.25" y="8" width="3.5" height="11" rx="1" />
-                <rect x="15.5" y="4" width="3.5" height="15" rx="1" />
-              </svg>
-              <h3 class="subhead">Budgeted in public</h3>
-              <p>
-                The build fails if the published bundle passes 400 KiB gzip or the theme passes 30
-                KiB. Weight is a contract, not an afterthought.
+                Import only what a screen uses. Every component runs <code>OnPush</code> and works
+                zoneless.
               </p>
             </article>
           </div>
         </div>
       </section>
 
+      <!-- ----------------------------------------------------- compositions -->
+      <section class="band" aria-labelledby="compositions-title">
+        <div class="band__rail" aria-hidden="true">
+          <p class="band__tick">In context</p>
+        </div>
+        <div class="band__body">
+          <div class="band__head reveal">
+            <h2 class="headline" id="compositions-title">Pieces that become a product.</h2>
+            <p class="lede">
+              Start with a field or a badge. Compose the full workflow without changing visual
+              language halfway down the screen.
+            </p>
+          </div>
+
+          <div class="product-showcase">
+            <figure class="product-frame product-frame--workflow reveal">
+              <figcaption class="product-frame__bar">
+                <span>Volunteer onboarding</span><code>12 components</code>
+              </figcaption>
+              <div class="app-shell" aria-hidden="true">
+                <aside class="app-nav">
+                  <span class="app-mark"></span>
+                  <span class="app-nav__item app-nav__item--active"></span>
+                  <span class="app-nav__item"></span>
+                  <span class="app-nav__item"></span>
+                </aside>
+                <div class="app-content">
+                  <div class="app-heading">
+                    <div>
+                      <small>People / Onboarding</small><strong>Welcome the next volunteer</strong>
+                    </div>
+                    <span class="ui-avatar">QB</span>
+                  </div>
+                  <div class="ui-progress"><i></i></div>
+                  <div class="ui-step-row">
+                    <span class="ui-step ui-step--done"><i>1</i>Profile</span>
+                    <span class="ui-step ui-step--active"><i>2</i>Safeguarding</span>
+                    <span class="ui-step"><i>3</i>Team</span>
+                  </div>
+                  <div class="ui-panel">
+                    <div class="ui-panel__head">
+                      <strong>Safeguarding check</strong><span class="ui-badge">In review</span>
+                    </div>
+                    <div class="ui-field">
+                      <small>Reference contact</small><span>miriam@example.org</span>
+                    </div>
+                    <div class="ui-action-row">
+                      <span class="ui-button ui-button--muted">Back</span
+                      ><span class="ui-button">Continue</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="product-frame product-frame--insight reveal">
+              <figcaption class="product-frame__bar">
+                <span>Programme health</span><code>9 components</code>
+              </figcaption>
+              <div class="insight" aria-hidden="true">
+                <div class="insight__head">
+                  <div><small>This month</small><strong>Movement is growing</strong></div>
+                  <span class="ui-badge ui-badge--success">+18%</span>
+                </div>
+                <div class="metric-row">
+                  <div class="metric">
+                    <small>Active groups</small><strong>24</strong><span>3 added</span>
+                  </div>
+                  <div class="metric">
+                    <small>Attendance</small><strong>87%</strong><span>On target</span>
+                  </div>
+                  <div class="metric">
+                    <small>Milestones</small><strong>142</strong><span>Completed</span>
+                  </div>
+                </div>
+                <div class="chart-card">
+                  <div class="chart-card__meta">
+                    <span>Weekly participation</span><code>12 weeks</code>
+                  </div>
+                  <div class="chart-bars">
+                    <i style="--bar: 42%"></i><i style="--bar: 55%"></i><i style="--bar: 48%"></i
+                    ><i style="--bar: 64%"></i><i style="--bar: 59%"></i><i style="--bar: 75%"></i
+                    ><i style="--bar: 71%"></i><i style="--bar: 86%"></i><i style="--bar: 82%"></i
+                    ><i style="--bar: 96%"></i>
+                  </div>
+                </div>
+                <div class="activity-row">
+                  <span class="ui-avatar ui-avatar--small">AM</span>
+                  <p>
+                    <strong>Ada completed a milestone</strong
+                    ><small>Toronto Youth · 8 min ago</small>
+                  </p>
+                  <span class="ui-badge">Complete</span>
+                </div>
+              </div>
+            </figure>
+          </div>
+
+          <p class="reveal spaced">
+            <a class="arrowlink" href="components.html"
+              >Explore all 144 components
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path
+                  d="M2 7h9M7.5 3.5 11 7l-3.5 3.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          </p>
+        </div>
+      </section>
+
       <!-- -------------------------------------------------------- inventory -->
-      <section class="band" aria-labelledby="inventory-title">
+      <section class="band band--compact" aria-labelledby="inventory-title">
         <div class="band__rail" aria-hidden="true">
           <p class="band__tick">Inventory</p>
         </div>
@@ -280,7 +309,7 @@
             </p>
           </div>
 
-          <div class="schedule reveal">
+          <div class="schedule schedule--compact reveal">
             <a class="schedule__row" href="components.html#foundations">
               <p class="schedule__name">
                 Foundations
@@ -377,71 +406,8 @@
         </div>
       </section>
 
-      <!-- ---------------------------------------------------------- install -->
-      <section class="band" aria-labelledby="install-title">
-        <div class="band__rail" aria-hidden="true">
-          <p class="band__tick">Setting out</p>
-        </div>
-        <div class="band__body">
-          <div class="band__head reveal">
-            <h2 class="headline" id="install-title">Three steps to the first screen.</h2>
-            <p class="lede">
-              Install, name the theme, import what you use. There is no module to register and no
-              provider to remember.
-            </p>
-          </div>
-
-          <ol class="steps stagger">
-            <li class="step reveal">
-              <p class="step__ord">01</p>
-              <div>
-                <h3 class="step__title">Install the package</h3>
-                <p class="step__note">
-                  The CDK is a peer dependency, so your application controls its version.
-                </p>
-              </div>
-              <pre
-                tabindex="0"
-              ><code><s>$</s> npm install <b>@cornerstone/ui</b> <b>@angular/cdk</b></code></pre>
-            </li>
-            <li class="step reveal">
-              <p class="step__ord">02</p>
-              <div>
-                <h3 class="step__title">Name the theme</h3>
-                <p class="step__note">
-                  One entry in <code>angular.json</code> loads every token. Add
-                  <code>compat.scss</code> after it only if you are migrating.
-                </p>
-              </div>
-              <pre tabindex="0"><code>"styles": [
-  <i>"@cornerstone/ui/styles/theme.scss"</i>,
-  "src/styles.scss"
-]</code></pre>
-            </li>
-            <li class="step reveal">
-              <p class="step__ord">03</p>
-              <div>
-                <h3 class="step__title">Import only what the screen uses</h3>
-                <p class="step__note">
-                  Standalone imports mean an unused component never reaches the browser.
-                </p>
-              </div>
-              <pre
-                tabindex="0"
-              ><code><b>import</b> { CsButtonDirective, CsCardComponent } <b>from</b> <i>'@cornerstone/ui'</i>;
-
-<b>@Component</b>({
-  imports: [CsButtonDirective, CsCardComponent],
-  templateUrl: <i>'./welcome.component.html'</i>,
-})
-<b>export class</b> WelcomeComponent {}</code></pre>
-            </li>
-          </ol>
-        </div>
-      </section>
-
       <!-- ------------------------------------------------------- guarantees -->
-      <section class="band" aria-labelledby="guarantees-title">
+      <section class="band band--compact" aria-labelledby="guarantees-title">
         <div class="band__rail" aria-hidden="true">
           <p class="band__tick">Load bearing</p>
         </div>
@@ -484,7 +450,7 @@
       </section>
 
       <!-- -------------------------------------------------------- migration -->
-      <section class="band" aria-labelledby="migration-title">
+      <section class="band band--compact" aria-labelledby="migration-title">
         <div class="band__rail" aria-hidden="true">
           <p class="band__tick">The bridge</p>
         </div>
@@ -516,15 +482,15 @@
               <tbody>
                 <tr>
                   <th scope="row">wu-btn*</th>
-                  <td><code>CsButtonDirective</code>, <code>CsButtonGroupComponent</code></td>
+                  <td><code>CsButtonDirective</code>, <code>ButtonGroupComponent</code></td>
                 </tr>
                 <tr>
                   <th scope="row">wu-table*</th>
-                  <td><code>CsTableDirective</code>, <code>CsTableContainerComponent</code></td>
+                  <td><code>TableDirective</code>, <code>TableContainerComponent</code></td>
                 </tr>
                 <tr>
                   <th scope="row">wu-modal*, wu-drawer*</th>
-                  <td><code>CsDialogService</code>, <code>CsDrawerService</code></td>
+                  <td><code>DialogService</code>, <code>DrawerService</code></td>
                 </tr>
                 <tr>
                   <th scope="row">rail*, station*, movement*</th>
@@ -533,7 +499,7 @@
                 <tr>
                   <th scope="row">gate*, requirement*</th>
                   <td>
-                    <code>CsGateComponent</code>, <code>CsRequirementChecklistComponent</code>
+                    <code>GateComponent</code>, <code>RequirementChecklistComponent</code>
                   </td>
                 </tr>
               </tbody>
@@ -558,7 +524,7 @@
       </section>
 
       <!-- -------------------------------------------------------- questions -->
-      <section class="band" aria-labelledby="faq-title">
+      <section class="band band--compact" aria-labelledby="faq-title">
         <div class="band__rail" aria-hidden="true">
           <p class="band__tick">Questions</p>
         </div>
@@ -577,29 +543,11 @@
               </p>
             </details>
             <details>
-              <summary>What does the compatibility bridge actually change?</summary>
-              <p class="prose">
-                Presentation, and only presentation. It reproduces the audited Liturgy and Word Up
-                class vocabularies so old templates keep rendering correctly. It gives you none of
-                the keyboard behavior or ARIA relationships — those come from moving the template to
-                the Angular API. It also adds no CSS at all to applications that never name its
-                export.
-              </p>
-            </details>
-            <details>
               <summary>How much can I change without forking it?</summary>
               <p class="prose">
                 Color, type, spacing, radius, shadow, motion, and container widths are all CSS
                 custom properties. Set them on <code>:root</code> for the whole application or on
                 any ancestor element to re-theme one subtree. Nothing needs recompiling.
-              </p>
-            </details>
-            <details>
-              <summary>What happens when something has to break?</summary>
-              <p class="prose">
-                It is announced two minor releases before it is removed, and an
-                <code>ng update</code> migration rewrites what can be rewritten automatically.
-                Anything left over is reported with the affected file and its manual replacement.
               </p>
             </details>
             <details>
@@ -611,20 +559,12 @@
                 than an opt-in.
               </p>
             </details>
-            <details>
-              <summary>Do I need zone.js?</summary>
-              <p class="prose">
-                No. Every component runs with <code>OnPush</code> change detection and the reference
-                applications bootstrap zoneless. If your application still uses zone.js, that works
-                too.
-              </p>
-            </details>
           </div>
         </div>
       </section>
 
       <!-- -------------------------------------------------------------- cta -->
-      <section class="band" aria-labelledby="cta-title">
+      <section class="band band--compact" aria-labelledby="cta-title">
         <div class="band__rail" aria-hidden="true"></div>
         <div class="band__body">
           <div class="cta reveal">
@@ -701,5 +641,6 @@
         </div>
       </div>
     </footer>
+    <script type="module" src="scripts/foundation-field.js"></script>
   </body>
 </html>

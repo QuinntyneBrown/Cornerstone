@@ -12,7 +12,7 @@ System_Ext(cdk, "Angular CDK", "Dialog, overlay, focus trap, and scroll strategy
 System_Ext(browser, "Browser platform", "Owns focus, keyboard events, stacking, and document scrolling")
 System_Ext(npm, "npm registry", "Distributes the published package")
 
-Rel(dev, app, "Injects CsDialogService in")
+Rel(dev, app, "Injects DialogService in")
 Rel(app, cornerstone, "Opens dialogs through")
 Rel(cornerstone, cdk, "Builds overlay, trap, and scroll blocking on")
 Rel(cornerstone, browser, "Attaches the panel and moves focus in")

@@ -20,11 +20,11 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone reading components" #D1FADF
-  participant "CsDefinitionListComponent" as deflist
-  participant "CsListComponent" as list
-  participant "CsListItemComponent" as item
-  participant "CsTimelineComponent" as timeline
-  participant "CsScriptureQuoteComponent" as quote
+  participant "DefinitionListComponent" as deflist
+  participant "ListComponent" as list
+  participant "ListItemComponent" as item
+  participant "TimelineComponent" as timeline
+  participant "ScriptureQuoteComponent" as quote
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "ListKeyManager" as keys
@@ -40,7 +40,7 @@ deflist -> dom : Render the field skeletons
 page -> services : Request the record, its items, and its history
 
 services --> page : Record, related items, and dated events
-page -> deflist : Bind CsDefinitionItem values in the inline layout per L2-092
+page -> deflist : Bind DefinitionItem values in the inline layout per L2-092
 deflist -> dom : Render a native dl with one div per pair
 deflist -> dom : Render an em dash and hidden absence text for each null value
 
@@ -49,7 +49,7 @@ list -> item : Project each related item
 item -> dom : Render leading visual, title, meta, trailing status, and actions
 item -> dom : Pair the unread marker with hidden unread text per L2-091
 
-page -> timeline : Bind CsTimelineEntry values per L2-098
+page -> timeline : Bind TimelineEntry values per L2-098
 timeline -> dom : Render an ordered list with a past, current, or future marker per entry
 timeline -> dom : Set aria-current="step" on the current entry
 timeline -> dom : Mark the connecting rail aria-hidden="true"

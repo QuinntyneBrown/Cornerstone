@@ -12,7 +12,7 @@ System_Boundary(app, "Consuming application") {
 }
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "CsGateComponent, CsRequirementChecklistComponent, and the Cornerstone checkbox")
+  Container(lib, "Component library", "Angular standalone components", "GateComponent, RequirementChecklistComponent, and the Cornerstone checkbox")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Resolves gate and requirement state colour")
   Container(docs, "Documentation site", "Angular application", "Publishes gate examples driven by a neutral adapter")
 }
@@ -24,7 +24,7 @@ Rel(user, shell, "Toggles requirements in")
 Rel(shell, page, "Renders")
 Rel(services, page, "Supply the enforcement result and persisted requirement states to")
 Rel(page, lib, "Binds requirements, the enforcement result, and the adapter to", "signal inputs")
-Rel(lib, page, "Emits CsGateAdvanceIntent and CsRequirementToggleIntent to", "output()")
+Rel(lib, page, "Emits GateAdvanceIntent and CsRequirementToggleIntent to", "output()")
 Rel(page, services, "Resolves intents into persistence and enforcement through")
 Rel(lib, theme, "Resolves state colour from")
 Rel(lib, cdk, "Announces open and error transitions through")

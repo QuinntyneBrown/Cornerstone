@@ -34,44 +34,44 @@ the list appear on stage pages beside the process rail.
 The feature is a vertical slice from a movement view model down to the announced
 progress summary. It introduces three components and the types they share.
 
-- **`CsMovementDialComponent`** — the radial dial, selector `cs-movement-dial`.
+- **`MovementDialComponent`** — the radial dial, selector `cs-movement-dial`.
   Inputs: `segments: InputSignal<number>`, `completed: InputSignal<number>`,
   `label: InputSignal<string>`, `valueText: InputSignal<string | null>`,
-  `variant: InputSignal<CsDialVariant>` holding `'paper'` or `'dark'`, and
+  `variant: InputSignal<DialVariant>` holding `'paper'` or `'dark'`, and
   `adapter: InputSignal<CsProcessAdapter>`. It renders through
-  `CsProgressRingComponent` (L2-089), which supplies `role="progressbar"`,
+  `ProgressRingComponent` (L2-089), which supplies `role="progressbar"`,
   `aria-valuenow`, `aria-valuemin`, `aria-valuemax`, and the accessible name.
   Completed, current, and remaining segments differ in stroke pattern as well as
   in colour, so they stay distinguishable under `forced-colors: active`. A
   completed count of `0` and a completed count equal to `segments` each render
   without a visual artifact.
-- **`CsMovementListComponent`** — the ordered movement list, selector
-  `cs-movement-list`. Inputs: `movements: InputSignal<readonly CsMovement[]>`,
-  `variant: InputSignal<CsMovementListVariant>` holding `'rail'` or `'page'`,
+- **`MovementListComponent`** — the ordered movement list, selector
+  `cs-movement-list`. Inputs: `movements: InputSignal<readonly Movement[]>`,
+  `variant: InputSignal<MovementListVariant>` holding `'rail'` or `'page'`,
   and `adapter`. Output:
-  `movementActivated: OutputEmitterRef<CsMovementActivation>`. The list renders
+  `movementActivated: OutputEmitterRef<MovementActivation>`. The list renders
   an `<ol>`; the current movement carries `aria-current="step"` and is
   distinguished by an icon and a state word as well as by colour. In the `rail`
   variant the visible label may be abbreviated while the accessible name stays
   complete. Activating a locked movement emits no intent and exposes the blocking
   reason as an accessible description.
-- **`CsPipStripComponent`** — the compact strip, selector `cs-pip-strip`.
+- **`PipStripComponent`** — the compact strip, selector `cs-pip-strip`.
   Inputs: `count: InputSignal<number>`, `current: InputSignal<number>`,
   `labels: InputSignal<readonly string[] | null>`, and `adapter`. The strip
   exposes one accessible summary stating the current position and the total; each
   pip carries `aria-hidden="true"` and is not focusable. Pip states differ by
   shape and fill as well as by colour, so they remain distinguishable under
   `forced-colors: active` and at 200% zoom.
-- **`CsMovement`** — the movement view model: `id`, `label`, optional
+- **`Movement`** — the movement view model: `id`, `label`, optional
   `shortLabel`, `state`, and optional `lockReason`.
-- **`CsMovementState`** — union type of the movement states: `'done' | 'current'
+- **`MovementState`** — union type of the movement states: `'done' | 'current'
   | 'locked'`.
-- **`CsDialVariant`** — union type of the dial surfaces: `'paper' | 'dark'`. The
+- **`DialVariant`** — union type of the dial surfaces: `'paper' | 'dark'`. The
   dark variant resolves a track and arc pair holding at least 3:1 contrast
   against the dark surface.
-- **`CsMovementListVariant`** — union type of the list presentations: `'rail' |
+- **`MovementListVariant`** — union type of the list presentations: `'rail' |
   'page'`.
-- **`CsMovementActivation`** — the intent emitted when an unlocked movement is
+- **`MovementActivation`** — the intent emitted when an unlocked movement is
   activated, carrying `movementId` and `index`.
 
 Every visible string in the three components resolves from
@@ -113,7 +113,7 @@ name.
 
 ### Components
 
-The dial delegates its accessible value semantics to `CsProgressRingComponent`.
+The dial delegates its accessible value semantics to `ProgressRingComponent`.
 All three components read their labels from the adapter, which is the only path
 by which application vocabulary enters them.
 
@@ -121,7 +121,7 @@ by which application vocabulary enters them.
 
 ### Class structure
 
-`CsMovement` carries a state and an optional short label; the dial reads counts,
+`Movement` carries a state and an optional short label; the dial reads counts,
 the list reads movements, and the strip reads a count and a current position.
 
 ![Class diagram for showing movement progress](diagrams/class-structure.png)

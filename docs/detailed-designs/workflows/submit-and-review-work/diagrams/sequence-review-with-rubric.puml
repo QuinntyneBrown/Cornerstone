@@ -21,9 +21,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Submission service" as submissions
 end box
 box "Frontend — Cornerstone work composites" #D1FADF
-  participant "CsAssessmentEditorComponent" as editor
-  participant "CsRubricComponent" as rubric
-  participant "CsSubmissionStatusComponent" as status
+  participant "AssessmentEditorComponent" as editor
+  participant "RubricComponent" as rubric
+  participant "SubmissionStatusComponent" as status
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Focus and key management" as cdk
@@ -33,16 +33,16 @@ box "Browser — platform" #FFF4E5
 end box
 
 grading -> page : Supply the rubric and any saved selection
-page -> editor : Bind CsAssessmentView in editing mode per L2-121
-editor -> rubric : Pass CsRubricView and the current selection
+page -> editor : Bind AssessmentView in editing mode per L2-121
+editor -> rubric : Pass RubricView and the current selection
 rubric -> rubric : Render criteria, levels, and scores per L2-121
 rubric --> browser : Rendered criterion by level grid
 
 mentor -> browser : Select a level with the arrow keys
 browser -> cdk : Key events
 cdk -> rubric : Move within the criterion radio group
-rubric -> editor : Emit CsRubricLevelSelect
-editor -> page : Emit CsAssessmentChange
+rubric -> editor : Emit RubricLevelSelect
+editor -> page : Emit AssessmentChange
 page -> grading : Save the draft assessment
 grading --> page : Draft recorded
 
@@ -52,13 +52,13 @@ editor -> editor : Mark the editor dirty per L2-121
 
 mentor -> browser : Activate 'request changes'
 browser -> editor : Activation event
-editor -> page : Emit CsAssessmentDecision with outcome 'request-changes'
+editor -> page : Emit AssessmentDecision with outcome 'request-changes'
 page -> grading : Record the decision and apply the approval rules
 grading -> submissions : Move the submission to 'changes-requested'
 submissions --> page : Updated submission record
-page -> status : Bind the updated CsSubmissionView per L2-120
+page -> status : Bind the updated SubmissionView per L2-120
 status -> status : Render the feedback and the new status per L2-120
-page -> editor : Bind CsAssessmentView in read-only mode per L2-121
+page -> editor : Bind AssessmentView in read-only mode per L2-121
 editor -> rubric : Pass readOnly true
 rubric -> rubric : Render the selection without inputs per L2-121
 rubric --> browser : Repaint the grid read-only

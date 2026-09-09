@@ -55,38 +55,38 @@ association.
 - **`CsSelectDirective` variants** — the `density` input selects `comfortable`,
   `compact`, or `in-table`. The compact and in-table variants stay at least 44 px
   tall at viewport XS and never overflow their table cell.
-- **`CsCheckboxComponent`** — element component with the `cs-checkbox` selector
+- **`CheckboxComponent`** — element component with the `cs-checkbox` selector
   wrapping a native `<input type="checkbox">`. It carries the `label` input, the
   `description` input, the `indeterminate` model, the `presentation` input
   (`inline` or `checklist-row`), and the `disabled` input. `Space` toggles it and
   emits the change exactly once. The indeterminate state exposes
   `aria-checked="mixed"` and clears on activation. The description is referenced
   by `aria-describedby` and stays out of the accessible name.
-- **`CsCheckboxComponent` checklist row** — in the `checklist-row` presentation,
+- **`CheckboxComponent` checklist row** — in the `checklist-row` presentation,
   activating the row's non-interactive area toggles the checkbox and moves focus
   to it, so the whole row behaves as one target.
-- **`CsRadioGroupComponent`** — element component with the `cs-radio-group`
+- **`RadioGroupComponent`** — element component with the `cs-radio-group`
   selector. It exposes `role="radiogroup"` with an accessible name from its
   required `label` input, owns the value and the form binding for the whole
   group, and associates any group-level error with the group rather than with a
   member.
-- **`CsRadioComponent`** — element component with the `cs-radio` selector. It
+- **`RadioComponent`** — element component with the `cs-radio` selector. It
   carries the `value` input, the `label` input, the `description` input, and the
   `disabled` input. The group keeps one roving tab stop; `ArrowDown` and
   `ArrowRight` move focus to the next enabled member and select it, wrapping at
   the end, and skip disabled members.
-- **`CsSwitchComponent`** — element component with the `cs-switch` selector. It
+- **`SwitchComponent`** — element component with the `cs-switch` selector. It
   exposes `role="switch"` with `aria-checked`, toggles on `Space` and `Enter`,
   and emits the change exactly once. A programmatic `setValue` updates the
   rendered state and emits nothing back to the form control. Under
   `prefers-reduced-motion: reduce` the thumb position changes without a
   transition.
-- **`CsChoiceGroupComponent`** — element component with the `cs-choice-group`
+- **`ChoiceGroupComponent`** — element component with the `cs-choice-group`
   selector. Its `mode` input selects `single` or `multiple`. In `single` mode it
   exposes radio-group semantics; in `multiple` mode it exposes a labelled group
   of checkboxes. It owns the value, the required validation, and the group-level
   error announcement.
-- **`CsChoiceCardComponent`** — element component with the `cs-choice-card`
+- **`ChoiceCardComponent`** — element component with the `cs-choice-card`
   selector. It carries the `value` input, the `title` input, the `description`
   input, the `media` input, and the `disabled` input. Activating any part of the
   card toggles the choice and moves focus to the underlying control. A selected
@@ -96,7 +96,7 @@ association.
   'empty' | 'error'`.
 - **`CsCheckboxState`** — union type of the checkbox states: `'checked' |
   'unchecked' | 'indeterminate'`.
-- **`CsChoiceMode`** — union type of the choice modes: `'single' | 'multiple'`.
+- **`ChoiceMode`** — union type of the choice modes: `'single' | 'multiple'`.
 - **`CsChoiceValue<T>`** — generic value type the choice group emits, single for
   `single` mode and an array for `multiple` mode.
 
@@ -138,9 +138,9 @@ value accessor.
 
 ### Components
 
-`CsSelectDirective` decorates the native select. `CsRadioGroupComponent` and
-`CsChoiceGroupComponent` own the group value and the roving tab stop, while
-`CsRadioComponent` and `CsChoiceCardComponent` render one option each.
+`CsSelectDirective` decorates the native select. `RadioGroupComponent` and
+`ChoiceGroupComponent` own the group value and the roving tab stop, while
+`RadioComponent` and `ChoiceCardComponent` render one option each.
 
 ![C4 component view for choosing from options](diagrams/c4-component.png)
 

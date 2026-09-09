@@ -21,9 +21,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Authorization service" as authz
 end box
 box "Frontend — Cornerstone people composites" #D1FADF
-  participant "CsPersonRowComponent" as row
-  participant "CsPersonSummaryComponent" as summary
-  participant "CsRecordTabsComponent" as tabs
+  participant "PersonRowComponent" as row
+  participant "PersonSummaryComponent" as summary
+  participant "RecordTabsComponent" as tabs
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Key manager" as keys
@@ -40,7 +40,7 @@ authz --> page : Permitted record scope
 page -> personsvc : Load the record within that scope
 personsvc --> page : Person record and section list
 
-page -> summary : Bind CsPersonSummaryView per L2-124
+page -> summary : Bind PersonSummaryView per L2-124
 summary -> summary : Render avatar, name, role, cohort, status, and contacts per L2-124
 summary -> summary : Log nothing and persist nothing
 summary --> browser : Profile header presented
@@ -52,7 +52,7 @@ tabs --> browser : Section set presented
 mentor -> browser : Press ArrowRight then Enter
 browser -> keys : Key events
 keys -> tabs : Move the active tab, then select it
-tabs -> page : Emit CsRecordSectionChange
+tabs -> page : Emit RecordSectionChange
 
 alt Section content already loaded
   page -> tabs : Project the attendance content into the panel

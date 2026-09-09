@@ -7,7 +7,7 @@ Person(dev, "Application developer", "Configures accept and size rules")
 Person(user, "Application user", "Selects files")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsFilePickerComponent, CsDropzoneComponent, and CsFileSummaryComponent")
+  Container(lib, "Component library", "Angular standalone components", "Supplies FilePickerComponent, DropzoneComponent, and FileSummaryComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares dropzone, drop-target, progress, and validation tokens")
   Container(docs, "Documentation site", "Angular application", "Publishes the intent contract and the object URL lifetime rules")
 }

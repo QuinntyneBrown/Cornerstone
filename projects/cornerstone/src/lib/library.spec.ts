@@ -1,11 +1,11 @@
 // Traces to: L2-001, L2-016, L2-017, L2-018, L2-021, L2-024, L2-026, L2-044, L2-051, L2-070, L2-083, L2-118, L2-163, L2-164
 import { TestBed } from '@angular/core/testing';
-import { CsToastService } from './data-display';
+import { ToastService } from './data-display';
 import { csSafeUrl } from './platform';
-import { ButtonHostComponent } from './testing/button-host.component';
-import { CheckboxHostComponent } from './testing/checkbox-host.component';
-import { TabsHostComponent } from './testing/tabs-host.component';
-import { CsQuizComponent, CsQuizView } from './workflows';
+import { ButtonHostComponent } from './testing/button-host/button-host.component';
+import { CheckboxHostComponent } from './testing/checkbox-host/checkbox-host.component';
+import { TabsHostComponent } from './testing/tabs-host/tabs-host.component';
+import { QuizComponent, QuizView } from './workflows';
 
 describe('@cornerstone/ui contract', () => {
   it('applies typed button appearances', async () => {
@@ -47,7 +47,7 @@ describe('@cornerstone/ui contract', () => {
   });
 
   it('limits the toast outlet queue to three items', () => {
-    const service = TestBed.inject(CsToastService);
+    const service = TestBed.inject(ToastService);
     for (let index = 0; index < 4; index += 1)
       service.open({ body: `Message ${index}`, duration: 60_000 });
     expect(service.items()).toHaveLength(3);
@@ -55,7 +55,7 @@ describe('@cornerstone/ui contract', () => {
 });
 
 describe('workflow intent boundary', () => {
-  const view: CsQuizView = {
+  const view: QuizView = {
     id: 'quiz',
     title: 'Quiz',
     activeIndex: 0,
@@ -64,8 +64,8 @@ describe('workflow intent boundary', () => {
   };
 
   it('emits submission intent without persistence', async () => {
-    await TestBed.configureTestingModule({ imports: [CsQuizComponent] }).compileComponents();
-    const fixture = TestBed.createComponent(CsQuizComponent);
+    await TestBed.configureTestingModule({ imports: [QuizComponent] }).compileComponents();
+    const fixture = TestBed.createComponent(QuizComponent);
     fixture.componentRef.setInput('view', Object.freeze(view));
     const submitted = vi.fn();
     fixture.componentInstance.submitted.subscribe(submitted);

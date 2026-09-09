@@ -28,7 +28,7 @@ enum CsLivePoliteness {
   off
 }
 
-enum CsConnectivityState {
+enum ConnectivityState {
   online
   offline
   reconnecting
@@ -36,7 +36,7 @@ enum CsConnectivityState {
   restored
 }
 
-enum CsToastResult {
+enum ToastResult {
   timeout
   dismissed
   action
@@ -46,7 +46,7 @@ class CsAnnouncementPolicy <<function>> {
   +csAnnouncementPolitenessFor(tone: CsMessageTone, insertedAfterFirstRender: boolean): CsLivePoliteness
 }
 
-class CsAlertComponent {
+class AlertComponent {
   +tone: InputSignal<CsMessageTone>
   +heading: InputSignal<string>
   +icon: InputSignal<string>
@@ -58,16 +58,16 @@ class CsAlertComponent {
   #onDismiss(): void
 }
 
-class CsOfflineBannerComponent {
-  +state: InputSignal<CsConnectivityState>
+class OfflineBannerComponent {
+  +state: InputSignal<ConnectivityState>
   +pendingCount: InputSignal<number>
   +restoredDismissAfter: InputSignal<number>
   +heightChanged: OutputEmitterRef<number>
-  -debouncedState: Signal<CsConnectivityState>
+  -debouncedState: Signal<ConnectivityState>
   -announceOnce(message: string, politeness: CsLivePoliteness): void
 }
 
-class CsToastConfig {
+class ToastConfig {
   +tone: CsMessageTone
   +title: string
   +body?: string
@@ -76,22 +76,22 @@ class CsToastConfig {
   +id?: string
 }
 
-class CsToastRef {
+class ToastRef {
   +id: string
-  +afterDismissed: Promise<CsToastResult>
+  +afterDismissed: Promise<ToastResult>
   +dismiss(): void
 }
 
-class CsToastService {
-  +open(config: CsToastConfig): CsToastRef
+class ToastService {
+  +open(config: ToastConfig): ToastRef
   +dismiss(id: string): void
   +dismissAll(): void
-  -queue: Signal<readonly CsToastConfig[]>
-  -visible: Signal<readonly CsToastConfig[]>
+  -queue: Signal<readonly ToastConfig[]>
+  -visible: Signal<readonly ToastConfig[]>
   -assertOutletPresent(): void
 }
 
-class CsToastOutletComponent {
+class ToastOutletComponent {
   +maxVisible: InputSignal<number>
   #politeText: Signal<string>
   #assertiveText: Signal<string>
@@ -103,17 +103,17 @@ class LiveAnnouncer <<CDK>> {
   +announce(message: string, politeness: string): Promise<void>
 }
 
-CsToastService ..> CsToastConfig : accepts
-CsToastService ..> CsToastRef : returns
-CsToastRef --> CsToastResult : resolves to
-CsToastService --> "1" CsToastOutletComponent : releases visible messages to
-CsToastOutletComponent ..> CsAnnouncementPolicy : calls
-CsAlertComponent ..> CsAnnouncementPolicy : calls
-CsOfflineBannerComponent ..> CsAnnouncementPolicy : calls
+ToastService ..> ToastConfig : accepts
+ToastService ..> ToastRef : returns
+ToastRef --> ToastResult : resolves to
+ToastService --> "1" ToastOutletComponent : releases visible messages to
+ToastOutletComponent ..> CsAnnouncementPolicy : calls
+AlertComponent ..> CsAnnouncementPolicy : calls
+OfflineBannerComponent ..> CsAnnouncementPolicy : calls
 CsAnnouncementPolicy --> CsLivePoliteness : returns
 CsAnnouncementPolicy ..> CsMessageTone : reads
-CsOfflineBannerComponent --> CsConnectivityState : holds
-CsAlertComponent --> CsMessageTone : has
-CsToastOutletComponent ..> LiveAnnouncer : announces through
-CsOfflineBannerComponent ..> LiveAnnouncer : announces through
+OfflineBannerComponent --> ConnectivityState : holds
+AlertComponent --> CsMessageTone : has
+ToastOutletComponent ..> LiveAnnouncer : announces through
+OfflineBannerComponent ..> LiveAnnouncer : announces through
 @enduml

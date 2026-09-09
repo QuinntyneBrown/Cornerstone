@@ -21,9 +21,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone page frame" #D1FADF
-  participant "CsPageComponent" as frame
-  participant "CsSectionComponent" as section
-  participant "CsToolbarComponent" as toolbar
+  participant "PageComponent" as frame
+  participant "SectionComponent" as section
+  participant "ToolbarComponent" as toolbar
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "BreakpointObserver" as cdk

@@ -13,56 +13,56 @@ skinparam class {
 ' --------------------------
 title Class structure — Manage people
 
-class CsPeopleDirectoryComponent {
-  +people: InputSignal<readonly CsPersonRowView[]>
-  +query: ModelSignal<CsPeopleQuery>
-  +facets: InputSignal<readonly CsPeopleFacet[]>
+class PeopleDirectoryComponent {
+  +people: InputSignal<readonly PersonRowView[]>
+  +query: ModelSignal<PeopleQuery>
+  +facets: InputSignal<readonly PeopleFacet[]>
   +selection: ModelSignal<ReadonlySet<string>>
-  +layout: InputSignal<CsDirectoryLayout>
+  +layout: InputSignal<DirectoryLayout>
   +loading: InputSignal<boolean>
-  +queryChanged: OutputEmitterRef<CsPeopleQuery>
-  +selectionChanged: OutputEmitterRef<CsPeopleSelectionChange>
-  +rowAction: OutputEmitterRef<CsPersonRowAction>
-  -resolvedVariant: Signal<CsPersonRowVariant>
+  +queryChanged: OutputEmitterRef<PeopleQuery>
+  +selectionChanged: OutputEmitterRef<PeopleSelectionChange>
+  +rowAction: OutputEmitterRef<PersonRowAction>
+  -resolvedVariant: Signal<PersonRowVariant>
   -allSelectedState: Signal<boolean | 'indeterminate'>
 }
 
-class CsPersonRowComponent {
-  +person: InputSignal<CsPersonRowView>
+class PersonRowComponent {
+  +person: InputSignal<PersonRowView>
   +selected: ModelSignal<boolean>
   +selectable: InputSignal<boolean>
-  +variant: InputSignal<CsPersonRowVariant>
-  +actionSelected: OutputEmitterRef<CsPersonRowAction>
+  +variant: InputSignal<PersonRowVariant>
+  +actionSelected: OutputEmitterRef<PersonRowAction>
   +opened: OutputEmitterRef<CsPersonOpen>
   -avatarFailed: WritableSignal<boolean>
 }
 
-class CsPersonSummaryComponent {
-  +person: InputSignal<CsPersonSummaryView>
-  +actions: InputSignal<readonly CsPersonAction[]>
-  +actionSelected: OutputEmitterRef<CsPersonAction>
+class PersonSummaryComponent {
+  +person: InputSignal<PersonSummaryView>
+  +actions: InputSignal<readonly PersonAction[]>
+  +actionSelected: OutputEmitterRef<PersonAction>
 }
 
-class CsRecordTabsComponent {
-  +sections: InputSignal<readonly CsRecordSection[]>
+class RecordTabsComponent {
+  +sections: InputSignal<readonly RecordSection[]>
   +activeSectionId: ModelSignal<string>
-  +orientation: InputSignal<CsRecordTabsOrientation>
-  +sectionChanged: OutputEmitterRef<CsRecordSectionChange>
+  +orientation: InputSignal<RecordTabsOrientation>
+  +sectionChanged: OutputEmitterRef<RecordSectionChange>
 }
 
-class CsPersonRowView {
+class PersonRowView {
   +personId: string
   +displayName: string
   +avatarUrl: string | null
   +initials: string
   +roleLabel: string
   +cohortLabel: string | null
-  +status: CsPersonStatus
+  +status: PersonStatus
   +statusLabel: string
-  +actions: readonly CsPersonRowAction[]
+  +actions: readonly PersonRowAction[]
 }
 
-class CsPersonSummaryView {
+class PersonSummaryView {
   +personId: string
   +displayName: string
   +pronouns: string | null
@@ -70,33 +70,33 @@ class CsPersonSummaryView {
   +initials: string
   +roleLabel: string
   +cohortLabel: string | null
-  +status: CsPersonStatus
+  +status: PersonStatus
   +statusLabel: string
-  +contacts: readonly CsContactEntry[]
+  +contacts: readonly ContactEntry[]
 }
 
-class CsContactEntry {
+class ContactEntry {
   +kind: string
   +label: string
   +value: string
   +href: string | null
 }
 
-enum CsPersonStatus {
+enum PersonStatus {
   active
   inactive
   pending
   archived
 }
 
-class CsPeopleQuery {
+class PeopleQuery {
   +text: string
   +filters: Record<string, readonly string[]>
   +sortKey: string
   +sortDirection: string
 }
 
-class CsPeopleFacet {
+class PeopleFacet {
   +facetId: string
   +label: string
   +options: readonly CsFacetOption[]
@@ -109,23 +109,23 @@ class CsFacetOption {
   +count: number | null
 }
 
-enum CsDirectoryLayout {
+enum DirectoryLayout {
   auto
   table
   list
 }
 
-enum CsPersonRowVariant {
+enum PersonRowVariant {
   table
   list
 }
 
-class CsPeopleSelectionChange {
+class PeopleSelectionChange {
   +selectedIds: readonly string[]
   +lastChangedId: string
 }
 
-class CsPersonRowAction {
+class PersonRowAction {
   +personId: string
   +actionId: string
   +kind: string
@@ -135,14 +135,14 @@ class CsPersonOpen {
   +personId: string
 }
 
-class CsPersonAction {
+class PersonAction {
   +personId: string
   +actionId: string
   +label: string
   +kind: string
 }
 
-class CsRecordSection {
+class RecordSection {
   +sectionId: string
   +label: string
   +badgeCount: number | null
@@ -150,34 +150,34 @@ class CsRecordSection {
   +loading: boolean
 }
 
-class CsRecordSectionChange {
+class RecordSectionChange {
   +personId: string
   +fromSectionId: string
   +toSectionId: string
 }
 
-enum CsRecordTabsOrientation {
+enum RecordTabsOrientation {
   horizontal
   vertical
 }
 
-CsPeopleDirectoryComponent *-- "0..*" CsPersonRowComponent : renders one per person
-CsPeopleDirectoryComponent --> "0..*" CsPersonRowView : reads
-CsPeopleDirectoryComponent o-- "1" CsPeopleQuery : holds
-CsPeopleDirectoryComponent --> "0..*" CsPeopleFacet : offers
-CsPeopleDirectoryComponent --> CsDirectoryLayout : has
-CsPeopleDirectoryComponent ..> CsPeopleSelectionChange : emits
-CsPeopleFacet *-- "1..*" CsFacetOption : offers
-CsPersonRowComponent --> "1" CsPersonRowView : reads
-CsPersonRowComponent --> CsPersonRowVariant : has
-CsPersonRowComponent ..> CsPersonRowAction : emits
-CsPersonRowComponent ..> CsPersonOpen : emits
-CsPersonRowView --> CsPersonStatus : has
-CsPersonSummaryComponent --> "1" CsPersonSummaryView : reads
-CsPersonSummaryComponent ..> CsPersonAction : emits
-CsPersonSummaryView *-- "0..*" CsContactEntry : carries
-CsPersonSummaryView --> CsPersonStatus : has
-CsRecordTabsComponent --> "1..*" CsRecordSection : reads
-CsRecordTabsComponent --> CsRecordTabsOrientation : has
-CsRecordTabsComponent ..> CsRecordSectionChange : emits
+PeopleDirectoryComponent *-- "0..*" PersonRowComponent : renders one per person
+PeopleDirectoryComponent --> "0..*" PersonRowView : reads
+PeopleDirectoryComponent o-- "1" PeopleQuery : holds
+PeopleDirectoryComponent --> "0..*" PeopleFacet : offers
+PeopleDirectoryComponent --> DirectoryLayout : has
+PeopleDirectoryComponent ..> PeopleSelectionChange : emits
+PeopleFacet *-- "1..*" CsFacetOption : offers
+PersonRowComponent --> "1" PersonRowView : reads
+PersonRowComponent --> PersonRowVariant : has
+PersonRowComponent ..> PersonRowAction : emits
+PersonRowComponent ..> CsPersonOpen : emits
+PersonRowView --> PersonStatus : has
+PersonSummaryComponent --> "1" PersonSummaryView : reads
+PersonSummaryComponent ..> PersonAction : emits
+PersonSummaryView *-- "0..*" ContactEntry : carries
+PersonSummaryView --> PersonStatus : has
+RecordTabsComponent --> "1..*" RecordSection : reads
+RecordTabsComponent --> RecordTabsOrientation : has
+RecordTabsComponent ..> RecordSectionChange : emits
 @enduml

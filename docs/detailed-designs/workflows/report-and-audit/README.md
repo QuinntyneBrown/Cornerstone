@@ -61,39 +61,39 @@ The feature is a vertical slice from an application-supplied filter state and
 report view model down to rendered panels, a paged event table, and a set of
 typed intents travelling back.
 
-- **`CsReportFiltersComponent`** — the filter bar, selector `cs-report-filters`.
+- **`ReportFiltersComponent`** — the filter bar, selector `cs-report-filters`.
   It takes `options: InputSignal<CsReportFilterOptions>` and
-  `filters: ModelSignal<CsReportFilterState>`, and emits `filtersChanged` and
+  `filters: ModelSignal<ReportFilterState>`, and emits `filtersChanged` and
   `filtersCleared`. A change to any control emits exactly one intent carrying the
   complete filter state, debounced by the documented interval, rather than one
   intent per control.
-- **`CsReportDashboardComponent`** — the dashboard, selector
-  `cs-report-dashboard`. It takes `report: InputSignal<CsReportViewModel>`,
-  `view: ModelSignal<CsReportView>`, and `state: InputSignal<CsPanelState>`, and
+- **`ReportDashboardComponent`** — the dashboard, selector
+  `cs-report-dashboard`. It takes `report: InputSignal<ReportViewModel>`,
+  `view: ModelSignal<ReportView>`, and `state: InputSignal<PanelState>`, and
   emits `exportRequested` and `viewChanged`. In the loading state each panel
   shows a skeleton, the dashboard region carries `aria-busy="true"`, and panel
   heights are reserved so the layout does not shift when figures arrive.
-- **`CsReportView`** — union type of the four framings:
+- **`ReportView`** — union type of the four framings:
   `'overview' | 'youth' | 'cohort' | 'staff'`.
-- **`CsPanelState`** — union type of the panel states:
+- **`PanelState`** — union type of the panel states:
   `'loading' | 'ready' | 'empty' | 'error'`.
-- **`CsReportFilterState`** — the filter type: the date range, the cohort
+- **`ReportFilterState`** — the filter type: the date range, the cohort
   identifiers, the track identifiers, and the mentor identifiers.
-- **`CsReportViewModel`** — the dashboard input: the KPI panels, the ring panels,
+- **`ReportViewModel`** — the dashboard input: the KPI panels, the ring panels,
   the bar panels, the applied filter summary, and the resulting record count.
-- **`CsReportExportIntent`** — intent carrying the complete filter state and the
+- **`ReportExportIntent`** — intent carrying the complete filter state and the
   active view. The dashboard generates no file; the application produces the
   export.
-- **`CsAuditLogComponent`** — the audit log, selector `cs-audit-log`. It takes
-  `events: InputSignal<CsAuditEvent[]>`, `page: ModelSignal<CsPageState>`,
-  `filters: ModelSignal<CsAuditFilterState>`, and `state: InputSignal<CsPanelState>`,
+- **`AuditLogComponent`** — the audit log, selector `cs-audit-log`. It takes
+  `events: InputSignal<AuditEvent[]>`, `page: ModelSignal<CsPageState>`,
+  `filters: ModelSignal<CsAuditFilterState>`, and `state: InputSignal<PanelState>`,
   and emits `pageChanged`, `filtersChanged`, `filtersCleared`, and
   `detailToggled`. It satisfies the table semantics of L2-093 and the paginator
   behaviour of L2-074.
-- **`CsAuditEvent`** — one event: the event identifier, the action label, the
+- **`AuditEvent`** — one event: the event identifier, the action label, the
   actor name, the source label, the target label, the timestamp, the private
   flag, and the detail fields the application chose to supply.
-- **`CsAuditDetailField`** — one detail field: the label and the value. A
+- **`AuditDetailField`** — one detail field: the label and the value. A
   withheld field is not represented in this list at all, so the component has no
   value to render and no placeholder element to emit.
 
@@ -143,7 +143,7 @@ audit log, and holds no store of its own.
 
 ### Components
 
-`CsReportFiltersComponent` emits one complete filter state; the dashboard and the
+`ReportFiltersComponent` emits one complete filter state; the dashboard and the
 audit log render what the application returns. The aggregation, the export file,
 and the redaction decision sit on the application side of the boundary, and the
 audit log receives only the fields it is entitled to render.
@@ -152,7 +152,7 @@ audit log receives only the fields it is entitled to render.
 
 ### Class structure
 
-The filter state feeds both the dashboard and the audit log. `CsAuditEvent`
+The filter state feeds both the dashboard and the audit log. `AuditEvent`
 carries a detail field list from which withheld fields are absent, so no type in
 the slice can hold a redacted value.
 

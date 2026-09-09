@@ -17,11 +17,11 @@ docs/specs/           architecture, API inventory, and migration specifications
 ```
 
 The documentation application is a static Angular build. The brochure site is plain HTML and CSS
-with no framework and no runtime JavaScript; `npm run build:marketing` copies it to
-`dist/marketing/browser` and fails if a script tag ever appears in it. Both ship Azure Static Web
-Apps route configuration, and GitHub Actions deploys each from `main` when its Azure deployment
-token is configured. See [`docs/marketing-site.md`](docs/marketing-site.md) for the brochure site's
-design and content rationale.
+with one dependency-free WebGPU enhancement module; `npm run build:marketing` copies it to
+`dist/marketing/browser` and rejects every script outside that explicit allowlist. Both ship Azure
+Static Web Apps route configuration, and GitHub Actions deploys each from `main` when its Azure
+deployment token is configured. See [`docs/marketing-site.md`](docs/marketing-site.md) for the
+brochure site's design and content rationale.
 
 ## Start locally
 
@@ -64,10 +64,10 @@ Add the base theme to the application's `angular.json` styles array:
 Then import only the standalone pieces a screen uses:
 
 ```ts
-import { CsButtonDirective, CsCardComponent } from '@cornerstone/ui';
+import { CsButtonDirective, CardComponent } from '@cornerstone/ui';
 
 @Component({
-  imports: [CsButtonDirective, CsCardComponent],
+  imports: [CsButtonDirective, CardComponent],
   template: `<cs-card><button csButton>Continue</button></cs-card>`,
 })
 export class ExampleComponent {}

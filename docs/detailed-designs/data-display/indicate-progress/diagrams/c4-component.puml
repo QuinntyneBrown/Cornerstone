@@ -6,11 +6,11 @@ title Components — Indicate progress
 Person(admin, "Administrator", "Watches a roster import complete")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(spinner, "CsSpinnerComponent", "Standalone component", "Renders inline and full-region indeterminate status with a polite label")
-  Component(skeleton, "CsSkeletonComponent", "Standalone component", "Renders one preset shape, always aria-hidden")
-  Component(group, "CsSkeletonGroupComponent", "Standalone component", "Holds the loading state and the aria-busy condition, and swaps in real content")
-  Component(bar, "CsProgressBarComponent", "Standalone component", "Renders determinate and indeterminate linear progress with native semantics")
-  Component(ring, "CsProgressRingComponent", "Standalone component", "Renders an SVG track and arc with the same value contract as the bar")
+  Component(spinner, "SpinnerComponent", "Standalone component", "Renders inline and full-region indeterminate status with a polite label")
+  Component(skeleton, "SkeletonComponent", "Standalone component", "Renders one preset shape, always aria-hidden")
+  Component(group, "SkeletonGroupComponent", "Standalone component", "Holds the loading state and the aria-busy condition, and swaps in real content")
+  Component(bar, "ProgressBarComponent", "Standalone component", "Renders determinate and indeterminate linear progress with native semantics")
+  Component(ring, "ProgressRingComponent", "Standalone component", "Renders an SVG track and arc with the same value contract as the bar")
   Component(clamp, "Value helpers", "Pure functions", "Clamp out-of-range values and throttle value announcements")
   Component(styles, "Indicator styles", "Component-scoped CSS", "Resolves size, tone, and motion from --cs- tokens and honours reduced motion")
 }

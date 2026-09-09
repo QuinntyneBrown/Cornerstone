@@ -48,15 +48,15 @@ The feature is a vertical slice from the application's root template down to the
 focus state of a single DOM element. It spans six public building blocks and the
 types that describe their configuration.
 
-- **`CsShellComponent`** (`cs-shell`) — the frame itself. It reads
-  `sidenavMode: InputSignal<CsShellSidenavMode>` (`'side' | 'over' | 'auto'`),
+- **`ShellComponent`** (`cs-shell`) — the frame itself. It reads
+  `sidenavMode: InputSignal<ShellSidenavMode>` (`'side' | 'over' | 'auto'`),
   `sidenavOpen: ModelSignal<boolean>`, `compact: InputSignal<boolean>`, and
   `bottomNavVisible: InputSignal<boolean>`. It emits through the two-way
   `sidenavOpen` model. It projects four content regions: `[csShellTopbar]`,
   `[csShellSidenav]`, `[csShellBottomNav]`, and the default slot, which the
   component wraps in a single `<main>` landmark. It carries three states:
   `side`, `over-closed`, and `over-open`.
-- **`CsTopbarComponent`** (`cs-topbar`) — the sticky bar across the top of the
+- **`TopbarComponent`** (`cs-topbar`) — the sticky bar across the top of the
   shell. It reads `brand: InputSignal<CsBrand>`, `heading: InputSignal<string>`,
   `pills: InputSignal<readonly CsTopbarPill[]>`,
   `notificationCount: InputSignal<number>`, and
@@ -67,14 +67,14 @@ types that describe their configuration.
   action. It accepts breadcrumbs or a plain heading in the same position; the
   breadcrumbs component is defined in the `locate-the-current-page` feature
   (L2-068).
-- **`CsSidenavComponent`** (`cs-sidenav`) — the navigation column. It reads
-  `groups: InputSignal<readonly CsNavGroup[]>`,
+- **`SidenavComponent`** (`cs-sidenav`) — the navigation column. It reads
+  `groups: InputSignal<readonly NavGroup[]>`,
   `roles: InputSignal<readonly string[]>`, `compact: InputSignal<boolean>`, and
-  `mode: InputSignal<CsShellSidenavMode>`. It emits
+  `mode: InputSignal<ShellSidenavMode>`. It emits
   `itemActivated: OutputEmitterRef<CsNavItemActivation>`. It filters each group
   and item against the supplied role set; it resolves no authorization of its
   own. Its states are `expanded`, `compact`, and `drawer`.
-- **`CsNavGroupComponent`** (`cs-nav-group`) — a labelled section of the
+- **`NavGroupComponent`** (`cs-nav-group`) — a labelled section of the
   sidenav. It reads `heading: InputSignal<string>`,
   `collapsible: InputSignal<boolean>`, and `expanded: ModelSignal<boolean>`. It
   renders the heading as a group label and associates it with the item list so
@@ -86,22 +86,22 @@ types that describe their configuration.
   `aria-current="page"` when active and `aria-disabled` when disabled. It reads
   the active state that `routerLinkActive` supplies; it does not query the
   router itself.
-- **`CsBottomNavComponent`** (`cs-bottom-nav`) — the primary navigation bar for
+- **`BottomNavComponent`** (`cs-bottom-nav`) — the primary navigation bar for
   phone viewports, consumed by Word Up. It reads
-  `items: InputSignal<readonly CsBottomNavItem[]>` and
+  `items: InputSignal<readonly BottomNavItem[]>` and
   `activeId: ModelSignal<string>`, and emits
   `itemActivated: OutputEmitterRef<CsNavItemActivation>`. It pads its lower edge
   by `env(safe-area-inset-bottom)` so no item falls under a device home
   indicator.
-- **`CsNavGroup`** — configuration type holding a heading, an item list, and an
+- **`NavGroup`** — configuration type holding a heading, an item list, and an
   optional role list.
 - **`CsNavItem`** — configuration type holding an identifier, a label, an icon
   name, an optional badge, an optional role list, and a disabled flag.
-- **`CsBottomNavItem`** — configuration type holding an identifier, a label, an
+- **`BottomNavItem`** — configuration type holding an identifier, a label, an
   icon name, and an optional badge.
 - **`CsNavItemActivation`** — output type carrying the activated item identifier
   and the originating pointer or keyboard event.
-- **`CsShellSidenavMode`** — union type of the sidenav resolutions:
+- **`ShellSidenavMode`** — union type of the sidenav resolutions:
   `'side' | 'over' | 'auto'`.
 
 The shell reads Angular CDK `BreakpointObserver` to resolve `auto` to `side` or
@@ -160,7 +160,7 @@ The router renders each feature page into the shell's default slot.
 
 ### Components
 
-`CsShellComponent` coordinates the four chrome components and the scrim. The
+`ShellComponent` coordinates the four chrome components and the scrim. The
 sidenav filters the supplied groups against the role set; the nav item directive
 reflects the active state that `routerLinkActive` sets.
 

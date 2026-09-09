@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "FormGroup" as form
 end box
 box "Frontend — Cornerstone submission components" #D1FADF
-  participant "CsFormActionsComponent" as actions
-  participant "CsValidationSummaryComponent" as summary
+  participant "FormActionsComponent" as actions
+  participant "ValidationSummaryComponent" as summary
   participant "Focus router" as focus
 end box
 box "Frontend — Angular CDK" #ECFDF3

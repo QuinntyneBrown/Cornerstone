@@ -22,7 +22,7 @@ System_Ext(browser, "Browser platform", "Rendering, input, and connectivity repo
 
 Rel(volunteer, browser, "Marks attendance in")
 Rel(browser, lib, "Delivers pointer and keyboard events to")
-Rel(page, lib, "Supplies CsAttendanceRosterViewModel to")
+Rel(page, lib, "Supplies AttendanceRosterViewModel to")
 Rel(lib, page, "Emits change, bulk, note, and conflict intents to")
 Rel(page, services, "Delegates every write and rule decision to")
 Rel(services, page, "Returns the next roster view model to")

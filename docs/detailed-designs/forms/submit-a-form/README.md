@@ -40,42 +40,42 @@ The feature is three components and one cross-cutting contract. None of them
 performs the submission; the application owns the handler, the persistence, and
 the navigation that follows.
 
-- **`CsFormActionsComponent`** — element component with the `cs-form-actions`
+- **`FormActionsComponent`** — element component with the `cs-form-actions`
   selector. It exposes `role="group"` with an accessible name from its required
   `label` input, and carries the `submitting` input, the `sticky` input, and the
   `secondaryPlacement` input. It places the primary action in the documented
   position relative to secondary actions while DOM order places the submit
   control first, per the documented keyboard convention.
-- **`CsFormActionsComponent` submitting state** — the primary action enters its
+- **`FormActionsComponent` submitting state** — the primary action enters its
   loading state, secondary actions are disabled, and a second activation produces
   no second submission. Its buttons stay reachable in one tab sequence.
-- **`CsFormActionsComponent` sticky treatment** — at viewport XS with `sticky`
+- **`FormActionsComponent` sticky treatment** — at viewport XS with `sticky`
   enabled, the action bar stays visible above the fold boundary, respects
   safe-area insets, and does not overlap the last form control while that control
   holds focus.
-- **`CsValidationSummaryComponent`** — element component with the
+- **`ValidationSummaryComponent`** — element component with the
   `cs-validation-summary` selector. It carries the `errors` input, listing one
   entry per invalid control in the DOM order of the fields, each entry a link to
   that control's identifier. Activating an entry moves focus to the control and
   scrolls it into view.
-- **`CsValidationSummaryComponent` announcement** — the summary appears only
+- **`ValidationSummaryComponent` announcement** — the summary appears only
   after a failed submission, moves focus to its heading, and announces assertively
   exactly once. When every error is corrected and the form is resubmitted, the
   summary leaves the DOM and produces no stale announcement.
-- **`CsWizardComponent`** — element component with the `cs-wizard` selector. It
+- **`WizardComponent`** — element component with the `cs-wizard` selector. It
   carries the `steps` input, the `currentStep` model, the `resumeState` input,
   and the `finishing` input. It emits the `stepChanged` output and the `finished`
   output. Each step declares its validity, its optional flag, and its title.
-- **`CsWizardComponent` gates and navigation** — activating Next on an invalid
+- **`WizardComponent` gates and navigation** — activating Next on an invalid
   step blocks advancement, announces that step's validation summary, and moves
   focus to the first invalid control. Selecting a completed step in the header
   navigates to it and sets `aria-current="step"` on the new position. Activating
   Skip on an optional step advances and marks that step skipped in the header.
-- **`CsWizardComponent` save and resume** — supplying `resumeState` restores the
+- **`WizardComponent` save and resume** — supplying `resumeState` restores the
   recorded step and the per-step values and emits no change intent while doing
   so. At viewport XS the step header collapses to the documented compact
   indicator stating the current position and the total count as text.
-- **`CsWizardComponent` completion** — activating Finish on the final step emits
+- **`WizardComponent` completion** — activating Finish on the final step emits
   one `finished` output carrying the accumulated typed value; a repeated
   activation while that output is pending emits nothing further.
 - **`CsStepper` disposition** — `CsStepper` is the pre-existing step-header
@@ -90,11 +90,11 @@ the navigation that follows.
 - **`CsFormParticipation`** — union type recording a control's participation:
   `'native' | 'angular-only'`. Each control in the subsystem publishes one value
   of this type in its documentation.
-- **`CsValidationEntry`** — type describing one summary entry: the control `id`,
+- **`ValidationEntry`** — type describing one summary entry: the control `id`,
   the field `label`, and the `message`.
-- **`CsWizardStep`** — type describing one step: its `id`, `title`, `optional`
+- **`WizardStep`** — type describing one step: its `id`, `title`, `optional`
   flag, `valid` flag, and `state`.
-- **`CsWizardStepState`** — union type of the step states: `'pending' | 'current'
+- **`WizardStepState`** — union type of the step states: `'pending' | 'current'
   | 'complete' | 'skipped'`.
 
 The exact primary-action position relative to secondary actions at viewport LG is
@@ -132,15 +132,15 @@ state values from the theme stylesheet.
 
 ### Components
 
-`CsFormActionsComponent` guards against duplicate submission,
-`CsValidationSummaryComponent` links each error to its control, and
-`CsWizardComponent` gates advancement on per-step validity.
+`FormActionsComponent` guards against duplicate submission,
+`ValidationSummaryComponent` links each error to its control, and
+`WizardComponent` gates advancement on per-step validity.
 
 ![C4 component view for submitting a form](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsWizardComponent` realizes `ControlValueAccessor` over its accumulated value,
+`WizardComponent` realizes `ControlValueAccessor` over its accumulated value,
 and each control in the subsystem publishes a `CsFormParticipation` value that
 records how it reaches a submission.
 

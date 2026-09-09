@@ -37,6 +37,7 @@ yarn-error.log
 /verification/playwright-results
 /verification/playwright-report
 /verification/diff
+/.playwright-cli/
 /libpeerconnection.log
 testem.log
 /typings

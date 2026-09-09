@@ -42,32 +42,32 @@ the scroll block as the mode changes rather than only at open.
 The feature spans one component, its content directives, a service for programmatic
 opening, and the types that carry position and mode.
 
-- **`CsDrawerComponent`** — the `cs-drawer` element that renders the panel. It
+- **`DrawerComponent`** — the `cs-drawer` element that renders the panel. It
   carries an `opened` model of `boolean`, a `position` input of
   `'start' | 'end' | 'bottom'`, a `mode` input of `'modal' | 'non-modal'`, a
   `responsiveFullScreen` input, a `dismissible` input, and a `size` input holding
   the panel extent along the anchored axis. It emits `openedChange` and `closed`,
   and projects a header selected by `[csDrawerHeader]`, the default content, and a
   footer selected by `[csDrawerFooter]`.
-- **`CsDrawerPosition`** — union type of the anchoring edges:
+- **`DrawerPosition`** — union type of the anchoring edges:
   `'start' | 'end' | 'bottom'`. The `start` and `end` values resolve against the
   writing direction reported by the CDK directionality service, so a
   right-to-left application anchors a `start` drawer to the right.
-- **`CsDrawerMode`** — union type of the modes: `'modal' | 'non-modal'`.
-- **`CsDrawerService`** — the injectable that opens a drawer from application code
+- **`DrawerMode`** — union type of the modes: `'modal' | 'non-modal'`.
+- **`DrawerService`** — the injectable that opens a drawer from application code
   without a template declaration. Its `open<R, D, C>(component, config)` method
-  returns a `CsDrawerRef<R, C>` carrying the same typed close channel as
-  `CsDialogRef` (L2-102).
-- **`CsDrawerConfig<D>`** — the configuration object. It carries `data`,
+  returns a `DrawerRef<R, C>` carrying the same typed close channel as
+  `DialogRef` (L2-102).
+- **`DrawerConfig<D>`** — the configuration object. It carries `data`,
   `position`, `mode`, `size`, `responsiveFullScreen`, `dismissible`,
   `ariaLabelledBy`, and `restoreFocus`.
-- **`CsDrawerHeaderDirective`** — the `csDrawerHeader` attribute directive. It lays
+- **`DrawerHeaderDirective`** — the `csDrawerHeader` attribute directive. It lays
   out the title and the close control, and registers the title id as the panel's
   `aria-labelledby` target.
-- **`CsDrawerFooterDirective`** — the `csDrawerFooter` attribute directive. It pins
+- **`DrawerFooterDirective`** — the `csDrawerFooter` attribute directive. It pins
   the action region to the bottom edge of the panel and keeps it visible while the
   content region scrolls.
-- **`CsDrawerContainerComponent`** — the `cs-drawer-container` element that hosts a
+- **`DrawerContainerComponent`** — the `cs-drawer-container` element that hosts a
   non-modal drawer and the page content side by side, and reflows the content
   region when the drawer opens or closes.
 
@@ -116,8 +116,8 @@ resolves its surface and motion from the theme stylesheet.
 
 ### Components
 
-`CsDrawerComponent` renders the panel and delegates the trap and the scroll block to
-the CDK when it runs modal. `CsDrawerContainerComponent` reflows the page content
+`DrawerComponent` renders the panel and delegates the trap and the scroll block to
+the CDK when it runs modal. `DrawerContainerComponent` reflows the page content
 around a non-modal drawer, and the header and footer directives fill the fixed
 regions.
 
@@ -125,9 +125,9 @@ regions.
 
 ### Class structure
 
-`CsDrawerComponent` holds the position, mode, and opened state, and composes a
-focus trap only while modal. `CsDrawerService` produces a `CsDrawerRef<R, C>` from a
-`CsDrawerConfig<D>` for the programmatic case.
+`DrawerComponent` holds the position, mode, and opened state, and composes a
+focus trap only while modal. `DrawerService` produces a `DrawerRef<R, C>` from a
+`DrawerConfig<D>` for the programmatic case.
 
 ![Class diagram for opening a drawer](diagrams/class-structure.png)
 

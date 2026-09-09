@@ -67,7 +67,7 @@ enum CsRegionState {
   collapsed
 }
 
-class CsContainerComponent {
+class ContainerComponent {
   +width: InputSignal<CsContainerWidth>
   +gutter: InputSignal<CsGutter>
   -maxInlineSize: Signal<string>
@@ -114,11 +114,11 @@ CsLayoutPrimitiveBase --> CsSpacingStep : has
 CsLayoutPrimitiveBase --> CsAlign : has
 CsLayoutPrimitiveBase --> CsDistribute : has
 CsGridDirective --> CsGridColumns : has
-CsContainerComponent --> CsContainerWidth : has
-CsContainerComponent --> CsGutter : has
+ContainerComponent --> CsContainerWidth : has
+ContainerComponent --> CsGutter : has
 CsResponsiveRegionDirective --> CsRegionPattern : has
 CsResponsiveRegionDirective --> CsRegionState : reports
-CsContainerComponent ..> CsTokenSet : reads
+ContainerComponent ..> CsTokenSet : reads
 CsLayoutPrimitiveBase ..> CsTokenSet : reads
-CsContainerComponent "1" o-- "0..*" CsLayoutPrimitiveBase : bounds
+ContainerComponent "1" o-- "0..*" CsLayoutPrimitiveBase : bounds
 @enduml

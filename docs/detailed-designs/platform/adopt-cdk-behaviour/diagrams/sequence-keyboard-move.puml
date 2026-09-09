@@ -19,8 +19,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Liturgy Develop board page" as page
 end box
 box "Frontend — Cornerstone component library" #D1FADF
-  participant "CsKanbanBoardComponent" as board
-  participant "CsWorkItemCardComponent" as card
+  participant "KanbanBoardComponent" as board
+  participant "WorkItemCardComponent" as card
 end box
 box "Frontend — Cornerstone CDK adapter layer" #ECFDF3
   participant "CsKeyboardMoveDirective" as kbd

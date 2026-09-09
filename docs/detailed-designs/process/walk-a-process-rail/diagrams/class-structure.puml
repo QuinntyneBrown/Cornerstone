@@ -19,7 +19,7 @@ enum CsProcessStageState {
   locked
 }
 
-enum CsRailOrientation {
+enum RailOrientation {
   vertical
   horizontal
   auto
@@ -37,10 +37,10 @@ class CsProcessStage {
   +description?: string
   +lockReason?: string
   +badge?: string
-  +gate?: CsGateSummary
+  +gate?: GateSummary
 }
 
-class CsGateSummary {
+class GateSummary {
   +id: string
   +label: string
   +open: boolean
@@ -51,7 +51,7 @@ class CsGateSummary {
 interface CsProcessAdapter {
   +labels: CsProcessLabels
   +palette: CsProcessPalette
-  +enforcement: ReadonlyMap<string, CsGateSummary>
+  +enforcement: ReadonlyMap<string, GateSummary>
 }
 
 class CsProcessLabels {
@@ -67,25 +67,25 @@ class CsProcessPalette {
   +defaultToken: string
 }
 
-class CsProcessRailComponent {
+class ProcessRailComponent {
   +stages: InputSignal<readonly CsProcessStage[]>
-  +orientation: InputSignal<CsRailOrientation>
+  +orientation: InputSignal<RailOrientation>
   +adapter: InputSignal<CsProcessAdapter>
   +activeStageId: InputSignal<string | null>
   +stageActivated: OutputEmitterRef<CsStageActivation>
-  #resolvedOrientation: Signal<CsRailOrientation>
+  #resolvedOrientation: Signal<RailOrientation>
   -stateText(stage: CsProcessStage): string
 }
 
-class CsProcessJourneyComponent {
+class ProcessJourneyComponent {
   +stages: InputSignal<readonly CsProcessStage[]>
   +adapter: InputSignal<CsProcessAdapter>
   +density: InputSignal<CsJourneyDensity>
   +stageActivated: OutputEmitterRef<CsStageActivation>
-  +stageAction: OutputEmitterRef<CsStageActionIntent>
+  +stageAction: OutputEmitterRef<StageActionIntent>
 }
 
-class CsStageContentDirective {
+class StageContentDirective {
   +csStageContent: InputSignal<string>
 }
 
@@ -94,30 +94,30 @@ class CsStageActivation {
   +index: number
 }
 
-class CsStageActionIntent {
+class StageActionIntent {
   +stageId: string
   +actionId: string
   +payload?: unknown
 }
 
-class CsGateComponent {
-  +gate: InputSignal<CsGateSummary>
+class GateComponent {
+  +gate: InputSignal<GateSummary>
 }
 
-CsProcessRailComponent "1" o-- "0..*" CsProcessStage : renders
-CsProcessJourneyComponent "1" o-- "0..*" CsProcessStage : renders
+ProcessRailComponent "1" o-- "0..*" CsProcessStage : renders
+ProcessJourneyComponent "1" o-- "0..*" CsProcessStage : renders
 CsProcessStage --> CsProcessStageState : has
-CsProcessStage "1" *-- "0..1" CsGateSummary : is followed by
-CsProcessRailComponent --> CsProcessAdapter : reads labels and colours from
-CsProcessJourneyComponent --> CsProcessAdapter : reads labels and colours from
+CsProcessStage "1" *-- "0..1" GateSummary : is followed by
+ProcessRailComponent --> CsProcessAdapter : reads labels and colours from
+ProcessJourneyComponent --> CsProcessAdapter : reads labels and colours from
 CsProcessAdapter *-- CsProcessLabels
 CsProcessAdapter *-- CsProcessPalette
-CsProcessAdapter --> CsGateSummary : supplies enforcement results as
-CsProcessRailComponent --> CsRailOrientation : resolves
-CsProcessJourneyComponent --> CsJourneyDensity : has
-CsProcessRailComponent ..> CsStageActivation : emits
-CsProcessJourneyComponent ..> CsStageActionIntent : emits
-CsProcessRailComponent ..> CsStageContentDirective : projects
-CsProcessRailComponent ..> CsGateComponent : renders between stages
-CsProcessJourneyComponent ..> CsGateComponent : renders as a gate panel
+CsProcessAdapter --> GateSummary : supplies enforcement results as
+ProcessRailComponent --> RailOrientation : resolves
+ProcessJourneyComponent --> CsJourneyDensity : has
+ProcessRailComponent ..> CsStageActivation : emits
+ProcessJourneyComponent ..> StageActionIntent : emits
+ProcessRailComponent ..> StageContentDirective : projects
+ProcessRailComponent ..> GateComponent : renders between stages
+ProcessJourneyComponent ..> GateComponent : renders as a gate panel
 @enduml

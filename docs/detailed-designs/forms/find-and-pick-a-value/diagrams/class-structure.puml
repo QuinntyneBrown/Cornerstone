@@ -20,12 +20,12 @@ interface ControlValueAccessor {
   +setDisabledState(isDisabled: boolean): void
 }
 
-enum CsSearchMode {
+enum SearchMode {
   live
   submit
 }
 
-enum CsComboboxMode {
+enum ComboboxMode {
   single
   multiple
 }
@@ -37,10 +37,10 @@ enum CsQueryState {
   empty
 }
 
-class CsSearchFieldComponent {
+class SearchFieldComponent {
   +placeholder: InputSignal<string>
   +debounceMs: InputSignal<number>
-  +mode: InputSignal<CsSearchMode>
+  +mode: InputSignal<SearchMode>
   +resultCount: InputSignal<number | null>
   +search: OutputEmitterRef<string>
   +cleared: OutputEmitterRef<void>
@@ -52,10 +52,10 @@ class CsSearchFieldComponent {
   #clear(): void
 }
 
-class CsComboboxComponent {
+class ComboboxComponent {
   +options: InputSignal<readonly CsComboboxOption[]>
   +displayWith: InputSignal<(option: unknown) => string>
-  +mode: InputSignal<CsComboboxMode>
+  +mode: InputSignal<ComboboxMode>
   +loading: InputSignal<boolean>
   +emptyText: InputSignal<string>
   +queryChanged: OutputEmitterRef<string>
@@ -76,7 +76,7 @@ class CsComboboxOption {
   +id: string
 }
 
-class CsDateFieldComponent {
+class DateFieldComponent {
   +min: InputSignal<string | null>
   +max: InputSignal<string | null>
   +disabled: InputSignal<boolean>
@@ -87,7 +87,7 @@ class CsDateFieldComponent {
   #parse(raw: string): string | null
 }
 
-class CsDateTimeFieldComponent {
+class DateTimeFieldComponent {
   +timeZone: InputSignal<string>
   +writeValue(value: string | null): void
   +registerOnChange(fn: (value: string | null) => void): void
@@ -95,7 +95,7 @@ class CsDateTimeFieldComponent {
   #toContractValue(local: string): string
 }
 
-class CsDateBounds {
+class DateBounds {
   +min: string
   +max: string
 }
@@ -111,17 +111,17 @@ class CsLiveStatusRegion {
   +announcePolite(message: string): void
 }
 
-CsSearchFieldComponent ..|> ControlValueAccessor
-CsComboboxComponent ..|> ControlValueAccessor
-CsDateFieldComponent ..|> ControlValueAccessor
-CsDateTimeFieldComponent ..|> ControlValueAccessor
-CsDateFieldComponent <|-- CsDateTimeFieldComponent
-CsSearchFieldComponent --> CsSearchMode : has
-CsSearchFieldComponent o-- CsLiveStatusRegion : announces through
-CsComboboxComponent --> CsComboboxMode : has
-CsComboboxComponent --> CsQueryState : reports
-CsComboboxComponent *-- CsOverlayListbox : owns
-CsComboboxComponent o-- "0..*" CsComboboxOption : renders
-CsComboboxComponent o-- CsLiveStatusRegion : announces through
-CsDateFieldComponent --> CsDateBounds : validates against
+SearchFieldComponent ..|> ControlValueAccessor
+ComboboxComponent ..|> ControlValueAccessor
+DateFieldComponent ..|> ControlValueAccessor
+DateTimeFieldComponent ..|> ControlValueAccessor
+DateFieldComponent <|-- DateTimeFieldComponent
+SearchFieldComponent --> SearchMode : has
+SearchFieldComponent o-- CsLiveStatusRegion : announces through
+ComboboxComponent --> ComboboxMode : has
+ComboboxComponent --> CsQueryState : reports
+ComboboxComponent *-- CsOverlayListbox : owns
+ComboboxComponent o-- "0..*" CsComboboxOption : renders
+ComboboxComponent o-- CsLiveStatusRegion : announces through
+DateFieldComponent --> DateBounds : validates against
 @enduml

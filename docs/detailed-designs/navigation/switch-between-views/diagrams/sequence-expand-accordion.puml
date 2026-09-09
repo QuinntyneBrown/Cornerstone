@@ -19,8 +19,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone accordion" #D1FADF
-  participant "CsAccordionComponent" as acc
-  participant "CsAccordionItemComponent" as item
+  participant "AccordionComponent" as acc
+  participant "AccordionItemComponent" as item
   participant "Deferred body host" as defer
 end box
 box "Frontend — Cornerstone styles" #ECFDF3

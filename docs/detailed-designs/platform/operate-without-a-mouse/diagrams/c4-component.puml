@@ -8,7 +8,7 @@ Container_Boundary(a11y, "Cornerstone accessibility layer") {
   Component(roving, "CsRovingFocusDirective", "Angular directive", "Applies roving tabindex or active descendant to a composite")
   Component(visible, "CsFocusVisibleDirective", "Angular directive", "Stamps the focus origin on the host for styling")
   Component(status, "CsStatusService", "Injectable service", "Announces at a documented politeness and suppresses a repeat")
-  Component(region, "CsStatusRegionComponent", "Angular component", "Component-owned live region for local announcements")
+  Component(region, "StatusRegionComponent", "Angular component", "Component-owned live region for local announcements")
   Component(busy, "CsBusyDirective", "Angular directive", "Sets aria-busy and announces a delayed loading status")
   Component(skip, "CsSkipLinkDirective", "Angular directive", "Reveals a skip link on keyboard focus and moves focus to main")
   Component(hidden, "CsVisuallyHiddenDirective", "Angular directive", "Keeps content in the accessibility tree and out of the layout")
@@ -21,8 +21,8 @@ Container_Boundary(styles, "Cornerstone theme stylesheet") {
 
 Container_Boundary(lib, "Cornerstone component library") {
   Component(menu, "CsMenuDirective / CsMenuItemDirective", "Angular directives", "Implements the menu button pattern")
-  Component(alert, "CsAlertComponent / CsToastOutletComponent", "Angular components", "Announce status and alert content")
-  Component(table, "CsTableDirective / CsPaginatorComponent", "Angular directive and component", "Announce result counts on filter and page change")
+  Component(alert, "AlertComponent / ToastOutletComponent", "Angular components", "Announce status and alert content")
+  Component(table, "TableDirective / PaginatorComponent", "Angular directive and component", "Announce result counts on filter and page change")
 }
 
 Container_Boundary(gate, "Verification gate") {

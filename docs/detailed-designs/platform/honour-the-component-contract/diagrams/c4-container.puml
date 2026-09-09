@@ -8,7 +8,7 @@ Person(dev, "Application developer", "Consumes the package root and reviews surf
 System_Boundary(cornerstone, "Cornerstone") {
   Container(root, "Package root", "public-api.ts", "Re-exports every public Cs-prefixed symbol")
   Container(lib, "Component library", "Angular standalone components and directives", "Primitives, patterns, and composites that satisfy the contract")
-  Container(contract, "Contract layer", "Base classes, interfaces, and input transforms", "CsControlBase, CsFieldComponent, slot directives, coercion helpers, intent types")
+  Container(contract, "Contract layer", "Base classes, interfaces, and input transforms", "CsControlBase, FieldComponent, slot directives, coercion helpers, intent types")
   Container(report, "Surface report", "Generated Markdown and lint rules", "Regenerates api-surface.md and fails on an unreviewed signature change")
   Container(docs, "Documentation site", "Angular application", "Publishes the contract rules and every slot, input, and intent")
 }

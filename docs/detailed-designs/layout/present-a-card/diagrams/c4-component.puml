@@ -6,13 +6,13 @@ title Components — Present a card
 Person(dev, "Application developer", "Chooses a tone, a presentation, and the slots to fill")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(card, "CsCardComponent", "Standalone component", "Renders the surface and owns the single activation target")
+  Component(card, "CardComponent", "Standalone component", "Renders the surface and owns the single activation target")
   Component(header, "CsCardHeaderComponent", "Standalone component", "Renders the overline, title, subtitle, and trailing control")
   Component(media, "CsCardMediaComponent", "Standalone component", "Reserves the aspect box and holds the image")
   Component(content, "CsCardContentComponent", "Standalone component", "Holds the body at the readable prose measure")
   Component(footer, "CsCardFooterComponent", "Standalone component", "Holds supporting metadata beneath the content")
   Component(actions, "CsCardActionsComponent", "Standalone component", "Groups the card controls in a wrapping cluster")
-  Component(divider, "CsDividerComponent", "Standalone component", "Draws a rule with decorative or separator semantics")
+  Component(divider, "DividerComponent", "Standalone component", "Draws a rule with decorative or separator semantics")
   Component(cluster, "CsClusterDirective", "Attribute directive", "Arranges the card actions so they wrap")
 }
 

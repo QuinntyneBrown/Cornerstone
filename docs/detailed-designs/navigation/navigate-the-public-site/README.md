@@ -40,19 +40,19 @@ The feature is a vertical slice from a public route's link configuration down to
 the rendered landmark elements. It spans two components and the types describing
 their content.
 
-- **`CsMarketingHeaderComponent`** (`cs-marketing-header`) — the public top
+- **`MarketingHeaderComponent`** (`cs-marketing-header`) — the public top
   navigation. It reads `brand: InputSignal<CsBrand>`,
   `links: InputSignal<readonly CsMarketingLink[]>`,
-  `cta: InputSignal<CsMarketingCta | null>`,
-  `secondaryCta: InputSignal<CsMarketingCta | null>`, and
+  `cta: InputSignal<MarketingCta | null>`,
+  `secondaryCta: InputSignal<MarketingCta | null>`, and
   `menuOpen: ModelSignal<boolean>`. It emits
-  `ctaSelected: OutputEmitterRef<CsMarketingCta>`. It renders a `<header>`
+  `ctaSelected: OutputEmitterRef<MarketingCta>`. It renders a `<header>`
   element containing a `<nav>` landmark. Its states are `wide`, `narrow-closed`,
   and `narrow-open`.
-- **`CsMarketingFooterComponent`** (`cs-marketing-footer`) — the public bottom
+- **`MarketingFooterComponent`** (`cs-marketing-footer`) — the public bottom
   navigation. It reads `brand: InputSignal<CsBrand>`,
-  `groups: InputSignal<readonly CsMarketingLinkGroup[]>`,
-  `social: InputSignal<readonly CsSocialLink[]>`,
+  `groups: InputSignal<readonly MarketingLinkGroup[]>`,
+  `social: InputSignal<readonly SocialLink[]>`,
   `legal: InputSignal<readonly CsMarketingLink[]>`, and
   `copyright: InputSignal<string>`. It renders a `<footer>` element containing
   one `<nav>` landmark per link group, each labelled by its heading. On narrow
@@ -60,15 +60,15 @@ their content.
 - **`CsMarketingLink`** — configuration type holding a label, an optional
   `routerLink` value, an optional external `href`, and an optional flag marking
   the link as external.
-- **`CsMarketingLinkGroup`** — configuration type holding a heading and a link
+- **`MarketingLinkGroup`** — configuration type holding a heading and a link
   list.
-- **`CsMarketingCta`** — configuration type holding a label, a variant, an
+- **`MarketingCta`** — configuration type holding a label, a variant, an
   optional `routerLink` value, and an optional external `href`.
-- **`CsSocialLink`** — configuration type holding a platform identifier, an
+- **`SocialLink`** — configuration type holding a platform identifier, an
   accessible label, and an `href`.
 - **`CsBrand`** — configuration type holding a label, an optional logo source,
   and an optional home `routerLink` value. The header shares this type with
-  `CsTopbarComponent` (L2-065).
+  `TopbarComponent` (L2-065).
 
 The narrow-viewport behaviour differs from the shell's drawer. The header's
 mobile menu expands in flow beneath the header rather than overlaying the page,
@@ -91,7 +91,7 @@ mobile menu's expand and collapse transitions collapse to an instant state chang
 under `prefers-reduced-motion: reduce` (L2-008).
 
 The viewport width at which the header switches to the mobile menu is
-`<TO SUPPLY>`, and the set of platform identifiers `CsSocialLink` accepts is
+`<TO SUPPLY>`, and the set of platform identifiers `SocialLink` accepts is
 `<TO SUPPLY>`.
 
 ## Requirements

@@ -40,7 +40,7 @@ The feature is a vertical slice from a page template that declares a label down 
 the computed style and the accessibility tree of the rendered element. It introduces
 three components, four public types, and one internal focus manager binding.
 
-- **`CsBadgeComponent`** — the status label, selector `cs-badge`. It carries a
+- **`BadgeComponent`** — the status label, selector `cs-badge`. It carries a
   `tone` input over the nine documented tones (`neutral`, `phase`, `success`,
   `warning`, `error`, `info`, `lime`, `ink`, `outline`), a `presentation` input over
   `text`, `dot`, `count`, and `locked`, a `value` input for the count presentation, a
@@ -52,7 +52,7 @@ three components, four public types, and one internal focus manager binding.
   overflow format while the exact value stays available to assistive technology
   through visually hidden text. In the `locked` presentation the component renders an
   icon and text together so state never rests on colour alone.
-- **`CsPillComponent`** — the interactive label, selector `cs-pill`. It carries a
+- **`PillComponent`** — the interactive label, selector `cs-pill`. It carries a
   `tone` input, a `removable` input, a `selectable` input, a `selected` model, and a
   `disabled` input. It emits `removed` when the remove control is activated and when
   `Delete` or `Backspace` is pressed while the pill holds focus. It emits
@@ -60,22 +60,22 @@ three components, four public types, and one internal focus manager binding.
   `aria-pressed` when it acts as a toggle button and `aria-selected` when it sits in
   a chip list declared as a listbox, and it indicates selection with a check mark and
   a border weight change in addition to tone.
-- **`CsChipListComponent`** — the composite container, selector `cs-chip-list`. It
+- **`ChipListComponent`** — the composite container, selector `cs-chip-list`. It
   carries a `selectionMode` input over `none`, `single`, and `multiple`, an
   `orientation` input over `horizontal` and `vertical`, and an `ariaLabel` required
-  input. It queries its projected `CsPillComponent` children, drives a roving tab
+  input. It queries its projected `PillComponent` children, drives a roving tab
   index across them, and holds exactly one child in the document tab order. It emits
-  `removed` carrying `CsChipRemoveEvent` and `selectionChange` carrying
-  `CsChipSelectionChange`. When a chip is removed the list moves focus to the next
+  `removed` carrying `ChipRemoveEvent` and `selectionChange` carrying
+  `ChipSelectionChange`. When a chip is removed the list moves focus to the next
   chip, to the previous chip when the removed chip was last, and to the list host
   when no chip remains. Chips wrap when they exceed the container width, and the
   focus ring is drawn inside the chip box so wrapping never clips it.
 - **`CsBadgeTone`** — union type of the nine tone identifiers.
 - **`CsBadgePresentation`** — union type of the four presentations: `'text' | 'dot' |
   'count' | 'locked'`.
-- **`CsChipRemoveEvent`** — typed intent carrying the removed chip's value and its
+- **`ChipRemoveEvent`** — typed intent carrying the removed chip's value and its
   index in the list at the moment of removal.
-- **`CsChipSelectionChange`** — typed intent carrying the full selected value set
+- **`ChipSelectionChange`** — typed intent carrying the full selected value set
   after the change, so a page applies one filter state rather than reconciling
   individual toggles.
 - **`_badge.scss` and `_chip.scss`** — the component stylesheets. Every foreground,
@@ -128,15 +128,15 @@ selection and removal intents.
 
 ### Components
 
-`CsChipListComponent` owns the tab stop and delegates key handling to the CDK focus
-key manager. `CsPillComponent` and `CsBadgeComponent` render tone and presentation
+`ChipListComponent` owns the tab stop and delegates key handling to the CDK focus
+key manager. `PillComponent` and `BadgeComponent` render tone and presentation
 from the shared tone set; only the pill emits intents.
 
 ![C4 component view for labelling with a badge](diagrams/c4-component.png)
 
 ### Class structure
 
-`CsBadgeComponent` and `CsPillComponent` share `CsBadgeTone`. The chip list
+`BadgeComponent` and `PillComponent` share `CsBadgeTone`. The chip list
 aggregates its pills and emits the two typed intents; the pill holds the selected
 state as a model so a page can drive it or observe it.
 

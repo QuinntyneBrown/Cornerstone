@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as svc
 end box
 box "Frontend — Cornerstone message runtime" #D1FADF
-  participant "CsAlertComponent" as alert
-  participant "CsToastService" as toasts
-  participant "CsToastOutletComponent" as outlet
+  participant "AlertComponent" as alert
+  participant "ToastService" as toasts
+  participant "ToastOutletComponent" as outlet
   participant "csAnnouncementPolitenessFor()" as policy
 end box
 box "Frontend — Angular CDK" #ECFDF3

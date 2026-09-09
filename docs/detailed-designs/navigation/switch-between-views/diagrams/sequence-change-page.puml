@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone paginator" #D1FADF
-  participant "CsPaginatorComponent" as pag
+  participant "PaginatorComponent" as pag
   participant "Live region" as live
 end box
 box "Browser — platform" #FFF4E5

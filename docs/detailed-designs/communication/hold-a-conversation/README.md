@@ -31,9 +31,9 @@ intents, and own delivery, retry, and offline queueing. That boundary appears in
 the component diagram below as the sole edge crossing into and out of the
 library.
 
-Word Up consumes all four. Youth and mentors use `CsMessageThreadComponent` and
-`CsMessageComposerComponent`; mentor messaging adds `CsConversationListComponent`
-and `CsConversationItemComponent` for the master-detail layout.
+Word Up consumes all four. Youth and mentors use `MessageThreadComponent` and
+`MessageComposerComponent`; mentor messaging adds `ConversationListComponent`
+and `ConversationItemComponent` for the master-detail layout.
 
 Two behaviours carry the substance of the feature and each has its own sequence
 below. Scroll anchoring decides where the thread sits when content arrives at
@@ -45,8 +45,8 @@ when it does, and it deliberately stays silent for prepended history.
 The feature introduces one log component, one composer, one list component, one
 list item, and the types they exchange.
 
-- **`CsMessageThreadComponent`** — accessible message log. Inputs:
-  `messages: InputSignal<readonly CsMessageViewModel[]>`, `state:
+- **`MessageThreadComponent`** — accessible message log. Inputs:
+  `messages: InputSignal<readonly MessageViewModel[]>`, `state:
   InputSignal<CsDataState>` carrying the uniform data-state contract (L2-101),
   and `assignment: InputSignal<CsThreadAssignment>` naming the assigned
   participant or the unassigned condition. Outputs: `historyRequested:
@@ -55,36 +55,36 @@ list item, and the types they exchange.
   `newMessagesActivated: OutputEmitterRef<void>`. The host carries `role="log"`
   and `aria-live="polite"`. Each message renders as one readable unit holding
   author, time, and body.
-- **`CsThreadScrollAnchor`** — internal directive owning the anchoring policy. It
+- **`ThreadScrollAnchor`** — internal directive owning the anchoring policy. It
   records whether the log is pinned to the bottom before a content change, and
   restores either the bottom position or the prior offset of the previously
   visible message after it. Prepending history preserves the visual position of
   that message.
-- **`CsThreadAnnouncerService`** — internal service holding the announcement
+- **`ThreadAnnouncerService`** — internal service holding the announcement
   policy. It announces an appended message once, announces nothing for prepended
   history, and suppresses a repeat announcement of a message already announced.
-- **`CsMessageComposerComponent`** — auto-growing composer. Inputs:
+- **`MessageComposerComponent`** — auto-growing composer. Inputs:
   `value: ModelSignal<string>`, `maxLength: InputSignal<number>`,
   `attachments: InputSignal<readonly CsComposerAttachment[]>`, `sendState:
   InputSignal<CsSendState>`, and `offline: InputSignal<boolean>`. Outputs:
-  `send: OutputEmitterRef<CsSendIntent>`, `attachmentRemoved:
-  OutputEmitterRef<string>`, and `retry: OutputEmitterRef<CsSendIntent>`. The
+  `send: OutputEmitterRef<SendIntent>`, `attachmentRemoved:
+  OutputEmitterRef<string>`, and `retry: OutputEmitterRef<SendIntent>`. The
   input grows through CDK autosize to the documented maximum row count and then
   scrolls internally. The composer implements `ControlValueAccessor`.
-- **`CsConversationListComponent`** — selectable conversation list. Inputs:
+- **`ConversationListComponent`** — selectable conversation list. Inputs:
   `conversations: InputSignal<readonly CsConversationViewModel[]>`,
   `selectedId: ModelSignal<string | null>`, and `state:
   InputSignal<CsDataState>`. Output: `conversationSelected:
   OutputEmitterRef<string>`. Items carry list semantics and the selected item
   carries `aria-current="true"`.
-- **`CsConversationItemComponent`** — one row of that list, showing avatar,
+- **`ConversationItemComponent`** — one row of that list, showing avatar,
   preview, timestamp, unread badge, and selected state. The unread condition and
   its count join the item's accessible name. A long preview truncates to one line
   visually and stays complete for assistive technology.
-- **`CsMessageViewModel`** — message fields: identifier, author name and avatar,
+- **`MessageViewModel`** — message fields: identifier, author name and avatar,
   instant, body, `kind` of `'sent' | 'received' | 'system'`, read state, and
   delivery state.
-- **`CsSendIntent`**, **`CsMessageRetryIntent`**, and **`CsHistoryRequest`** —
+- **`SendIntent`**, **`CsMessageRetryIntent`**, and **`CsHistoryRequest`** —
   typed outputs carrying the conversation identifier and the message body,
   message identifier, or oldest loaded instant. None carries a callback.
 
@@ -135,8 +135,8 @@ the component library and the theme stylesheet arrive from the published package
 
 ### Components
 
-`CsConversationListComponent`, `CsMessageThreadComponent`, and
-`CsMessageComposerComponent` each receive a view model from the application's
+`ConversationListComponent`, `MessageThreadComponent`, and
+`MessageComposerComponent` each receive a view model from the application's
 messaging service and emit intents back to it. The scroll anchor and the
 announcer sit inside the thread and cross no boundary.
 
@@ -144,9 +144,9 @@ announcer sit inside the thread and cross no boundary.
 
 ### Class structure
 
-`CsMessageThreadComponent` composes `CsThreadScrollAnchor` and
-`CsThreadAnnouncerService`. `CsConversationListComponent` composes
-`CsConversationItemComponent` per conversation, and the composer holds its send
+`MessageThreadComponent` composes `ThreadScrollAnchor` and
+`ThreadAnnouncerService`. `ConversationListComponent` composes
+`ConversationItemComponent` per conversation, and the composer holds its send
 state and attachment set.
 
 ![Class diagram for holding a conversation](diagrams/class-structure.png)

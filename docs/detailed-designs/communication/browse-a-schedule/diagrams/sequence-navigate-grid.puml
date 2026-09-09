@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "ScheduleIntentHandler" as intent
 end box
 box "Frontend — Cornerstone calendar" #D1FADF
-  participant "CsCalendarComponent" as calendar
-  participant "CsCalendarKeyboardGrid" as grid
-  participant "CsCalendarDate utilities" as dates
+  participant "CalendarComponent" as calendar
+  participant "CalendarKeyboardGrid" as grid
+  participant "CalendarDate utilities" as dates
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "FocusKeyManager" as cdk
@@ -43,7 +43,7 @@ alt Target lies inside the displayed period
 else Target lies outside the displayed period
   grid -> calendar : Request the next period
   calendar -> dates : Compute the next range from calendar dates
-  dates --> calendar : New CsCalendarRange
+  dates --> calendar : New CalendarRange
   calendar -> intent : Emit rangeChange
   intent -> vm : Load events for the new range
   vm --> calendar : Refreshed CsCalendarDayEvents per L2-107

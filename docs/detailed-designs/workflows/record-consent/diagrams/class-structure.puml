@@ -13,21 +13,21 @@ skinparam class {
 ' --------------------------
 title Class structure — Record consent
 
-enum CsConsentStatus {
+enum ConsentStatus {
   granted
   revoked
   not_recorded
 }
 
-interface CsConsentPanelViewModel {
+interface ConsentPanelViewModel {
   +subjectName: string
-  +contact: CsConsentContactDetail
-  +groups: CsConsentGroup[]
-  +history: CsConsentHistoryEntry[]
+  +contact: ConsentContactDetail
+  +groups: ConsentGroup[]
+  +history: ConsentHistoryEntry[]
   +readOnly: boolean
 }
 
-interface CsConsentContactDetail {
+interface ConsentContactDetail {
   +guardianName: string
   +relationship: string
   +lines: CsContactLine[]
@@ -38,69 +38,69 @@ interface CsContactLine {
   +value: string
 }
 
-interface CsConsentGroup {
+interface ConsentGroup {
   +groupId: string
   +label: string
-  +choices: CsConsentChoice[]
+  +choices: ConsentChoice[]
 }
 
-interface CsConsentChoice {
+interface ConsentChoice {
   +scopeId: string
   +label: string
   +scopeStatement: string
-  +status: CsConsentStatus
+  +status: ConsentStatus
   +locked: boolean
 }
 
-interface CsConsentHistoryEntry {
+interface ConsentHistoryEntry {
   +scopeLabel: string
-  +status: CsConsentStatus
+  +status: ConsentStatus
   +actorName: string
   +recordedAt: string
 }
 
-interface CsConsentDecisionIntent {
+interface ConsentDecisionIntent {
   +scopeIds: string[]
-  +status: CsConsentStatus
+  +status: ConsentStatus
 }
 
-interface CsConsentRevokeIntent {
+interface ConsentRevokeIntent {
   +scopeIds: string[]
   +confirmed: true
 }
 
-interface CsConsentContactUpdateIntent {
+interface ConsentContactUpdateIntent {
   +subjectId: string
 }
 
-class CsConsentPanelComponent {
-  +consent: InputSignal<CsConsentPanelViewModel>
+class ConsentPanelComponent {
+  +consent: InputSignal<ConsentPanelViewModel>
   +busy: InputSignal<boolean>
-  +decisionRequested: OutputEmitterRef<CsConsentDecisionIntent>
-  +revokeRequested: OutputEmitterRef<CsConsentRevokeIntent>
-  +contactUpdateRequested: OutputEmitterRef<CsConsentContactUpdateIntent>
-  +requestDecision(scopeId: string, status: CsConsentStatus): void
+  +decisionRequested: OutputEmitterRef<ConsentDecisionIntent>
+  +revokeRequested: OutputEmitterRef<ConsentRevokeIntent>
+  +contactUpdateRequested: OutputEmitterRef<ConsentContactUpdateIntent>
+  +requestDecision(scopeId: string, status: ConsentStatus): void
   +requestRevoke(scopeIds: string[]): void
-  -announceDecision(scopeLabel: string, status: CsConsentStatus): void
+  -announceDecision(scopeLabel: string, status: ConsentStatus): void
   -formatTimestamp(value: string): string
 }
 
-class CsConfirmDialogComponent {
+class ConfirmDialogComponent {
   +title: InputSignal<string>
   +destructive: InputSignal<boolean>
   +decided: OutputEmitterRef<'confirm' | 'cancel'>
 }
 
-CsConsentPanelComponent --> "1" CsConsentPanelViewModel : reads
-CsConsentPanelViewModel *-- "1" CsConsentContactDetail : frames
-CsConsentContactDetail o-- "0..*" CsContactLine : lists
-CsConsentPanelViewModel o-- "1..*" CsConsentGroup : groups
-CsConsentGroup o-- "1..*" CsConsentChoice : contains
-CsConsentPanelViewModel o-- "0..*" CsConsentHistoryEntry : records
-CsConsentChoice --> "1" CsConsentStatus : holds
-CsConsentHistoryEntry --> "1" CsConsentStatus : states
-CsConsentPanelComponent ..> CsConsentDecisionIntent : emits
-CsConsentPanelComponent ..> CsConsentRevokeIntent : emits
-CsConsentPanelComponent ..> CsConsentContactUpdateIntent : emits
-CsConsentPanelComponent ..> CsConfirmDialogComponent : opens before revoking
+ConsentPanelComponent --> "1" ConsentPanelViewModel : reads
+ConsentPanelViewModel *-- "1" ConsentContactDetail : frames
+ConsentContactDetail o-- "0..*" CsContactLine : lists
+ConsentPanelViewModel o-- "1..*" ConsentGroup : groups
+ConsentGroup o-- "1..*" ConsentChoice : contains
+ConsentPanelViewModel o-- "0..*" ConsentHistoryEntry : records
+ConsentChoice --> "1" ConsentStatus : holds
+ConsentHistoryEntry --> "1" ConsentStatus : states
+ConsentPanelComponent ..> ConsentDecisionIntent : emits
+ConsentPanelComponent ..> ConsentRevokeIntent : emits
+ConsentPanelComponent ..> ConsentContactUpdateIntent : emits
+ConsentPanelComponent ..> ConfirmDialogComponent : opens before revoking
 @enduml

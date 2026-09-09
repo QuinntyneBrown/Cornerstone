@@ -19,7 +19,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Directory page" as page
 end box
 box "Frontend — Cornerstone data display" #D1FADF
-  participant "CsPersonComponent" as person
+  participant "PersonComponent" as person
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "BreakpointObserver" as bp

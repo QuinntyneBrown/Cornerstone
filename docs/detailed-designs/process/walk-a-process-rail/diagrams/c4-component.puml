@@ -12,9 +12,9 @@ Container_Boundary(page, "Consuming application feature page") {
 }
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(rail, "CsProcessRailComponent", "Standalone component", "Ordered rail with step links, inter-step gates, and nested current-stage content per L2-132")
-  Component(journey, "CsProcessJourneyComponent", "Standalone component", "Full-content timeline of stage cards and gate panels per L2-133")
-  Component(gate, "CsGateComponent", "Standalone component", "Renders the inter-step gate panel")
+  Component(rail, "ProcessRailComponent", "Standalone component", "Ordered rail with step links, inter-step gates, and nested current-stage content per L2-132")
+  Component(journey, "ProcessJourneyComponent", "Standalone component", "Full-content timeline of stage cards and gate panels per L2-133")
+  Component(gate, "GateComponent", "Standalone component", "Renders the inter-step gate panel")
   Component(orientation, "Orientation resolver", "Computed signal", "Selects the horizontal or vertical presentation from the observed breakpoint")
   Component(styles, "Component styles", "Component-scoped CSS", "Read --cs- custom properties only")
 }
@@ -27,7 +27,7 @@ Rel(vm, journey, "Supplies ordered stages to", "input()")
 Rel(adapter, rail, "Supplies every visible label and colour to", "input()")
 Rel(adapter, journey, "Supplies every visible label and colour to", "input()")
 Rel(rail, handler, "Emits CsStageActivation to", "output()")
-Rel(journey, handler, "Emits CsStageActionIntent to", "output()")
+Rel(journey, handler, "Emits StageActionIntent to", "output()")
 Rel(rail, gate, "Renders between two stages")
 Rel(journey, gate, "Renders as a gate panel between stages")
 Rel(rail, orientation, "Reads the resolved presentation from")

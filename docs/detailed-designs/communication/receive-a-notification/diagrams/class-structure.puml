@@ -67,7 +67,7 @@ class CsNotificationNavigateIntent {
   +target: CsDeepLinkTarget
 }
 
-class CsNotificationListComponent {
+class NotificationListComponent {
   +notifications: InputSignal<readonly CsNotificationViewModel[]>
   +state: InputSignal<CsDataState>
   +unreadCount: InputSignal<number>
@@ -77,21 +77,21 @@ class CsNotificationListComponent {
   +canMarkAll: Signal<boolean>
 }
 
-class CsNotificationItemComponent {
+class NotificationItemComponent {
   +notification: InputSignal<CsNotificationViewModel>
   +readToggled: OutputEmitterRef<string>
   +activated: OutputEmitterRef<CsNotificationNavigateIntent>
   +accessibleName: Signal<string>
 }
 
-class CsAudienceOption {
+class AudienceOption {
   +id: string
   +label: string
   +kind: CsAudienceKind
   +recipientCount: number
 }
 
-class CsAnnouncementDraft {
+class AnnouncementDraft {
   +audienceIds: readonly string[]
   +delivery: CsDeliveryMode
   +scheduledAt: string | null
@@ -99,13 +99,13 @@ class CsAnnouncementDraft {
   +body: string
 }
 
-class CsAnnouncementComposerComponent {
-  +audiences: InputSignal<readonly CsAudienceOption[]>
-  +value: ModelSignal<CsAnnouncementDraft>
+class AnnouncementComposerComponent {
+  +audiences: InputSignal<readonly AudienceOption[]>
+  +value: ModelSignal<AnnouncementDraft>
   +submitState: InputSignal<CsSubmitState>
   +previewHtml: InputSignal<string | null>
-  +submitted: OutputEmitterRef<CsAnnouncementDraft>
-  +previewRequested: OutputEmitterRef<CsAnnouncementDraft>
+  +submitted: OutputEmitterRef<AnnouncementDraft>
+  +previewRequested: OutputEmitterRef<AnnouncementDraft>
   +scheduleRequired: Signal<boolean>
   -validateFutureInstant(value: string): CsValidationError | null
 }
@@ -115,25 +115,25 @@ class CsValidationError {
   +message: string
 }
 
-class CsValidationSummaryComponent {
+class ValidationSummaryComponent {
   +errors: InputSignal<readonly CsValidationError[]>
   +focusFirstInvalid(): void
 }
 
-CsNotificationListComponent "1" o-- "0..*" CsNotificationViewModel
-CsNotificationListComponent ..> CsNotificationItemComponent : renders
-CsNotificationListComponent --> CsDataState : has
-CsNotificationListComponent --> CsNotificationNavigateIntent : emits
-CsNotificationItemComponent ..> CsNotificationViewModel : renders
-CsNotificationItemComponent --> CsNotificationNavigateIntent : emits
+NotificationListComponent "1" o-- "0..*" CsNotificationViewModel
+NotificationListComponent ..> NotificationItemComponent : renders
+NotificationListComponent --> CsDataState : has
+NotificationListComponent --> CsNotificationNavigateIntent : emits
+NotificationItemComponent ..> CsNotificationViewModel : renders
+NotificationItemComponent --> CsNotificationNavigateIntent : emits
 CsNotificationViewModel --> CsNotificationCategory : has
 CsNotificationViewModel "1" o-- "0..1" CsDeepLinkTarget
 CsNotificationNavigateIntent --> CsDeepLinkTarget : carries
-CsAnnouncementComposerComponent "1" o-- "0..*" CsAudienceOption
-CsAnnouncementComposerComponent --> CsAnnouncementDraft : holds
-CsAnnouncementComposerComponent --> CsSubmitState : has
-CsAnnouncementComposerComponent *-- CsValidationSummaryComponent
-CsAnnouncementDraft --> CsDeliveryMode : has
-CsAudienceOption --> CsAudienceKind : has
-CsValidationSummaryComponent "1" o-- "0..*" CsValidationError
+AnnouncementComposerComponent "1" o-- "0..*" AudienceOption
+AnnouncementComposerComponent --> AnnouncementDraft : holds
+AnnouncementComposerComponent --> CsSubmitState : has
+AnnouncementComposerComponent *-- ValidationSummaryComponent
+AnnouncementDraft --> CsDeliveryMode : has
+AudienceOption --> CsAudienceKind : has
+ValidationSummaryComponent "1" o-- "0..*" CsValidationError
 @enduml

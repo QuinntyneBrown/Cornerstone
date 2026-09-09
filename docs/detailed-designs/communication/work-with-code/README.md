@@ -46,7 +46,7 @@ Word Up coding lessons consume all three components.
 The feature introduces one display component, one editor, one preview pane, and
 the types they exchange.
 
-- **`CsCodeBlockComponent`** — read-only source display. Inputs:
+- **`CodeBlockComponent`** — read-only source display. Inputs:
   `source: InputSignal<string>`, `language: InputSignal<string | null>`,
   `wrap: InputSignal<CsCodeWrapMode>` selecting `'wrap'` or `'scroll'`, and
   `copyable: InputSignal<boolean>`. Output: `copied:
@@ -54,31 +54,31 @@ the types they exchange.
   whitespace preserved. The language label renders as text and joins the block's
   accessible name. In scroll mode the block carries `tabindex="0"` and an
   accessible name, so a long line is reachable by keyboard.
-- **`CsCodeEditorComponent`** — accessible editor baseline. Inputs:
+- **`CodeEditorComponent`** — accessible editor baseline. Inputs:
   `value: ModelSignal<string>`, `label: InputSignal<string>`,
   `language: InputSignal<string | null>`, `readOnly: InputSignal<boolean>`, and
-  `runState: InputSignal<CsRunState>`. Outputs: `runRequested:
-  OutputEmitterRef<CsRunIntent>` and `resetRequested: OutputEmitterRef<void>`.
+  `runState: InputSignal<RunState>`. Outputs: `runRequested:
+  OutputEmitterRef<RunIntent>` and `resetRequested: OutputEmitterRef<void>`.
   The control is a labelled `<textarea>` implementing `ControlValueAccessor`.
   `Tab` moves focus out of the editor through the documented escape mechanism
   rather than being captured unconditionally.
-- **`CsCaretPositionDirective`** — internal directive tracking the caret. It
+- **`CaretPositionDirective`** — internal directive tracking the caret. It
   maintains the line and column values and exposes them on demand rather than
   announcing them on every keystroke.
-- **`CsPreviewPaneComponent`** — output presentation. Inputs:
-  `output: InputSignal<CsPreviewOutput>` and `state:
+- **`PreviewPaneComponent`** — output presentation. Inputs:
+  `output: InputSignal<PreviewOutput>` and `state:
   InputSignal<CsDataState>` carrying the uniform data-state contract (L2-101).
   Output: `retryRequested: OutputEmitterRef<void>`. Text output renders through
-  `CsCodeBlockComponent`; document output renders in an iframe carrying a
+  `CodeBlockComponent`; document output renders in an iframe carrying a
   required `title` and the documented restrictive `sandbox` set.
 - **`CsCopyToClipboardDirective`** — the shared directive backing the copy action.
   On completion it announces the copy politely and leaves focus on the copy
   control.
-- **`CsRunIntent`** — typed output carrying the current source and the language.
+- **`RunIntent`** — typed output carrying the current source and the language.
   It carries no callback and the editor performs no evaluation.
-- **`CsPreviewOutput`** — output fields: kind of `'text' | 'document'`, the
+- **`PreviewOutput`** — output fields: kind of `'text' | 'document'`, the
   content, and an error message when evaluation failed.
-- **`CsRunState`** — union of `'idle' | 'running' | 'succeeded' | 'failed'`.
+- **`RunState`** — union of `'idle' | 'running' | 'succeeded' | 'failed'`.
 
 The reset action discards modified source. A confirm step per L2-103 precedes the
 discard, and the editor emits `resetRequested` only after that step completes.
@@ -116,7 +116,7 @@ reset intents.
 
 ### Components
 
-`CsCodeBlockComponent`, `CsCodeEditorComponent`, and `CsPreviewPaneComponent` each
+`CodeBlockComponent`, `CodeEditorComponent`, and `PreviewPaneComponent` each
 receive a view model from an application service and emit intents back to it.
 Evaluation sits entirely on the application side of that edge.
 
@@ -124,9 +124,9 @@ Evaluation sits entirely on the application side of that edge.
 
 ### Class structure
 
-`CsCodeEditorComponent` composes `CsCaretPositionDirective` and implements
-`ControlValueAccessor`. `CsPreviewPaneComponent` renders text output through
-`CsCodeBlockComponent`, which composes the copy directive.
+`CodeEditorComponent` composes `CaretPositionDirective` and implements
+`ControlValueAccessor`. `PreviewPaneComponent` renders text output through
+`CodeBlockComponent`, which composes the copy directive.
 
 ![Class diagram for working with code](diagrams/class-structure.png)
 

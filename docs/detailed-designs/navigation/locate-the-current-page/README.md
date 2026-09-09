@@ -43,18 +43,18 @@ The feature is a vertical slice from the application's crumb configuration down
 to the rendered navigation landmark. It spans one component, the types it reads,
 and the contract that binds the whole subsystem to Angular Router.
 
-- **`CsBreadcrumbsComponent`** (`cs-breadcrumbs`) — the trail itself. It reads
-  `crumbs: InputSignal<readonly CsCrumb[]>`,
+- **`BreadcrumbsComponent`** (`cs-breadcrumbs`) — the trail itself. It reads
+  `crumbs: InputSignal<readonly Crumb[]>`,
   `maxVisible: InputSignal<number>`, `separator: InputSignal<string>`, and
   `ariaLabel: InputSignal<string>`. It emits
   `overflowToggled: OutputEmitterRef<boolean>` when the collapsed segment
   opens or closes. It renders a `<nav>` landmark containing an ordered list, and
   marks the final crumb with `aria-current="page"` and no link. Its states are
   `full`, `collapsed`, and `truncated`.
-- **`CsCrumb`** — configuration type holding a label, an optional `routerLink`
+- **`Crumb`** — configuration type holding a label, an optional `routerLink`
   value, optional `queryParams`, and an optional icon name. A crumb without a
   `routerLink` renders as plain text.
-- **`CsCrumbOverflow`** — internal view model describing the collapsed segment:
+- **`CrumbOverflow`** — internal view model describing the collapsed segment:
   the leading crumb kept visible, the hidden crumb list, and the trailing crumbs
   kept visible.
 
@@ -71,9 +71,9 @@ with the parent presented as a back link. The full trail stays in the accessible
 name of the landmark, so assistive technology reports the complete path even when
 the visual trail is short.
 
-The router integration contract (L2-076) applies to `CsBreadcrumbsComponent`,
-`CsNavItemDirective`, `CsBottomNavComponent`, `CsTabGroupComponent`,
-`CsMenuItemDirective`, and `CsMarketingHeaderComponent`. Each of them renders an
+The router integration contract (L2-076) applies to `BreadcrumbsComponent`,
+`CsNavItemDirective`, `BottomNavComponent`, `TabGroupComponent`,
+`CsMenuItemDirective`, and `MarketingHeaderComponent`. Each of them renders an
 anchor carrying the `routerLink` value an application binds, and each emits a
 typed activation output the application may observe. None of them injects
 `Router`. A component that offers a non-route action renders a `<button>`
@@ -119,7 +119,7 @@ the application boundary.
 
 ### Components
 
-`CsBreadcrumbsComponent` renders the visible crumbs and delegates the hidden
+`BreadcrumbsComponent` renders the visible crumbs and delegates the hidden
 segment to the anchored menu. Every link it renders carries an
 application-supplied `routerLink` value.
 

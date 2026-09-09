@@ -55,81 +55,81 @@ The feature is a vertical slice from a Word Up directory page and record page
 down to the rendered row and section surfaces. It introduces four components,
 their view model types, and their intent types.
 
-- **`CsPeopleDirectoryComponent`** — the directory composite, selector
+- **`PeopleDirectoryComponent`** — the directory composite, selector
   `cs-people-directory`. It renders the search field, the filter and sort
   controls, the rows, and the selection summary. Inputs: `people:
-  InputSignal<readonly CsPersonRowView[]>`, `query: ModelSignal<CsPeopleQuery>`,
-  `facets: InputSignal<readonly CsPeopleFacet[]>`, `selection:
-  ModelSignal<ReadonlySet<string>>`, `layout: InputSignal<CsDirectoryLayout>`
+  InputSignal<readonly PersonRowView[]>`, `query: ModelSignal<PeopleQuery>`,
+  `facets: InputSignal<readonly PeopleFacet[]>`, `selection:
+  ModelSignal<ReadonlySet<string>>`, `layout: InputSignal<DirectoryLayout>`
   defaulting to `'auto'`, and `loading: InputSignal<boolean>`. Outputs:
-  `queryChanged: OutputEmitterRef<CsPeopleQuery>`, `selectionChanged:
-  OutputEmitterRef<CsPeopleSelectionChange>`, and `rowAction:
-  OutputEmitterRef<CsPersonRowAction>`. States: loading, populated, empty, and
+  `queryChanged: OutputEmitterRef<PeopleQuery>`, `selectionChanged:
+  OutputEmitterRef<PeopleSelectionChange>`, and `rowAction:
+  OutputEmitterRef<PersonRowAction>`. States: loading, populated, empty, and
   no-match.
-- **`CsPersonRowComponent`** — the row composite, selector `cs-person-row`. It
+- **`PersonRowComponent`** — the row composite, selector `cs-person-row`. It
   renders one person's avatar, identity, role, cohort, and status, along with the
   row actions open to the viewer. Inputs: `person:
-  InputSignal<CsPersonRowView>`, `selected: ModelSignal<boolean>`,
+  InputSignal<PersonRowView>`, `selected: ModelSignal<boolean>`,
   `selectable: InputSignal<boolean>`, and `variant:
-  InputSignal<CsPersonRowVariant>`. Outputs: `actionSelected:
-  OutputEmitterRef<CsPersonRowAction>` and `opened:
+  InputSignal<PersonRowVariant>`. Outputs: `actionSelected:
+  OutputEmitterRef<PersonRowAction>` and `opened:
   OutputEmitterRef<CsPersonOpen>`. States: default, selected, and inactive.
-- **`CsPersonSummaryComponent`** — the header composite, selector
+- **`PersonSummaryComponent`** — the header composite, selector
   `cs-person-summary`. It renders the profile header: avatar, name, pronouns when
   supplied, role, cohort, status, contact entries, and the record-level actions.
-  Inputs: `person: InputSignal<CsPersonSummaryView>` and `actions:
-  InputSignal<readonly CsPersonAction[]>`. Output: `actionSelected:
-  OutputEmitterRef<CsPersonAction>`. States: active, inactive, and archived.
-- **`CsRecordTabsComponent`** — the section composite, selector
+  Inputs: `person: InputSignal<PersonSummaryView>` and `actions:
+  InputSignal<readonly PersonAction[]>`. Output: `actionSelected:
+  OutputEmitterRef<PersonAction>`. States: active, inactive, and archived.
+- **`RecordTabsComponent`** — the section composite, selector
   `cs-record-tabs`. It renders the record sections as an accessible tab set and
   projects the active section's content. Inputs: `sections:
-  InputSignal<readonly CsRecordSection[]>`, `activeSectionId:
+  InputSignal<readonly RecordSection[]>`, `activeSectionId:
   ModelSignal<string>`, and `orientation:
-  InputSignal<CsRecordTabsOrientation>`. Output: `sectionChanged:
-  OutputEmitterRef<CsRecordSectionChange>`. States: idle and section-loading.
-- **`CsPersonRowView`** — view model of one directory entry. Fields: `personId`,
+  InputSignal<RecordTabsOrientation>`. Output: `sectionChanged:
+  OutputEmitterRef<RecordSectionChange>`. States: idle and section-loading.
+- **`PersonRowView`** — view model of one directory entry. Fields: `personId`,
   `displayName`, `avatarUrl`, `initials`, `roleLabel`, `cohortLabel`, `status`,
   `statusLabel`, and `actions`.
-- **`CsPersonStatus`** — union type of the statuses: `'active' | 'inactive' |
+- **`PersonStatus`** — union type of the statuses: `'active' | 'inactive' |
   'pending' | 'archived'`.
-- **`CsPeopleQuery`** — view model of the current search, filter, and sort
+- **`PeopleQuery`** — view model of the current search, filter, and sort
   selection. Fields: `text`, `filters`, `sortKey`, and `sortDirection`. The
   component holds this as a `model()` signal and emits it; it applies none of it
   to the row list.
-- **`CsPeopleFacet`** — view model of one filter facet. Fields: `facetId`,
+- **`PeopleFacet`** — view model of one filter facet. Fields: `facetId`,
   `label`, `options`, and `multiple`.
-- **`CsDirectoryLayout`** — union type of the layout selections: `'auto' |
+- **`DirectoryLayout`** — union type of the layout selections: `'auto' |
   'table' | 'list'`. Under `'auto'` the directory renders a table at and above
   the wide breakpoint and a stacked list below it; the breakpoint value is
   `<TO SUPPLY>`.
-- **`CsPersonRowVariant`** — union type of the row presentations: `'table' |
+- **`PersonRowVariant`** — union type of the row presentations: `'table' |
   'list'`.
-- **`CsPeopleSelectionChange`** — intent emitted when the selected set changes.
+- **`PeopleSelectionChange`** — intent emitted when the selected set changes.
   Fields: `selectedIds` and `lastChangedId`.
-- **`CsPersonRowAction`** — intent emitted when a viewer picks a row action.
+- **`PersonRowAction`** — intent emitted when a viewer picks a row action.
   Fields: `personId`, `actionId`, and `kind`.
 - **`CsPersonOpen`** — intent emitted when a viewer opens a person. Field:
   `personId`.
-- **`CsPersonSummaryView`** — view model of a record header. Fields: `personId`,
+- **`PersonSummaryView`** — view model of a record header. Fields: `personId`,
   `displayName`, `pronouns`, `avatarUrl`, `initials`, `roleLabel`,
   `cohortLabel`, `status`, `statusLabel`, and `contacts`.
-- **`CsContactEntry`** — view model of one contact entry. Fields: `kind`,
+- **`ContactEntry`** — view model of one contact entry. Fields: `kind`,
   `label`, `value`, and `href`. The application decides which entries a viewer
   may see; the component renders the list it is given.
-- **`CsPersonAction`** — intent naming a record-level action. Fields: `personId`,
+- **`PersonAction`** — intent naming a record-level action. Fields: `personId`,
   `actionId`, `label`, and `kind`.
-- **`CsRecordSection`** — view model of one section. Fields: `sectionId`,
+- **`RecordSection`** — view model of one section. Fields: `sectionId`,
   `label`, `badgeCount`, `disabled`, and `loading`.
-- **`CsRecordSectionChange`** — intent emitted on a section change. Fields:
+- **`RecordSectionChange`** — intent emitted on a section change. Fields:
   `personId`, `fromSectionId`, and `toSectionId`.
-- **`CsRecordTabsOrientation`** — union type of the tab orientations:
+- **`RecordTabsOrientation`** — union type of the tab orientations:
   `'horizontal' | 'vertical'`.
 
 All four components are standalone and use `OnPush` change detection.
-`CsPeopleDirectoryComponent` composes one `CsPersonRowComponent` per entry and
+`PeopleDirectoryComponent` composes one `PersonRowComponent` per entry and
 passes the `variant` its resolved layout calls for.
 
-`CsRecordTabsComponent` implements the ARIA tabs pattern over the CDK key
+`RecordTabsComponent` implements the ARIA tabs pattern over the CDK key
 manager: the tab list carries `role="tablist"`, arrow keys move the active tab,
 `Home` and `End` jump to the ends, and each panel carries `role="tabpanel"`
 labelled by its tab. A disabled section stays focusable and carries
@@ -174,14 +174,14 @@ sections and reads its visual values from the theme stylesheet.
 ### Components
 
 Word Up's directory and person services build the view models and receive the
-intents. `CsPeopleDirectoryComponent` neither filters nor sorts, and neither it
-nor `CsPersonSummaryComponent` logs or persists the personal fields it renders.
+intents. `PeopleDirectoryComponent` neither filters nor sorts, and neither it
+nor `PersonSummaryComponent` logs or persists the personal fields it renders.
 
 ![C4 component view for managing people](diagrams/c4-component.png)
 
 ### Class structure
 
-The directory composite holds a `CsPeopleQuery` and a selection set as `model()`
+The directory composite holds a `PeopleQuery` and a selection set as `model()`
 signals and passes each row its own view model. The record composites sit over a
 separate summary and section family.
 

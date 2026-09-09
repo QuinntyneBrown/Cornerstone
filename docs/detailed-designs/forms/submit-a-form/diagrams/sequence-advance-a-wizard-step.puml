@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "FormGroup" as form
 end box
 box "Frontend — Cornerstone submission components" #D1FADF
-  participant "CsWizardComponent" as wizard
+  participant "WizardComponent" as wizard
   participant "Validation gate" as gate
-  participant "CsValidationSummaryComponent" as summary
+  participant "ValidationSummaryComponent" as summary
   participant "CsStepper" as header
 end box
 box "Frontend — Angular CDK" #ECFDF3

@@ -35,7 +35,7 @@ interface CsCurriculumNode {
   +children: CsCurriculumNode[]
 }
 
-interface CsImportTargetColumn {
+interface ImportTargetColumn {
   +field: string
   +label: string
   +required: boolean
@@ -139,8 +139,8 @@ interface CsTransitionIntent {
   +toStageId: string
 }
 
-class CsCsvImportWizardComponent {
-  +targets: InputSignal<CsImportTargetColumn[]>
+class CsvImportWizardComponent {
+  +targets: InputSignal<ImportTargetColumn[]>
   +validation: InputSignal<CsImportValidation | null>
   +progress: InputSignal<CsImportProgress | null>
   +result: InputSignal<CsImportResult | null>
@@ -151,7 +151,7 @@ class CsCsvImportWizardComponent {
   -renderCellAsText(value: string): string
 }
 
-class CsCurriculumTreeComponent {
+class CurriculumTreeComponent {
   +nodes: InputSignal<CsCurriculumNode[]>
   +selectedId: ModelSignal<string | null>
   +addRequested: OutputEmitterRef<CsCurriculumNodeKind>
@@ -161,14 +161,14 @@ class CsCurriculumTreeComponent {
   -announcePosition(nodeId: string, index: number): void
 }
 
-class CsCurriculumEditorComponent {
+class CurriculumEditorComponent {
   +node: InputSignal<CsCurriculumNode | null>
   +dirty: Signal<boolean>
   +saveRequested: OutputEmitterRef<CsCurriculumSaveIntent>
   +cancelRequested: OutputEmitterRef<void>
 }
 
-class CsProgressionBuilderComponent {
+class ProgressionBuilderComponent {
   +progression: InputSignal<CsProgressionViewModel>
   +transitions: InputSignal<CsTransitionRule[]>
   +rowChanged: OutputEmitterRef<CsProgressionStage>
@@ -177,36 +177,36 @@ class CsProgressionBuilderComponent {
   +canSave(): boolean
 }
 
-class CsCompetencyGridComponent {
+class CompetencyGridComponent {
   +grid: InputSignal<CsCompetencyGridViewModel>
   +cellActivated: OutputEmitterRef<CsCompetencyCell>
 }
 
-CsCsvImportWizardComponent --> "0..*" CsImportTargetColumn : maps to
-CsCsvImportWizardComponent --> "0..1" CsImportValidation : reads
+CsvImportWizardComponent --> "0..*" ImportTargetColumn : maps to
+CsvImportWizardComponent --> "0..1" CsImportValidation : reads
 CsImportValidation o-- "0..*" CsImportRowError : lists
-CsCsvImportWizardComponent --> "0..1" CsImportProgress : reports
-CsCsvImportWizardComponent --> "0..1" CsImportResult : summarizes
-CsCsvImportWizardComponent ..> CsImportIntent : emits
-CsCsvImportWizardComponent ..> CsColumnMapping : emits
+CsvImportWizardComponent --> "0..1" CsImportProgress : reports
+CsvImportWizardComponent --> "0..1" CsImportResult : summarizes
+CsvImportWizardComponent ..> CsImportIntent : emits
+CsvImportWizardComponent ..> CsColumnMapping : emits
 
-CsCurriculumTreeComponent --> "1..*" CsCurriculumNode : renders
+CurriculumTreeComponent --> "1..*" CsCurriculumNode : renders
 CsCurriculumNode *-- "0..*" CsCurriculumNode : contains
 CsCurriculumNode --> "1" CsCurriculumNodeKind : has
 CsCurriculumNode --> "1" CsCurriculumNodeState : reports
-CsCurriculumTreeComponent ..> CsCurriculumReorderIntent : emits
-CsCurriculumTreeComponent ..> CsCurriculumDeleteIntent : emits
-CsCurriculumEditorComponent --> "0..1" CsCurriculumNode : edits
-CsCurriculumEditorComponent ..> CsCurriculumSaveIntent : emits
-CsCurriculumTreeComponent --> CsCurriculumEditorComponent : publishes selection to
+CurriculumTreeComponent ..> CsCurriculumReorderIntent : emits
+CurriculumTreeComponent ..> CsCurriculumDeleteIntent : emits
+CurriculumEditorComponent --> "0..1" CsCurriculumNode : edits
+CurriculumEditorComponent ..> CsCurriculumSaveIntent : emits
+CurriculumTreeComponent --> CurriculumEditorComponent : publishes selection to
 
-CsProgressionBuilderComponent --> "1" CsProgressionViewModel : reads
+ProgressionBuilderComponent --> "1" CsProgressionViewModel : reads
 CsProgressionViewModel o-- "1..*" CsProgressionStage : orders
 CsProgressionViewModel o-- "0..*" CsCompetency : names
-CsProgressionBuilderComponent --> "0..*" CsTransitionRule : consults
-CsProgressionBuilderComponent ..> CsProgressionReorderIntent : emits
-CsProgressionBuilderComponent ..> CsTransitionIntent : emits
-CsProgressionBuilderComponent o-- "1" CsCompetencyGridComponent : composes
-CsCompetencyGridComponent --> "1" CsCompetencyGridViewModel : reads
+ProgressionBuilderComponent --> "0..*" CsTransitionRule : consults
+ProgressionBuilderComponent ..> CsProgressionReorderIntent : emits
+ProgressionBuilderComponent ..> CsTransitionIntent : emits
+ProgressionBuilderComponent o-- "1" CompetencyGridComponent : composes
+CompetencyGridComponent --> "1" CsCompetencyGridViewModel : reads
 CsCompetencyGridViewModel o-- "0..*" CsCompetencyCell : holds
 @enduml

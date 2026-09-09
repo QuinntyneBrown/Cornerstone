@@ -19,8 +19,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone drawer runtime" #D1FADF
-  participant "CsDrawerContainerComponent" as container
-  participant "CsDrawerComponent" as drawer
+  participant "DrawerContainerComponent" as container
+  participant "DrawerComponent" as drawer
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "BreakpointObserver" as bp

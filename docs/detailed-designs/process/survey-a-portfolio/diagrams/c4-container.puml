@@ -12,7 +12,7 @@ System_Boundary(app, "Consuming application") {
 }
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "CsPhaseLaneComponent, CsProjectCardComponent, CsGratitudeWallComponent, and CsGratitudeNoteComponent")
+  Container(lib, "Component library", "Angular standalone components", "PhaseLaneComponent, ProjectCardComponent, GratitudeWallComponent, and GratitudeNoteComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the tokens the adapter palette names")
   Container(docs, "Documentation site", "Angular application", "Publishes the adapter contract and a neutral example adapter")
 }
@@ -24,7 +24,7 @@ Rel(user, shell, "Surveys the portfolio in")
 Rel(shell, page, "Renders")
 Rel(services, page, "Supply phases, projects, notes, and enforcement results to")
 Rel(page, lib, "Provides the typed adapter to", "provideCsProcessAdapter()")
-Rel(lib, page, "Emits CsProjectOpenIntent to", "output()")
+Rel(lib, page, "Emits ProjectOpenIntent to", "output()")
 Rel(page, services, "Resolves the open intent into routing through")
 Rel(lib, theme, "Resolves the token named by the adapter palette from")
 Rel(lib, cdk, "Observes the XS breakpoint and announces the empty state through")

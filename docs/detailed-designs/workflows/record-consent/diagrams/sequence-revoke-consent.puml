@@ -21,8 +21,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Consent store" as store
 end box
 box "Frontend — Cornerstone consent composite" #D1FADF
-  participant "CsConsentPanelComponent" as panel
-  participant "CsConfirmDialogComponent" as confirm
+  participant "ConsentPanelComponent" as panel
+  participant "ConfirmDialogComponent" as confirm
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer and focus trap" as cdk
@@ -31,7 +31,7 @@ box "Browser — platform" #FFF4E5
   participant "DOM" as browser
 end box
 
-page -> panel : Bind CsConsentPanelViewModel
+page -> panel : Bind ConsentPanelViewModel
 panel -> browser : Render each group as a fieldset with a legend per L2-126
 panel -> browser : State each scope in text beside its control per L2-126
 panel -> browser : Render each history entry with actor and locale timestamp per L2-126
@@ -47,7 +47,7 @@ alt Guardian confirms
   user -> confirm : Confirm
   confirm -> cdk : Restore focus to the revoke action
   confirm --> panel : Confirmed
-  panel -> page : Emit exactly one CsConsentRevokeIntent per L2-126
+  panel -> page : Emit exactly one ConsentRevokeIntent per L2-126
   panel -> panel : Leave the supplied view model unmutated per L2-126
   page -> rules : Decide whether the revocation is permitted
   rules --> page : Permitted

@@ -62,16 +62,16 @@ the CDK overlay they attach to.
   `menuitemcheckbox`, or `menuitemradio` semantics according to its inputs, and
   marks a danger action with the error tone from the token layer. A separator
   renders as a sibling element carrying `role="separator"`.
-- **`CsPopoverComponent`** (`cs-popover`) — the generic anchored panel. It reads
+- **`PopoverComponent`** (`cs-popover`) — the generic anchored panel. It reads
   `open: ModelSignal<boolean>`, `position: InputSignal<CsAnchorPosition>`,
   `trapFocus: InputSignal<boolean>`, and `ariaLabel: InputSignal<string>`, and
   projects arbitrary content. It emits
   `closed: OutputEmitterRef<CsDismissReason>`. It applies `role="dialog"` when
   `trapFocus` is set and `role="group"` when it is not.
-- **`CsAccountMenuComponent`** (`cs-account-menu`) — the composed menu for the
-  signed-in user. It reads `account: InputSignal<CsAccount>` and
-  `actions: InputSignal<readonly CsAccountAction[]>`. It emits
-  `actionSelected: OutputEmitterRef<CsAccountAction>` and
+- **`AccountMenuComponent`** (`cs-account-menu`) — the composed menu for the
+  signed-in user. It reads `account: InputSignal<Account>` and
+  `actions: InputSignal<readonly AccountAction[]>`. It emits
+  `actionSelected: OutputEmitterRef<AccountAction>` and
   `signOut: OutputEmitterRef<void>`. Its trigger shows the avatar and the display
   name; its panel holds profile, settings, and support entries, a separator, and
   a sign-out entry marked as a danger action. It performs no sign-out itself; it
@@ -80,9 +80,9 @@ the CDK overlay they attach to.
   `'below-start' | 'below-end' | 'above-start' | 'above-end' | 'right' | 'left'`.
 - **`CsDismissReason`** — union type of the ways a surface closes:
   `'select' | 'escape' | 'outside-click' | 'trigger' | 'detach'`.
-- **`CsAccount`** — configuration type holding a display name, an optional email
+- **`Account`** — configuration type holding a display name, an optional email
   address, an optional avatar source, and an optional role label.
-- **`CsAccountAction`** — configuration type holding an identifier, a label, an
+- **`AccountAction`** — configuration type holding an identifier, a label, an
   optional icon name, an optional `routerLink` value, and a danger flag.
 - **`CsMenuItemTrigger`** — output type holding the item identifier and whether
   the trigger came from a pointer or the keyboard.
@@ -145,8 +145,8 @@ attaches to the CDK overlay container outside the application's own DOM subtree.
 ### Components
 
 `CsMenuDirective` owns the overlay lifetime and the focus contract.
-`CsAccountMenuComponent` composes it with a fixed action set;
-`CsPopoverComponent` reuses the same positioning for projected content.
+`AccountMenuComponent` composes it with a fixed action set;
+`PopoverComponent` reuses the same positioning for projected content.
 
 ![C4 component view for opening an anchored surface](diagrams/c4-component.png)
 

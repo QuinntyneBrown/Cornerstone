@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "FormControl" as control
 end box
 box "Frontend — Cornerstone component library" #D1FADF
-  participant "CsFieldComponent" as field
+  participant "FieldComponent" as field
   participant "CsInputDirective" as input
 end box
 box "Frontend — Cornerstone contract layer" #ECFDF3

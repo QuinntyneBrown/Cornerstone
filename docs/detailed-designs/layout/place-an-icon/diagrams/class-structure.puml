@@ -13,7 +13,7 @@ skinparam class {
 ' --------------------------
 title Class structure — Place an icon
 
-enum CsIconSize {
+enum IconSize {
   sm
   md
   lg
@@ -25,47 +25,47 @@ enum CsIconFill {
   solid
 }
 
-class CsIconDefinition {
+class IconDefinition {
   +name: string
   +viewBox: string
   +paths: readonly string[]
   +fills: readonly CsIconFill[]
 }
 
-class CsIconSet {
+class IconSet {
   +id: string
-  +icons: Record<string, CsIconDefinition>
+  +icons: Record<string, IconDefinition>
 }
 
-class CsIconRegistry {
-  -definitions: Map<string, CsIconDefinition>
+class IconRegistry {
+  -definitions: Map<string, IconDefinition>
   +names: Signal<readonly string[]>
-  +registerIconSet(set: CsIconSet): void
-  +registerIcon(name: string, definition: CsIconDefinition): void
-  +resolve(name: string): CsIconDefinition | undefined
+  +registerIconSet(set: IconSet): void
+  +registerIcon(name: string, definition: IconDefinition): void
+  +resolve(name: string): IconDefinition | undefined
 }
 
-class CsIconComponent {
+class IconComponent {
   +name: InputSignal<string>
-  +size: InputSignal<CsIconSize>
+  +size: InputSignal<IconSize>
   +fill: InputSignal<CsIconFill>
   +label: InputSignal<string | undefined>
-  +definition: Signal<CsIconDefinition | undefined>
+  +definition: Signal<IconDefinition | undefined>
   +decorative: Signal<boolean>
   -reportMissing(name: string): void
 }
 
 class ProvideCsIcons <<function>> {
-  +provideCsIcons(...sets: CsIconSet[]): EnvironmentProviders
+  +provideCsIcons(...sets: IconSet[]): EnvironmentProviders
 }
 
-ProvideCsIcons ..> CsIconRegistry : registers
-ProvideCsIcons ..> CsIconSet : seeds from
-CsIconSet "1" *-- "1..*" CsIconDefinition : contains
-CsIconRegistry o-- "0..*" CsIconDefinition : indexes
-CsIconComponent --> CsIconRegistry : resolves through
-CsIconComponent ..> CsIconDefinition : renders
-CsIconComponent --> CsIconSize : has
-CsIconComponent --> CsIconFill : has
-CsIconDefinition --> CsIconFill : provides
+ProvideCsIcons ..> IconRegistry : registers
+ProvideCsIcons ..> IconSet : seeds from
+IconSet "1" *-- "1..*" IconDefinition : contains
+IconRegistry o-- "0..*" IconDefinition : indexes
+IconComponent --> IconRegistry : resolves through
+IconComponent ..> IconDefinition : renders
+IconComponent --> IconSize : has
+IconComponent --> CsIconFill : has
+IconDefinition --> CsIconFill : provides
 @enduml

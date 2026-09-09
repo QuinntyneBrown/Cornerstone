@@ -6,12 +6,12 @@ title Components — Open a dialog
 Person(dev, "Application developer", "Opens a dialog and subscribes to its result")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(service, "CsDialogService", "Injectable service", "Opens dialogs, applies FaithTech classes, and blocks page scrolling")
-  Component(ref, "CsDialogRef<R, C>", "Handle object", "Carries close(result), the closed observable, and disableClose")
-  Component(shell, "CsDialogShellComponent", "Standalone component", "Renders the panel, hosts the focus trap, and applies the size variant")
-  Component(titled, "CsDialogTitleDirective", "Attribute directive", "Registers the heading id as aria-labelledby")
-  Component(descd, "CsDialogDescriptionDirective", "Attribute directive", "Registers the description id as aria-describedby")
-  Component(actd, "CsDialogActionsDirective", "Attribute directive", "Lays out the action bar and stacks it on narrow viewports")
+  Component(service, "DialogService", "Injectable service", "Opens dialogs, applies FaithTech classes, and blocks page scrolling")
+  Component(ref, "DialogRef<R, C>", "Handle object", "Carries close(result), the closed observable, and disableClose")
+  Component(shell, "DialogShellComponent", "Standalone component", "Renders the panel, hosts the focus trap, and applies the size variant")
+  Component(titled, "DialogTitleDirective", "Attribute directive", "Registers the heading id as aria-labelledby")
+  Component(descd, "DialogDescriptionDirective", "Attribute directive", "Registers the description id as aria-describedby")
+  Component(actd, "DialogActionsDirective", "Attribute directive", "Lays out the action bar and stacks it on narrow viewports")
 }
 
 Container_Boundary(themec, "Theme stylesheet") {

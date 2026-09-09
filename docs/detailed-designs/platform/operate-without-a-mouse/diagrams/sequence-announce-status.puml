@@ -19,8 +19,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Word Up people directory page" as page
 end box
 box "Frontend — Cornerstone component library" #D1FADF
-  participant "CsDataToolbarComponent" as toolbar
-  participant "CsPaginatorComponent" as paginator
+  participant "DataToolbarComponent" as toolbar
+  participant "PaginatorComponent" as paginator
 end box
 box "Frontend — Cornerstone accessibility layer" #ECFDF3
   participant "CsBusyDirective" as busy

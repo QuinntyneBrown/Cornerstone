@@ -57,7 +57,7 @@ class CsResponsiveRegionDirective {
   +collapsedChange: OutputEmitterRef<boolean>
 }
 
-class CsResponsiveTableDirective {
+class ResponsiveTableDirective {
   +reflowBelow: InputSignal<CsViewportClass>
   +cardLabelSource: InputSignal<CsLabelSource>
   +reflowed: Signal<boolean>
@@ -93,10 +93,10 @@ CsBreakpointService ..> CsBreakpoints : builds queries from
 CsBreakpointService --> CsViewportClass : reports
 CsResponsiveRegionDirective ..> CsBreakpointService : reads the active class from
 CsResponsiveRegionDirective --> CsCollapseMode : has
-CsResponsiveTableDirective ..> CsBreakpointService : reads the active class from
-CsResponsiveTableDirective --> CsLabelSource : has
-CsResponsiveTableDirective o-- "0..1" CsScrollRegionDirective : delegates overflow to
+ResponsiveTableDirective ..> CsBreakpointService : reads the active class from
+ResponsiveTableDirective --> CsLabelSource : has
+ResponsiveTableDirective o-- "0..1" CsScrollRegionDirective : delegates overflow to
 CsScrollRegionDirective --> CsScrollAxis : has
 CsViewportHarness ..> CsBreakpoints : iterates
-CsViewportHarness ..> CsResponsiveTableDirective : asserts the transform of
+CsViewportHarness ..> ResponsiveTableDirective : asserts the transform of
 @enduml

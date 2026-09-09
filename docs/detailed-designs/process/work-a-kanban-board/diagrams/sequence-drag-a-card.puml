@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone kanban components" #D1FADF
-  participant "CsKanbanBoardComponent" as board
-  participant "CsKanbanColumnComponent" as column
-  participant "CsWorkItemCardComponent" as card
+  participant "KanbanBoardComponent" as board
+  participant "KanbanColumnComponent" as column
+  participant "WorkItemCardComponent" as card
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "DragDropModule" as cdk
@@ -50,7 +50,7 @@ user -> dom : Release over the accepting column
 dom -> cdk : Drop
 cdk -> board : CdkDragDrop with the source and target index
 board -> board : Leave the bound columns unmutated per L2-139
-board -> page : Emit exactly one CsWorkItemMoveIntent
+board -> page : Emit exactly one WorkItemMoveIntent
 page -> services : Apply the move and persist it
 services --> page : Updated columns
 page -> board : Rebind the columns

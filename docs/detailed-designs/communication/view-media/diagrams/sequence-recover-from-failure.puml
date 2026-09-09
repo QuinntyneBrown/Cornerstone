@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "AttachmentTransferHandler" as transfer
 end box
 box "Frontend — Cornerstone media" #D1FADF
-  participant "CsMediaViewerComponent" as viewer
-  participant "CsAttachmentListComponent" as attach
+  participant "MediaViewerComponent" as viewer
+  participant "AttachmentListComponent" as attach
 end box
 box "Browser — platform" #FFF4E5
   participant "Media loader and live region" as browser

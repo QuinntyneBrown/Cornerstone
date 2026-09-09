@@ -8,9 +8,9 @@ Person(dev, "Application developer", "Binds the action inputs")
 Container_Boundary(lib, "Cornerstone component library") {
   Component(button, "CsButtonDirective", "Angular attribute directive", "Applies appearance, size, block width, and the loading, disabled, and locked states to a native host")
   Component(iconbutton, "CsIconButtonDirective", "Angular attribute directive", "Square icon-only action with a required label and an optional badge indicator")
-  Component(group, "CsButtonGroupComponent", "Angular standalone component", "Projects related or split actions with role=group semantics and safe wrapping")
+  Component(group, "ButtonGroupComponent", "Angular standalone component", "Projects related or split actions with role=group semantics and safe wrapping")
   Component(tooltip, "CsTooltipDirective", "Angular attribute directive", "Describes an icon-only action without duplicating its accessible name")
-  Component(icon, "CsIconComponent", "Angular standalone component", "Renders the leading, trailing, or only icon")
+  Component(icon, "IconComponent", "Angular standalone component", "Renders the leading, trailing, or only icon")
   Component(assert, "Label assertion", "Development-mode check", "Throws when an icon-only action carries no accessible name")
 }
 

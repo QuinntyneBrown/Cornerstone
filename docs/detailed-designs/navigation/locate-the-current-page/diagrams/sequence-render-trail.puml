@@ -21,7 +21,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application shell" as shell
 end box
 box "Frontend — Cornerstone breadcrumbs" #D1FADF
-  participant "CsBreadcrumbsComponent" as crumbs
+  participant "BreadcrumbsComponent" as crumbs
 end box
 box "Browser — platform" #FFF4E5
   participant "DOM and history" as dom
@@ -30,7 +30,7 @@ end box
 user -> dom : Open a deep application URL
 dom -> router : Resolve the route tree
 router -> resolver : Publish the activated route data
-resolver -> resolver : Map each ancestor to a CsCrumb
+resolver -> resolver : Map each ancestor to a Crumb
 resolver --> shell : Crumb list, current page last
 shell -> crumbs : Bind crumbs and maxVisible
 

@@ -1,1 +1,1 @@
-export * from './app/cs-docs-app.component';
+export * from './app/docs-app.component';

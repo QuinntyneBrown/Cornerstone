@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Angular Router" as router
 end box
 box "Frontend — Cornerstone breadcrumbs" #D1FADF
-  participant "CsBreadcrumbsComponent" as crumbs
+  participant "BreadcrumbsComponent" as crumbs
   participant "CsMenuDirective" as menu
 end box
 box "Frontend — Angular CDK" #ECFDF3

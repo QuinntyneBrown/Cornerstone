@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "AnnouncementDeliveryHandler" as delivery
 end box
 box "Frontend — Cornerstone announcements" #D1FADF
-  participant "CsAnnouncementComposerComponent" as composer
+  participant "AnnouncementComposerComponent" as composer
   participant "Cornerstone field components" as fields
-  participant "CsValidationSummaryComponent" as summary
+  participant "ValidationSummaryComponent" as summary
 end box
 box "Browser — platform" #FFF4E5
   participant "Live region and focus" as browser

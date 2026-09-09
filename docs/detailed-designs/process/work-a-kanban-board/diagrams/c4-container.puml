@@ -12,7 +12,7 @@ System_Boundary(app, "Consuming application") {
 }
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "CsKanbanBoardComponent, CsKanbanColumnComponent, and CsWorkItemCardComponent")
+  Container(lib, "Component library", "Angular standalone components", "KanbanBoardComponent, KanbanColumnComponent, and WorkItemCardComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Resolves column, drop feedback, and card state colour")
   Container(docs, "Documentation site", "Angular application", "Publishes the board example and the documented keyboard move sequence")
 }
@@ -24,7 +24,7 @@ Rel(user, shell, "Drags cards and uses the keyboard move sequence in")
 Rel(shell, page, "Renders")
 Rel(services, page, "Supply columns, item state, and move legality to")
 Rel(page, lib, "Binds columns and the adapter to", "signal inputs")
-Rel(lib, page, "Emits CsWorkItemMoveIntent, CsWorkItemOpenIntent, and CsWorkItemActionIntent to", "output()")
+Rel(lib, page, "Emits WorkItemMoveIntent, WorkItemOpenIntent, and WorkItemActionIntent to", "output()")
 Rel(page, services, "Applies or rejects the move through")
 Rel(lib, cdk, "Registers drop lists and announces moves through")
 Rel(lib, theme, "Resolves drop feedback and state colour from")

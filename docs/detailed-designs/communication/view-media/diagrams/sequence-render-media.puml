@@ -19,8 +19,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "MediaViewModelService" as vm
 end box
 box "Frontend — Cornerstone media" #D1FADF
-  participant "CsMediaViewerComponent" as viewer
-  participant "CsMediaFrameDirective" as frame
+  participant "MediaViewerComponent" as viewer
+  participant "MediaFrameDirective" as frame
   participant "CsSafeUrlPipe" as safe
 end box
 box "Browser — platform" #FFF4E5

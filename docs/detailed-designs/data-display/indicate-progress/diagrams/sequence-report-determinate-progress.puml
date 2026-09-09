@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as svc
 end box
 box "Frontend — Cornerstone data display" #D1FADF
-  participant "CsProgressBarComponent" as bar
-  participant "CsProgressRingComponent" as ring
+  participant "ProgressBarComponent" as bar
+  participant "ProgressRingComponent" as ring
   participant "Value helpers" as helpers
 end box
 box "Frontend — Cornerstone styles" #ECFDF3

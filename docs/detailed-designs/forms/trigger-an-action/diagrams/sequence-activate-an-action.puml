@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone action components" #D1FADF
-  participant "CsButtonGroupComponent" as group
+  participant "ButtonGroupComponent" as group
   participant "CsButtonDirective" as button
 end box
 box "Frontend — Angular CDK" #ECFDF3

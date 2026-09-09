@@ -48,7 +48,7 @@ The feature is a vertical slice from a routed component's template to the
 rendered landmark structure and the accessibility tree. It introduces four
 components and two directives.
 
-- **`CsPageComponent`** — the `cs-page` element that frames a routed screen. It
+- **`PageComponent`** — the `cs-page` element that frames a routed screen. It
   takes `title` as a required signal input, and `eyebrow`, `subtitle`, and
   `headingId` as optional inputs. It takes a `state` input over
   `'ready' | 'loading' | 'error'` and an `errorMessage` input read when the state
@@ -56,21 +56,21 @@ components and two directives.
   content slot, and it renders the title as the single `h1` of the screen. The
   header stacks its title and actions on narrow viewports and places them on one
   row on wide viewports, through `CsResponsiveRegionDirective` (L2-043).
-- **`CsSectionComponent`** — the `cs-section` element that frames a block within
+- **`SectionComponent`** — the `cs-section` element that frames a block within
   a page. It renders a `<section>` landmark labelled by its own heading through
   `aria-labelledby`. It takes `title` as a required input, `label` and
   `description` as optional inputs, and `headingLevel` over `2 | 3 | 4 | 5 | 6`.
   It projects an actions slot and a default content slot.
-- **`CsSectionHeaderComponent`** — the `cs-section-header` element that renders
+- **`SectionHeaderComponent`** — the `cs-section-header` element that renders
   the label, title, description, and actions of a section on its own. It carries
   the same `title`, `label`, `description`, and `headingLevel` inputs, and a
   consumer places it where a section heading is needed outside a `cs-section`.
-- **`CsToolbarComponent`** — the `cs-toolbar` element that groups controls in a
+- **`ToolbarComponent`** — the `cs-toolbar` element that groups controls in a
   row. It projects a `start` slot and an `end` slot, takes a `sticky` input over
   `boolean` that pins the toolbar to the top of its scroll container, and takes a
   `density` input over `'compact' | 'default'`. It applies the overflow strategy
   to the controls that do not fit.
-- **`CsActionBarComponent`** — the `cs-action-bar` element that groups the
+- **`ActionBarComponent`** — the `cs-action-bar` element that groups the
   primary and secondary actions of a page or a form. It projects the same `start`
   and `end` slots, takes the same `sticky` input, and takes an `align` input over
   `'start' | 'end' | 'between'`. It pins to the bottom of its scroll container
@@ -139,8 +139,8 @@ container from the same subsystem.
 
 ### Components
 
-`CsPageComponent` owns the heading and the body states, `CsSectionComponent` and
-`CsSectionHeaderComponent` own the section outline, and the toolbar and action
+`PageComponent` owns the heading and the body states, `SectionComponent` and
+`SectionHeaderComponent` own the section outline, and the toolbar and action
 bar own action grouping and overflow.
 
 ![C4 component view for framing a page](diagrams/c4-component.png)

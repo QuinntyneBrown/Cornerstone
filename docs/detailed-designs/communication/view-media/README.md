@@ -40,15 +40,15 @@ check is the reason the feature exists as one slice rather than three unrelated
 components.
 
 Word Up consumes all three: lessons and the public site use
-`CsMediaViewerComponent`; assignments and reviews use
-`CsAttachmentListComponent` and `CsEvidencePreviewComponent`.
+`MediaViewerComponent`; assignments and reviews use
+`AttachmentListComponent` and `EvidencePreviewComponent`.
 
 ## Description
 
 The feature introduces one viewer, one list, one preview component, and the types
 they exchange.
 
-- **`CsMediaViewerComponent`** — responsive presentation of one media item.
+- **`MediaViewerComponent`** — responsive presentation of one media item.
   Inputs: `media: InputSignal<CsMediaViewModel>`, `alt:
   InputSignal<string | null>`, `decorative: InputSignal<boolean>`,
   `state: InputSignal<CsDataState>` carrying the uniform data-state contract
@@ -59,30 +59,30 @@ they exchange.
   renders native controls and preserves the caption tracks the consumer supplies.
   An iframe carries a required `title`, the documented restrictive `sandbox`
   attribute set, and a `referrerpolicy`.
-- **`CsMediaFrameDirective`** — internal directive holding the aspect ratio box.
+- **`MediaFrameDirective`** — internal directive holding the aspect ratio box.
   It reserves the declared ratio before the source loads, so the layout shift on
   load stays within the documented threshold.
 - **`CsSafeUrlPipe`** — the shared pipe applying the URL contract in L2-164. It
   validates the scheme, rejects an unsupported one, and returns the value the
   template binds. Every URL in this feature passes through it.
-- **`CsAttachmentListComponent`** — list of attachments. Inputs:
-  `attachments: InputSignal<readonly CsAttachmentViewModel[]>` and
+- **`AttachmentListComponent`** — list of attachments. Inputs:
+  `attachments: InputSignal<readonly AttachmentViewModel[]>` and
   `state: InputSignal<CsDataState>`. Outputs: `removeRequested:
   OutputEmitterRef<string>`, `retryRequested: OutputEmitterRef<string>`, and
   `downloadRequested: OutputEmitterRef<string>`. Each item's accessible name
   states the file name, the file type, and a human-readable size. A download
   renders as a link carrying the documented `download` and `rel` attributes.
-- **`CsEvidencePreviewComponent`** — image preview of one attachment. Input:
-  `attachment: InputSignal<CsAttachmentViewModel>`. The preview derives its
+- **`EvidencePreviewComponent`** — image preview of one attachment. Input:
+  `attachment: InputSignal<AttachmentViewModel>`. The preview derives its
   accessible name from the file name. When the source is a generated object URL,
   the component revokes it on destroy.
-- **`CsMiddleTruncateDirective`** — internal directive truncating a long file name
+- **`MiddleTruncateDirective`** — internal directive truncating a long file name
   in the middle so the extension stays visible. The complete name remains
   available to assistive technology.
 - **`CsMediaViewModel`** — media fields: kind of `'image' | 'video' | 'iframe' |
   'document'`, source URL, poster URL, caption, declared aspect ratio, and
   caption track descriptors.
-- **`CsAttachmentViewModel`** — attachment fields: identifier, file name, MIME
+- **`AttachmentViewModel`** — attachment fields: identifier, file name, MIME
   type, size in bytes, transfer status, failure reason, preview URL, and download
   URL.
 
@@ -126,8 +126,8 @@ remove, and download intents.
 
 ### Components
 
-`CsMediaViewerComponent`, `CsAttachmentListComponent`, and
-`CsEvidencePreviewComponent` each receive a view model from an application service
+`MediaViewerComponent`, `AttachmentListComponent`, and
+`EvidencePreviewComponent` each receive a view model from an application service
 and emit intents back to it. Every consumer-supplied URL passes `CsSafeUrlPipe`
 before reaching the DOM.
 
@@ -135,9 +135,9 @@ before reaching the DOM.
 
 ### Class structure
 
-`CsMediaViewerComponent` composes `CsMediaFrameDirective` for the aspect ratio
-box. `CsAttachmentListComponent` composes `CsEvidencePreviewComponent` for image
-attachments, and both read `CsAttachmentViewModel`.
+`MediaViewerComponent` composes `MediaFrameDirective` for the aspect ratio
+box. `AttachmentListComponent` composes `EvidencePreviewComponent` for image
+attachments, and both read `AttachmentViewModel`.
 
 ![Class diagram for viewing media](diagrams/class-structure.png)
 

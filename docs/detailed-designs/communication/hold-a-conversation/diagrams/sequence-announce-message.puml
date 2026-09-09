@@ -19,9 +19,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "MessagingViewModelService" as vm
 end box
 box "Frontend — Cornerstone messaging" #D1FADF
-  participant "CsMessageThreadComponent" as thread
-  participant "CsThreadAnnouncerService" as announcer
-  participant "CsThreadScrollAnchor" as anchor
+  participant "MessageThreadComponent" as thread
+  participant "ThreadAnnouncerService" as announcer
+  participant "ThreadScrollAnchor" as anchor
 end box
 box "Browser — platform" #FFF4E5
   participant "Live region" as browser

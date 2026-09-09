@@ -32,7 +32,7 @@ boundary appears in the component diagram below as the sole edge crossing into
 and out of the library.
 
 Word Up consumes all three. Every Word Up role reads the notification list;
-`CsAnnouncementComposerComponent` is a Word Up administrator surface, and it
+`AnnouncementComposerComponent` is a Word Up administrator surface, and it
 composes its controls from the Cornerstone field components rather than from
 native elements.
 
@@ -41,29 +41,29 @@ native elements.
 The feature introduces one list component, one list item, one composer, and the
 types they exchange.
 
-- **`CsNotificationListComponent`** — notification panel. Inputs:
+- **`NotificationListComponent`** — notification panel. Inputs:
   `notifications: InputSignal<readonly CsNotificationViewModel[]>`,
   `state: InputSignal<CsDataState>` carrying the uniform data-state contract
   (L2-101), and `unreadCount: InputSignal<number>`. Outputs: `markRead:
   OutputEmitterRef<string>`, `markAllRead: OutputEmitterRef<void>`, and
   `navigate: OutputEmitterRef<CsNotificationNavigateIntent>`. The list uses list
   semantics and scrolls internally inside an overlay panel.
-- **`CsNotificationItemComponent`** — one notification row. Inputs:
+- **`NotificationItemComponent`** — one notification row. Inputs:
   `notification: InputSignal<CsNotificationViewModel>`. Outputs: `readToggled:
   OutputEmitterRef<string>` and `activated:
   OutputEmitterRef<CsNotificationNavigateIntent>`. The unread condition joins the
   item's accessible name and is shown by text and icon as well as by a colour
   dot. The category renders as an icon with a text label. The timestamp renders
   through a locale-aware pipe with the instant on a `<time datetime>` element.
-- **`CsAnnouncementComposerComponent`** — announcement authoring form. Inputs:
-  `audiences: InputSignal<readonly CsAudienceOption[]>`, `value:
-  ModelSignal<CsAnnouncementDraft>`, `submitState:
+- **`AnnouncementComposerComponent`** — announcement authoring form. Inputs:
+  `audiences: InputSignal<readonly AudienceOption[]>`, `value:
+  ModelSignal<AnnouncementDraft>`, `submitState:
   InputSignal<CsSubmitState>`, and `previewHtml: InputSignal<string | null>`.
-  Outputs: `submitted: OutputEmitterRef<CsAnnouncementDraft>` and
-  `previewRequested: OutputEmitterRef<CsAnnouncementDraft>`. Targeting,
+  Outputs: `submitted: OutputEmitterRef<AnnouncementDraft>` and
+  `previewRequested: OutputEmitterRef<AnnouncementDraft>`. Targeting,
   scheduling, and content occupy three labelled fieldsets, and every control is
   a Cornerstone field component.
-- **`CsValidationSummaryComponent`** — the shared summary the composer reports
+- **`ValidationSummaryComponent`** — the shared summary the composer reports
   blocking validation through. It states each blocking error and moves focus to
   the first invalid control.
 - **`CsNotificationViewModel`** — notification fields: identifier, category,
@@ -73,9 +73,9 @@ types they exchange.
 - **`CsNotificationNavigateIntent`** — typed output carrying the notification
   identifier and the deep link target. The component performs no navigation
   itself.
-- **`CsAnnouncementDraft`** — draft fields: audience identifiers, delivery mode of
+- **`AnnouncementDraft`** — draft fields: audience identifiers, delivery mode of
   `'now' | 'scheduled'`, scheduled instant, subject, and body.
-- **`CsAudienceOption`** — one selectable audience, carrying an identifier, a
+- **`AudienceOption`** — one selectable audience, carrying an identifier, a
   label, a kind of `'cohort' | 'role' | 'individual'`, and a recipient count.
 
 The mark-all-read action emits one intent, announces the count of notifications
@@ -128,7 +128,7 @@ receive both intent sets.
 
 ### Components
 
-`CsNotificationListComponent` and `CsAnnouncementComposerComponent` each receive a
+`NotificationListComponent` and `AnnouncementComposerComponent` each receive a
 view model from an application service and emit intents back to it. The composer
 draws its controls from the Cornerstone field components inside the same library
 boundary.
@@ -137,8 +137,8 @@ boundary.
 
 ### Class structure
 
-`CsNotificationListComponent` composes `CsNotificationItemComponent` per
-notification. `CsAnnouncementComposerComponent` holds a draft model and a submit
+`NotificationListComponent` composes `NotificationItemComponent` per
+notification. `AnnouncementComposerComponent` holds a draft model and a submit
 state, and reads the audience option set.
 
 ![Class diagram for receiving a notification](diagrams/class-structure.png)

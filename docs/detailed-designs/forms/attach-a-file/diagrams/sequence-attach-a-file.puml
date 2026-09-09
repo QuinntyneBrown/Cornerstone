@@ -21,10 +21,10 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone file components" #D1FADF
-  participant "CsDropzoneComponent" as dropzone
-  participant "CsFilePickerComponent" as picker
+  participant "DropzoneComponent" as dropzone
+  participant "FilePickerComponent" as picker
   participant "Object URL registry" as urls
-  participant "CsFileSummaryComponent" as summary
+  participant "FileSummaryComponent" as summary
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer" as announcer

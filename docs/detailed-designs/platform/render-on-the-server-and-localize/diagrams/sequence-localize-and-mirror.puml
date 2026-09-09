@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application shell" as shell
 end box
 box "Frontend — Cornerstone component library" #D1FADF
-  participant "CsPaginatorComponent" as paginator
-  participant "CsTabGroupComponent" as tabs
+  participant "PaginatorComponent" as paginator
+  participant "TabGroupComponent" as tabs
 end box
 box "Frontend — Cornerstone localization layer" #ECFDF3
   participant "CsLocalizationService" as i18n

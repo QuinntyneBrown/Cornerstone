@@ -18,39 +18,39 @@ enum CsCalendarView {
   week
 }
 
-class CsCalendarDate {
+class CalendarDate {
   +year: number
   +month: number
   +day: number
 }
 
-class CsCalendarRange {
-  +start: CsCalendarDate
-  +end: CsCalendarDate
+class CalendarRange {
+  +start: CalendarDate
+  +end: CalendarDate
 }
 
-class CsCalendarComponent {
+class CalendarComponent {
   +view: InputSignal<CsCalendarView>
-  +focusedDate: ModelSignal<CsCalendarDate>
-  +selectedDate: ModelSignal<CsCalendarDate | null>
+  +focusedDate: ModelSignal<CalendarDate>
+  +selectedDate: ModelSignal<CalendarDate | null>
   +events: InputSignal<readonly CsCalendarDayEvents[]>
   +maxEventsPerDay: InputSignal<number>
-  +rangeChange: OutputEmitterRef<CsCalendarRange>
-  +dateSelected: OutputEmitterRef<CsCalendarDate>
-  +overflowOpened: OutputEmitterRef<CsCalendarDate>
+  +rangeChange: OutputEmitterRef<CalendarRange>
+  +dateSelected: OutputEmitterRef<CalendarDate>
+  +overflowOpened: OutputEmitterRef<CalendarDate>
   +compact: Signal<boolean>
-  -buildCells(range: CsCalendarRange): readonly CsCalendarCell[]
+  -buildCells(range: CalendarRange): readonly CsCalendarCell[]
 }
 
-class CsCalendarKeyboardGrid {
+class CalendarKeyboardGrid {
   +columns: InputSignal<number>
   +onKeydown(event: KeyboardEvent): void
-  -move(from: CsCalendarDate, days: number): CsCalendarDate
-  -moveMonth(from: CsCalendarDate, months: number): CsCalendarDate
+  -move(from: CalendarDate, days: number): CalendarDate
+  -moveMonth(from: CalendarDate, months: number): CalendarDate
 }
 
 class CsCalendarCell {
-  +date: CsCalendarDate
+  +date: CalendarDate
   +outsideMonth: boolean
   +today: boolean
   +selected: boolean
@@ -58,7 +58,7 @@ class CsCalendarCell {
 }
 
 class CsCalendarDayEvents {
-  +date: CsCalendarDate
+  +date: CalendarDate
   +events: readonly CsEventViewModel[]
 }
 
@@ -87,15 +87,15 @@ enum CsRsvpValue {
   maybe
 }
 
-class CsEventCardComponent {
+class EventCardComponent {
   +event: InputSignal<CsEventViewModel>
   +actions: InputSignal<readonly CsEventAction[]>
   +pending: InputSignal<boolean>
-  +rsvpChanged: OutputEmitterRef<CsRsvpIntent>
+  +rsvpChanged: OutputEmitterRef<RsvpIntent>
   +actionInvoked: OutputEmitterRef<CsEventActionIntent>
 }
 
-class CsRsvpIntent {
+class RsvpIntent {
   +eventId: string
   +value: CsRsvpValue
 }
@@ -111,15 +111,15 @@ class CsEventAction {
   +disabled: boolean
 }
 
-class CsScheduleGroup {
-  +date: CsCalendarDate
+class ScheduleGroup {
+  +date: CalendarDate
   +heading: string
   +events: readonly CsEventViewModel[]
 }
 
-class CsScheduleListComponent {
-  +groups: InputSignal<readonly CsScheduleGroup[]>
-  +range: InputSignal<CsCalendarRange>
+class ScheduleListComponent {
+  +groups: InputSignal<readonly ScheduleGroup[]>
+  +range: InputSignal<CalendarRange>
   +state: InputSignal<CsDataState>
   +actionInvoked: OutputEmitterRef<CsEventActionIntent>
 }
@@ -132,24 +132,24 @@ enum CsDataState {
   error
 }
 
-CsCalendarComponent *-- CsCalendarKeyboardGrid
-CsCalendarComponent --> CsCalendarView : has
-CsCalendarComponent "1" o-- "28..42" CsCalendarCell
-CsCalendarComponent --> CsCalendarRange : emits
-CsCalendarComponent ..> CsCalendarDayEvents : reads
-CsCalendarKeyboardGrid ..> CsCalendarDate : computes
-CsCalendarCell --> CsCalendarDate : has
-CsCalendarRange *-- CsCalendarDate
+CalendarComponent *-- CalendarKeyboardGrid
+CalendarComponent --> CsCalendarView : has
+CalendarComponent "1" o-- "28..42" CsCalendarCell
+CalendarComponent --> CalendarRange : emits
+CalendarComponent ..> CsCalendarDayEvents : reads
+CalendarKeyboardGrid ..> CalendarDate : computes
+CsCalendarCell --> CalendarDate : has
+CalendarRange *-- CalendarDate
 CsCalendarDayEvents "1" o-- "0..*" CsEventViewModel
-CsScheduleListComponent "1" o-- "0..*" CsScheduleGroup
-CsScheduleListComponent ..> CsEventCardComponent : renders
-CsScheduleListComponent --> CsDataState : has
-CsScheduleGroup "1" o-- "1..*" CsEventViewModel
-CsEventCardComponent ..> CsEventViewModel : renders
-CsEventCardComponent --> CsRsvpIntent : emits
-CsEventCardComponent --> CsEventActionIntent : emits
-CsEventCardComponent "1" o-- "0..*" CsEventAction
+ScheduleListComponent "1" o-- "0..*" ScheduleGroup
+ScheduleListComponent ..> EventCardComponent : renders
+ScheduleListComponent --> CsDataState : has
+ScheduleGroup "1" o-- "1..*" CsEventViewModel
+EventCardComponent ..> CsEventViewModel : renders
+EventCardComponent --> RsvpIntent : emits
+EventCardComponent --> CsEventActionIntent : emits
+EventCardComponent "1" o-- "0..*" CsEventAction
 CsEventViewModel --> CsEventStatus : has
 CsEventViewModel --> CsRsvpValue : has
-CsRsvpIntent --> CsRsvpValue : carries
+RsvpIntent --> CsRsvpValue : carries
 @enduml

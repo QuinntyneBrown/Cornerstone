@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as appsvc
 end box
 box "Frontend — Cornerstone overlay runtime" #D1FADF
-  participant "CsDialogService" as service
-  participant "CsDialogShellComponent" as shell
-  participant "CsConfirmDialogComponent" as confirm
+  participant "DialogService" as service
+  participant "DialogShellComponent" as shell
+  participant "ConfirmDialogComponent" as confirm
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Dialog and FocusTrap" as cdk

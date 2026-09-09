@@ -20,10 +20,10 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone table components" #D1FADF
-  participant "CsTableDirective" as table
-  participant "CsTableRowDirective" as row
+  participant "TableDirective" as table
+  participant "TableRowDirective" as row
   participant "CsTableSelectAllDirective" as selectall
-  participant "CsDataToolbarComponent" as toolbar
+  participant "DataToolbarComponent" as toolbar
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Overlay" as overlay
@@ -59,7 +59,7 @@ row -> page : Emit the row action intent
 page -> services : Perform the action
 
 admin -> toolbar : Activate export
-toolbar -> page : Emit CsExportRequest { format, scope: 'selected' } per L2-095
+toolbar -> page : Emit ExportRequest { format, scope: 'selected' } per L2-095
 page -> services : Produce the export file
 services --> admin : Downloaded file
 

@@ -19,9 +19,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Feature page" as page
 end box
 box "Frontend — Cornerstone dialog runtime" #D1FADF
-  participant "CsDialogShellComponent" as shell
-  participant "CsDialogRef" as ref
-  participant "CsDialogService" as service
+  participant "DialogShellComponent" as shell
+  participant "DialogRef" as ref
+  participant "DialogService" as service
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "Overlay and Dialog" as cdk

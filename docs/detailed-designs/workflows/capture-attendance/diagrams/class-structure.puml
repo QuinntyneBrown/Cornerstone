@@ -27,15 +27,15 @@ enum CsAttendanceRowStatus {
   conflict
 }
 
-interface CsAttendanceRosterViewModel {
+interface AttendanceRosterViewModel {
   +sessionId: string
   +sessionLabel: string
-  +rows: CsAttendanceRowViewModel[]
+  +rows: AttendanceRowViewModel[]
   +conflictCount: number
   +queued: boolean
 }
 
-interface CsAttendanceRowViewModel {
+interface AttendanceRowViewModel {
   +personId: string
   +personName: string
   +state: CsAttendanceState | null
@@ -44,23 +44,23 @@ interface CsAttendanceRowViewModel {
   +conflictReason: string | null
 }
 
-interface CsAttendanceChange {
+interface AttendanceChange {
   +personId: string
   +state: CsAttendanceState
 }
 
-interface CsAttendanceBulkChange {
+interface AttendanceBulkChange {
   +state: CsAttendanceState | null
   +personIds: string[]
   +changedCount: number
 }
 
-interface CsAttendanceNoteChange {
+interface AttendanceNoteChange {
   +personId: string
   +note: string
 }
 
-interface CsAttendanceConflictIntent {
+interface AttendanceConflictIntent {
   +personId: string
   +reason: string
 }
@@ -77,20 +77,20 @@ interface ControlValueAccessor {
   +setDisabledState(isDisabled: boolean): void
 }
 
-class CsAttendanceRosterComponent {
-  +roster: InputSignal<CsAttendanceRosterViewModel>
+class AttendanceRosterComponent {
+  +roster: InputSignal<AttendanceRosterViewModel>
   +busy: InputSignal<boolean>
   +unsaved: Signal<CsAttendanceUnsavedSummary>
-  +stateChanged: OutputEmitterRef<CsAttendanceChange>
-  +bulkChanged: OutputEmitterRef<CsAttendanceBulkChange>
-  +noteChanged: OutputEmitterRef<CsAttendanceNoteChange>
-  +conflictResolveRequested: OutputEmitterRef<CsAttendanceConflictIntent>
+  +stateChanged: OutputEmitterRef<AttendanceChange>
+  +bulkChanged: OutputEmitterRef<AttendanceBulkChange>
+  +noteChanged: OutputEmitterRef<AttendanceNoteChange>
+  +conflictResolveRequested: OutputEmitterRef<AttendanceConflictIntent>
   +markAll(state: CsAttendanceState): void
   +clearAll(): void
   -announceChangedCount(count: number): void
 }
 
-class CsAttendanceChoiceComponent {
+class AttendanceChoiceComponent {
   +personName: InputSignal<string>
   +value: ModelSignal<CsAttendanceState | null>
   +status: InputSignal<CsAttendanceRowStatus>
@@ -101,22 +101,22 @@ class CsAttendanceChoiceComponent {
   +setDisabledState(isDisabled: boolean): void
 }
 
-class CsUnsavedChangesDialogComponent {
+class UnsavedChangesDialogComponent {
   +summary: InputSignal<CsAttendanceUnsavedSummary>
   +decided: OutputEmitterRef<'stay' | 'discard'>
 }
 
-CsAttendanceChoiceComponent ..|> ControlValueAccessor
-CsAttendanceRosterComponent *-- "0..*" CsAttendanceChoiceComponent : renders one per row
-CsAttendanceRosterComponent --> "1" CsAttendanceRosterViewModel : reads
-CsAttendanceRosterViewModel o-- "0..*" CsAttendanceRowViewModel : lists
-CsAttendanceRowViewModel --> "0..1" CsAttendanceState : holds
-CsAttendanceRowViewModel --> "1" CsAttendanceRowStatus : reports
-CsAttendanceChoiceComponent --> "0..1" CsAttendanceState : binds
-CsAttendanceRosterComponent ..> CsAttendanceChange : emits
-CsAttendanceRosterComponent ..> CsAttendanceBulkChange : emits
-CsAttendanceRosterComponent ..> CsAttendanceNoteChange : emits
-CsAttendanceRosterComponent ..> CsAttendanceConflictIntent : emits
-CsAttendanceRosterComponent --> "1" CsAttendanceUnsavedSummary : derives
-CsUnsavedChangesDialogComponent ..> CsAttendanceUnsavedSummary : reads
+AttendanceChoiceComponent ..|> ControlValueAccessor
+AttendanceRosterComponent *-- "0..*" AttendanceChoiceComponent : renders one per row
+AttendanceRosterComponent --> "1" AttendanceRosterViewModel : reads
+AttendanceRosterViewModel o-- "0..*" AttendanceRowViewModel : lists
+AttendanceRowViewModel --> "0..1" CsAttendanceState : holds
+AttendanceRowViewModel --> "1" CsAttendanceRowStatus : reports
+AttendanceChoiceComponent --> "0..1" CsAttendanceState : binds
+AttendanceRosterComponent ..> AttendanceChange : emits
+AttendanceRosterComponent ..> AttendanceBulkChange : emits
+AttendanceRosterComponent ..> AttendanceNoteChange : emits
+AttendanceRosterComponent ..> AttendanceConflictIntent : emits
+AttendanceRosterComponent --> "1" CsAttendanceUnsavedSummary : derives
+UnsavedChangesDialogComponent ..> CsAttendanceUnsavedSummary : reads
 @enduml

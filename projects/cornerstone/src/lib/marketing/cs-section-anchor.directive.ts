@@ -7,7 +7,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { CsButtonDirective, CsCardComponent } from '../foundations';
+import { CsButtonDirective, CardComponent } from '../foundations';
 
 @Directive({ selector: '[csSectionAnchor]' })
 export class CsSectionAnchorDirective {}

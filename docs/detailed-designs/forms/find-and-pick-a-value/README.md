@@ -43,49 +43,49 @@ the form element and documents its Angular-only participation.
 The feature is four components over two behaviour bases: a debounced query
 emitter and an overlay-backed listbox.
 
-- **`CsSearchFieldComponent`** — element component with the `cs-search-field`
+- **`SearchFieldComponent`** — element component with the `cs-search-field`
   selector wrapping a native `<input type="search">`. It carries the
   `placeholder` input, the `debounceMs` input, the `mode` input (`live` or
   `submit`), and the `resultCount` input. It emits the `search` output carrying
   the query string.
-- **`CsSearchFieldComponent` behaviour** — a clear button with an accessible name
+- **`SearchFieldComponent` behaviour** — a clear button with an accessible name
   appears while the value is non-empty and is absent while it is empty.
   Activating it clears the value, returns focus to the input, and announces
   politely that the search was cleared. In `live` mode the `search` output emits
   once after `debounceMs` elapses following the final keystroke; in `submit` mode
   `Enter` emits immediately regardless of the interval. A change to `resultCount`
   announces the count politely in the documented format.
-- **`CsComboboxComponent<T>`** — element component with the `cs-combobox`
+- **`ComboboxComponent<T>`** — element component with the `cs-combobox`
   selector implementing the ARIA combobox pattern. It carries the `options`
   input, the `displayWith` input, the `mode` input (`single` or `multiple`), the
   `loading` input, and the `emptyText` input. It emits the `queryChanged` output
   for asynchronous result loading and holds the selection through the value
   accessor.
-- **`CsComboboxComponent` keyboard contract** — `ArrowDown` on a closed control
+- **`ComboboxComponent` keyboard contract** — `ArrowDown` on a closed control
   opens the listbox, sets `aria-expanded="true"`, and marks the first option as
   the active descendant. `ArrowDown` and `ArrowUp` move `aria-activedescendant`
   and scroll the active option into view while DOM focus stays on the input.
   `Enter` selects the active option and, in `single` mode, closes the listbox
   with focus still on the input. `Escape` closes the listbox, reverts the input
   per the documented policy, and keeps focus on the input.
-- **`CsComboboxComponent` query debounce** — the `queryChanged` output follows the
+- **`ComboboxComponent` query debounce** — the `queryChanged` output follows the
   same debounce contract the search field states (L2-055), so one query reaches
   the application after the interval elapses following the final keystroke.
-- **`CsComboboxComponent` multiple mode** — selecting an option keeps the listbox
+- **`ComboboxComponent` multiple mode** — selecting an option keeps the listbox
   open, sets `aria-selected="true"` on the option, and reflects the selection as
   removable chips with accessible names.
-- **`CsComboboxComponent` loading and empty states** — an in-flight query sets
+- **`ComboboxComponent` loading and empty states** — an in-flight query sets
   `aria-busy="true"` on the listbox and announces politely that results are
   loading. A resolved query with no matches renders the documented empty state
   inside the listbox and announces politely that no results were found.
-- **`CsComboboxComponent` scale** — the listbox renders through CDK virtual
+- **`ComboboxComponent` scale** — the listbox renders through CDK virtual
   scrolling, so an option set of 5,000 entries renders only the documented
   buffer, and open-to-paint time stays inside the budget stated by L2-161.
-- **`CsDateFieldComponent`** — element component with the `cs-date-field`
+- **`DateFieldComponent`** — element component with the `cs-date-field`
   selector wrapping a native `<input type="date">` by default. Its value contract
   is an ISO-8601 calendar date string with no timezone conversion applied. It
   carries the `min` input, the `max` input, and the `disabled` input.
-- **`CsDateTimeFieldComponent`** — element component with the `cs-date-time-field`
+- **`DateTimeFieldComponent`** — element component with the `cs-date-time-field`
   selector wrapping a native `<input type="datetime-local">`. Its value contract
   is timezone-explicit, so a written value read back is identical in every
   supported browser timezone, including a timezone with a fractional-hour offset.
@@ -94,10 +94,10 @@ emitter and an overlay-backed listbox.
   the documented parse error on blur and substitutes no previous value silently.
   At viewport XS the field is at least 44 px tall and the platform picker remains
   reachable.
-- **`CsSearchMode`** — union type of the search modes: `'live' | 'submit'`.
-- **`CsComboboxMode`** — union type of the selection modes: `'single' |
+- **`SearchMode`** — union type of the search modes: `'live' | 'submit'`.
+- **`ComboboxMode`** — union type of the selection modes: `'single' |
   'multiple'`.
-- **`CsDateBounds`** — type holding the `min` and `max` ISO-8601 strings.
+- **`DateBounds`** — type holding the `min` and `max` ISO-8601 strings.
 - **`CsQueryState`** — union type of the query states: `'idle' | 'loading' |
   'resolved' | 'empty'`.
 
@@ -136,7 +136,7 @@ contract, and the announcements.
 
 ### Components
 
-`CsSearchFieldComponent` debounces and announces. `CsComboboxComponent` owns the
+`SearchFieldComponent` debounces and announces. `ComboboxComponent` owns the
 overlay listbox and the active-descendant contract. The two date components share
 one value contract and one bound validator.
 

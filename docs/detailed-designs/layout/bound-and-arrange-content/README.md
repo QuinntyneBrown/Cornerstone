@@ -39,7 +39,7 @@ The feature is a stylesheet-and-directive slice with one Angular component. Ever
 piece resolves its spacing from the token layer (L2-005) and declares no literal
 length.
 
-- **`CsContainerComponent`** — the `cs-container` element that applies content
+- **`ContainerComponent`** — the `cs-container` element that applies content
   bounds. It takes a `width` signal input over `'narrow' | 'default' | 'wide'`
   and a `gutter` input over `'none' | 'compact' | 'default'`. Each width resolves
   its maximum inline size from a container token, and the gutter steps with the
@@ -122,7 +122,7 @@ their width signals from the CDK layout observation container.
 
 ### Components
 
-`CsContainerComponent` sets the bounds; the stack, cluster, and grid directives
+`ContainerComponent` sets the bounds; the stack, cluster, and grid directives
 arrange within them; `CsResponsiveRegionDirective` observes the region width and
 selects a documented pattern.
 

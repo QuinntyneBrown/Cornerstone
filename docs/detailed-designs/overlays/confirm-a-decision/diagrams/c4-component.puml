@@ -6,12 +6,12 @@ title Components — Confirm a decision
 Person(user, "Application user", "Chooses among the offered actions")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(service, "CsDialogService", "Injectable service", "Opens the dialogs and exposes confirm() as a promise")
-  Component(shell, "CsDialogShellComponent", "Standalone component", "Hosts the focus trap, restoration, and scroll block per L2-102")
-  Component(confirm, "CsConfirmDialogComponent", "Standalone component", "Renders the tone icon, message, destructive slot, and the two actions")
-  Component(unsaved, "CsUnsavedChangesDialogComponent", "Standalone component", "Renders save, leave, and stay, with stay focused first")
-  Component(guard, "csConfirmLeave()", "CanDeactivateFn factory", "Converts the choice into a navigation answer and awaits the save callback")
-  Component(types, "Result and data types", "TypeScript types", "CsConfirmResult, CsConfirmTone, CsUnsavedChangesChoice, CsConfirmDialogData")
+  Component(service, "DialogService", "Injectable service", "Opens the dialogs and exposes confirm() as a promise")
+  Component(shell, "DialogShellComponent", "Standalone component", "Hosts the focus trap, restoration, and scroll block per L2-102")
+  Component(confirm, "ConfirmDialogComponent", "Standalone component", "Renders the tone icon, message, destructive slot, and the two actions")
+  Component(unsaved, "UnsavedChangesDialogComponent", "Standalone component", "Renders save, leave, and stay, with stay focused first")
+  Component(guard, "confirmLeave()", "CanDeactivateFn factory", "Converts the choice into a navigation answer and awaits the save callback")
+  Component(types, "Result and data types", "TypeScript types", "ConfirmResult, ConfirmTone, UnsavedChangesChoice, ConfirmDialogData")
 }
 
 Container_Boundary(themec, "Theme stylesheet") {
@@ -30,8 +30,8 @@ Rel(guard, service, "Opens the unsaved-changes dialog through")
 Rel(router, guard, "Calls before leaving the route")
 Rel(shell, confirm, "Projects and traps focus around")
 Rel(shell, unsaved, "Projects and traps focus around")
-Rel(confirm, types, "Resolves to CsConfirmResult from")
-Rel(unsaved, types, "Resolves to CsUnsavedChangesChoice from")
+Rel(confirm, types, "Resolves to ConfirmResult from")
+Rel(unsaved, types, "Resolves to UnsavedChangesChoice from")
 Rel(confirm, tones, "Resolves icon and button tone from")
 Rel(confirm, appsvc, "Awaits the confirmAction of")
 Rel(guard, appsvc, "Awaits the save callback of")

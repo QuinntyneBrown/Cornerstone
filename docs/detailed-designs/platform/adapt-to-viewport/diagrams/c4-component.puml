@@ -15,10 +15,10 @@ Container_Boundary(adapters, "CDK adapter layer") {
 
 Container_Boundary(lib, "Cornerstone component library") {
   Component(region, "CsResponsiveRegionDirective", "Angular directive", "Collapses a region to stack, drawer, or overflow below a named class")
-  Component(rtable, "CsResponsiveTableDirective", "Angular directive", "Reflows a table to labelled cards, preserving header association")
+  Component(rtable, "ResponsiveTableDirective", "Angular directive", "Reflows a table to labelled cards, preserving header association")
   Component(scroll, "CsScrollRegionDirective", "Angular directive", "Makes a documented horizontal scroller keyboard scrollable and named")
   Component(targets, "Target size rules", "Shared CSS rules", "Gives every pointer target a 24 by 24 CSS pixel box")
-  Component(consumers, "CsShellComponent / CsDataToolbarComponent / CsKanbanBoardComponent", "Angular components", "Change navigation, filters, and columns by class")
+  Component(consumers, "ShellComponent / DataToolbarComponent / KanbanBoardComponent", "Angular components", "Change navigation, filters, and columns by class")
 }
 
 Container_Boundary(harness, "Responsive verification harness") {

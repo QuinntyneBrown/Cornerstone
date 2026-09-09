@@ -6,7 +6,7 @@ title Containers — Authenticate a user
 Person(user, "Application user", "Signs in to Liturgy or Word Up")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsAuthLayoutComponent, CsAuthCardComponent, and the region directives")
+  Container(lib, "Component library", "Angular standalone components", "Supplies AuthLayoutComponent, AuthCardComponent, and the region directives")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares the panel tones, heading scale, and container bound")
   Container(docs, "Documentation site", "Angular application", "Publishes the centered and split variants and the error pattern")
 }

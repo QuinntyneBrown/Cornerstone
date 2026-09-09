@@ -30,17 +30,17 @@ enum CsListItemInteraction {
   selectable
 }
 
-class CsListComponent {
+class ListComponent {
   +dividers: InputSignal<boolean>
   +density: InputSignal<CsListDensity>
   +selectionMode: InputSignal<CsListSelectionMode>
   +state: InputSignal<CsDataState<void>>
   +selectionChange: OutputEmitterRef<ReadonlySet<string>>
-  -keyManager: ListKeyManager<CsListItemComponent>
+  -keyManager: ListKeyManager<ListItemComponent>
   -role: Signal<string>
 }
 
-class CsListItemComponent {
+class ListItemComponent {
   +key: InputSignal<string>
   +title: InputSignal<string>
   +meta: InputSignal<string | null>
@@ -51,13 +51,13 @@ class CsListItemComponent {
   +activated: OutputEmitterRef<void>
 }
 
-class CsDefinitionListComponent {
-  +items: InputSignal<CsDefinitionItem[]>
+class DefinitionListComponent {
+  +items: InputSignal<DefinitionItem[]>
   +layout: InputSignal<CsDefinitionLayout>
   +state: InputSignal<CsDataState<void>>
 }
 
-class CsDefinitionItem {
+class DefinitionItem {
   +term: string
   +value: string | null
   +emptyText?: string
@@ -69,14 +69,14 @@ enum CsDefinitionLayout {
   compact
 }
 
-class CsTimelineComponent {
-  +entries: InputSignal<CsTimelineEntry[]>
+class TimelineComponent {
+  +entries: InputSignal<TimelineEntry[]>
   +variant: InputSignal<CsTimelineVariant>
   +state: InputSignal<CsDataState<void>>
   +entryActivated: OutputEmitterRef<CsTimelineEntryRef>
 }
 
-class CsTimelineEntry {
+class TimelineEntry {
   +key: string
   +title: string
   +date: string
@@ -96,7 +96,7 @@ enum CsTimelineVariant {
   compact
 }
 
-class CsScriptureQuoteComponent {
+class ScriptureQuoteComponent {
   +citation: InputSignal<string | null>
   +reference: InputSignal<string | null>
   +surface: InputSignal<CsQuoteSurface>
@@ -130,20 +130,20 @@ interface CsDataState<T> {
   +kind: CsDataStateKind
 }
 
-CsListComponent *-- "0..*" CsListItemComponent : contains
-CsListComponent --> CsListDensity : has
-CsListComponent --> CsListSelectionMode : has
-CsListComponent ..> CsDataState : renders states of
-CsListItemComponent --> CsListItemInteraction : has
-CsDefinitionListComponent --> "0..*" CsDefinitionItem : renders
-CsDefinitionListComponent --> CsDefinitionLayout : has
-CsDefinitionListComponent ..> CsDataState : renders states of
-CsTimelineComponent --> "0..*" CsTimelineEntry : renders
-CsTimelineComponent --> CsTimelineVariant : has
-CsTimelineComponent ..> CsDataState : renders states of
-CsTimelineEntry --> CsTimelinePosition : has
-CsScriptureQuoteComponent --> CsQuoteSurface : has
+ListComponent *-- "0..*" ListItemComponent : contains
+ListComponent --> CsListDensity : has
+ListComponent --> CsListSelectionMode : has
+ListComponent ..> CsDataState : renders states of
+ListItemComponent --> CsListItemInteraction : has
+DefinitionListComponent --> "0..*" DefinitionItem : renders
+DefinitionListComponent --> CsDefinitionLayout : has
+DefinitionListComponent ..> CsDataState : renders states of
+TimelineComponent --> "0..*" TimelineEntry : renders
+TimelineComponent --> CsTimelineVariant : has
+TimelineComponent ..> CsDataState : renders states of
+TimelineEntry --> CsTimelinePosition : has
+ScriptureQuoteComponent --> CsQuoteSurface : has
 CsTooltipDirective --> CsTooltipPosition : prefers
-CsListItemComponent ..> CsTooltipDirective : may carry on a trailing action
-CsDefinitionListComponent ..> CsTooltipDirective : may carry on an abbreviated value
+ListItemComponent ..> CsTooltipDirective : may carry on a trailing action
+DefinitionListComponent ..> CsTooltipDirective : may carry on an abbreviated value
 @enduml

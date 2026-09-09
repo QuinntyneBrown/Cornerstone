@@ -51,34 +51,34 @@ components, one directive, and the state types they share.
   `message: string`, an optional `code: string`, and an optional
   `retryable: boolean`. It carries no HTTP status and no stack, because the
   library holds no HTTP client.
-- **`CsDataStateOutletComponent`** — selector `cs-data-state-outlet`. It takes a
+- **`DataStateOutletComponent`** — selector `cs-data-state-outlet`. It takes a
   required `state: InputSignal<CsDataState<unknown>>` and projects one of five
   named slots: `[csIdle]`, `[csLoading]`, `[csEmpty]`, `[csError]`, and
   `[csReady]`. The slot names are the ones every data-bearing component in the
   subsystem reuses (L2-101). It emits `retry: OutputEmitterRef<void>` when the
   error slot's retry control is activated, and `stateChange:
   OutputEmitterRef<CsDataStateKind>` on each transition.
-- **`CsDataStateHostDirective`** — selector `[csDataState]`. It applies the same
+- **`DataStateHostDirective`** — selector `[csDataState]`. It applies the same
   contract to a component that renders its own content, such as
-  `CsTableContainerComponent` or `CsListComponent`. It sets `aria-busy` on the
+  `TableContainerComponent` or `ListComponent`. It sets `aria-busy` on the
   host during `loading`, and it manages the live announcement so that the host
   component holds no announcement code of its own.
-- **`CsEmptyStateComponent`** — selector `cs-empty-state`. It renders an icon, an
+- **`EmptyStateComponent`** — selector `cs-empty-state`. It renders an icon, an
   eyebrow, a title, a description, and actions. The inputs are
   `icon: InputSignal<string | null>`, `eyebrow: InputSignal<string | null>`,
   `title: InputSignal<string>`, `description: InputSignal<string | null>`, and
-  `variant: InputSignal<CsEmptyStateVariant>` defaulting to `card`. The action
+  `variant: InputSignal<EmptyStateVariant>` defaulting to `card`. The action
   slot is `[csEmptyStateActions]` and the icon slot is `[csEmptyStateIcon]`, so
   an application may project a component in place of a named icon (L2-086).
-- **`CsEmptyStateVariant`** — union type of the three presentations:
+- **`EmptyStateVariant`** — union type of the three presentations:
   `'compact' | 'card' | 'full-page'`. The compact variant renders a single line
   with no icon frame for use inside a table body or a list. The card variant
   renders the icon frame and centred text inside the surrounding card. The
   full-page variant centres the block in the available height and raises the
   title to the page heading level.
-- **`CsStatePageComponent`** — selector `cs-state-page`. It renders a full-page
+- **`StatePageComponent`** — selector `cs-state-page`. It renders a full-page
   presentation for one of eight conditions (L2-087). The inputs are
-  `condition: InputSignal<CsStatePageCondition>`,
+  `condition: InputSignal<StatePageCondition>`,
   `title: InputSignal<string | null>`,
   `description: InputSignal<string | null>`, and
   `showBrand: InputSignal<boolean>`. When `title` or `description` is null the
@@ -86,12 +86,12 @@ components, one directive, and the state types they share.
   `action: OutputEmitterRef<CsStatePageAction>` carrying the identifier of the
   activated action, so the application performs the navigation, the sign-in, or
   the retry.
-- **`CsStatePageCondition`** — union type of the eight conditions:
+- **`StatePageCondition`** — union type of the eight conditions:
   `'not-found' | 'forbidden' | 'session-expired' | 'account-state' |
   'server-error' | 'maintenance' | 'offline' | 'consent-required'`. Each
   condition maps to a default icon, a default tone, and a default action set.
 - **`CsStatePageAction`** — the emitted intent. It holds `id: string` and
-  `condition: CsStatePageCondition`, so a single handler distinguishes a retry on
+  `condition: StatePageCondition`, so a single handler distinguishes a retry on
   a server error from a retry on an offline condition.
 
 Every state resolves its icon frame, surface, spacing, and text colour from
@@ -106,9 +106,9 @@ through an assertive live region, because the condition interrupts the reading
 task. A transition out of `idle` announces nothing, because `idle` precedes any
 user-visible request.
 
-`CsStatePageComponent` moves focus to its heading on first render, so a keyboard
+`StatePageComponent` moves focus to its heading on first render, so a keyboard
 reader that arrives at a forbidden or not-found route lands on the explanation
-rather than at the top of the document. `CsEmptyStateComponent` does not move
+rather than at the top of the document. `EmptyStateComponent` does not move
 focus, because it replaces a region rather than a route.
 
 Both components render without a browser global, so a server renderer produces
@@ -150,9 +150,9 @@ text tokens the vacant presentations resolve.
 
 ### Components
 
-`CsDataStateOutletComponent` and `CsDataStateHostDirective` share one state
-contract and one announcer. `CsEmptyStateComponent` fills the empty slot and
-`CsStatePageComponent` replaces the whole route.
+`DataStateOutletComponent` and `DataStateHostDirective` share one state
+contract and one announcer. `EmptyStateComponent` fills the empty slot and
+`StatePageComponent` replaces the whole route.
 
 ![C4 component view for presenting a vacant state](diagrams/c4-component.png)
 

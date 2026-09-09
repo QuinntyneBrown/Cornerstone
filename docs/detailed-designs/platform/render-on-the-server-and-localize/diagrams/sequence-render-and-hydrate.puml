@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Node server renderer" as server
 end box
 box "Frontend — Cornerstone component library" #D1FADF
-  participant "CsHeroComponent" as hero
+  participant "HeroComponent" as hero
   participant "CsMenuDirective" as menu
 end box
 box "Frontend — Cornerstone platform guard layer" #ECFDF3

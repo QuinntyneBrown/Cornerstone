@@ -13,27 +13,27 @@ skinparam class {
 ' --------------------------
 title Class structure — Show movement progress
 
-enum CsMovementState {
+enum MovementState {
   done
   current
   locked
 }
 
-enum CsDialVariant {
+enum DialVariant {
   paper
   dark
 }
 
-enum CsMovementListVariant {
+enum MovementListVariant {
   rail
   page
 }
 
-class CsMovement {
+class Movement {
   +id: string
   +label: string
   +shortLabel?: string
-  +state: CsMovementState
+  +state: MovementState
   +lockReason?: string
 }
 
@@ -43,7 +43,7 @@ interface CsProcessAdapter {
 }
 
 class CsProcessPalette {
-  +stateToken: ReadonlyMap<CsMovementState, string>
+  +stateToken: ReadonlyMap<MovementState, string>
   +defaultToken: string
 }
 
@@ -54,26 +54,26 @@ class CsProcessLabels {
   +positionSummary: (current: number, total: number) => string
 }
 
-class CsMovementDialComponent {
+class MovementDialComponent {
   +segments: InputSignal<number>
   +completed: InputSignal<number>
   +label: InputSignal<string>
   +valueText: InputSignal<string | null>
-  +variant: InputSignal<CsDialVariant>
+  +variant: InputSignal<DialVariant>
   +adapter: InputSignal<CsProcessAdapter>
   -segmentPaths: Signal<readonly string[]>
 }
 
-class CsMovementListComponent {
-  +movements: InputSignal<readonly CsMovement[]>
-  +variant: InputSignal<CsMovementListVariant>
+class MovementListComponent {
+  +movements: InputSignal<readonly Movement[]>
+  +variant: InputSignal<MovementListVariant>
   +adapter: InputSignal<CsProcessAdapter>
-  +movementActivated: OutputEmitterRef<CsMovementActivation>
-  -accessibleName(item: CsMovement): string
-  -isActivatable(item: CsMovement): boolean
+  +movementActivated: OutputEmitterRef<MovementActivation>
+  -accessibleName(item: Movement): string
+  -isActivatable(item: Movement): boolean
 }
 
-class CsPipStripComponent {
+class PipStripComponent {
   +count: InputSignal<number>
   +current: InputSignal<number>
   +labels: InputSignal<readonly string[] | null>
@@ -81,7 +81,7 @@ class CsPipStripComponent {
   -summaryText: Signal<string>
 }
 
-class CsProgressRingComponent {
+class ProgressRingComponent {
   +value: InputSignal<number>
   +size: InputSignal<CsRingSize>
   +tone: InputSignal<CsRingTone>
@@ -89,21 +89,21 @@ class CsProgressRingComponent {
   +indeterminate: InputSignal<boolean>
 }
 
-class CsMovementActivation {
+class MovementActivation {
   +movementId: string
   +index: number
 }
 
-CsMovementDialComponent *-- CsProgressRingComponent : renders through
-CsMovementDialComponent --> CsDialVariant : has
-CsMovementListComponent "1" o-- "0..*" CsMovement : renders
-CsMovementListComponent --> CsMovementListVariant : has
-CsMovementListComponent ..> CsPipStripComponent : renders per-movement pips through
-CsMovement --> CsMovementState : has
-CsMovementDialComponent --> CsProcessAdapter : reads labels from
-CsMovementListComponent --> CsProcessAdapter : reads labels from
-CsPipStripComponent --> CsProcessAdapter : reads labels from
+MovementDialComponent *-- ProgressRingComponent : renders through
+MovementDialComponent --> DialVariant : has
+MovementListComponent "1" o-- "0..*" Movement : renders
+MovementListComponent --> MovementListVariant : has
+MovementListComponent ..> PipStripComponent : renders per-movement pips through
+Movement --> MovementState : has
+MovementDialComponent --> CsProcessAdapter : reads labels from
+MovementListComponent --> CsProcessAdapter : reads labels from
+PipStripComponent --> CsProcessAdapter : reads labels from
 CsProcessAdapter *-- CsProcessLabels
 CsProcessAdapter *-- CsProcessPalette
-CsMovementListComponent ..> CsMovementActivation : emits
+MovementListComponent ..> MovementActivation : emits
 @enduml

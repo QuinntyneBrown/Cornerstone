@@ -25,7 +25,7 @@ enum CsCtaTone {
   lime
 }
 
-enum CsContentSectionVariant {
+enum ContentSectionVariant {
   prose
   proseMedia
   cardGrid
@@ -53,14 +53,14 @@ interface CsSectionBase {
   +lede: InputSignal<string>
 }
 
-class CsHeroComponent {
+class HeroComponent {
   +tone: InputSignal<CsSectionTone>
   +eyebrow: InputSignal<string>
   +title: InputSignal<string>
   +lede: InputSignal<string>
   +align: InputSignal<CsHeroAlign>
   +mediaPosition: InputSignal<CsHeroMediaPosition>
-  +actionSelected: OutputEmitterRef<CsHeroAction>
+  +actionSelected: OutputEmitterRef<HeroAction>
 }
 
 enum CsHeroAlign {
@@ -68,27 +68,27 @@ enum CsHeroAlign {
   center
 }
 
-class CsContentSectionComponent {
+class ContentSectionComponent {
   +tone: InputSignal<CsSectionTone>
   +eyebrow: InputSignal<string>
   +title: InputSignal<string>
   +lede: InputSignal<string>
-  +variant: InputSignal<CsContentSectionVariant>
+  +variant: InputSignal<ContentSectionVariant>
   +reverse: InputSignal<boolean>
   +anchorId: InputSignal<string>
-  +cards: InputSignal<readonly CsSectionCard[]>
-  +stats: InputSignal<readonly CsSectionStat[]>
-  +cardSelected: OutputEmitterRef<CsSectionCard>
+  +cards: InputSignal<readonly SectionCard[]>
+  +stats: InputSignal<readonly SectionStat[]>
+  +cardSelected: OutputEmitterRef<SectionCard>
 }
 
-class CsCtaSectionComponent {
+class CtaSectionComponent {
   +tone: InputSignal<CsCtaTone>
   +width: InputSignal<CsCtaWidth>
   +title: InputSignal<string>
   +lede: InputSignal<string>
-  +primaryAction: InputSignal<CsCtaAction>
-  +secondaryAction: InputSignal<CsCtaAction | null>
-  +actionSelected: OutputEmitterRef<CsCtaAction>
+  +primaryAction: InputSignal<CtaAction>
+  +secondaryAction: InputSignal<CtaAction | null>
+  +actionSelected: OutputEmitterRef<CtaAction>
 }
 
 enum CsCtaWidth {
@@ -96,19 +96,19 @@ enum CsCtaWidth {
   full
 }
 
-class CsHeroAction {
+class HeroAction {
   +id: string
   +label: string
   +emphasis: CsActionEmphasis
 }
 
-class CsCtaAction {
+class CtaAction {
   +id: string
   +label: string
   +emphasis: CsActionEmphasis
 }
 
-class CsSectionCard {
+class SectionCard {
   +id: string
   +title: string
   +body: string
@@ -117,7 +117,7 @@ class CsSectionCard {
   +media: CsSectionMedia
 }
 
-class CsSectionStat {
+class SectionStat {
   +id: string
   +value: string
   +label: string
@@ -136,20 +136,20 @@ class CsSectionAnchorDirective {
   +scrollIntoView(): void
 }
 
-CsHeroComponent ..|> CsSectionBase
-CsContentSectionComponent ..|> CsSectionBase
-CsHeroComponent --> CsHeroMediaPosition : has
-CsHeroComponent --> CsHeroAlign : has
-CsHeroComponent ..> CsHeroAction : emits
-CsHeroAction --> CsActionEmphasis : has
-CsContentSectionComponent --> CsContentSectionVariant : has
-CsContentSectionComponent o-- "0..*" CsSectionCard : renders
-CsContentSectionComponent o-- "0..*" CsSectionStat : renders
-CsContentSectionComponent *-- "0..1" CsSectionAnchorDirective : registers
-CsCtaSectionComponent --> CsCtaTone : has
-CsCtaSectionComponent --> CsCtaWidth : has
-CsCtaSectionComponent ..> CsCtaAction : emits
-CsCtaAction --> CsActionEmphasis : has
-CsSectionCard --> "0..1" CsSectionMedia : has
+HeroComponent ..|> CsSectionBase
+ContentSectionComponent ..|> CsSectionBase
+HeroComponent --> CsHeroMediaPosition : has
+HeroComponent --> CsHeroAlign : has
+HeroComponent ..> HeroAction : emits
+HeroAction --> CsActionEmphasis : has
+ContentSectionComponent --> ContentSectionVariant : has
+ContentSectionComponent o-- "0..*" SectionCard : renders
+ContentSectionComponent o-- "0..*" SectionStat : renders
+ContentSectionComponent *-- "0..1" CsSectionAnchorDirective : registers
+CtaSectionComponent --> CsCtaTone : has
+CtaSectionComponent --> CsCtaWidth : has
+CtaSectionComponent ..> CtaAction : emits
+CtaAction --> CsActionEmphasis : has
+SectionCard --> "0..1" CsSectionMedia : has
 CsSectionBase --> CsSectionTone : has
 @enduml

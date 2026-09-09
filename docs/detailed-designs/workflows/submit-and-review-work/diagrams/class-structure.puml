@@ -20,80 +20,80 @@ interface ControlValueAccessor {
   +setDisabledState(isDisabled: boolean): void
 }
 
-class CsAssignmentCardComponent {
-  +assignment: InputSignal<CsAssignmentView>
+class AssignmentCardComponent {
+  +assignment: InputSignal<AssignmentView>
   +expanded: ModelSignal<boolean>
   +busy: InputSignal<boolean>
-  +actionSelected: OutputEmitterRef<CsAssignmentAction>
+  +actionSelected: OutputEmitterRef<AssignmentAction>
 }
 
-class CsSubmissionStatusComponent {
-  +submission: InputSignal<CsSubmissionView>
-  +history: InputSignal<readonly CsSubmissionVersion[]>
+class SubmissionStatusComponent {
+  +submission: InputSignal<SubmissionView>
+  +history: InputSignal<readonly SubmissionVersion[]>
   +showHistory: ModelSignal<boolean>
-  +versionSelected: OutputEmitterRef<CsSubmissionVersionSelect>
+  +versionSelected: OutputEmitterRef<SubmissionVersionSelect>
   +actionSelected: OutputEmitterRef<CsSubmissionAction>
 }
 
-class CsRubricComponent {
-  +rubric: InputSignal<CsRubricView>
-  +selection: ModelSignal<CsRubricSelection>
+class RubricComponent {
+  +rubric: InputSignal<RubricView>
+  +selection: ModelSignal<RubricSelection>
   +readOnly: InputSignal<boolean>
-  +levelSelected: OutputEmitterRef<CsRubricLevelSelect>
+  +levelSelected: OutputEmitterRef<RubricLevelSelect>
 }
 
-class CsAssessmentEditorComponent {
-  +assessment: InputSignal<CsAssessmentView>
+class AssessmentEditorComponent {
+  +assessment: InputSignal<AssessmentView>
   +readOnly: InputSignal<boolean>
   +saving: InputSignal<boolean>
-  +assessmentChanged: OutputEmitterRef<CsAssessmentChange>
-  +decisionSubmitted: OutputEmitterRef<CsAssessmentDecision>
+  +assessmentChanged: OutputEmitterRef<AssessmentChange>
+  +decisionSubmitted: OutputEmitterRef<AssessmentDecision>
   -dirty: Signal<boolean>
   +writeValue(value: string): void
 }
 
-class CsAchievementCardComponent {
-  +achievement: InputSignal<CsAchievementView>
+class AchievementCardComponent {
+  +achievement: InputSignal<AchievementView>
   +size: InputSignal<CsAchievementSize>
-  +achievementSelected: OutputEmitterRef<CsAchievementSelect>
+  +achievementSelected: OutputEmitterRef<AchievementSelect>
 }
 
-class CsBadgeCollectionComponent {
-  +achievements: InputSignal<readonly CsAchievementView[]>
-  +layout: InputSignal<CsCollectionLayout>
+class BadgeCollectionComponent {
+  +achievements: InputSignal<readonly AchievementView[]>
+  +layout: InputSignal<CollectionLayout>
   +emptyLabel: InputSignal<string>
-  +achievementSelected: OutputEmitterRef<CsAchievementSelect>
+  +achievementSelected: OutputEmitterRef<AchievementSelect>
 }
 
-class CsAssignmentView {
+class AssignmentView {
   +assignmentId: string
   +title: string
   +dueLabel: string
-  +dueState: CsAssignmentDueState
-  +status: CsSubmissionStatus
+  +dueState: AssignmentDueState
+  +status: SubmissionStatus
   +instructions: string
   +metadata: readonly CsMetadataItem[]
-  +actions: readonly CsAssignmentAction[]
+  +actions: readonly AssignmentAction[]
 }
 
-enum CsAssignmentDueState {
+enum AssignmentDueState {
   upcoming
   dueSoon
   overdue
   closed
 }
 
-class CsSubmissionView {
+class SubmissionView {
   +submissionId: string
   +assignmentId: string
-  +status: CsSubmissionStatus
+  +status: SubmissionStatus
   +submittedAtLabel: string | null
-  +evidence: readonly CsEvidenceItem[]
-  +feedback: CsReviewFeedback | null
+  +evidence: readonly EvidenceItem[]
+  +feedback: ReviewFeedback | null
   +versionCount: number
 }
 
-enum CsSubmissionStatus {
+enum SubmissionStatus {
   draft
   submitted
   inReview
@@ -101,15 +101,15 @@ enum CsSubmissionStatus {
   approved
 }
 
-class CsSubmissionVersion {
+class SubmissionVersion {
   +versionId: string
   +ordinal: number
   +submittedAtLabel: string
-  +status: CsSubmissionStatus
+  +status: SubmissionStatus
   +isCurrent: boolean
 }
 
-class CsEvidenceItem {
+class EvidenceItem {
   +evidenceId: string
   +kind: string
   +label: string
@@ -117,52 +117,52 @@ class CsEvidenceItem {
   +previewUrl: string | null
 }
 
-class CsReviewFeedback {
+class ReviewFeedback {
   +authorLabel: string
   +postedAtLabel: string
   +body: string
   +decision: string
 }
 
-class CsRubricView {
+class RubricView {
   +rubricId: string
   +title: string
-  +criteria: readonly CsRubricCriterion[]
+  +criteria: readonly RubricCriterion[]
   +totalLabel: string
 }
 
-class CsRubricCriterion {
+class RubricCriterion {
   +criterionId: string
   +label: string
   +description: string
   +weight: number
-  +levels: readonly CsRubricLevel[]
+  +levels: readonly RubricLevel[]
 }
 
-class CsRubricLevel {
+class RubricLevel {
   +levelId: string
   +label: string
   +descriptor: string
   +score: number
 }
 
-class CsAssessmentView {
+class AssessmentView {
   +assessmentId: string
   +submissionId: string
-  +rubric: CsRubricView
-  +selection: CsRubricSelection
+  +rubric: RubricView
+  +selection: RubricSelection
   +comment: string
   +decision: string | null
 }
 
-class CsAssessmentDecision {
+class AssessmentDecision {
   +assessmentId: string
   +outcome: string
-  +selection: CsRubricSelection
+  +selection: RubricSelection
   +comment: string
 }
 
-class CsAchievementView {
+class AchievementView {
   +achievementId: string
   +name: string
   +artUrl: string | null
@@ -170,45 +170,45 @@ class CsAchievementView {
   +criteriaLabel: string
   +earned: boolean
   +awardedAtLabel: string | null
-  +progress: CsAchievementProgress | null
+  +progress: AchievementProgress | null
 }
 
-class CsAchievementProgress {
+class AchievementProgress {
   +current: number
   +target: number
   +percent: number
   +label: string
 }
 
-class CsAchievementSelect {
+class AchievementSelect {
   +achievementId: string
   +earned: boolean
 }
 
-enum CsCollectionLayout {
+enum CollectionLayout {
   grid
   list
 }
 
-CsAssessmentEditorComponent ..|> ControlValueAccessor
-CsAssessmentEditorComponent *-- "1" CsRubricComponent : composes
-CsBadgeCollectionComponent *-- "0..*" CsAchievementCardComponent : renders one per achievement
-CsAssignmentCardComponent --> "1" CsAssignmentView : reads
-CsAssignmentView --> CsAssignmentDueState : has
-CsAssignmentView --> CsSubmissionStatus : reports
-CsSubmissionStatusComponent --> "1" CsSubmissionView : reads
-CsSubmissionStatusComponent --> "0..*" CsSubmissionVersion : lists
-CsSubmissionView *-- "0..*" CsEvidenceItem : carries
-CsSubmissionView o-- "0..1" CsReviewFeedback : carries
-CsSubmissionView --> CsSubmissionStatus : has
-CsRubricComponent --> "1" CsRubricView : reads
-CsRubricView *-- "1..*" CsRubricCriterion : contains
-CsRubricCriterion *-- "1..*" CsRubricLevel : offers
-CsAssessmentEditorComponent --> "1" CsAssessmentView : reads
-CsAssessmentView o-- "1" CsRubricView : assesses against
-CsAssessmentEditorComponent ..> CsAssessmentDecision : emits
-CsAchievementCardComponent --> "1" CsAchievementView : reads
-CsAchievementView o-- "0..1" CsAchievementProgress : reports
-CsAchievementCardComponent ..> CsAchievementSelect : emits
-CsBadgeCollectionComponent --> CsCollectionLayout : has
+AssessmentEditorComponent ..|> ControlValueAccessor
+AssessmentEditorComponent *-- "1" RubricComponent : composes
+BadgeCollectionComponent *-- "0..*" AchievementCardComponent : renders one per achievement
+AssignmentCardComponent --> "1" AssignmentView : reads
+AssignmentView --> AssignmentDueState : has
+AssignmentView --> SubmissionStatus : reports
+SubmissionStatusComponent --> "1" SubmissionView : reads
+SubmissionStatusComponent --> "0..*" SubmissionVersion : lists
+SubmissionView *-- "0..*" EvidenceItem : carries
+SubmissionView o-- "0..1" ReviewFeedback : carries
+SubmissionView --> SubmissionStatus : has
+RubricComponent --> "1" RubricView : reads
+RubricView *-- "1..*" RubricCriterion : contains
+RubricCriterion *-- "1..*" RubricLevel : offers
+AssessmentEditorComponent --> "1" AssessmentView : reads
+AssessmentView o-- "1" RubricView : assesses against
+AssessmentEditorComponent ..> AssessmentDecision : emits
+AchievementCardComponent --> "1" AchievementView : reads
+AchievementView o-- "0..1" AchievementProgress : reports
+AchievementCardComponent ..> AchievementSelect : emits
+BadgeCollectionComponent --> CollectionLayout : has
 @enduml

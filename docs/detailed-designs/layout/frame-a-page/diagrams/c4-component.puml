@@ -6,11 +6,11 @@ title Components — Frame a page
 Person(dev, "Application developer", "Sets the title, the state, and the actions")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(page, "CsPageComponent", "Standalone component", "Renders the single h1, the breadcrumb, actions, and the ready, loading, and error bodies")
-  Component(section, "CsSectionComponent", "Standalone component", "Renders a labelled section landmark at a chosen heading level")
-  Component(sechead, "CsSectionHeaderComponent", "Standalone component", "Renders the label, title, description, and actions of a section")
-  Component(toolbar, "CsToolbarComponent", "Standalone component", "Groups controls in start and end slots with an optional sticky mode")
-  Component(actionbar, "CsActionBarComponent", "Standalone component", "Groups page and form actions with an optional sticky mode")
+  Component(page, "PageComponent", "Standalone component", "Renders the single h1, the breadcrumb, actions, and the ready, loading, and error bodies")
+  Component(section, "SectionComponent", "Standalone component", "Renders a labelled section landmark at a chosen heading level")
+  Component(sechead, "SectionHeaderComponent", "Standalone component", "Renders the label, title, description, and actions of a section")
+  Component(toolbar, "ToolbarComponent", "Standalone component", "Groups controls in start and end slots with an optional sticky mode")
+  Component(actionbar, "ActionBarComponent", "Standalone component", "Groups page and form actions with an optional sticky mode")
   Component(overflow, "Overflow strategy", "Component logic", "Moves trailing controls into a menu behind one labelled trigger")
   Component(skip, "CsSkipLinkDirective", "Attribute directive", "Hides an anchor until focus and moves focus to the target")
   Component(hidden, "CsVisuallyHiddenDirective", "Attribute directive", "Clips an element from view while keeping it announced")

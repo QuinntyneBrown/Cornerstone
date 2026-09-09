@@ -19,8 +19,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Cohort card" as page
 end box
 box "Frontend — Cornerstone data display" #D1FADF
-  participant "CsAvatarStackComponent" as stack
-  participant "CsAvatarComponent" as avatar
+  participant "AvatarStackComponent" as stack
+  participant "AvatarComponent" as avatar
   participant "csAvatarPalette()" as palette
 end box
 box "Frontend — Cornerstone styles" #ECFDF3

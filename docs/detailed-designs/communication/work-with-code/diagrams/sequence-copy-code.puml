@@ -19,7 +19,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "LessonSourceService" as vm
 end box
 box "Frontend — Cornerstone code" #D1FADF
-  participant "CsCodeBlockComponent" as block
+  participant "CodeBlockComponent" as block
   participant "CsCopyToClipboardDirective" as copy
 end box
 box "Frontend — Angular CDK" #ECFDF3

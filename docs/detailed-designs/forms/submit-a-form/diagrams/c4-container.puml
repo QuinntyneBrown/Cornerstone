@@ -7,7 +7,7 @@ Person(dev, "Application developer", "Owns the form model and the handler")
 Person(user, "Application user", "Submits the form")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components", "Supplies CsFormActionsComponent, CsValidationSummaryComponent, and CsWizardComponent")
+  Container(lib, "Component library", "Angular standalone components", "Supplies FormActionsComponent, ValidationSummaryComponent, and WizardComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares action placement, sticky offset, safe-area inset, and error tokens")
   Container(docs, "Documentation site", "Angular application", "Publishes the participation statement of every value-bearing control")
 }

@@ -19,9 +19,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "ScheduleViewModelService" as vm
 end box
 box "Frontend — Cornerstone calendar" #D1FADF
-  participant "CsCalendarComponent" as calendar
-  participant "CsCalendarDate utilities" as dates
-  participant "CsEventCardComponent" as card
+  participant "CalendarComponent" as calendar
+  participant "CalendarDate utilities" as dates
+  participant "EventCardComponent" as card
 end box
 box "Browser — platform" #FFF4E5
   participant "Intl and timezone database" as browser

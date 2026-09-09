@@ -23,7 +23,7 @@ enum CsAccordionMode {
   multiple
 }
 
-class CsTabGroupComponent {
+class TabGroupComponent {
   +tabs: InputSignal<readonly CsTab[]>
   +selectedId: ModelSignal<string>
   +lazy: InputSignal<boolean>
@@ -34,15 +34,15 @@ class CsTabGroupComponent {
   -moveFocus(delta: number): void
 }
 
-class CsTabComponent {
+class TabComponent {
   +label: InputSignal<string>
   +badge: InputSignal<string | number | null>
   +disabled: InputSignal<boolean>
   +panel: TemplateRef<unknown>
 }
 
-class CsSegmentedControlComponent {
-  +options: InputSignal<readonly CsSegmentOption[]>
+class SegmentedControlComponent {
+  +options: InputSignal<readonly SegmentOption[]>
   +value: ModelSignal<string>
   +size: InputSignal<CsSize>
   +ariaLabel: InputSignal<string>
@@ -50,7 +50,7 @@ class CsSegmentedControlComponent {
   +registerOnChange(fn: (v: string) => void): void
 }
 
-class CsAccordionComponent {
+class AccordionComponent {
   +mode: InputSignal<CsAccordionMode>
   +expandedIds: ModelSignal<readonly string[]>
   +lazy: InputSignal<boolean>
@@ -58,7 +58,7 @@ class CsAccordionComponent {
   -collapseOthers(itemId: string): void
 }
 
-class CsAccordionItemComponent {
+class AccordionItemComponent {
   +itemId: InputSignal<string>
   +heading: InputSignal<string>
   +disabled: InputSignal<boolean>
@@ -66,7 +66,7 @@ class CsAccordionItemComponent {
   +body: TemplateRef<unknown>
 }
 
-class CsPaginatorComponent {
+class PaginatorComponent {
   +totalItems: InputSignal<number>
   +pageIndex: ModelSignal<number>
   +pageSize: ModelSignal<number>
@@ -74,7 +74,7 @@ class CsPaginatorComponent {
   +compact: InputSignal<boolean>
   +pageCount: Signal<number>
   +rangeLabel: Signal<string>
-  +pageChange: OutputEmitterRef<CsPageChange>
+  +pageChange: OutputEmitterRef<PageChange>
 }
 
 class CsTab {
@@ -85,7 +85,7 @@ class CsTab {
   +routerLink?: unknown
 }
 
-class CsSegmentOption {
+class SegmentOption {
   +value: string
   +label: string
   +icon?: string
@@ -98,7 +98,7 @@ class CsSelectionChange {
   +source: 'pointer' | 'keyboard'
 }
 
-class CsPageChange {
+class PageChange {
   +pageIndex: number
   +pageSize: number
   +totalItems: number
@@ -111,13 +111,13 @@ interface ControlValueAccessor {
   +setDisabledState(isDisabled: boolean): void
 }
 
-CsSegmentedControlComponent ..|> ControlValueAccessor
-CsTabGroupComponent o-- "0..*" CsTabComponent : projects
-CsTabGroupComponent ..> CsTab : reads
-CsTabGroupComponent --> CsTabOverflow : resolves
-CsTabGroupComponent ..> CsSelectionChange : emits
-CsSegmentedControlComponent ..> CsSegmentOption : reads
-CsAccordionComponent *-- "1..*" CsAccordionItemComponent : coordinates
-CsAccordionComponent --> CsAccordionMode : applies
-CsPaginatorComponent ..> CsPageChange : emits
+SegmentedControlComponent ..|> ControlValueAccessor
+TabGroupComponent o-- "0..*" TabComponent : projects
+TabGroupComponent ..> CsTab : reads
+TabGroupComponent --> CsTabOverflow : resolves
+TabGroupComponent ..> CsSelectionChange : emits
+SegmentedControlComponent ..> SegmentOption : reads
+AccordionComponent *-- "1..*" AccordionItemComponent : coordinates
+AccordionComponent --> CsAccordionMode : applies
+PaginatorComponent ..> PageChange : emits
 @enduml

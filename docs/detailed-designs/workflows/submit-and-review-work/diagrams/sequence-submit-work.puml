@@ -20,33 +20,33 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Submission service" as submissions
 end box
 box "Frontend — Cornerstone work composites" #D1FADF
-  participant "CsAssignmentCardComponent" as card
-  participant "CsSubmissionStatusComponent" as status
-  participant "CsAchievementCardComponent" as badge
+  participant "AssignmentCardComponent" as card
+  participant "SubmissionStatusComponent" as status
+  participant "AchievementCardComponent" as badge
 end box
 box "Browser — platform" #FFF4E5
   participant "Rendering and input" as browser
 end box
 
 submissions -> page : Supply assignment and submission records
-page -> card : Bind CsAssignmentView
+page -> card : Bind AssignmentView
 card -> card : Render due date, status, metadata, and instructions per L2-120
-page -> status : Bind CsSubmissionView and the version list
+page -> status : Bind SubmissionView and the version list
 status -> status : Render evidence, feedback, and history per L2-120
 status --> browser : Rendered submission state
 
 youth -> browser : Expand the assignment and select 'submit'
 browser -> card : Activation event
-card -> page : Emit CsAssignmentAction with kind 'submit'
+card -> page : Emit AssignmentAction with kind 'submit'
 page -> submissions : Create the submission and attach the evidence
 submissions --> page : Submission recorded with a new version ordinal
-page -> status : Bind the updated CsSubmissionView per L2-120
+page -> status : Bind the updated SubmissionView per L2-120
 status -> status : Move the status to 'submitted' and prepend the version per L2-120
 status --> browser : Repaint the status and history
 
 opt Changes requested earlier
   submissions -> page : Supply feedback with decision 'request-changes'
-  page -> status : Bind the feedback into CsSubmissionView
+  page -> status : Bind the feedback into SubmissionView
   status -> status : Render the feedback against the current version per L2-120
   youth -> browser : Select 'resubmit'
   browser -> status : Activation event

@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "FormControl" as control
 end box
 box "Frontend — Cornerstone text controls" #D1FADF
-  participant "CsFieldComponent" as field
+  participant "FieldComponent" as field
   participant "CsTextareaDirective" as textarea
   participant "Character count region" as count
 end box

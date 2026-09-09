@@ -46,7 +46,7 @@ down to the utterance an assistive technology produces. It introduces two
 components, one service, one outlet component, one policy function, and six public
 types.
 
-- **`CsAlertComponent`** — the inline message, selector `cs-alert`. It carries a
+- **`AlertComponent`** — the inline message, selector `cs-alert`. It carries a
   `tone` input over `success`, `warning`, `error`, `info`, and `lime`, a `heading`
   input, an `icon` input, a `dismissible` input, and a `live` input over `auto`,
   `polite`, `assertive`, and `off`. It projects body content and projects actions
@@ -56,7 +56,7 @@ types.
   present at first render takes `role="status"`, and an alert inserted after first
   render with an `error` tone takes `role="alert"` and is announced assertively once.
   Every tone renders an icon and text so the tone never rests on colour alone.
-- **`CsOfflineBannerComponent`** — the connectivity message, selector
+- **`OfflineBannerComponent`** — the connectivity message, selector
   `cs-offline-banner`. It carries a `state` input over `online`, `offline`,
   `reconnecting`, `queued`, and `restored`, a `pendingCount` input, and a
   `restoredDismissAfter` input. It emits `heightChanged` so the shell offsets its
@@ -65,17 +65,17 @@ types.
   one announcement, throttles the `queued` count announcement, announces `offline`
   assertively once, announces `restored` politely, and auto-dismisses the `restored`
   state after the documented interval.
-- **`CsToastService`** — the injectable that raises transient messages. It exposes
-  `open(config: CsToastConfig): CsToastRef`, `dismiss(id: string)`, and
+- **`ToastService`** — the injectable that raises transient messages. It exposes
+  `open(config: ToastConfig): ToastRef`, `dismiss(id: string)`, and
   `dismissAll()`. It holds the queue, enforces the maximum-visible policy, and
   releases queued messages as visible ones retire. In development mode it throws an
   error naming the missing outlet when `open()` is called and no
-  `CsToastOutletComponent` is mounted.
-- **`CsToastRef`** — the handle returned to the caller. It exposes an `afterDismissed`
-  promise resolving to `CsToastResult`, which reports whether the message timed out,
+  `ToastOutletComponent` is mounted.
+- **`ToastRef`** — the handle returned to the caller. It exposes an `afterDismissed`
+  promise resolving to `ToastResult`, which reports whether the message timed out,
   was dismissed by the person, or had its action activated. Dismissal moves no focus,
   so the person's caret and focus position stay where they were.
-- **`CsToastOutletComponent`** — the single mount point, selector `cs-toast-outlet`.
+- **`ToastOutletComponent`** — the single mount point, selector `cs-toast-outlet`.
   It renders the visible messages, owns the two live regions the policy routes to,
   and pauses a message's timeout while the pointer rests on it or focus sits inside
   it. When hover and focus both end the timeout resumes from the remaining time
@@ -91,11 +91,11 @@ types.
   'error' | 'info' | 'lime'`.
 - **`CsLivePoliteness`** — union type of the live settings: `'auto' | 'polite' |
   'assertive' | 'off'`.
-- **`CsConnectivityState`** — union type of the five banner states.
-- **`CsToastConfig`** — the message description: `tone`, `title`, `body`, optional
+- **`ConnectivityState`** — union type of the five banner states.
+- **`ToastConfig`** — the message description: `tone`, `title`, `body`, optional
   `action`, optional `timeoutMs`, and optional `id`.
-- **`CsToastResult`** — the typed outcome: `'timeout' | 'dismissed' | 'action'`.
-- **`CsToastRef`** — the caller-facing handle described above.
+- **`ToastResult`** — the typed outcome: `'timeout' | 'dismissed' | 'action'`.
+- **`ToastRef`** — the caller-facing handle described above.
 
 The outlet declares exactly two live regions, one `aria-live="polite"` and one
 `aria-live="assertive"`, and writes each message's text into the region the policy
@@ -152,8 +152,8 @@ component declares one.
 
 ### Class structure
 
-`CsToastService` holds the queue and hands each caller a `CsToastRef` that resolves
-to a `CsToastResult`. The alert, the banner, and the outlet all route their text
+`ToastService` holds the queue and hands each caller a `ToastRef` that resolves
+to a `ToastResult`. The alert, the banner, and the outlet all route their text
 through the shared politeness function.
 
 ![Class diagram for announcing a system message](diagrams/class-structure.png)

@@ -27,7 +27,7 @@ enum CsAvatarState {
   initials
 }
 
-class CsPersonSummary {
+class PersonSummary {
   +id: string
   +name: string
   +imageUrl?: string
@@ -39,7 +39,7 @@ class CsPersonActivated {
   +id: string
 }
 
-class CsAvatarComponent {
+class AvatarComponent {
   +name: InputSignal<string>
   +src: InputSignal<string>
   +personId: InputSignal<string>
@@ -57,19 +57,19 @@ class CsAvatarPalette <<function>> {
   -hash(key: string): number
 }
 
-class CsAvatarStackComponent {
-  +people: InputSignal<readonly CsPersonSummary[]>
+class AvatarStackComponent {
+  +people: InputSignal<readonly PersonSummary[]>
   +max: InputSignal<number>
   +size: InputSignal<CsAvatarSize>
   +interactive: InputSignal<boolean>
   +opened: OutputEmitterRef<void>
-  #drawn: Signal<readonly CsPersonSummary[]>
+  #drawn: Signal<readonly PersonSummary[]>
   #hiddenCount: Signal<number>
   #groupLabel: Signal<string>
 }
 
-class CsPersonComponent {
-  +person: InputSignal<CsPersonSummary>
+class PersonComponent {
+  +person: InputSignal<PersonSummary>
   +size: InputSignal<CsAvatarSize>
   +clickable: InputSignal<boolean>
   +dense: InputSignal<boolean>
@@ -82,13 +82,13 @@ class BreakpointObserver <<CDK>> {
   +observe(query: string): Observable<BreakpointState>
 }
 
-CsPersonComponent *-- "1" CsAvatarComponent : composes
-CsAvatarStackComponent *-- "0..max" CsAvatarComponent : composes
-CsPersonComponent --> "1" CsPersonSummary : renders
-CsAvatarStackComponent --> "0..*" CsPersonSummary : renders
-CsAvatarComponent ..> CsAvatarPalette : calls
-CsAvatarComponent --> CsAvatarSize : has
-CsAvatarComponent --> CsAvatarState : holds
-CsPersonComponent ..> CsPersonActivated : emits
-CsPersonComponent ..> BreakpointObserver : reads
+PersonComponent *-- "1" AvatarComponent : composes
+AvatarStackComponent *-- "0..max" AvatarComponent : composes
+PersonComponent --> "1" PersonSummary : renders
+AvatarStackComponent --> "0..*" PersonSummary : renders
+AvatarComponent ..> CsAvatarPalette : calls
+AvatarComponent --> CsAvatarSize : has
+AvatarComponent --> CsAvatarState : holds
+PersonComponent ..> CsPersonActivated : emits
+PersonComponent ..> BreakpointObserver : reads
 @enduml

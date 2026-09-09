@@ -7,7 +7,7 @@ Person(dev, "Application developer", "Declares the option set")
 Person(user, "Application user", "Picks an option")
 
 System_Boundary(cornerstone, "Cornerstone") {
-  Container(lib, "Component library", "Angular standalone components and directives", "Supplies CsSelectDirective, CsCheckboxComponent, CsRadioGroupComponent, CsRadioComponent, CsSwitchComponent, CsChoiceGroupComponent, and CsChoiceCardComponent")
+  Container(lib, "Component library", "Angular standalone components and directives", "Supplies CsSelectDirective, CheckboxComponent, RadioGroupComponent, RadioComponent, SwitchComponent, ChoiceGroupComponent, and ChoiceCardComponent")
   Container(theme, "Theme stylesheet", "Sass / CSS custom properties", "Declares control, selection, card tone, focus, and motion tokens")
   Container(docs, "Documentation site", "Angular application", "Publishes the selection semantics and the form participation of each control")
 }

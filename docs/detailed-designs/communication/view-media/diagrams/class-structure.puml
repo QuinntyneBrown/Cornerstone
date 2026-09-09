@@ -63,7 +63,7 @@ class CsMediaActionIntent {
   +actionKey: string
 }
 
-class CsMediaViewerComponent {
+class MediaViewerComponent {
   +media: InputSignal<CsMediaViewModel>
   +alt: InputSignal<string | null>
   +decorative: InputSignal<boolean>
@@ -75,7 +75,7 @@ class CsMediaViewerComponent {
   -sandboxTokens(): string
 }
 
-class CsMediaFrameDirective {
+class MediaFrameDirective {
   +ratio: InputSignal<string>
   +reserve(): void
 }
@@ -92,7 +92,7 @@ enum CsUrlContext {
   external
 }
 
-class CsAttachmentViewModel {
+class AttachmentViewModel {
   +id: string
   +fileName: string
   +mimeType: string
@@ -103,41 +103,41 @@ class CsAttachmentViewModel {
   +downloadUrl: string | null
 }
 
-class CsAttachmentListComponent {
-  +attachments: InputSignal<readonly CsAttachmentViewModel[]>
+class AttachmentListComponent {
+  +attachments: InputSignal<readonly AttachmentViewModel[]>
   +state: InputSignal<CsDataState>
   +removeRequested: OutputEmitterRef<string>
   +retryRequested: OutputEmitterRef<string>
   +downloadRequested: OutputEmitterRef<string>
-  +accessibleName(item: CsAttachmentViewModel): string
+  +accessibleName(item: AttachmentViewModel): string
 }
 
-class CsEvidencePreviewComponent {
-  +attachment: InputSignal<CsAttachmentViewModel>
+class EvidencePreviewComponent {
+  +attachment: InputSignal<AttachmentViewModel>
   +previewName: Signal<string>
   -revokeObjectUrl(): void
 }
 
-class CsMiddleTruncateDirective {
+class MiddleTruncateDirective {
   +text: InputSignal<string>
   +headChars: InputSignal<number>
   -preserveExtension(value: string): string
 }
 
-CsMediaViewerComponent ..> CsMediaViewModel : renders
-CsMediaViewerComponent *-- CsMediaFrameDirective
-CsMediaViewerComponent ..> CsSafeUrlPipe : validates through
-CsMediaViewerComponent "1" o-- "0..*" CsMediaAction
-CsMediaViewerComponent --> CsMediaActionIntent : emits
-CsMediaViewerComponent --> CsDataState : has
+MediaViewerComponent ..> CsMediaViewModel : renders
+MediaViewerComponent *-- MediaFrameDirective
+MediaViewerComponent ..> CsSafeUrlPipe : validates through
+MediaViewerComponent "1" o-- "0..*" CsMediaAction
+MediaViewerComponent --> CsMediaActionIntent : emits
+MediaViewerComponent --> CsDataState : has
 CsMediaViewModel --> CsMediaKind : has
 CsMediaViewModel "1" o-- "0..*" CsCaptionTrack
-CsAttachmentListComponent "1" o-- "0..*" CsAttachmentViewModel
-CsAttachmentListComponent ..> CsEvidencePreviewComponent : renders for an image
-CsAttachmentListComponent *-- CsMiddleTruncateDirective
-CsAttachmentListComponent ..> CsSafeUrlPipe : validates through
-CsEvidencePreviewComponent ..> CsAttachmentViewModel : renders
-CsEvidencePreviewComponent ..> CsSafeUrlPipe : validates through
-CsAttachmentViewModel --> CsTransferStatus : has
+AttachmentListComponent "1" o-- "0..*" AttachmentViewModel
+AttachmentListComponent ..> EvidencePreviewComponent : renders for an image
+AttachmentListComponent *-- MiddleTruncateDirective
+AttachmentListComponent ..> CsSafeUrlPipe : validates through
+EvidencePreviewComponent ..> AttachmentViewModel : renders
+EvidencePreviewComponent ..> CsSafeUrlPipe : validates through
+AttachmentViewModel --> CsTransferStatus : has
 CsSafeUrlPipe --> CsUrlContext : reads
 @enduml

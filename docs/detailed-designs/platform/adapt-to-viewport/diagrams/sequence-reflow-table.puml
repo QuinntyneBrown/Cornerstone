@@ -19,8 +19,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Word Up people directory page" as page
 end box
 box "Frontend — Cornerstone component library" #D1FADF
-  participant "CsTableContainerComponent" as table
-  participant "CsResponsiveTableDirective" as rtable
+  participant "TableContainerComponent" as table
+  participant "ResponsiveTableDirective" as rtable
   participant "CsScrollRegionDirective" as scroll
 end box
 box "Frontend — Cornerstone CDK adapter layer" #ECFDF3

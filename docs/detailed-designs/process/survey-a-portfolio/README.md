@@ -41,55 +41,55 @@ an enforcement rule of its own.
 The feature is a vertical slice from a portfolio view model down to a rendered
 lane, and it declares the adapter types the whole subsystem reads.
 
-- **`CsPhaseLaneComponent`** — the phase grouping, selector `cs-phase-lane`.
-  Inputs: `phase: InputSignal<CsPhase>`,
-  `projects: InputSignal<readonly CsProject[]>`,
-  `layout: InputSignal<CsPortfolioLayout>` holding `'card'`, `'grid'`, or
+- **`PhaseLaneComponent`** — the phase grouping, selector `cs-phase-lane`.
+  Inputs: `phase: InputSignal<Phase>`,
+  `projects: InputSignal<readonly Project[]>`,
+  `layout: InputSignal<PortfolioLayout>` holding `'card'`, `'grid'`, or
   `'board'`, and `adapter: InputSignal<CsProcessAdapter>`. Each lane is a
   labelled region whose accessible name combines the phase name and the project
   count. The lane resolves its colour from `adapter.palette`; it holds no phase
   name and no colour value in its own source. At viewport XS the lanes stack
   vertically and the cards become full-width.
-- **`CsProjectCardComponent`** — the project tile, selector `cs-project-card`.
-  Inputs: `project: InputSignal<CsProject>` and `adapter`. Output:
-  `opened: OutputEmitterRef<CsProjectOpenIntent>`. The card states the project
+- **`ProjectCardComponent`** — the project tile, selector `cs-project-card`.
+  Inputs: `project: InputSignal<Project>` and `adapter`. Output:
+  `opened: OutputEmitterRef<ProjectOpenIntent>`. The card states the project
   state, its metadata, and its gate state in text; the gate indicator is never
   the sole conveyance. Activation emits one typed open intent and performs no
   navigation.
-- **`CsGratitudeWallComponent`** — the collection layout, selector
-  `cs-gratitude-wall`. Inputs: `notes: InputSignal<readonly CsGratitudeNote[]>`,
+- **`GratitudeWallComponent`** — the collection layout, selector
+  `cs-gratitude-wall`. Inputs: `notes: InputSignal<readonly GratitudeNote[]>`,
   `loading: InputSignal<boolean>`, `emptyText: InputSignal<string>`, and
   `adapter`. The wall uses list semantics so assistive technology can report the
   note count. In the loading state it renders skeleton notes, sets
   `aria-busy="true"`, and reserves the layout height. When it holds no note it
   renders the empty state and announces it politely once. At viewport XS the
   notes stack in one column and reading order matches visual order.
-- **`CsGratitudeNoteComponent`** — the note, selector `cs-gratitude-note`.
-  Inputs: `note: InputSignal<CsGratitudeNote>`. It renders `<figure>`,
+- **`GratitudeNoteComponent`** — the note, selector `cs-gratitude-note`.
+  Inputs: `note: InputSignal<GratitudeNote>`. It renders `<figure>`,
   `<blockquote>`, and `<figcaption>`, associating the attribution with the
   quotation.
-- **`CsPhase`** — the phase view model: `id`, `name`, optional `paletteKey`, and
+- **`Phase`** — the phase view model: `id`, `name`, optional `paletteKey`, and
   optional `description`.
-- **`CsProject`** — the project view model: `id`, `name`, `state`, `meta` as an
+- **`Project`** — the project view model: `id`, `name`, `state`, `meta` as an
   ordered list of label and value pairs, optional `gate` holding a
-  `CsGateSummary`, and optional `phaseId`.
-- **`CsGratitudeNote`** — the note view model: `id`, `quote`, `attribution`, and
+  `GateSummary`, and optional `phaseId`.
+- **`GratitudeNote`** — the note view model: `id`, `quote`, `attribution`, and
   optional `context`.
-- **`CsPortfolioLayout`** — union type of the layouts: `'card' | 'grid' |
+- **`PortfolioLayout`** — union type of the layouts: `'card' | 'grid' |
   'board'`.
-- **`CsProjectOpenIntent`** — the intent emitted when a project card is
+- **`ProjectOpenIntent`** — the intent emitted when a project card is
   activated, carrying `projectId`.
 - **`CsProcessAdapter`** — the adapter contract (L2-143). It holds `labels` of
   type `CsProcessLabels`, `palette` of type `CsProcessPalette`, `order` naming
   the phase or stage sequence, and `enforcement` mapping a gate identifier to a
-  `CsGateSummary`. Every field is consumer-supplied and typed.
+  `GateSummary`. Every field is consumer-supplied and typed.
 - **`CsProcessLabels`** — the label set. Every field is optional; each component
   falls back to its documented neutral default when a label is absent, and no
   runtime error occurs.
 - **`CsProcessPalette`** — the colour map. It names design tokens by key; it
   carries no literal colour value, so an application changes portfolio colour
   through the token layer (L2-005).
-- **`CsGateSummary`** — the enforcement result the application computes and the
+- **`GateSummary`** — the enforcement result the application computes and the
   gate renders.
 - **`provideCsProcessAdapter()`** — the provider function that registers a
   default adapter for a route subtree, so a page composes the subsystem's
@@ -135,7 +135,7 @@ the palette names.
 ### Components
 
 The adapter boundary sits between the application's vocabulary and every
-component of the subsystem. `CsPhaseLaneComponent`, `CsProjectCardComponent`, and
+component of the subsystem. `PhaseLaneComponent`, `ProjectCardComponent`, and
 the gratitude components read it, and so does every other process component.
 
 ![C4 component view for surveying a portfolio](diagrams/c4-component.png)

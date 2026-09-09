@@ -44,7 +44,7 @@ The feature is a vertical slice from a page that holds a loading flag down to th
 rendered indicator and its entry in the accessibility tree. It introduces five
 components and five public types.
 
-- **`CsSpinnerComponent`** — the indeterminate indicator, selector `cs-spinner`. It
+- **`SpinnerComponent`** — the indeterminate indicator, selector `cs-spinner`. It
   carries a `label` input, a `size` input over `xs`, `sm`, `md`, and `lg`, a `mode`
   input over `inline` and `region`, and a `decorative` input. A labelled spinner
   exposes `role="status"` and announces its label politely once. A decorative spinner
@@ -54,20 +54,20 @@ components and five public types.
   the person cannot act on content that is still settling. Under
   `prefers-reduced-motion: reduce` the rotation is suppressed and the status stays
   announced.
-- **`CsSkeletonComponent`** — one placeholder shape, selector `cs-skeleton`. It
+- **`SkeletonComponent`** — one placeholder shape, selector `cs-skeleton`. It
   carries a `preset` input over `text`, `title`, `circle`, `block`, `button`, and
   `tableRow`, a `lines` input for the `text` preset, and `width` and `height` inputs
   overriding the preset. Every preset derives its dimensions from tokens so it
   reserves the same space as the content it replaces within the documented tolerance.
   Each shape is `aria-hidden="true"`; the busy condition belongs to the group.
-- **`CsSkeletonGroupComponent`** — the busy region, selector `cs-skeleton-group`. It
+- **`SkeletonGroupComponent`** — the busy region, selector `cs-skeleton-group`. It
   carries a `loading` input and a `label` input, projects the skeleton shapes while
   `loading` holds, and projects the real content once it clears. The group exposes
   `aria-busy="true"` while loading. The swap preserves the outer box dimensions, so
   the exchange stays inside the documented cumulative-layout-shift threshold. Under
   `prefers-reduced-motion: reduce` the shimmer animation is suppressed and the shapes
   render static.
-- **`CsProgressBarComponent`** — the linear indicator, selector `cs-progress-bar`. It
+- **`ProgressBarComponent`** — the linear indicator, selector `cs-progress-bar`. It
   carries a `label` required input, a `value` input, `min` and `max` inputs, a `mode`
   input over `determinate` and `indeterminate`, a `height` input over `thin` and
   `standard`, a `tone` input over `default` and `ink`, and a `showValue` input adding
@@ -79,7 +79,7 @@ components and five public types.
   Announcements of a changing value are throttled to the documented interval rather
   than emitted on every increment. Under `prefers-reduced-motion: reduce` the sweeping
   animation is suppressed and a static busy indication remains.
-- **`CsProgressRingComponent`** — the circular indicator, selector
+- **`ProgressRingComponent`** — the circular indicator, selector
   `cs-progress-ring`. It carries the same `label`, `value`, `min`, `max`, and `mode`
   inputs as the bar, plus a `size` input over `sm`, `md`, `lg`, and `xl` and a `tone`
   input. It renders an SVG track and arc, and the SVG root carries
@@ -143,8 +143,8 @@ every size, tone, and motion duration.
 
 ### Components
 
-`CsSkeletonGroupComponent` owns the busy condition that its projected shapes leave
-alone. `CsProgressBarComponent` and `CsProgressRingComponent` share the clamp helper
+`SkeletonGroupComponent` owns the busy condition that its projected shapes leave
+alone. `ProgressBarComponent` and `ProgressRingComponent` share the clamp helper
 and the throttled announcement helper.
 
 ![C4 component view for indicating progress](diagrams/c4-component.png)

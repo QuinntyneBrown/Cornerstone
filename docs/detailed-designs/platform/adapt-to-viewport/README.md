@@ -63,7 +63,7 @@ service, two behaviour directives, and a test harness.
   panels, filter bars, and action bars. It takes a `collapseBelow` input naming a
   viewport class and a `mode` input of `'stack' | 'drawer' | 'overflow'`, and it
   projects its content once rather than duplicating it per variant.
-- **`CsResponsiveTableDirective`** — attribute directive `csResponsiveTable` that
+- **`ResponsiveTableDirective`** — attribute directive `csResponsiveTable` that
   reflows a table into labelled cards below its configured class. Each card cell
   keeps its header association through the generated header identifiers, and the
   keyboard order of the card layout matches the reading order of the table.
@@ -125,7 +125,7 @@ The responsive verification harness asserts the result at each class.
 ### Components
 
 `CsBreakpoints` is the single source the constant, the mixins, and the service
-share. `CsResponsiveRegionDirective` and `CsResponsiveTableDirective` consume the
+share. `CsResponsiveRegionDirective` and `ResponsiveTableDirective` consume the
 service, and `CsScrollRegionDirective` covers the components documented as
 horizontally scrollable.
 

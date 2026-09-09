@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
 end box
 box "Frontend — Cornerstone component library" #D1FADF
   participant "CsMenuDirective" as menu
-  participant "CsPopoverComponent" as panel
+  participant "PopoverComponent" as panel
 end box
 box "Frontend — Cornerstone CDK adapter layer" #ECFDF3
   participant "CsOverlayService" as overlay
@@ -33,7 +33,7 @@ end box
 
 user -> page : Activate the menu trigger
 page -> menu : Trigger click or Enter
-menu -> overlay : open(CsPopoverComponent, config) per L2-011
+menu -> overlay : open(PopoverComponent, config) per L2-011
 overlay -> overlay : Resolve the belowStart position preset
 overlay -> cdk : Create a flexible connected position strategy
 overlay -> cdk : Attach the reposition scroll strategy per L2-011

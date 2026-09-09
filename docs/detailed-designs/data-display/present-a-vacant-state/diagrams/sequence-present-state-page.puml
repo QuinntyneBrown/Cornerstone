@@ -21,8 +21,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone state-page runtime" #D1FADF
-  participant "CsStatePageComponent" as statepage
-  participant "CsEmptyStateComponent" as empty
+  participant "StatePageComponent" as statepage
+  participant "EmptyStateComponent" as empty
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "FocusMonitor" as focus

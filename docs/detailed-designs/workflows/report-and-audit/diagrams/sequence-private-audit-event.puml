@@ -20,7 +20,7 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Authorization service" as authz
 end box
 box "Frontend — Cornerstone audit composite" #D1FADF
-  participant "CsAuditLogComponent" as audit
+  participant "AuditLogComponent" as audit
   participant "Audit detail region" as detail
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
@@ -33,7 +33,7 @@ end box
 
 page -> authz : Ask which fields this reader may see
 authz --> page : Event marked private, with the withheld fields removed from the list
-page -> audit : Bind CsAuditEvent carrying only the permitted detail fields
+page -> audit : Bind AuditEvent carrying only the permitted detail fields
 
 audit -> dom : Render the paged table per L2-093 and the paginator per L2-074
 audit -> dom : State the private indicator in text per L2-131

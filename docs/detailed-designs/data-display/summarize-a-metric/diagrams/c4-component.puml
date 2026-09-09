@@ -6,14 +6,14 @@ title Components — Summarize a metric
 Person(dev, "Application developer", "Supplies the computed figures")
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(stat, "CsStatCardComponent", "Angular component", "Framed statistic with label, value, unit, delta, and tone")
-  Component(kpi, "CsKpiComponent", "Angular component", "Unframed statistic for headers and summary rows")
-  Component(matrix, "CsProgressMatrixComponent", "Angular component", "Labelled grid of done, in-progress, none, and not-applicable cells")
-  Component(bars, "CsMetricBarsComponent", "Angular component", "Horizontal bars and 100-percent distributions")
-  Component(compare, "CsComparisonChartComponent", "Angular component", "Paired bars with an explicit delta column")
-  Component(valuetable, "CsMetricValueTableComponent", "Angular component", "Tabular restatement of every series and point")
-  Component(legend, "CsMetricLegendComponent", "Angular component", "Colour, label, and pattern for each series")
-  Component(types, "CsMetricDelta and CsMetricSeries", "TypeScript types", "Delta direction and sentiment; series and point view model")
+  Component(stat, "StatCardComponent", "Angular component", "Framed statistic with label, value, unit, delta, and tone")
+  Component(kpi, "KpiComponent", "Angular component", "Unframed statistic for headers and summary rows")
+  Component(matrix, "ProgressMatrixComponent", "Angular component", "Labelled grid of done, in-progress, none, and not-applicable cells")
+  Component(bars, "MetricBarsComponent", "Angular component", "Horizontal bars and 100-percent distributions")
+  Component(compare, "ComparisonChartComponent", "Angular component", "Paired bars with an explicit delta column")
+  Component(valuetable, "MetricValueTableComponent", "Angular component", "Tabular restatement of every series and point")
+  Component(legend, "MetricLegendComponent", "Angular component", "Colour, label, and pattern for each series")
+  Component(types, "MetricDelta and CsMetricSeries", "TypeScript types", "Delta direction and sentiment; series and point view model")
   Component(state, "CsDataState contract", "TypeScript types", "Idle, loading, empty, error, and ready conditions")
 }
 

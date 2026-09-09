@@ -44,7 +44,7 @@ interface CsHeadingHost {
   +headingId: InputSignal<string | undefined>
 }
 
-class CsPageComponent {
+class PageComponent {
   +title: InputSignal<string>
   +eyebrow: InputSignal<string | undefined>
   +subtitle: InputSignal<string | undefined>
@@ -55,7 +55,7 @@ class CsPageComponent {
   -busy: Signal<boolean>
 }
 
-class CsSectionComponent {
+class SectionComponent {
   +title: InputSignal<string>
   +label: InputSignal<string | undefined>
   +description: InputSignal<string | undefined>
@@ -64,7 +64,7 @@ class CsSectionComponent {
   -labelledBy: Signal<string>
 }
 
-class CsSectionHeaderComponent {
+class SectionHeaderComponent {
   +title: InputSignal<string>
   +label: InputSignal<string | undefined>
   +description: InputSignal<string | undefined>
@@ -79,11 +79,11 @@ abstract class CsActionGroupBase {
   -measure(inlineSize: number): void
 }
 
-class CsToolbarComponent {
+class ToolbarComponent {
   +density: InputSignal<CsToolbarDensity>
 }
 
-class CsActionBarComponent {
+class ActionBarComponent {
   +align: InputSignal<CsActionAlign>
 }
 
@@ -108,20 +108,20 @@ class CsResponsiveRegionDirective {
   +state: Signal<CsRegionState>
 }
 
-CsHeadingHost <|.. CsPageComponent
-CsHeadingHost <|.. CsSectionComponent
-CsHeadingHost <|.. CsSectionHeaderComponent
-CsActionGroupBase <|-- CsToolbarComponent
-CsActionGroupBase <|-- CsActionBarComponent
-CsPageComponent --> CsPageState : has
-CsSectionComponent --> CsHeadingLevel : has
-CsSectionComponent *-- "1" CsSectionHeaderComponent : renders
-CsPageComponent o-- "0..*" CsSectionComponent : contains
-CsPageComponent o-- "0..1" CsToolbarComponent : places in the actions slot
+CsHeadingHost <|.. PageComponent
+CsHeadingHost <|.. SectionComponent
+CsHeadingHost <|.. SectionHeaderComponent
+CsActionGroupBase <|-- ToolbarComponent
+CsActionGroupBase <|-- ActionBarComponent
+PageComponent --> CsPageState : has
+SectionComponent --> CsHeadingLevel : has
+SectionComponent *-- "1" SectionHeaderComponent : renders
+PageComponent o-- "0..*" SectionComponent : contains
+PageComponent o-- "0..1" ToolbarComponent : places in the actions slot
 CsActionGroupBase o-- "0..*" CsActionRef : overflows
 CsActionGroupBase ..> CsResponsiveRegionDirective : measures through
-CsPageComponent ..> CsResponsiveRegionDirective : reflows its header through
-CsToolbarComponent --> CsToolbarDensity : has
-CsActionBarComponent --> CsActionAlign : has
+PageComponent ..> CsResponsiveRegionDirective : reflows its header through
+ToolbarComponent --> CsToolbarDensity : has
+ActionBarComponent --> CsActionAlign : has
 CsSkipLinkDirective ..> CsVisuallyHiddenDirective : hides itself with
 @enduml

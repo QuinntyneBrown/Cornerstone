@@ -45,35 +45,35 @@ copy, the routes, the analytics, and the images.
 The feature spans three components, the directives that name their projection
 regions, and the view-model types the applications populate.
 
-- **`CsHeroComponent`** — the `cs-hero` element that opens a page. It carries a
+- **`HeroComponent`** — the `cs-hero` element that opens a page. It carries a
   `tone` input of `'light' | 'dark' | 'brand'`, an `eyebrow` input, a `title`
   input, a `lede` input, an `align` input of `'start' | 'center'`, and a
   `mediaPosition` input of `'start' | 'end' | 'below' | 'background'`. It projects
   an actions region selected by `[csHeroActions]` and a media region selected by
-  `[csHeroMedia]`, and emits `actionSelected` carrying a `CsHeroAction`.
-- **`CsHeroAction`** — the typed intent a hero action emits. It carries an `id`, a
+  `[csHeroMedia]`, and emits `actionSelected` carrying a `HeroAction`.
+- **`HeroAction`** — the typed intent a hero action emits. It carries an `id`, a
   `label`, and an `emphasis` of `'primary' | 'secondary'`.
-- **`CsContentSectionComponent`** — the `cs-content-section` element that carries a
+- **`ContentSectionComponent`** — the `cs-content-section` element that carries a
   body band. It renders one of six variants selected by its `variant` input:
   `'prose'`, `'prose-media'`, `'card-grid'`, `'stats'`, `'callout'`, and
   `'scripture'`. It carries a `tone` input, an `eyebrow` input, a `title` input, a
   `lede` input, an `anchorId` input, and a `reverse` input that swaps the prose and
   media columns for the alternating rhythm down a page.
-- **`CsContentSectionVariant`** — union type of the six body variants above.
-- **`CsSectionCard`** — the view-model item the `card-grid` variant renders. It
+- **`ContentSectionVariant`** — union type of the six body variants above.
+- **`SectionCard`** — the view-model item the `card-grid` variant renders. It
   carries an `id`, a `title`, a `body`, an optional `icon`, an optional `href`, and
   an optional `media`.
-- **`CsSectionStat`** — the view-model item the `stats` variant renders. It carries
+- **`SectionStat`** — the view-model item the `stats` variant renders. It carries
   an `id`, a `value`, a `label`, and an optional `caption`. The value renders in
   the display scale and the label in the meta scale (L2-010).
-- **`CsCtaSectionComponent`** — the `cs-cta-section` element that closes a page. It
+- **`CtaSectionComponent`** — the `cs-cta-section` element that closes a page. It
   carries a `tone` input of `'light' | 'dark' | 'lime'`, a `width` input of
   `'compact' | 'full'`, a `title` input, a `lede` input, a `primaryAction` input,
   and a `secondaryAction` input. It emits `actionSelected` carrying a
-  `CsCtaAction`.
-- **`CsCtaAction`** — the typed intent a call-to-action emits. It carries an `id`, a
+  `CtaAction`.
+- **`CtaAction`** — the typed intent a call-to-action emits. It carries an `id`, a
   `label`, and an `emphasis`.
-- **`CsHeroActionsDirective`, `CsHeroMediaDirective`** — the `csHeroActions` and
+- **`HeroActionsDirective`, `CsHeroMediaDirective`** — the `csHeroActions` and
   `csHeroMedia` attribute directives that lay out the projected regions and stack
   them on narrow viewports.
 - **`CsSectionAnchorDirective`** — the `csSectionAnchor` attribute directive. It
@@ -127,7 +127,7 @@ against, and application services handle the intents the actions emit.
 
 ### Components
 
-`CsHeroComponent`, `CsContentSectionComponent`, and `CsCtaSectionComponent` compose
+`HeroComponent`, `ContentSectionComponent`, and `CtaSectionComponent` compose
 the page in order. The anchor directive registers each section for in-page
 navigation, and both action-bearing sections emit typed intents outward.
 
@@ -136,7 +136,7 @@ navigation, and both action-bearing sections emit typed intents outward.
 ### Class structure
 
 The three section components share the tone and title inputs and differ in variant.
-`CsSectionCard` and `CsSectionStat` are the view-model items the card-grid and stats
+`SectionCard` and `SectionStat` are the view-model items the card-grid and stats
 variants render, and the two action types carry the emitted intents.
 
 ![Class diagram for presenting a landing page](diagrams/class-structure.png)

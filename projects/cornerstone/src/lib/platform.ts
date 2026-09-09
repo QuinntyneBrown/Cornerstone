@@ -50,7 +50,7 @@ export * from './platform/cs-busy.directive';
 export * from './platform/cs-scroll-region.directive';
 export * from './platform/cs-state-indicator.interface';
 export * from './platform/cs-status.service';
-export * from './platform/cs-status-region.component';
+export * from './platform/status-region/status-region.component';
 export * from './platform/cs-viewport-harness.class';
 export * from './platform/cs-date.pipe';
 export * from './platform/cs-number.pipe';

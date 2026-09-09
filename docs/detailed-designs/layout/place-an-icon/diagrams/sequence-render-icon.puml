@@ -21,8 +21,8 @@ box "Frontend — Consuming application" #E0F2FE
 end box
 box "Frontend — Cornerstone icon runtime" #D1FADF
   participant "provideCsIcons()" as provider
-  participant "CsIconRegistry" as registry
-  participant "CsIconComponent" as icon
+  participant "IconRegistry" as registry
+  participant "IconComponent" as icon
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Icon styles" as styles
@@ -39,7 +39,7 @@ registry --> provider : Registration complete
 
 page -> icon : Bind name='calendar', size='md', label='Schedule'
 icon -> registry : resolve('calendar')
-registry --> icon : CsIconDefinition
+registry --> icon : IconDefinition
 
 alt Label supplied
   icon -> browser : Set role='img' and aria-label per L2-034 labelled mode

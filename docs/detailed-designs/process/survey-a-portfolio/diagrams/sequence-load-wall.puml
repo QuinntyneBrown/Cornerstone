@@ -20,8 +20,8 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as services
 end box
 box "Frontend — Cornerstone portfolio components" #D1FADF
-  participant "CsGratitudeWallComponent" as wall
-  participant "CsGratitudeNoteComponent" as note
+  participant "GratitudeWallComponent" as wall
+  participant "GratitudeNoteComponent" as note
 end box
 box "Frontend — Angular CDK" #ECFDF3
   participant "LiveAnnouncer" as cdk

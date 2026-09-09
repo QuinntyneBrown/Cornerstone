@@ -20,9 +20,9 @@ box "Frontend — Consuming application" #E0F2FE
   participant "Application services" as svc
 end box
 box "Frontend — Cornerstone data display" #D1FADF
-  participant "CsSkeletonGroupComponent" as group
-  participant "CsSkeletonComponent" as skeleton
-  participant "CsSpinnerComponent" as spinner
+  participant "SkeletonGroupComponent" as group
+  participant "SkeletonComponent" as skeleton
+  participant "SpinnerComponent" as spinner
 end box
 box "Frontend — Cornerstone styles" #ECFDF3
   participant "Indicator styles" as styles

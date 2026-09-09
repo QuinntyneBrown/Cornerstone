@@ -6,16 +6,16 @@ title Components — Show movement progress
 Person(user, "Application user", "Reads completion and activates a movement")
 
 Container_Boundary(page, "Consuming application feature page") {
-  Component(vm, "Movement view model", "CsMovement[]", "Ordered movements with done, current, and locked states")
+  Component(vm, "Movement view model", "Movement[]", "Ordered movements with done, current, and locked states")
   Component(adapter, "Process adapter", "CsProcessAdapter", "Consumer-supplied movement labels and palette per L2-143")
   Component(handler, "Intent handler", "Component method", "Resolves movement activation into routing")
 }
 
 Container_Boundary(lib, "Cornerstone component library") {
-  Component(dial, "CsMovementDialComponent", "Standalone component", "Segmented radial completion display with paper and dark variants per L2-136")
-  Component(list, "CsMovementListComponent", "Standalone component", "Ordered movements with rail and page variants per L2-137")
-  Component(strip, "CsPipStripComponent", "Standalone component", "Compact card progress with one accessible summary per L2-138")
-  Component(ring, "CsProgressRingComponent", "Standalone component", "SVG ring supplying progressbar value semantics per L2-089")
+  Component(dial, "MovementDialComponent", "Standalone component", "Segmented radial completion display with paper and dark variants per L2-136")
+  Component(list, "MovementListComponent", "Standalone component", "Ordered movements with rail and page variants per L2-137")
+  Component(strip, "PipStripComponent", "Standalone component", "Compact card progress with one accessible summary per L2-138")
+  Component(ring, "ProgressRingComponent", "Standalone component", "SVG ring supplying progressbar value semantics per L2-089")
   Component(styles, "Component styles", "Component-scoped CSS", "Read --cs- custom properties only")
 }
 
@@ -29,7 +29,7 @@ Rel(adapter, list, "Supplies every visible label to", "input()")
 Rel(adapter, strip, "Supplies the configured label set to", "input()")
 Rel(dial, ring, "Delegates arc rendering and value semantics to")
 Rel(list, strip, "Renders per-movement pips through")
-Rel(list, handler, "Emits CsMovementActivation to", "output()")
+Rel(list, handler, "Emits MovementActivation to", "output()")
 Rel(dial, styles, "Renders through")
 Rel(strip, styles, "Renders through")
 Rel(styles, browser, "Is resolved by")
