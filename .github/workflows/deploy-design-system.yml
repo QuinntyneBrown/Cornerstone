@@ -1,12 +1,15 @@
-name: Deploy design system
+name: Deploy component documentation
 
 on:
   push:
     branches: [main]
     paths:
       [
+        'src/docs-app/**',
         'design-system/**',
-        'projects/cornerstone/**',
+        'tools/**',
+        '.github/workflows/deploy-design-system.yml',
+        'src/cornerstone/**',
         'package*.json',
         'angular.json',
         'tsconfig.json',

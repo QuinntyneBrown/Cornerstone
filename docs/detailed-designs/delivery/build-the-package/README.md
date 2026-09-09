@@ -39,23 +39,23 @@ The feature is a vertical slice from the library source tree to an installable
 tarball. It spans the ng-packagr build configuration, the package manifest, and
 the declaration and source-map output of the Angular compiler.
 
-- **`projects/cornerstone/package.json`** — the source manifest ng-packagr reads
+- **`src/cornerstone/package.json`** — the source manifest ng-packagr reads
   and rewrites into the built manifest. It shall declare `name` as
   `@cornerstone/ui`, a `license`, a `repository`, a `homepage`, a `bugs` URL,
   `keywords`, and `sideEffects: false` (L2-001). The current file declares
   `name`, `license`, `keywords`, and `sideEffects`; `repository`, `homepage`, and
   `bugs` are added by this design.
-- **`projects/cornerstone/ng-package.json`** — the ng-packagr configuration. It
+- **`src/cornerstone/ng-package.json`** — the ng-packagr configuration. It
   sets `dest` to `../../dist/cornerstone`, names `src/public-api.ts` as the
   single entry file, and copies `src/styles/**/*.scss` and `src/styles/**/*.css`
   into the `styles/` folder of the artifact.
-- **`projects/cornerstone/src/public-api.ts`** — the single entry file. It
+- **`src/cornerstone/public-api.ts`** — the single entry file. It
   re-exports the five source modules `primitives`, `forms`, `disclosure`,
   `navigation`, and `overlays`, and carries the package name in its banner
   comment.
 - **`build:library` script** — `ng build cornerstone`, bound to the
   `@angular/build:ng-packagr` builder in `angular.json` with `production` as the
-  default configuration and `projects/cornerstone/tsconfig.lib.prod.json` as its
+  default configuration and `src/cornerstone/tsconfig.lib.prod.json` as its
   compilation input.
 - **Peer dependency block** — `@angular/core`, `@angular/common`,
   `@angular/cdk`, `@angular/forms`, and `@angular/router`, each with a range that

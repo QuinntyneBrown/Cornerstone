@@ -6,8 +6,8 @@ coverage
 docs/detailed-designs
 docs/specs
 docs/marketing-site.md
-design-system/src/generated
-marketing/styles
-projects/cornerstone/src/styles/_word-up-compat.scss
-projects/cornerstone/src/styles/_liturgy-compat.scss
+src/docs-app/generated
+src/marketing/styles
+src/cornerstone/styles/_word-up-compat.scss
+src/cornerstone/styles/_liturgy-compat.scss
 verification

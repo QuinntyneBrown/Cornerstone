@@ -3,7 +3,8 @@ name: Deploy marketing
 on:
   push:
     branches: [main]
-    paths: ['marketing/**', 'scripts/build-marketing.mjs', '.github/workflows/deploy-marketing.yml']
+    paths:
+      ['src/marketing/**', 'tools/build-marketing.mjs', '.github/workflows/deploy-marketing.yml']
   workflow_dispatch:
 
 permissions:
@@ -26,7 +27,7 @@ jobs:
           node-version: 22
           package-manager-cache: false
       # The brochure site is hand-written HTML and CSS. There are no dependencies
-      # to install: the build copies the directory and verifies it ships no scripts.
+      # to install: the build copies the directory and enforces the runtime script allowlist.
       - run: npm run build:marketing
       - name: Publish to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1

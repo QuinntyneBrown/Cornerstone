@@ -9,7 +9,7 @@
       }
     },
     {
-      "files": "marketing/**/*.html",
+      "files": "src/marketing/**/*.html",
       "options": {
         "parser": "html"
       }

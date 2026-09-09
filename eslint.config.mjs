@@ -9,15 +9,16 @@ export default tseslint.config(
       'node_modules/**',
       'out-tsc/**',
       'coverage/**',
-      'design-system/src/generated/**',
+      'src/docs-app/generated/**',
+      'src/e2e-app/generated/**',
       // The brochure pages are static HTML, not Angular templates, so the
       // Angular parser below cannot read them. The WebGPU module remains linted.
-      'marketing/**/*.html',
+      'src/marketing/**/*.html',
     ],
   },
   {
     ...eslint.configs.recommended,
-    files: ['marketing/**/*.js'],
+    files: ['src/marketing/**/*.js'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',

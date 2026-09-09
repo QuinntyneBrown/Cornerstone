@@ -23,9 +23,12 @@ jobs:
       - run: npm run schematics:test
       - run: npm run architecture:check
       - run: npm run lint
+      - run: npm run typecheck:e2e
       - run: npm run format:check
       - run: npm run test:coverage
+      - run: npm run test:tokens
       - run: npm run build
+      - run: npm run verify:consumer
       - run: npm run pack:check
       - run: npm run size:check
       - run: npx playwright install --with-deps chromium firefox webkit

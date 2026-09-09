@@ -96,7 +96,7 @@ and WebKit, a 400 KiB gzip FESM budget, and the audited Liturgy/Word Up compatib
 | 2   | Gather truthful product facts for the copy                              | Done   |
 | 3   | Write this roadmap                                                      | Done   |
 | 4   | Delete the Angular marketing application                                | Done   |
-| 5   | Build `marketing/styles/site.css` — tokens, layout, motion system       | Done   |
+| 5   | Build `src/marketing/styles/site.css` — tokens, layout, motion system       | Done   |
 | 6   | Build `index.html`                                                      | Done   |
 | 7   | Build `components.html`, `migration.html`, `404.html`                   | Done   |
 | 8   | Add `favicon.svg`, `robots.txt`, `staticwebapp.config.json`             | Done   |
@@ -108,7 +108,7 @@ and WebKit, a 400 KiB gzip FESM budget, and the audited Liturgy/Word Up compatib
 ## What shipped
 
 ```text
-marketing/
+src/marketing/
   index.html               the pitch
   components.html          all 144 components by domain, plus the support matrix
   migration.html           the compatibility bridge and its removal criteria
@@ -125,7 +125,7 @@ The site makes zero external requests. `npm run build:marketing` copies the dire
 `<title>`, or missing `lang` fails the build.
 
 Because the site no longer depends on the library, the deploy workflow dropped `npm ci` entirely
-and now triggers only on `marketing/**` changes.
+and now triggers only on `src/marketing/**` changes.
 
 ## Verification
 
@@ -140,7 +140,7 @@ and now triggers only on `marketing/**` changes.
 
 Two configuration files needed narrowing: both Prettier and ESLint apply Angular's template parser
 to every `*.html`, and it cannot read `{` in ordinary prose or code samples. Prettier now uses the
-standard `html` parser under `marketing/`, and ESLint ignores the static pages while linting the
+standard `html` parser under `src/marketing/`, and ESLint ignores the static pages while linting the
 WebGPU JavaScript separately. Angular template rules have nothing to say about the brochure HTML,
 so axe-core covers its accessibility ground instead.
 
@@ -148,7 +148,7 @@ so axe-core covers its accessibility ground instead.
 
 **2026-07-20 — Audit and plan.** Found 11 files in `marketing/`, all Angular. References to remove
 live in `angular.json` (a full project block), `tsconfig.json` (a project reference),
-`scripts/check-file-organization.mjs` (a source root), `package.json` (three scripts),
+`tools/check-file-organization.mjs` (a source root), `package.json` (three scripts),
 `.github/workflows/deploy-marketing.yml`, `CLAUDE.md`, and `README.md`. Settled the design
 direction and confirmed every statistic against the repository.
 

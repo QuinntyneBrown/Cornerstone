@@ -4,7 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@cornerstone/ui": ["./projects/cornerstone/src/public-api.ts"]
+      "@cornerstone/ui": ["./src/cornerstone/public-api.ts"]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -27,13 +27,19 @@
   "files": [],
   "references": [
     {
-      "path": "./projects/cornerstone/tsconfig.lib.json"
+      "path": "./src/cornerstone/tsconfig.lib.json"
     },
     {
-      "path": "./projects/cornerstone/tsconfig.spec.json"
+      "path": "./src/cornerstone/tsconfig.spec.json"
     },
     {
-      "path": "./design-system/tsconfig.app.json"
+      "path": "./src/docs-app/tsconfig.app.json"
+    },
+    {
+      "path": "./src/dev-app/tsconfig.app.json"
+    },
+    {
+      "path": "./src/e2e-app/tsconfig.app.json"
     }
   ]
 }

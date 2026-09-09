@@ -13,7 +13,7 @@ the generated API reference, and the written guides
 
 The `design-system` project declared in `angular.json` is that application. It
 carries the `cs-docs` selector prefix, lists
-`projects/cornerstone/src/styles/theme.scss` ahead of its own stylesheet, and
+`src/cornerstone/styles/theme.scss` ahead of its own stylesheet, and
 builds to `dist/design-system/browser` under an initial-bundle budget of 500 kB
 warning and 1 MB error. The `Deploy design system` workflow publishes that output
 to Azure Static Web Apps on every push to `main` that touches the application,
@@ -80,7 +80,7 @@ generated manifest that joins the two.
 - **`CsDocsApiService`** — injectable service that loads the generated manifest
   and resolves an `API entry` by exported symbol name.
 - **API extractor** — build-time Node step that reads
-  `projects/cornerstone/src/public-api.ts` through the TypeScript compiler API,
+  `src/cornerstone/public-api.ts` through the TypeScript compiler API,
   walks every re-exported declaration, and emits a manifest of `CsDocsApiEntry`
   records. It runs before `npm run build:docs` and fails when an exported symbol
   carries no documentation comment (L2-150).

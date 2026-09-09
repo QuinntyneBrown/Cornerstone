@@ -44,7 +44,7 @@ workflow that runs them.
 - **Unit and behaviour suites** — `*.spec.ts` files beside each public API,
   executed by `ng test cornerstone --watch=false`. Each suite covers the
   documented inputs, outputs, states, and edge cases of one exported symbol. The
-  workspace currently holds one suite, `projects/cornerstone/src/lib/
+  workspace currently holds one suite, `src/cornerstone/
   primitives.spec.ts`; the design extends the pattern to every export in
   `public-api.ts` (L2-154).
 - **`CsCoverageThresholds`** — the enforced floor for statement, branch,

@@ -10,10 +10,15 @@ Explore the library at the
 ## Workspace
 
 ```text
-projects/cornerstone/ @cornerstone/ui library
-design-system/        component documentation application (Angular)
-marketing/            brochure site (hand-written static HTML and CSS)
-docs/specs/           architecture, API inventory, and migration specifications
+src/cornerstone/      @cornerstone/ui library, with direct component feature folders
+src/docs-app/         published interactive documentation (Angular)
+src/dev-app/          independent manual component harness
+src/e2e-app/          deterministic acceptance-test application
+src/marketing/        static HTML/CSS brochure and optional WebGPU enhancement
+design-system/        independent @cornerstone/design-system token package
+e2e/                  browser page objects and specifications
+tools/                repository builds, generation, and verification
+docs/                 requirements, API inventory, and detailed designs
 ```
 
 The documentation application is a static Angular build. The brochure site is plain HTML and CSS
@@ -29,6 +34,8 @@ brochure site's design and content rationale.
 npm install
 npm start                 # component documentation on :5173
 npm run start:marketing   # brochure site on :5174
+npm run start:dev-app     # manual component harness on :5176
+npm run start:e2e-app     # acceptance harness on :5177
 ```
 
 ## Build and test
@@ -40,6 +47,8 @@ npm run lint
 npm run e2e
 npm run build
 npm run pack:check
+npm run test:tokens
+npm run verify:consumer
 npm run format:check
 ```
 
@@ -47,7 +56,10 @@ npm run format:check
 
 Frontend code follows a strict file-per-type convention. Each TypeScript file contains at most one
 top-level declaration, and every Angular component uses colocated external `.html` and `.scss`
-resources. See [`CLAUDE.md`](CLAUDE.md) and run `npm run architecture:check` to verify the invariant.
+resources. See [`AGENTS.md`](AGENTS.md) for project boundaries and placement rules, and run
+`npm run architecture:check` to verify the invariant. Use `npm run build:library` to create
+the distributable library with authoritative token assets; a bare Angular build omits that
+final packaging step. The token package builds independently with `npm run build:tokens`.
 
 ## Install in an Angular application
 

@@ -4,7 +4,9 @@ on:
   push:
     branches: [main, next]
     paths:
-      - 'projects/cornerstone/**'
+      - 'src/cornerstone/**'
+      - 'design-system/**'
+      - 'tools/**'
       - 'package.json'
       - 'package-lock.json'
       - 'release.config.mjs'

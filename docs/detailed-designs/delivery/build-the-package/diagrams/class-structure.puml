@@ -31,7 +31,7 @@ class CsPackageManifest {
 class CsRepositoryRef {
   +type: 'git'
   +url: string
-  +directory: 'projects/cornerstone'
+  +directory: 'src/cornerstone'
 }
 
 class CsExportsMap {

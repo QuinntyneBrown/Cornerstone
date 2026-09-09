@@ -1,5 +1,12 @@
 # Component testing strategy
 
+> Repository-layout update: the host-sharing and folder suggestions in this proposal
+> are superseded by [the implemented repository layout](repository-layout.md).
+> Documentation now lives in `src/docs-app`, acceptance fixtures in the independent
+> `src/e2e-app`, and manual development in `src/dev-app`. The root `design-system`
+> contains tokens only. The remaining proposals below describe future testing work;
+> they do not override the application boundaries documented in `AGENTS.md`.
+
 **Status:** Proposed  
 **Scope:** Every public UI component and directive in `@cornerstone/ui`  
 **Primary tools:** Playwright Test, the `design-system` Angular application, Component Object Models,
@@ -368,7 +375,7 @@ runner, but it does not remove the need to decide which system owns examples and
 ## Proposed repository layout
 
 ```text
-design-system/src/app/
+src/docs-app/app/
   component-pages/              human-facing pages
   examples/
     checkbox/

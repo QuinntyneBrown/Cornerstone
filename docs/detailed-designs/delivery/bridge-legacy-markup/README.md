@@ -34,11 +34,11 @@ governs the migration, and the criteria that end it.
 The feature spans three stylesheet files, one published export subpath, a mapping
 document, and two checks.
 
-- **`projects/cornerstone/src/styles/compat.scss`** — the published entry point.
+- **`src/cornerstone/styles/compat.scss`** — the published entry point.
   It is four lines: `@use 'tokens'`, `@use 'word-up-compat'`, and
   `@use 'liturgy-compat'`. It pulls in the token layer so the bridge resolves the
   same `--cs-` values as the library, then the two application vocabularies.
-- **`projects/cornerstone/src/styles/_word-up-compat.scss`** — 2,193 lines
+- **`src/cornerstone/styles/_word-up-compat.scss`** — 2,193 lines
   covering the `wu-` vocabulary across 21 sections: tokens, reset and base,
   layout primitives, app shell, buttons, forms, cards, table, badge and pill,
   progress ring and bar, avatar, tabs, modal and dialog, toast, offline banner,
@@ -47,7 +47,7 @@ document, and two checks.
   `wu-modal`, `wu-icon`, `wu-card`, `wu-alert`, `wu-sidenav`, and `wu-toast`. It
   declares a `--wu-` prefixed token block on `:root` and holds seven responsive
   breakpoints and a `prefers-reduced-motion: reduce` block.
-- **`projects/cornerstone/src/styles/_liturgy-compat.scss`** — 1,611 lines
+- **`src/cornerstone/styles/_liturgy-compat.scss`** — 1,611 lines
   covering Liturgy's vocabulary across 13 sections: reset and base, typographic
   utilities, buttons, badges and pills, app shell, the rhythm rail,
   the canonical-hours dial, cards and surfaces, the gate component, the kanban
