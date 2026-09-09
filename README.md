@@ -67,8 +67,11 @@ Both packages publish together on every passing push to `main`. See
 [`docs/npm-releases.md`](docs/npm-releases.md) for versioning, setup, and recovery.
 
 ```bash
-npm install @quinntyne/cornerstone @angular/cdk
+npm install @quinntyne/cornerstone @angular/cdk@^21
 ```
+
+The component library supports Angular 21. The independent token package can be
+used without Angular: `npm install @quinntyne/cornerstone-design-system`.
 
 Add the base theme to the application's `angular.json` styles array:
 

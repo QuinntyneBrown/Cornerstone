@@ -8,4 +8,9 @@
 - [x] Document setup and recovery.
 - [x] Complete repository validation and publication dry run (18 browser scenarios, 6 unit tests, 2 token tests, release tests, all builds and quality checks).
 - [x] Publish the first package pair (`0.1.0`) and configure trusted publishing for both packages.
-- [ ] Verify registry consumers and the next automatic GitHub release.
+- [x] Verify the registry consumer for `0.1.0`.
+
+Automatic publication evidence is retained in the
+[Release workflow](https://github.com/QuinntyneBrown/Cornerstone/actions/workflows/release.yml)
+and each completed GitHub release record. These include full validation, the
+exact source commit, package integrities, and registry consumer verification.
